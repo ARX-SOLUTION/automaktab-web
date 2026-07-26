@@ -81,13 +81,13 @@ export async function generateMetadata({
   };
 }
 
-// Sets `.dark` on <html> before first paint, from system preference only --
-// no persisted user choice (the nav's theme button is a non-functional stub
-// until a later ticket). suppressHydrationWarning below is required because
-// this mutates the DOM outside React's render; see Next's "Preventing Flash"
-// guide (node_modules/next/dist/docs/01-app/02-guides/preventing-flash-before-hydration.md).
+// Sets `.dark` on <html> before first paint. Checks localStorage for
+// persisted user choice first, then falls back to system preference.
+// suppressHydrationWarning below is required because this mutates the DOM
+// outside React's render; see Next's "Preventing Flash" guide
+// (node_modules/next/dist/docs/01-app/02-guides/preventing-flash-before-hydration.md).
 const THEME_SCRIPT =
-  "(function(){try{if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark')}}catch(e){}})()";
+  "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()";
 
 export default async function LocaleLayout({
   children,
