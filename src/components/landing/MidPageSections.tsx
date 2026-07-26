@@ -343,31 +343,35 @@ export default function MidPageSections({
     <div className="bg-background text-foreground">
       {/* ── Problem / pain ──────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
-        <div className="mx-auto mb-10 max-w-2xl text-center">
-          <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-600 dark:text-cyan-300">
-            {copy.pain.eyebrow}
-          </h2>
-          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {copy.pain.lead}
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {copy.pain.cards.map((card, i) => (
-            <div
-              key={card.title}
-              className="rounded-2xl border border-border bg-card p-6"
-            >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-destructive/20 bg-destructive/10">
-                <Icon path={PAIN_ICONS[i]} className="size-5 text-destructive" />
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="border-l-2 border-border pl-5 lg:col-span-7">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              {copy.pain.eyebrow}
+            </p>
+            <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
+              {copy.pain.lead}
+            </h2>
+          </div>
+          <div className="space-y-3 lg:col-span-5">
+            {copy.pain.cards.map((card, i) => (
+              <div
+                key={card.title}
+                className="flex gap-3 rounded-xl border border-border bg-card p-4"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-destructive/20 bg-destructive/10">
+                  <Icon path={PAIN_ICONS[i]} className="size-4 text-destructive" />
+                </div>
+                <div>
+                  <h3 className="font-heading text-sm font-semibold text-foreground">
+                    {card.title}
+                  </h3>
+                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                    {card.body}
+                  </p>
+                </div>
               </div>
-              <h3 className="mb-2 text-base font-semibold text-foreground">
-                {card.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {card.body}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <p className="mt-10 text-center text-base font-semibold text-foreground sm:text-lg">
           {copy.pain.bridge}
@@ -376,15 +380,27 @@ export default function MidPageSections({
 
       {/* ── Capability stats ────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
-        <div className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-2xl border border-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-          {copy.stats.items.map((stat) => (
-            <div key={stat.label} className="bg-card px-8 py-7 text-center">
-              <p className="tabular-nums text-3xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
-            </div>
-          ))}
+        <div className="overflow-hidden rounded-2xl border border-border bg-card sm:grid sm:grid-cols-[1.4fr_1fr]">
+          <div className="border-b border-border px-8 py-10 text-center sm:border-b-0 sm:border-r sm:text-left">
+            <p className="tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
+              {copy.stats.items[0].value}
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {copy.stats.items[0].label}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 divide-x divide-border">
+            {copy.stats.items.slice(1).map((stat) => (
+              <div key={stat.label} className="px-6 py-6 text-center">
+                <p className="tabular-nums text-2xl font-bold text-foreground">
+                  {stat.value}
+                </p>
+                <p className="mt-1.5 text-xs text-muted-foreground">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
         <p className="mt-4 text-center text-xs text-muted-foreground">
           {copy.stats.sub}
@@ -394,7 +410,7 @@ export default function MidPageSections({
       {/* ── How it works ────────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
         <div className="mb-12 text-center">
-          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+          <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.howItWorks.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.howItWorks.sub}</p>
@@ -405,10 +421,10 @@ export default function MidPageSections({
               key={step.title}
               className="rounded-2xl border border-border bg-card p-6"
             >
-              <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-400/10 text-sm font-bold text-cyan-600 dark:text-cyan-300">
+              <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted text-sm font-bold text-foreground">
                 {i + 1}
               </div>
-              <h3 className="mb-2 text-sm font-semibold text-foreground">
+              <h3 className="font-heading mb-2 text-sm font-semibold text-foreground">
                 {step.title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -428,7 +444,7 @@ export default function MidPageSections({
       {/* ── Benefits ─────────────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
         <div className="mb-10 text-center">
-          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+          <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.benefits.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.benefits.sub}</p>
@@ -439,10 +455,10 @@ export default function MidPageSections({
               key={card.title}
               className="rounded-2xl border border-border bg-card p-6"
             >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10">
-                <Icon path={BENEFIT_ICONS[i]} className="size-5 text-cyan-600 dark:text-cyan-300" />
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted">
+                <Icon path={BENEFIT_ICONS[i]} className="size-5 text-foreground" />
               </div>
-              <h3 className="mb-2 text-base font-semibold text-foreground">
+              <h3 className="font-heading mb-2 text-base font-semibold text-foreground">
                 {card.title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -456,7 +472,7 @@ export default function MidPageSections({
       {/* ── Role cards ───────────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
         <div className="mb-10 text-center">
-          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+          <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.roles.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.roles.sub}</p>
@@ -467,10 +483,10 @@ export default function MidPageSections({
               key={card.title}
               className="rounded-2xl border border-border bg-card p-5"
             >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10">
-                <Icon path={ROLE_ICONS[i]} className="size-4 text-cyan-600 dark:text-cyan-300" />
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted">
+                <Icon path={ROLE_ICONS[i]} className="size-4 text-foreground" />
               </div>
-              <h3 className="mb-1.5 text-sm font-semibold text-foreground">
+              <h3 className="font-heading mb-1.5 text-sm font-semibold text-foreground">
                 {card.title}
               </h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
@@ -484,7 +500,7 @@ export default function MidPageSections({
       {/* ── Feature alternating rows ────────────────────────────────── */}
       <section className={SECTION_CLASS}>
         <div className="mb-12 text-center">
-          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+          <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.features.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.features.sub}</p>
@@ -494,10 +510,10 @@ export default function MidPageSections({
           {/* Debt tracking */}
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-600 dark:text-cyan-300">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.debt.eyebrow}
               </p>
-              <h3 className="mb-4 text-xl font-bold leading-tight sm:text-2xl">
+              <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.debt.title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -566,7 +582,7 @@ export default function MidPageSections({
                 </div>
                 <button
                   type="button"
-                  className="min-h-[44px] rounded-lg bg-cyan-400/15 px-3 py-1.5 text-[11px] font-semibold text-cyan-600 dark:text-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+                  className="min-h-[44px] rounded-lg bg-muted px-3 py-1.5 text-[11px] font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
                 >
                   Saqlash
                 </button>
@@ -593,10 +609,10 @@ export default function MidPageSections({
               </div>
             </div>
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-600 dark:text-cyan-300">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.attendance.eyebrow}
               </p>
-              <h3 className="mb-4 text-xl font-bold leading-tight sm:text-2xl">
+              <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.attendance.title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
@@ -608,10 +624,10 @@ export default function MidPageSections({
           {/* Schedule */}
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-cyan-600 dark:text-cyan-300">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.schedule.eyebrow}
               </p>
-              <h3 className="mb-4 text-xl font-bold leading-tight sm:text-2xl">
+              <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.schedule.title}
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">

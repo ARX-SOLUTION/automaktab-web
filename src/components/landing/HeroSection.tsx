@@ -133,7 +133,7 @@ function buildKpiCards(copy: LandingCopy) {
       delta: "+12.4%",
       deltaUp: true,
       Icon: IconWallet,
-      iconBg: "bg-cyan-400/10 text-cyan-600 dark:text-cyan-300",
+      iconBg: "bg-slate-400/10 text-slate-600 dark:text-slate-300",
       tone: "text-cyan-600 dark:text-cyan-300",
     },
     {
@@ -355,27 +355,26 @@ function IconTrendUp({ className }: { className?: string }) {
 }
 
 // Static SVG revenue sparkline (no chart library on the landing bundle).
-// Uses a literal cyan instead of hsl(var(--primary)) -- this project's shared
-// --primary token is amber, not the marketing site's cyan brand accent (see
-// repo CLAUDE.md "Known drift"), so var(--primary) would render the wrong hue.
+// currentColor stroke, no cyan -- DESIGN.md scopes cyan to CTAs, the hero
+// accent word, and KPI number values only, so this trend line stays neutral.
 function MiniRevenueChart() {
   return (
     <svg
       viewBox="0 0 240 56"
       preserveAspectRatio="none"
-      className="h-full w-full"
+      className="h-full w-full text-slate-400 dark:text-white/25"
       aria-hidden="true"
     >
       <defs>
         <linearGradient id="mlg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#22d3ee" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path
         d="M0,52 C20,48 32,42 48,38 C64,34 76,30 92,24 C108,18 120,16 136,13 C152,10 168,8 184,6 C200,4 220,3 240,2"
         fill="none"
-        stroke="#22d3ee"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
@@ -397,8 +396,8 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
     <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-[20px]">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10">
-            <IconShieldCheck className="size-4 text-cyan-600 dark:text-cyan-200" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5">
+            <IconShieldCheck className="size-4 text-slate-600 dark:text-white/70" />
           </div>
           <span className="text-sm font-semibold tracking-tight text-slate-800 dark:text-white/85">
             Auto Maktab{" "}
@@ -428,7 +427,7 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
                 href={LOCALE_HOME_PATH[lang]}
                 className={`rounded-full px-2 py-1 text-xs uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 ${
                   lang === locale
-                    ? "bg-cyan-400/20 text-cyan-600 dark:text-cyan-400"
+                    ? "bg-slate-200 text-slate-900 dark:bg-white/15 dark:text-white"
                     : "text-slate-500 hover:text-slate-800 dark:text-white/60 dark:hover:text-white"
                 }`}
               >
@@ -446,7 +445,7 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
           </button>
           <a
             href={CRM_LOGIN_URL}
-            className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md bg-cyan-400 px-5 text-sm font-medium text-slate-950 transition-all hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2"
+            className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md bg-slate-900 px-5 text-sm font-medium text-white transition-all hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:bg-white dark:text-slate-950 dark:hover:bg-white/90"
           >
             {copy.navCta}
             <IconArrowRight className="size-3.5" />
@@ -469,12 +468,12 @@ function Hero({ copy }: { copy: LandingCopy }) {
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-28">
       <div className="mx-auto max-w-3xl text-center">
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/[0.08] px-4 py-1.5 text-xs font-medium text-cyan-700 backdrop-blur dark:text-cyan-100/80">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400" />
+        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-medium text-slate-600 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white/70">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-400 dark:bg-white/40" />
           {copy.heroBadge}
         </div>
 
-        <h1 className="mb-5 text-balance text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="mb-5 text-balance font-heading text-4xl font-bold leading-[1.1] tracking-tighter sm:text-5xl lg:text-6xl">
           {titleBefore}
           <span className="relative inline-block">
             <span className="relative z-10 bg-gradient-to-r from-cyan-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent dark:from-cyan-300 dark:via-cyan-200 dark:to-blue-300">
@@ -520,13 +519,13 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
   const debtors = buildDebtors(copy);
 
   return (
-    <section className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
-      <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white/90 shadow-[0_40px_100px_rgba(0,0,0,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70 dark:shadow-[0_40px_100px_rgba(0,0,0,0.55)]">
+    <section className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:-mt-8 sm:px-6 lg:px-8">
+      <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white/90 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.2),0_70px_140px_-30px_rgba(0,0,0,0.22)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70 dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7),0_70px_140px_-30px_rgba(0,0,0,0.8)]">
         {/* Browser chrome */}
         <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-5 py-3 dark:border-white/[8%] dark:bg-white/[0.015]">
-          <span className="h-2.5 w-2.5 rounded-full bg-rose-400/40" />
-          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/40" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/40" />
+          <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
           <div className="mx-auto flex h-5 w-52 items-center justify-center rounded-full bg-slate-200 text-[10px] tracking-wide text-slate-400 dark:bg-white/[0.06] dark:text-white/25">
             app.automaktab.uz
           </div>
@@ -606,7 +605,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                 <MiniRevenueChart />
               </div>
               <div className="mt-2 flex items-center gap-1.5 text-[10px] text-slate-400 dark:text-white/25">
-                <span className="inline-block h-1.5 w-4 rounded-full bg-cyan-400/60" />
+                <span className="inline-block h-1.5 w-4 rounded-full bg-slate-400/60 dark:bg-white/25" />
                 {copy.mockChartPeriod}
               </div>
             </div>

@@ -1,8 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
 import "../globals.css";
+
+// DESIGN.md: display/heading font. cyrillic + cyrillic-ext subsets verified
+// present in next/font's own Manrope metadata -- ru pages get real Manrope,
+// not a system-font fallback.
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  // 600 loaded too: MidPageSections uses font-heading + font-semibold, and
+  // without a real 600 face the browser's ascending-weight match silently
+  // substitutes 700, erasing the semibold/bold distinction those headings
+  // rely on. Found by review (reviewer-alpha/beta, both independently).
+  weight: ["600", "700", "800"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 // This is the app's root layout -- there is no app/layout.tsx above it
 // anymore. All three locales, including unprefixed uz, render through this
@@ -82,7 +97,7 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={manrope.variable} suppressHydrationWarning>
       <head>
         {/* type differs between server/client render on purpose -- React
             warns in dev about rendering raw <script> tags on the client, so
