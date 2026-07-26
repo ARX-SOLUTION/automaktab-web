@@ -288,7 +288,7 @@ export default function ClosingSections({
       {/* Blog teaser */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
-          <h2 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="mb-3 font-heading text-2xl font-bold text-foreground sm:text-3xl">
             {copy.blog.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.blog.sub}</p>
@@ -300,7 +300,7 @@ export default function ClosingSections({
         <div className="mt-8 flex justify-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-600 dark:text-cyan-300 transition-opacity hover:opacity-80"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-80"
           >
             {copy.blog.viewAll}
             <ArrowRightIcon />
@@ -310,7 +310,7 @@ export default function ClosingSections({
 
       {/* FAQ */}
       <section className="mx-auto max-w-2xl px-4 py-20 sm:px-6 lg:px-8">
-        <h2 className="mb-10 text-center text-2xl font-bold text-foreground sm:text-3xl">
+        <h2 className="mb-10 text-center font-heading text-2xl font-bold text-foreground sm:text-3xl">
           {copy.faq.title}
         </h2>
         <script
@@ -344,10 +344,10 @@ export default function ClosingSections({
       {/* Demo section shell */}
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
-          <p className="mb-3 text-xs font-semibold tracking-widest text-cyan-600 dark:text-cyan-300 uppercase">
+          <p className="mb-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
             {copy.demo.eyebrow}
           </p>
-          <h2 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 className="mb-3 font-heading text-2xl font-bold text-foreground sm:text-3xl">
             {copy.demo.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.demo.sub}</p>
@@ -361,7 +361,7 @@ export default function ClosingSections({
       {/* Bottom CTA */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="rounded-[28px] border border-border bg-card p-10 text-center sm:p-16">
-          <h2 className="mb-4 text-2xl font-bold text-foreground sm:text-4xl">
+          <h2 className="mb-4 font-heading text-2xl font-bold text-foreground sm:text-4xl">
             {copy.cta.title}
           </h2>
           <p className="mb-8 text-sm text-muted-foreground sm:text-base">
@@ -416,6 +416,66 @@ export default function ClosingSections({
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Social-proof slots (DESIGN.md, "Social proof"): built and styled so real
+// data can drop in later without a redesign. Deliberately not rendered
+// anywhere -- no real testimonials or activity events exist yet, and a
+// fabricated one is worse than an absent one.
+// ---------------------------------------------------------------------------
+
+interface TestimonialCardProps {
+  quote: string;
+  authorName: string;
+  authorRole: string;
+}
+
+// Slots in as its own section directly above the Bottom CTA once real
+// testimonials exist -- social proof reads best right before the final ask.
+export function TestimonialCard({
+  quote,
+  authorName,
+  authorRole,
+}: TestimonialCardProps) {
+  return (
+    <figure className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+      <blockquote className="text-sm leading-relaxed text-foreground sm:text-base">
+        &ldquo;{quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-5 text-sm">
+        <span className="font-semibold text-foreground">{authorName}</span>
+        <span className="text-muted-foreground"> — {authorRole}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+interface LiveActivityCardProps {
+  actorName: string;
+  action: string;
+  timeAgo: string;
+}
+
+// Once real event data exists, this renders as a small fixed-position toast
+// (e.g. bottom-left, near the Hero) rather than inline in a content section
+// -- that's the reference site's pattern for this card type.
+export function LiveActivityCard({
+  actorName,
+  action,
+  timeAgo,
+}: LiveActivityCardProps) {
+  return (
+    <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2.5 text-sm shadow-sm">
+      <span className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground" />
+      <p className="text-foreground">
+        <span className="font-semibold">{actorName}</span> {action}
+      </p>
+      <span className="ml-auto shrink-0 text-xs text-muted-foreground">
+        {timeAgo}
+      </span>
     </div>
   );
 }
