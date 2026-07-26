@@ -133,7 +133,7 @@ function buildKpiCards(copy: LandingCopy) {
       delta: "+12.4%",
       deltaUp: true,
       Icon: IconWallet,
-      iconBg: "bg-slate-400/10 text-slate-600 dark:text-slate-300",
+      iconBg: "bg-cyan-400/10 text-cyan-600 dark:text-cyan-300",
       tone: "text-cyan-600 dark:text-cyan-300",
     },
     {
@@ -355,14 +355,17 @@ function IconTrendUp({ className }: { className?: string }) {
 }
 
 // Static SVG revenue sparkline (no chart library on the landing bundle).
-// currentColor stroke, no cyan -- DESIGN.md scopes cyan to CTAs, the hero
-// accent word, and KPI number values only, so this trend line stays neutral.
+// currentColor stroke. DESIGN.md scopes cyan to CTAs/accent word/KPI values,
+// but a neutral currentColor here measured near-invisible (2.28:1 dark-mode
+// contrast, gradient fill under 7% opacity) -- a data viz that can't be seen
+// defeats DESIGN.md's "read as evidence" goal for DashboardMock, so this one
+// keeps the same cyan tone as the KPI values it sits next to.
 function MiniRevenueChart() {
   return (
     <svg
       viewBox="0 0 240 56"
       preserveAspectRatio="none"
-      className="h-full w-full text-slate-400 dark:text-white/25"
+      className="h-full w-full text-cyan-600 dark:text-cyan-300"
       aria-hidden="true"
     >
       <defs>
@@ -445,7 +448,7 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
           </button>
           <a
             href={CRM_LOGIN_URL}
-            className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md bg-slate-900 px-5 text-sm font-medium text-white transition-all hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:bg-white dark:text-slate-950 dark:hover:bg-white/90"
+            className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:text-white/80 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white px-5"
           >
             {copy.navCta}
             <IconArrowRight className="size-3.5" />
@@ -466,7 +469,7 @@ function Hero({ copy }: { copy: LandingCopy }) {
       : "";
 
   return (
-    <section className="relative z-10 mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-28">
+    <section className="relative z-20 mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-28">
       <div className="mx-auto max-w-3xl text-center">
         <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-medium text-slate-600 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white/70">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-400 dark:bg-white/40" />
@@ -503,7 +506,7 @@ function Hero({ copy }: { copy: LandingCopy }) {
             href={TELEGRAM_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="active:scale-[0.96] inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-slate-100 px-8 text-slate-700 transition-all hover:bg-slate-200 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:border-white/[12%] dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+            className="active:scale-[0.96] inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-slate-100 px-8 text-slate-700 transition-all hover:bg-slate-200 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:border-white/[12%] dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
           >
             <IconSend className="size-4" />
             {copy.ctaFree}
@@ -519,7 +522,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
   const debtors = buildDebtors(copy);
 
   return (
-    <section className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:-mt-8 sm:px-6 lg:px-8">
+    <section className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:-mt-16 sm:px-6 lg:px-8">
       <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white/90 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.2),0_70px_140px_-30px_rgba(0,0,0,0.22)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70 dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7),0_70px_140px_-30px_rgba(0,0,0,0.8)]">
         {/* Browser chrome */}
         <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-5 py-3 dark:border-white/[8%] dark:bg-white/[0.015]">
@@ -634,7 +637,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="tabular-nums text-xs font-semibold text-rose-600 dark:text-rose-300">
+                      <span className="tabular-nums whitespace-nowrap text-xs font-semibold text-rose-600 dark:text-rose-300">
                         {d.amount}
                       </span>
                       <span className="text-[10px] text-slate-400 dark:text-white/25">

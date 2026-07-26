@@ -300,7 +300,7 @@ export default function ClosingSections({
         <div className="mt-8 flex justify-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-80"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
           >
             {copy.blog.viewAll}
             <ArrowRightIcon />
@@ -327,7 +327,7 @@ export default function ClosingSections({
               key={item.q}
               className="group rounded-2xl border border-border bg-card px-5"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden sm:text-base">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 sm:text-base">
                 {item.q}
                 <ChevronDownIcon />
               </summary>
@@ -372,13 +372,13 @@ export default function ClosingSections({
               href={TELEGRAM_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-lg bg-cyan-400 px-8 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2"
+              className="inline-flex h-12 items-center justify-center rounded-lg border-2 border-muted-foreground px-8 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
             >
               {copy.cta.free}
             </a>
             <a
               href={PHONE_LINK}
-              className="inline-flex h-12 items-center justify-center rounded-lg border border-border px-8 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              className="inline-flex h-12 items-center justify-center rounded-lg border-2 border-muted-foreground px-8 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
             >
               {copy.cta.call}
             </a>
@@ -431,7 +431,17 @@ interface TestimonialCardProps {
   quote: string;
   authorName: string;
   authorRole: string;
+  locale: Locale;
 }
+
+// uz/en have no sourced case for guillemets over curly quotes, so both keep
+// the safe curly-quote default; ru gets the Russian typographic convention
+// (guillemets) -- same locale-aware approach as every other string in this file.
+const QUOTE_MARKS: Record<Locale, { open: string; close: string }> = {
+  uz: { open: "“", close: "”" },
+  ru: { open: "«", close: "»" },
+  en: { open: "“", close: "”" },
+};
 
 // Slots in as its own section directly above the Bottom CTA once real
 // testimonials exist -- social proof reads best right before the final ask.
@@ -439,11 +449,13 @@ export function TestimonialCard({
   quote,
   authorName,
   authorRole,
+  locale,
 }: TestimonialCardProps) {
+  const { open, close } = QUOTE_MARKS[locale];
   return (
     <figure className="rounded-2xl border border-border bg-card p-6 sm:p-8">
       <blockquote className="text-sm leading-relaxed text-foreground sm:text-base">
-        &ldquo;{quote}&rdquo;
+        {open}{quote}{close}
       </blockquote>
       <figcaption className="mt-5 text-sm">
         <span className="font-semibold text-foreground">{authorName}</span>
@@ -468,8 +480,11 @@ export function LiveActivityCard({
   timeAgo,
 }: LiveActivityCardProps) {
   return (
-    <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2.5 text-sm shadow-sm">
-      <span className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground" />
+    <div
+      aria-live="polite"
+      className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2.5 text-sm shadow-sm"
+    >
+      <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-400" />
       <p className="text-foreground">
         <span className="font-semibold">{actorName}</span> {action}
       </p>

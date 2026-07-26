@@ -338,21 +338,29 @@ export default function MidPageSections({
   locale: Locale;
 }): JSX.Element {
   const copy = COPY[locale];
+  // Not hardcoded to "3 items": dominantStat carries the section, any count
+  // of secondaryStats renders as an equal-width flex row (or the section
+  // doesn't render at all with zero items).
+  const [dominantStat, ...secondaryStats] = copy.stats.items;
 
   return (
     <div className="bg-background text-foreground">
       {/* ── Problem / pain ──────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="border-l-2 border-border pl-5 lg:col-span-7">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              {copy.pain.eyebrow}
-            </p>
-            <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
-              {copy.pain.lead}
-            </h2>
+          <div className="lg:col-span-7">
+            {/* Border wraps just the heading content (not the stretched grid
+                item) so it doesn't run past the text on the taller row. */}
+            <div className="border-l-2 border-border pl-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                {copy.pain.eyebrow}
+              </p>
+              <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
+                {copy.pain.lead}
+              </h2>
+            </div>
           </div>
-          <div className="space-y-3 lg:col-span-5">
+          <div className="space-y-3 border-l-2 border-transparent pl-5 sm:max-w-md lg:max-w-none lg:border-l-0 lg:pl-0 lg:col-span-5">
             {copy.pain.cards.map((card, i) => (
               <div
                 key={card.title}
@@ -379,33 +387,40 @@ export default function MidPageSections({
       </section>
 
       {/* ── Capability stats ────────────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
-        <div className="overflow-hidden rounded-2xl border border-border bg-card sm:grid sm:grid-cols-[1.4fr_1fr]">
-          <div className="border-b border-border px-8 py-10 text-center sm:border-b-0 sm:border-r sm:text-left">
-            <p className="tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
-              {copy.stats.items[0].value}
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {copy.stats.items[0].label}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 divide-x divide-border">
-            {copy.stats.items.slice(1).map((stat) => (
-              <div key={stat.label} className="px-6 py-6 text-center">
-                <p className="tabular-nums text-2xl font-bold text-foreground">
-                  {stat.value}
-                </p>
-                <p className="mt-1.5 text-xs text-muted-foreground">
-                  {stat.label}
-                </p>
+      {dominantStat && (
+        <section className={SECTION_CLASS}>
+          <div className="overflow-hidden rounded-2xl border border-border bg-card sm:mx-auto sm:flex sm:w-fit sm:max-w-full">
+            <div className="flex min-w-0 flex-col justify-center border-b border-border px-8 py-8 text-center sm:min-w-fit sm:border-b-0 sm:border-r sm:text-left">
+              <p className="tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
+                {dominantStat.value}
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {dominantStat.label}
+              </p>
+            </div>
+            {secondaryStats.length > 0 && (
+              <div className="flex min-w-0 divide-x divide-border">
+                {secondaryStats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex min-w-0 flex-1 flex-col justify-center px-6 py-8 text-center sm:min-w-[7rem] sm:flex-initial"
+                  >
+                    <p className="tabular-nums text-2xl font-bold text-foreground">
+                      {stat.value}
+                    </p>
+                    <p className="mt-1.5 text-xs text-muted-foreground">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          {copy.stats.sub}
-        </p>
-      </section>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            {copy.stats.sub}
+          </p>
+        </section>
+      )}
 
       {/* ── How it works ────────────────────────────────────────────── */}
       <section className={SECTION_CLASS}>
@@ -483,8 +498,8 @@ export default function MidPageSections({
               key={card.title}
               className="rounded-2xl border border-border bg-card p-5"
             >
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted">
-                <Icon path={ROLE_ICONS[i]} className="size-4 text-foreground" />
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted">
+                <Icon path={ROLE_ICONS[i]} className="size-5 text-foreground" />
               </div>
               <h3 className="font-heading mb-1.5 text-sm font-semibold text-foreground">
                 {card.title}
