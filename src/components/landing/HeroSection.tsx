@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 import Link from "next/link";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import ThemeToggle from "./ThemeToggle";
 
 // Cross-app / external targets -- ported from autodrive-frontend LandingPage.tsx.
 const CRM_LOGIN_URL = "https://app.automaktab.uz/login";
@@ -248,23 +249,6 @@ function IconSend({ className }: { className?: string }) {
   );
 }
 
-function IconMoon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M20.5 14.5a8.5 8.5 0 1 1-9-13 7 7 0 0 0 9 13z" />
-    </svg>
-  );
-}
-
 function IconWallet({ className }: { className?: string }) {
   return (
     <svg
@@ -438,14 +422,10 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
               </Link>
             ))}
           </div>
-          {/* ponytail: non-functional stub -- real theme switching lands in a later ticket */}
-          <button
-            type="button"
-            aria-label={copy.themeToggleLabel}
+          <ThemeToggle
+            label={copy.themeToggleLabel}
             className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-colors hover:text-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 dark:border-white/10 dark:text-white/50 dark:hover:text-white"
-          >
-            <IconMoon className="size-4" />
-          </button>
+          />
           <a
             href={CRM_LOGIN_URL}
             className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:text-white/80 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white px-5"
