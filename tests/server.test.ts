@@ -129,14 +129,23 @@ const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
   en: { prefix: "Every sum in your driving school,", accent: "under control" },
 };
 
-// Source-of-truth copy strings (layout.tsx's generateMetadata, ported from
-// autodrive-frontend/index.html). React/Next HTML-escape `'` as `&#x27;`
-// when serializing metadata text, so the served HTML never contains these
-// literal apostrophes -- match against the escaped form actually sent.
-const REAL_TITLE = "Avtomaktab CRM — to'lov, davomat, jadval | Auto Maktab";
-const REAL_DESCRIPTION =
-  "Qarzdorlar ro'yxati, kunlik tushum, davomat va dars jadvali — bitta tizimda. Birinchi oy bepul, o'rnatish shart emas: brauzerda ishlaydi.";
-const escapeApostrophe = (s: string) => s.replace(/'/g, "&#x27;");
+const METADATA_LANGUAGE_SIGNAL: Record<
+  Locale,
+  { title: string; description: string }
+> = {
+  uz: {
+    title: "Avtomaktab CRM",
+    description: "Qarzdorlar",
+  },
+  ru: {
+    title: "CRM для автошколы",
+    description: "Должники",
+  },
+  en: {
+    title: "Driving School CRM",
+    description: "Track debtors",
+  },
+};
 
 // Next normalizes metadata URLs against metadataBase, stripping the trailing
 // slash on the domain root (https://automaktab.uz/ -> https://automaktab.uz).
@@ -173,15 +182,34 @@ const JSON_LD_SCRIPT_RE =
 describe.each(LOCALE_ROUTES)(
   "GET $route (production server)",
   ({ route, locale }) => {
-    it(`serves ${locale} HTML with title, description, heading, hreflang alternates, and canonical`, async () => {
+    it(`serves ${locale} HTML with localized metadata, an icon, hreflang alternates, and canonical`, async () => {
       const res = await fetch(`${BASE_URL}${route}`);
       expect(res.status).toBe(200);
 
       const html = await res.text();
       expect(html).toContain(`<html lang="${locale}"`);
-      expect(html).toContain(`<title>${escapeApostrophe(REAL_TITLE)}</title>`);
-      expect(html).toContain('name="description"');
-      expect(html).toContain(escapeApostrophe(REAL_DESCRIPTION));
+      const signal = METADATA_LANGUAGE_SIGNAL[locale];
+      const title = html.match(/<title>(.*?)<\/title>/)?.[1] ?? "";
+      const description = html.match(
+        /<meta name="description" content="([^"]*)"\/?>/,
+      )?.[1] ?? "";
+      expect(title).toContain(signal.title);
+      expect(description).toContain(signal.description);
+      expect(title.length).toBeLessThanOrEqual(60);
+      expect(description.length).toBeLessThanOrEqual(155);
+      expect(html).toContain(
+        `property="og:title" content="${title}"`,
+      );
+      expect(html).toContain(
+        `property="og:description" content="${description}"`,
+      );
+      expect(html).toContain(
+        `name="twitter:title" content="${title}"`,
+      );
+      expect(html).toContain(
+        `name="twitter:description" content="${description}"`,
+      );
+      expect(html).toContain('rel="icon" href="/icon.svg?');
       const heading = HERO_HEADING[locale];
       expect(html).toContain(heading.prefix);
       expect(html).toContain(heading.accent);
@@ -225,11 +253,11 @@ describe.each(LOCALE_ROUTES)(
         Array.isArray(doc["@graph"]),
       );
       expect(organizationGraph).toBeTruthy();
-      expect(
-        organizationGraph["@graph"].some(
-          (node: { "@type"?: string }) => node["@type"] === "Organization",
-        ),
-      ).toBe(true);
+      const organization = organizationGraph["@graph"].find(
+        (node: { "@type"?: string }) => node["@type"] === "Organization",
+      );
+      expect(organization).toBeTruthy();
+      expect(organization.logo).toBe("https://automaktab.uz/icon.svg");
 
       const softwareApp = parsed
         .flatMap((doc) => doc["@graph"] ?? [doc])
