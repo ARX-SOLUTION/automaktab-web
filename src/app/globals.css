@@ -1,5 +1,5 @@
-@import '@autodrive/design-tokens/tokens.css';
-@import 'tailwindcss';
+@import "@autodrive/design-tokens/tokens.css";
+@import "tailwindcss";
 
 /* Tailwind v4 defaults `dark:` to @media (prefers-color-scheme). This repo's
    tokens.css and layout.tsx's inline theme script both key off a `.dark`
@@ -36,6 +36,26 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
+  --color-slate-50: hsl(var(--surface));
+  --color-slate-100: hsl(var(--muted));
+  --color-slate-200: hsl(var(--border));
+  --color-slate-300: hsl(var(--input));
+  --color-slate-400: hsl(var(--muted-foreground));
+  --color-slate-500: hsl(var(--muted-foreground));
+  --color-slate-600: hsl(var(--muted-foreground-strong));
+  --color-slate-700: hsl(var(--foreground));
+  --color-slate-800: hsl(var(--foreground));
+  --color-slate-900: hsl(var(--foreground));
+  --color-slate-950: hsl(var(--brand-navy));
+  --color-cyan-300: hsl(var(--brand-blue-bright));
+  --color-cyan-400: hsl(var(--brand-blue));
+  --color-cyan-500: hsl(var(--brand-blue));
+  --color-cyan-600: hsl(var(--brand-blue-bright));
+  --color-cyan-700: hsl(var(--brand-blue-deep));
+  --color-amber-300: hsl(var(--brand-orange));
+  --color-amber-400: hsl(var(--brand-orange));
+  --color-amber-600: hsl(var(--warning-strong));
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -43,10 +63,102 @@
   /* DESIGN.md: Manrope for headings/display text only, not body copy.
      --font-manrope is set by next/font/google in layout.tsx. */
   --font-heading: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  /* Product micro-typography: labels, KPI readouts, tabular data. */
+  --font-mono:
+    var(--font-jbmono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Keep the public site and app.automaktab.uz on one Road Signal palette. */
+:root {
+  color-scheme: light;
+  --brand-white: 45 32% 93%;
+  --brand-blue: 192 43% 13%;
+  --brand-navy: 192 43% 13%;
+  --brand-orange: 39 76% 53%;
+  --brand-blue-bright: 191 37% 28%;
+  --brand-blue-soft: 191 26% 38%;
+  --brand-blue-deep: 192 52% 10%;
+  --brand-blue-pale: 45 40% 92%;
+
+  --background: var(--brand-white);
+  --surface: 45 45% 98%;
+  --card: 45 45% 99%;
+  --card-foreground: var(--brand-navy);
+  --popover: 45 45% 99%;
+  --popover-foreground: var(--brand-navy);
+  --foreground: var(--brand-navy);
+  --muted: 40 25% 90%;
+  --muted-foreground: 191 14% 36%;
+  --muted-foreground-strong: 192 28% 24%;
+  --primary: var(--brand-orange);
+  --primary-foreground: var(--brand-navy);
+  --secondary: 44 55% 88%;
+  --secondary-foreground: var(--brand-navy);
+  --accent: 43 72% 88%;
+  --accent-foreground: var(--brand-navy);
+  --destructive: 0 72% 42%;
+  --destructive-foreground: var(--brand-white);
+  --success: 155 48% 29%;
+  --success-foreground: var(--brand-white);
+  --warning: 32 82% 31%;
+  --warning-strong: 32 82% 28%;
+  --warning-foreground: var(--brand-white);
+  --info: 191 54% 27%;
+  --info-foreground: var(--brand-white);
+  --border: 39 19% 82%;
+  --input: 39 20% 76%;
+  --ring: var(--brand-orange);
+  --radius: 0.875rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --brand-blue-bright: 174 31% 72%;
+  --brand-blue-soft: 178 22% 54%;
+  --brand-blue-deep: 174 38% 78%;
+  --brand-blue-pale: 188 27% 26%;
+
+  --background: 192 45% 11%;
+  --surface: 192 40% 14%;
+  --card: 192 35% 17%;
+  --card-foreground: var(--brand-white);
+  --popover: 199.53 53% 17%;
+  --popover-foreground: var(--brand-white);
+  --foreground: var(--brand-white);
+  --muted: 191 28% 22%;
+  --muted-foreground: 178 14% 72%;
+  --muted-foreground-strong: 178 18% 84%;
+  --primary: 40 84% 61%;
+  --primary-foreground: 192 45% 11%;
+  --secondary: 191 31% 23%;
+  --secondary-foreground: var(--brand-white);
+  --accent: 174 20% 25%;
+  --accent-foreground: var(--brand-white);
+  --destructive: 0 76% 74%;
+  --destructive-foreground: var(--brand-white);
+  --success: 155 48% 50%;
+  --success-foreground: var(--brand-navy);
+  --warning: var(--brand-orange);
+  --warning-strong: var(--brand-orange);
+  --warning-foreground: var(--brand-navy);
+  --info: 185 55% 57%;
+  --info-foreground: var(--brand-navy);
+  --border: 191 23% 31%;
+  --input: 191 23% 34%;
+  --ring: var(--brand-orange);
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  font-optical-sizing: auto;
+}
+
+body {
+  min-width: 320px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,5 +1,4 @@
 import type { JSX } from "react";
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 
 const TELEGRAM_LINK = "https://t.me/Xamidullo_xudoyberdiyev";
@@ -231,20 +230,6 @@ const COPY: Record<Locale, ClosingSectionsCopy> = {
   },
 };
 
-function ArrowRightIcon() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" className="size-3.5" aria-hidden="true">
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 function ChevronDownIcon() {
   return (
     <svg
@@ -285,31 +270,11 @@ export default function ClosingSections({
 
   return (
     <div className="bg-background text-foreground">
-      {/* Blog teaser */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <h2 className="mb-3 font-heading text-2xl font-bold text-foreground sm:text-3xl">
-            {copy.blog.title}
-          </h2>
-          <p className="text-sm text-muted-foreground">{copy.blog.sub}</p>
-        </div>
-        {/* ponytail: static placeholder, no fetch. Wire the real posts grid in autodrive-qqbq.9. */}
-        <p className="text-center text-sm text-muted-foreground">
-          {copy.blog.comingSoon}
-        </p>
-        <div className="mt-8 flex justify-center">
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
-          >
-            {copy.blog.viewAll}
-            <ArrowRightIcon />
-          </Link>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="mx-auto max-w-2xl px-4 py-20 sm:px-6 lg:px-8">
+      <section
+        data-reveal
+        className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8"
+      >
         <h2 className="mb-10 text-center font-heading text-2xl font-bold text-foreground sm:text-3xl">
           {copy.faq.title}
         </h2>
@@ -325,6 +290,7 @@ export default function ClosingSections({
           {copy.faq.items.map((item) => (
             <details
               key={item.q}
+              data-reveal-item
               className="group rounded-2xl border border-border bg-card px-5"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 sm:text-base">
@@ -341,49 +307,40 @@ export default function ClosingSections({
         </div>
       </section>
 
-      {/* Demo section shell */}
-      <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <p className="mb-3 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
-            {copy.demo.eyebrow}
-          </p>
-          <h2 className="mb-3 font-heading text-2xl font-bold text-foreground sm:text-3xl">
-            {copy.demo.title}
-          </h2>
-          <p className="text-sm text-muted-foreground">{copy.demo.sub}</p>
-        </div>
-        {/* ponytail: chrome only. The real form + submission lands in autodrive-qqbq.8. */}
-        <div className="rounded-2xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
-          {copy.demo.placeholder}
-        </div>
-      </section>
-
       {/* Bottom CTA */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="rounded-[28px] border border-border bg-card p-10 text-center sm:p-16">
-          <h2 className="mb-4 font-heading text-2xl font-bold text-foreground sm:text-4xl">
+      <section
+        data-reveal
+        className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 lg:px-8"
+      >
+        <div
+          data-reveal-item
+          className="relative overflow-hidden rounded-3xl bg-foreground p-10 text-center text-background sm:p-16"
+        >
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-1 bg-primary"
+          />
+          <h2 className="mb-4 font-heading text-2xl font-bold text-background sm:text-4xl">
             {copy.cta.title}
           </h2>
-          <p className="mb-8 text-sm text-muted-foreground sm:text-base">
+          <p className="mb-8 text-sm text-background/70 sm:text-base">
             {copy.cta.sub}
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <a
-              href={TELEGRAM_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-lg border-2 border-muted-foreground px-8 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              href={LOGIN_LINK}
+              className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
             >
               {copy.cta.free}
             </a>
             <a
               href={PHONE_LINK}
-              className="inline-flex h-12 items-center justify-center rounded-lg border-2 border-muted-foreground px-8 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              className="inline-flex h-12 items-center justify-center rounded-lg border border-background/25 px-8 text-sm font-semibold text-background transition-[background-color,transform] hover:bg-background/10 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
             >
               {copy.cta.call}
             </a>
           </div>
-          <p className="mt-5 text-xs text-muted-foreground">{copy.cta.risk}</p>
+          <p className="mt-5 text-xs text-background/80">{copy.cta.risk}</p>
         </div>
       </section>
 
@@ -455,7 +412,9 @@ export function TestimonialCard({
   return (
     <figure className="rounded-2xl border border-border bg-card p-6 sm:p-8">
       <blockquote className="text-sm leading-relaxed text-foreground sm:text-base">
-        {open}{quote}{close}
+        {open}
+        {quote}
+        {close}
       </blockquote>
       <figcaption className="mt-5 text-sm">
         <span className="font-semibold text-foreground">{authorName}</span>
@@ -484,7 +443,7 @@ export function LiveActivityCard({
       aria-live="polite"
       className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2.5 text-sm shadow-sm"
     >
-      <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-400" />
+      <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-emerald-400 motion-reduce:animate-none" />
       <p className="text-foreground">
         <span className="font-semibold">{actorName}</span> {action}
       </p>

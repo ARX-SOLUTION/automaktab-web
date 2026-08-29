@@ -138,6 +138,13 @@ const REAL_DESCRIPTION =
   "Qarzdorlar ro'yxati, kunlik tushum, davomat va dars jadvali — bitta tizimda. Birinchi oy bepul, o'rnatish shart emas: brauzerda ishlaydi.";
 const escapeApostrophe = (s: string) => s.replace(/'/g, "&#x27;");
 
+// Next normalizes metadata URLs against metadataBase, stripping the trailing
+// slash on the domain root (https://automaktab.uz/ -> https://automaktab.uz).
+// buildLocaleAlternates keeps the slash (its own unit test asserts it); this
+// only affects how the value is serialized into HTML, so we normalize both
+// sides before comparing.
+const normalizeUrl = (u: string) => u.replace(/\/$/, "");
+
 // One distinctive, locale-specific string per locale from MidPageSections'
 // "benefits" section and ClosingSections' FAQ heading (COPY.benefits.title /
 // COPY.faq.title in those files) -- neither uses a straight apostrophe, so
@@ -156,9 +163,10 @@ const CLOSING_FAQ_TITLE: Record<Locale, string> = {
 
 const FAQ_ITEM_COUNT = 8;
 
-// Matches both application/ld+json <script> tags (page.tsx's Organization +
-// SoftwareApplication graph, and ClosingSections.tsx's FAQPage) rendered as
-// a single line each (JSON.stringify output, not pretty-printed).
+// Two application/ld+json <script> tags, each rendered as a single line
+// (JSON.stringify output, not pretty-printed):
+//   1. page.tsx's Organization + SoftwareApplication @graph
+//   2. ClosingSections.tsx's FAQPage
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
 
@@ -184,12 +192,14 @@ describe.each(LOCALE_ROUTES)(
       // reached via a different locale prefix.
       const alternates = buildLocaleAlternates("/", locale);
       expect(alternates).toBeTruthy();
-      expect(html).toContain(`rel="canonical" href="${alternates!.canonical}"`);
+      expect(html).toContain(
+        `rel="canonical" href="${normalizeUrl(alternates!.canonical as string)}"`,
+      );
 
       const languages = alternates!.languages as Record<string, string>;
       for (const loc of [...SUPPORTED_LOCALES, "x-default"]) {
         expect(html).toContain(
-          `rel="alternate" hrefLang="${loc}" href="${languages[loc]}"`,
+          `rel="alternate" hrefLang="${loc}" href="${normalizeUrl(languages[loc])}"`,
         );
       }
     });
@@ -211,13 +221,21 @@ describe.each(LOCALE_ROUTES)(
       // JSON.parse throws on malformed JSON -- this is the "well-formed" check.
       const parsed = matches.map(([, json]) => JSON.parse(json));
 
-      const organizationGraph = parsed.find((doc) => Array.isArray(doc["@graph"]));
+      const organizationGraph = parsed.find((doc) =>
+        Array.isArray(doc["@graph"]),
+      );
       expect(organizationGraph).toBeTruthy();
       expect(
         organizationGraph["@graph"].some(
           (node: { "@type"?: string }) => node["@type"] === "Organization",
         ),
       ).toBe(true);
+
+      const softwareApp = parsed
+        .flatMap((doc) => doc["@graph"] ?? [doc])
+        .find((entry) => entry["@type"] === "SoftwareApplication");
+      expect(softwareApp).toBeTruthy();
+      expect(softwareApp.name).toBe("Auto Maktab CRM");
 
       const faqPage = parsed.find((doc) => doc["@type"] === "FAQPage");
       expect(faqPage).toBeTruthy();

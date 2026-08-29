@@ -12,7 +12,11 @@ const PHONE_DISPLAY = "+998 94 611 00 66";
 // ponytail: no pathname prop on this component (signature is fixed to { locale }),
 // and HeroSection only ever renders on the landing root, so the language switcher
 // targets each locale's homepage rather than doing generic path-rewriting.
-const LOCALE_HOME_PATH: Record<Locale, string> = { uz: "/", ru: "/ru", en: "/en" };
+const LOCALE_HOME_PATH: Record<Locale, string> = {
+  uz: "/",
+  ru: "/ru",
+  en: "/en",
+};
 
 type LandingCopy = {
   navBlog: string;
@@ -23,8 +27,9 @@ type LandingCopy = {
   heroTitleAccent: string;
   heroSub: string;
   ctaDemo: string;
-  ctaFree: string;
+  ctaContact: string;
   mockSubtitle: string;
+  mockGreeting: string;
   mockLive: string;
   mockIncome: string;
   mockStudents: string;
@@ -37,6 +42,11 @@ type LandingCopy = {
   mockDebtor1: string;
   mockDebtor2: string;
   mockDebtor3: string;
+  mockCurrency: string;
+  mockNewStudents: string;
+  mockDebtorStudents: string;
+  mockPassRate: string;
+  mockDaySuffix: string;
 };
 
 const COPY: Record<Locale, LandingCopy> = {
@@ -50,7 +60,8 @@ const COPY: Record<Locale, LandingCopy> = {
     heroSub:
       "Qarzdorlar ro’yxati, kunlik tushum, filial hisoboti — telefoningizda.",
     ctaDemo: "Demo bilan sinab ko’ring",
-    ctaFree: "Bepul sinovni boshlang",
+    ctaContact: "Savol berish",
+    mockGreeting: "Xayrli kun, Mansur",
     mockSubtitle: "Maktabingiz bugun qanday ko'rsatkichlar bilan",
     mockLive: "Jonli",
     mockIncome: "Bugungi tushum",
@@ -64,6 +75,11 @@ const COPY: Record<Locale, LandingCopy> = {
     mockDebtor1: "A. Karimov",
     mockDebtor2: "S. Toshmatov",
     mockDebtor3: "N. Yusupova",
+    mockCurrency: "so'm",
+    mockNewStudents: "+8 yangi",
+    mockDebtorStudents: "3 ta talaba",
+    mockPassRate: "94% o'tish",
+    mockDaySuffix: "k",
   },
   ru: {
     navBlog: "Блог",
@@ -75,7 +91,8 @@ const COPY: Record<Locale, LandingCopy> = {
     heroSub:
       "Список должников, дневная выручка, отчёт по филиалам — в вашем телефоне.",
     ctaDemo: "Попробовать демо",
-    ctaFree: "Начать бесплатно",
+    ctaContact: "Задать вопрос",
+    mockGreeting: "Добрый день, Мансур",
     mockSubtitle: "Как идут дела в вашей школе сегодня",
     mockLive: "Онлайн",
     mockIncome: "Выручка сегодня",
@@ -89,6 +106,11 @@ const COPY: Record<Locale, LandingCopy> = {
     mockDebtor1: "А. Каримов",
     mockDebtor2: "С. Тошматов",
     mockDebtor3: "Н. Юсупова",
+    mockCurrency: "сум",
+    mockNewStudents: "+8 новых",
+    mockDebtorStudents: "3 студента",
+    mockPassRate: "94% сдали",
+    mockDaySuffix: "д",
   },
   en: {
     navBlog: "Blog",
@@ -99,7 +121,8 @@ const COPY: Record<Locale, LandingCopy> = {
     heroTitleAccent: "under control",
     heroSub: "Debtor list, daily revenue, branch report — right in your phone.",
     ctaDemo: "Try the demo",
-    ctaFree: "Start your free trial",
+    ctaContact: "Ask a question",
+    mockGreeting: "Good afternoon, Mansur",
     mockSubtitle: "Here's how your school is doing today",
     mockLive: "Live",
     mockIncome: "Today's revenue",
@@ -113,16 +136,12 @@ const COPY: Record<Locale, LandingCopy> = {
     mockDebtor1: "A. Karimov",
     mockDebtor2: "S. Toshmatov",
     mockDebtor3: "N. Yusupova",
+    mockCurrency: "UZS",
+    mockNewStudents: "+8 new",
+    mockDebtorStudents: "3 students",
+    mockPassRate: "94% passed",
+    mockDaySuffix: "d",
   },
-};
-
-// Only true literals stay hardcoded Uzbek regardless of locale -- greeting,
-// currency unit, and delta strings are never routed through t() in source
-// (LandingPage.tsx). Everything else in the mock (KPI labels, chart copy,
-// debtor names) does have real per-locale translations in source, so those
-// live in COPY/LandingCopy instead -- see buildKpiCards/buildDebtors below.
-const MOCK = {
-  greeting: "Xayrli kun, Mansur",
 };
 
 function buildKpiCards(copy: LandingCopy) {
@@ -130,7 +149,7 @@ function buildKpiCards(copy: LandingCopy) {
     {
       label: copy.mockIncome,
       value: "4 800 000",
-      unit: "so'm",
+      unit: copy.mockCurrency,
       delta: "+12.4%",
       deltaUp: true,
       Icon: IconWallet,
@@ -141,7 +160,7 @@ function buildKpiCards(copy: LandingCopy) {
       label: copy.mockStudents,
       value: "147",
       unit: "",
-      delta: "+8 yangi",
+      delta: copy.mockNewStudents,
       deltaUp: true,
       Icon: IconUsers,
       iconBg: "bg-blue-400/10 text-blue-600 dark:text-blue-300",
@@ -150,8 +169,8 @@ function buildKpiCards(copy: LandingCopy) {
     {
       label: copy.mockDebt,
       value: "1 250 000",
-      unit: "so'm",
-      delta: "3 ta talaba",
+      unit: copy.mockCurrency,
+      delta: copy.mockDebtorStudents,
       deltaUp: false,
       Icon: IconWarning,
       iconBg: "bg-amber-400/10 text-amber-600 dark:text-amber-300",
@@ -161,11 +180,11 @@ function buildKpiCards(copy: LandingCopy) {
       label: copy.mockGraduates,
       value: "38",
       unit: "",
-      delta: "94% o'tish",
+      delta: copy.mockPassRate,
       deltaUp: true,
       Icon: IconBadgeCheck,
-      iconBg: "bg-emerald-400/10 text-emerald-600 dark:text-emerald-300",
-      tone: "text-emerald-600 dark:text-emerald-300",
+      iconBg: "bg-emerald-400/10 text-emerald-700 dark:text-emerald-300",
+      tone: "text-emerald-700 dark:text-emerald-300",
     },
   ];
 }
@@ -376,46 +395,36 @@ function MiniRevenueChart() {
 
 function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
   return (
-    // ponytail: static bg+blur instead of source's scroll-triggered .nav-scrolled
-    // class swap (GSAP ScrollTrigger toggling it on/off) -- that needs client JS
-    // this Server Component doesn't have. Always-on still fixes the real bug
-    // (content scrolling under an invisible nav); port the scroll trigger later if wanted.
-    <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-[20px]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5">
-            <IconShieldCheck className="size-4 text-slate-600 dark:text-white/70" />
+    <header className="sticky top-0 z-30 border-b border-border bg-background">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <div className="flex shrink-0 items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <IconShieldCheck className="size-4" />
           </div>
-          <span className="text-sm font-semibold tracking-tight text-slate-800 dark:text-white/85">
+          <span className="font-heading hidden text-sm font-bold tracking-tight text-foreground sm:inline sm:text-base">
             Auto Maktab{" "}
-            <span className="font-normal text-slate-400 dark:text-white/35">
-              CRM
-            </span>
+            <span className="font-medium text-muted-foreground">CRM</span>
           </span>
         </div>
-        <nav className="flex items-center gap-3">
-          <Link
-            href="/blog"
-            className="hidden items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 dark:text-white/40 dark:hover:text-white/70 lg:flex"
-          >
-            {copy.navBlog}
-          </Link>
+        <nav className="flex items-center gap-2 max-[420px]:gap-1">
           <a
             href={PHONE_LINK}
-            className="hidden items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 dark:text-white/40 dark:hover:text-white/70 lg:flex"
+            className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring lg:flex"
           >
             <IconPhone className="size-3.5" />
             {PHONE_DISPLAY}
           </a>
-          <div className="flex items-center gap-1 rounded-full border border-slate-200 px-1 py-0.5 dark:border-white/10">
+          <div className="flex items-center gap-1 rounded-full border border-border bg-card px-1 py-0.5 max-[380px]:gap-0.5 max-[380px]:px-0.5">
             {SUPPORTED_LOCALES.map((lang) => (
               <Link
                 key={lang}
                 href={LOCALE_HOME_PATH[lang]}
-                className={`rounded-full px-2 py-1 text-xs uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 ${
+                hrefLang={lang}
+                aria-current={lang === locale ? "page" : undefined}
+                className={`rounded-full px-2 py-1 text-xs uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring max-[380px]:px-1.5 ${
                   lang === locale
-                    ? "bg-slate-200 text-slate-900 dark:bg-white/15 dark:text-white"
-                    : "text-slate-500 hover:text-slate-800 dark:text-white/60 dark:hover:text-white"
+                    ? "bg-secondary text-secondary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {lang.toUpperCase()}
@@ -424,13 +433,14 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
           </div>
           <ThemeToggle
             label={copy.themeToggleLabel}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-colors hover:text-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 dark:border-white/10 dark:text-white/50 dark:hover:text-white"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           />
           <a
             href={CRM_LOGIN_URL}
-            className="active:scale-[0.96] inline-flex h-9 items-center gap-1.5 rounded-md text-sm font-medium text-slate-700 ring-1 ring-inset ring-slate-200 transition-all hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:text-white/80 dark:ring-white/10 dark:hover:bg-white/10 dark:hover:text-white px-5"
+            aria-label={copy.navCta}
+            className="inline-flex h-11 items-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 max-[420px]:px-3"
           >
-            {copy.navCta}
+            <span className="max-[420px]:sr-only">{copy.navCta}</span>
             <IconArrowRight className="size-3.5" />
           </a>
         </nav>
@@ -449,35 +459,47 @@ function Hero({ copy }: { copy: LandingCopy }) {
       : "";
 
   return (
-    <section className="relative z-20 mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-28">
-      <div className="mx-auto max-w-3xl text-center">
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-4 py-1.5 text-xs font-medium text-slate-600 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-slate-400 dark:bg-white/40" />
+    <div className="max-w-2xl lg:py-10">
+      <div className="text-left">
+        <div
+          data-hero-item
+          className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           {copy.heroBadge}
         </div>
 
-        <h1 className="mb-5 text-balance font-heading text-4xl font-bold leading-[1.1] tracking-tighter sm:text-5xl lg:text-6xl">
+        <h1
+          data-hero-item
+          className="mb-6 max-w-[14ch] text-balance font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.045em] max-[359px]:text-3xl sm:text-5xl lg:text-6xl"
+        >
           {titleBefore}
           <span className="relative inline-block">
-            <span className="relative z-10 bg-gradient-to-r from-cyan-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent dark:from-cyan-300 dark:via-cyan-200 dark:to-blue-300">
+            <span className="relative z-10 text-foreground">
               {copy.heroTitleAccent}
             </span>
             <span
               aria-hidden="true"
-              className="absolute inset-x-2 -bottom-0.5 h-[2px] rounded-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/60 to-cyan-400/0"
+              className="absolute inset-x-0 -bottom-1 h-1 rounded-full bg-primary"
             />
           </span>
           {titleAfter}
         </h1>
 
-        <p className="mx-auto mb-8 max-w-lg text-base leading-relaxed text-slate-500 dark:text-white/50 sm:text-lg">
+        <p
+          data-hero-item
+          className="mb-8 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+        >
           {copy.heroSub}
         </p>
 
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div
+          data-hero-item
+          className="flex flex-col items-start gap-3 sm:flex-row"
+        >
           <a
             href={CRM_LOGIN_URL}
-            className="active:scale-[0.96] inline-flex h-12 items-center gap-2 rounded-md bg-cyan-400 px-8 text-slate-950 transition-all hover:bg-cyan-300 hover:shadow-[0_0_32px_rgba(34,211,238,0.30)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2"
+            className="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-7 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
           >
             {copy.ctaDemo}
             <IconArrowRight className="size-4" />
@@ -486,14 +508,14 @@ function Hero({ copy }: { copy: LandingCopy }) {
             href={TELEGRAM_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="active:scale-[0.96] inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-slate-100 px-8 text-slate-700 transition-all hover:bg-slate-200 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2 dark:border-white/[12%] dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+            className="inline-flex h-12 items-center gap-2 rounded-lg border border-border bg-card px-7 text-sm font-semibold text-foreground transition-[background-color,transform] hover:bg-muted active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
           >
             <IconSend className="size-4" />
-            {copy.ctaFree}
+            {copy.ctaContact}
           </a>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -502,14 +524,14 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
   const debtors = buildDebtors(copy);
 
   return (
-    <section className="relative z-10 mx-auto max-w-6xl px-4 pb-20 sm:-mt-16 sm:px-6 lg:px-8">
-      <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white/90 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.2),0_70px_140px_-30px_rgba(0,0,0,0.22)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70 dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7),0_70px_140px_-30px_rgba(0,0,0,0.8)]">
+    <div data-hero-item className="relative z-10 min-w-0">
+      <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_80px_hsl(var(--foreground)/0.12)]">
         {/* Browser chrome */}
-        <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-5 py-3 dark:border-white/[8%] dark:bg-white/[0.015]">
+        <div className="flex items-center gap-2 border-b border-border bg-muted/50 px-5 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-          <div className="mx-auto flex h-5 w-52 items-center justify-center rounded-full bg-slate-200 text-[10px] tracking-wide text-slate-400 dark:bg-white/[0.06] dark:text-white/25">
+          <div className="mx-auto flex h-5 w-52 items-center justify-center rounded-full bg-background text-[10px] tracking-wide text-muted-foreground">
             app.automaktab.uz
           </div>
         </div>
@@ -519,14 +541,14 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
           <div className="mb-4 flex items-center justify-between">
             <div>
               <p className="text-sm font-bold text-slate-800 dark:text-white/90">
-                {MOCK.greeting}
+                {copy.mockGreeting}
               </p>
-              <p className="mt-0.5 text-[11px] text-slate-400 dark:text-white/35">
+              <p className="mt-0.5 text-[11px] text-slate-400 dark:text-white/55">
                 {copy.mockSubtitle}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400 motion-reduce:animate-none" />
               {copy.mockLive}
             </span>
           </div>
@@ -539,7 +561,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                 className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-white/[8%] dark:bg-white/[0.035]"
               >
                 <div className="mb-2 flex items-center justify-between">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-white/35">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-white/55">
                     {card.label}
                   </p>
                   <div
@@ -549,17 +571,17 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                   </div>
                 </div>
                 <p
-                  className={`tabular-nums text-base font-bold leading-tight sm:text-lg ${card.tone}`}
+                  className={`font-mono tabular-nums text-base font-bold leading-tight whitespace-nowrap max-[380px]:text-[13px] sm:text-lg ${card.tone}`}
                 >
                   {card.value}
                   {card.unit && (
-                    <span className="ml-0.5 text-[10px] font-normal text-slate-400 dark:text-white/30">
+                    <span className="ml-0.5 text-[10px] font-normal text-slate-400 dark:text-white/50">
                       {card.unit}
                     </span>
                   )}
                 </p>
                 <p
-                  className={`mt-1 text-[10px] font-semibold ${card.deltaUp ? "text-emerald-400" : "text-rose-400"}`}
+                  className={`mt-1 text-[10px] font-semibold ${card.deltaUp ? "text-emerald-700 dark:text-emerald-400" : "text-rose-700 dark:text-rose-400"}`}
                 >
                   {card.delta}
                 </p>
@@ -575,11 +597,11 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                   <p className="text-xs font-semibold text-slate-600 dark:text-white/65">
                     {copy.mockChartTitle}
                   </p>
-                  <p className="mt-0.5 text-[10px] text-slate-400 dark:text-white/30">
+                  <p className="mt-0.5 text-[10px] text-slate-400 dark:text-white/50">
                     {copy.mockChartSub}
                   </p>
                 </div>
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-600 dark:text-emerald-300">
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
                   <IconTrendUp className="size-3" />
                   +18%
                 </span>
@@ -587,8 +609,8 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
               <div className="h-14">
                 <MiniRevenueChart />
               </div>
-              <div className="mt-2 flex items-center gap-1.5 text-[10px] text-slate-400 dark:text-white/25">
-                <span className="inline-block h-1.5 w-4 rounded-full bg-slate-400/60 dark:bg-white/25" />
+              <div className="mt-2 flex items-center gap-1.5 text-[10px] text-slate-400 dark:text-white/50">
+                <span className="inline-block h-1.5 w-4 rounded-full bg-slate-400/60 dark:bg-white/50" />
                 {copy.mockChartPeriod}
               </div>
             </div>
@@ -598,7 +620,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                 <span className="text-xs font-semibold text-slate-600 dark:text-white/65">
                   {copy.mockDebtorsTitle}
                 </span>
-                <span className="rounded-full border border-rose-400/25 bg-rose-400/10 px-2 py-0.5 text-[10px] font-semibold text-rose-600 dark:text-rose-300">
+                <span className="rounded-full border border-rose-400/25 bg-rose-400/10 px-2 py-0.5 text-[10px] font-semibold text-rose-700 dark:text-rose-300">
                   {debtors.length}
                 </span>
               </div>
@@ -609,7 +631,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                     className="flex items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2 dark:border-white/5 dark:bg-white/[0.02]"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-400/15 text-[10px] font-semibold text-rose-600 dark:text-rose-300">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-400/15 text-[10px] font-semibold text-rose-700 dark:text-rose-300">
                         {d.name[0]}
                       </div>
                       <span className="text-xs text-slate-600 dark:text-white/60">
@@ -617,11 +639,12 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="tabular-nums whitespace-nowrap text-xs font-semibold text-rose-600 dark:text-rose-300">
+                      <span className="font-mono tabular-nums whitespace-nowrap text-xs font-semibold text-rose-700 dark:text-rose-300">
                         {d.amount}
                       </span>
-                      <span className="text-[10px] text-slate-400 dark:text-white/25">
-                        {d.days}k
+                      <span className="text-[10px] text-slate-400 dark:text-white/50">
+                        {d.days}
+                        {copy.mockDaySuffix}
                       </span>
                     </div>
                   </div>
@@ -631,7 +654,7 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -644,13 +667,28 @@ export function LandingNav({ locale }: { locale: Locale }): JSX.Element {
   return <Nav locale={locale} copy={COPY[locale]} />;
 }
 
-export default function HeroSection({ locale }: { locale: Locale }): JSX.Element {
+export default function HeroSection({
+  locale,
+}: {
+  locale: Locale;
+}): JSX.Element {
   const copy = COPY[locale];
 
   return (
     <div className="bg-background text-foreground">
-      <Hero copy={copy} />
-      <DashboardMock copy={copy} />
+      <section
+        data-hero
+        className="relative isolate overflow-hidden px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-28 lg:pt-24"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 -z-10 h-px bg-primary"
+        />
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+          <Hero copy={copy} />
+          <DashboardMock copy={copy} />
+        </div>
+      </section>
     </div>
   );
 }

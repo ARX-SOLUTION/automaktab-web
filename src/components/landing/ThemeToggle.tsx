@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "theme";
+const THEME_EVENT = "automaktab-theme-change";
+type Theme = "dark" | "light";
 
-function getInitialTheme(): "dark" | "light" {
-  if (typeof window === "undefined") return "dark";
+function getThemeSnapshot(): Theme {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === "dark" || stored === "light") return stored;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -13,8 +14,26 @@ function getInitialTheme(): "dark" | "light" {
     : "light";
 }
 
-function applyTheme(theme: "dark" | "light") {
+function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
+}
+
+function subscribeTheme(onStoreChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const notify = () => {
+    applyTheme(getThemeSnapshot());
+    onStoreChange();
+  };
+
+  window.addEventListener("storage", notify);
+  window.addEventListener(THEME_EVENT, notify);
+  media.addEventListener("change", notify);
+
+  return () => {
+    window.removeEventListener("storage", notify);
+    window.removeEventListener(THEME_EVENT, notify);
+    media.removeEventListener("change", notify);
+  };
 }
 
 function IconMoon({ className }: { className?: string }) {
@@ -59,28 +78,32 @@ export default function ThemeToggle({
   label: string;
   className?: string;
 }) {
-  const [theme, setTheme] = useState(getInitialTheme);
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    () => "dark" as const,
+  );
 
   const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "dark" ? "light" : "dark";
-      localStorage.setItem(STORAGE_KEY, next);
-      return next;
-    });
-  }, []);
+    const next = theme === "dark" ? "light" : "dark";
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
+    window.dispatchEvent(new Event(THEME_EVENT));
+  }, [theme]);
 
   return (
     <button
       type="button"
       onClick={toggle}
       aria-label={label}
+      aria-pressed={theme === "dark"}
       className={className}
     >
-      {theme === "dark" ? <IconSun className="size-4" /> : <IconMoon className="size-4" />}
+      {theme === "dark" ? (
+        <IconSun className="size-4" />
+      ) : (
+        <IconMoon className="size-4" />
+      )}
     </button>
   );
 }

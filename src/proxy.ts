@@ -50,5 +50,5 @@ export const config = {
   // Skip Next internals and any path with a file extension (favicon.ico,
   // sitemap.xml, images, ...); everything else participates in locale
   // resolution.
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };
