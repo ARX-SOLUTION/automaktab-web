@@ -57,6 +57,27 @@ const OG_LOCALE: Record<Locale, string> = {
   en: "en_US",
 };
 
+const SEO_METADATA: Record<
+  Locale,
+  { title: string; description: string }
+> = {
+  uz: {
+    title: "Avtomaktab CRM — to'lov, davomat, jadval | Auto Maktab",
+    description:
+      "Qarzdorlar ro'yxati, kunlik tushum, davomat va dars jadvali — bitta tizimda. Birinchi oy bepul, o'rnatish shart emas: brauzerda ishlaydi.",
+  },
+  ru: {
+    title: "CRM для автошколы — оплата и посещаемость | Auto Maktab",
+    description:
+      "Должники, выручка, посещаемость и расписание — в одной системе. Первый месяц бесплатно, установка не нужна: работает в браузере.",
+  },
+  en: {
+    title: "Driving School CRM — Payments and Attendance | Auto Maktab",
+    description:
+      "Track debtors, daily revenue, attendance, and schedules in one system. The first month is free, with no installation required.",
+  },
+};
+
 export async function generateMetadata({
   params,
 }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -67,17 +88,14 @@ export async function generateMetadata({
     typeof alternates?.canonical === "string"
       ? alternates.canonical
       : undefined;
+  const seo = SEO_METADATA[locale];
 
   return {
     // Resolves og:image / twitter:image to absolute production URLs; without
     // it Next falls back to http://localhost:3000 and social cards break.
     metadataBase: new URL("https://automaktab.uz"),
-    // Ported from autodrive-frontend/index.html -- uz-only for now, same
-    // for all three locales, since ru/en title/description copy wasn't
-    // part of any of the three section builds.
-    title: "Avtomaktab CRM — to'lov, davomat, jadval | Auto Maktab",
-    description:
-      "Qarzdorlar ro'yxati, kunlik tushum, davomat va dars jadvali — bitta tizimda. Birinchi oy bepul, o'rnatish shart emas: brauzerda ishlaydi.",
+    title: seo.title,
+    description: seo.description,
     alternates,
     robots: "index, follow",
     authors: [{ name: "Auto Maktab" }],

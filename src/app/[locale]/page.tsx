@@ -23,7 +23,7 @@ const jsonLd = {
       "@id": "https://automaktab.uz/#org",
       name: "Auto Maktab CRM",
       url: "https://automaktab.uz/",
-      logo: "https://automaktab.uz/favicon.png",
+      logo: "https://automaktab.uz/icon.svg",
       email: "demo@automaktab.uz",
       areaServed: "UZ",
     },
