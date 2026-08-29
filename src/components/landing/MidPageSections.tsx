@@ -43,6 +43,25 @@ type Copy = {
     attendance: { eyebrow: string; title: string; body: string };
     schedule: { eyebrow: string; title: string; body: string };
   };
+  mock: {
+    debtorsCount: string;
+    courseSchool: string;
+    courseFast: string;
+    paid: string;
+    daySuffix: string;
+    attendanceGroup: string;
+    theory: string;
+    practical: string;
+    save: string;
+    attendanceStatus: {
+      present: string;
+      absent: string;
+      late: string;
+    };
+    scheduleTitle: string;
+    days: [string, string, string, string, string];
+    groups: [string, string, string];
+  };
 };
 
 const COPY: Record<Locale, Copy> = {
@@ -51,9 +70,18 @@ const COPY: Record<Locale, Copy> = {
       eyebrow: "Tanish holatmi?",
       lead: "Oy oxirida kim to’ladi, kim to’lamadi — daftar, Excel, Telegram. Filiallar bo’yicha raqamlarni yig’ish kun ketadi.",
       cards: [
-        { title: "Qarzdorlarni qo’lda sanash", body: "Kim to’lamadi, qancha qoldi — bir qarashda bilib bo’lmaydi" },
-        { title: "Davomat daftarda", body: "Yo’qoladi, har o’qituvchi har xil yuritadi" },
-        { title: "Filiallar hisoboti — kun ketadi", body: "Raqamlar bir joyda emas, har safar yig’ish kerak" },
+        {
+          title: "Qarzdorlarni qo’lda sanash",
+          body: "Kim to’lamadi, qancha qoldi — bir qarashda bilib bo’lmaydi",
+        },
+        {
+          title: "Davomat daftarda",
+          body: "Yo’qoladi, har o’qituvchi har xil yuritadi",
+        },
+        {
+          title: "Filiallar hisoboti — kun ketadi",
+          body: "Raqamlar bir joyda emas, har safar yig’ish kerak",
+        },
       ],
       bridge: "Avtomaktab CRM shularning barchasini bitta panelga yig’adi.",
     },
@@ -69,10 +97,22 @@ const COPY: Record<Locale, Copy> = {
       title: "Qanday boshlaymiz?",
       sub: "To’rtta oddiy qadam — birinchi kuni ishga tushasiz",
       steps: [
-        { title: "Bog’lanasiz", body: "Telegram yoki telefon orqali murojaat qiling — 15 daqiqada javob" },
-        { title: "Biz sozlab beramiz", body: "Kompaniya, filial va xodim akkauntlari — 1 kun ichida" },
-        { title: "Jamoani o’rgatamiz", body: "1 soatlik jonli sessiya + demo mashq bilan o’rgatamiz" },
-        { title: "Ishga tushasiz", body: "Birinchi kunlar yonida bo’lamiz va savollaringizga javob beramiz" },
+        {
+          title: "Bog’lanasiz",
+          body: "Telegram yoki telefon orqali murojaat qiling — 15 daqiqada javob",
+        },
+        {
+          title: "Biz sozlab beramiz",
+          body: "Kompaniya, filial va xodim akkauntlari — 1 kun ichida",
+        },
+        {
+          title: "Jamoani o’rgatamiz",
+          body: "1 soatlik jonli sessiya + demo mashq bilan o’rgatamiz",
+        },
+        {
+          title: "Ishga tushasiz",
+          body: "Birinchi kunlar yonida bo’lamiz va savollaringizga javob beramiz",
+        },
       ],
       badge: "Birinchi oy — bepul",
     },
@@ -80,28 +120,80 @@ const COPY: Record<Locale, Copy> = {
       title: "Asosiy imkoniyatlar",
       sub: "Avtomaktabni boshqarish uchun zarur hamma narsa",
       cards: [
-        { title: "Qarz nazorati", body: "Kim qancha qarz — bir qarashda. Filiallar kesimida qarzdorlar ro’yxati, qolgan summa va to’lov sanasi." },
-        { title: "Davomat", body: "O‘qituvchi 2 bosishda belgilaydi. Guruh bo‘yicha davomat, kechikkan va uzrli sabablar." },
-        { title: "Jadval", body: "Guruhlar va darslar avtomatik. Haftalik jadval shablonlari, dars yaratish va hisobot." },
+        {
+          title: "Qarz nazorati",
+          body: "Kim qancha qarz — bir qarashda. Filiallar kesimida qarzdorlar ro’yxati, qolgan summa va to’lov sanasi.",
+        },
+        {
+          title: "Davomat",
+          body: "O‘qituvchi 2 bosishda belgilaydi. Guruh bo‘yicha davomat, kechikkan va uzrli sabablar.",
+        },
+        {
+          title: "Jadval",
+          body: "Guruhlar va darslar avtomatik. Haftalik jadval shablonlari, dars yaratish va hisobot.",
+        },
       ],
     },
     roles: {
       title: "Har bir rol uchun",
       sub: "O’z lavozimingizni toping — har biri uchun alohida ko’rinish",
       cards: [
-        { title: "Ega", body: "Barcha filiallar hisoboti, daromad va qarz nazorati bir panelda." },
-        { title: "Menejer", body: "Filial boshqaruvi: guruhlar, xodimlar va kunlik hisobot." },
-        { title: "Operator", body: "Tez talaba va to’lov kiritish. «Saqlash va yana qo’shish» tugmasi bor." },
-        { title: "O’qituvchi", body: "O’z guruhlari va davomat — 2 bosishda belgilash." },
+        {
+          title: "Ega",
+          body: "Barcha filiallar hisoboti, daromad va qarz nazorati bir panelda.",
+        },
+        {
+          title: "Menejer",
+          body: "Filial boshqaruvi: guruhlar, xodimlar va kunlik hisobot.",
+        },
+        {
+          title: "Operator",
+          body: "Tez talaba va to’lov kiritish. «Saqlash va yana qo’shish» tugmasi bor.",
+        },
+        {
+          title: "O’qituvchi",
+          body: "O’z guruhlari va davomat — 2 bosishda belgilash.",
+        },
       ],
     },
     features: {
       title: "Batafsil imkoniyatlar",
       sub: "Har bir funksiya real ehtiyojdan tug'ilgan",
       debtorsLabel: "Qarzdorlar",
-      debt: { eyebrow: "Qarzdorlik nazorati", title: "Har bir to’lovni nazorat ostida saqlang", body: "Qarzdor talabalar ro’yxati, qolgan summa, qarz muddati — bir qarashda. Filiallar kesimida to’liq hisobot, muddati o’tgan qarzlar alohida ajratilgan." },
-      attendance: { eyebrow: "Davomat tizimi", title: "O’qituvchi 2 bosishda belgilaydi", body: "Guruh ro’yxatini oching, talabani bosing — Keldi / Kelmadi / Kechikdi. Davomat jurnali avtomatik saqlanadi, qayta urinib ko’rish shart emas." },
-      schedule: { eyebrow: "Jadval va guruhlar", title: "Haftalik jadval — bir marta sozlang, doim ishlaydi", body: "Jadval shablonlari asosida kelgusi haftalar uchun darslar avtomatik yaratiladi. Guruhlar, o’qituvchilar va dars turlari — hammasi bir joyda." },
+      debt: {
+        eyebrow: "Qarzdorlik nazorati",
+        title: "Har bir to’lovni nazorat ostida saqlang",
+        body: "Qarzdor talabalar ro’yxati, qolgan summa, qarz muddati — bir qarashda. Filiallar kesimida to’liq hisobot, muddati o’tgan qarzlar alohida ajratilgan.",
+      },
+      attendance: {
+        eyebrow: "Davomat tizimi",
+        title: "O’qituvchi 2 bosishda belgilaydi",
+        body: "Guruh ro’yxatini oching, talabani bosing — Keldi / Kelmadi / Kechikdi. Davomat jurnali avtomatik saqlanadi, qayta urinib ko’rish shart emas.",
+      },
+      schedule: {
+        eyebrow: "Jadval va guruhlar",
+        title: "Haftalik jadval — bir marta sozlang, doim ishlaydi",
+        body: "Jadval shablonlari asosida kelgusi haftalar uchun darslar avtomatik yaratiladi. Guruhlar, o’qituvchilar va dars turlari — hammasi bir joyda.",
+      },
+    },
+    mock: {
+      debtorsCount: "4 ta qarzdor",
+      courseSchool: "Avtomaktab",
+      courseFast: "Tezkor",
+      paid: "To‘liq",
+      daySuffix: "k",
+      attendanceGroup: "1-guruh",
+      theory: "Nazariya",
+      practical: "Amaliy",
+      save: "Saqlash",
+      attendanceStatus: {
+        present: "Keldi",
+        absent: "Kelmadi",
+        late: "Kechikdi",
+      },
+      scheduleTitle: "Haftalik jadval",
+      days: ["Du", "Se", "Ch", "Pa", "Ju"],
+      groups: ["1-guruh", "2-guruh", "3-guruh"],
     },
   },
   ru: {
@@ -109,9 +201,18 @@ const COPY: Record<Locale, Copy> = {
       eyebrow: "Знакомая ситуация?",
       lead: "Конец месяца: кто заплатил, кто нет — в тетради, Excel и Telegram. Собрать данные по всем филиалам — целый день.",
       cards: [
-        { title: "Должников считаем вручную", body: "Кто не заплатил, сколько осталось — не видно с первого взгляда" },
-        { title: "Журнал посещаемости на бумаге", body: "Теряется, каждый преподаватель ведёт по-своему" },
-        { title: "Сводка по филиалам — целый день", body: "Данные разбросаны, каждый раз собираем заново" },
+        {
+          title: "Должников считаем вручную",
+          body: "Кто не заплатил, сколько осталось — не видно с первого взгляда",
+        },
+        {
+          title: "Журнал посещаемости на бумаге",
+          body: "Теряется, каждый преподаватель ведёт по-своему",
+        },
+        {
+          title: "Сводка по филиалам — целый день",
+          body: "Данные разбросаны, каждый раз собираем заново",
+        },
       ],
       bridge: "Avtomaktab CRM собирает всё это в одну панель.",
     },
@@ -127,10 +228,22 @@ const COPY: Record<Locale, Copy> = {
       title: "С чего начнём?",
       sub: "Четыре простых шага — с первого дня работаете",
       steps: [
-        { title: "Связываетесь", body: "Telegram или телефон — ответим за 15 минут" },
-        { title: "Настраиваем", body: "Компания, филиал, аккаунты сотрудников — за 1 день" },
-        { title: "Обучаем команду", body: "1 час живой сессии + демо-практика" },
-        { title: "Запускаетесь", body: "Первые дни мы рядом и отвечаем на вопросы" },
+        {
+          title: "Связываетесь",
+          body: "Telegram или телефон — ответим за 15 минут",
+        },
+        {
+          title: "Настраиваем",
+          body: "Компания, филиал, аккаунты сотрудников — за 1 день",
+        },
+        {
+          title: "Обучаем команду",
+          body: "1 час живой сессии + демо-практика",
+        },
+        {
+          title: "Запускаетесь",
+          body: "Первые дни мы рядом и отвечаем на вопросы",
+        },
       ],
       badge: "Первый месяц — бесплатно",
     },
@@ -138,28 +251,80 @@ const COPY: Record<Locale, Copy> = {
       title: "Ключевые возможности",
       sub: "Всё необходимое для управления автошколой",
       cards: [
-        { title: "Контроль долгов", body: "Кто и сколько должен — с первого взгляда. Список должников по филиалам, остаток и дата платежа." },
-        { title: "Посещаемость", body: "Преподаватель отмечает за 2 нажатия. Посещаемость по группам, опоздания и уважительные причины." },
-        { title: "Расписание", body: "Группы и занятия — автоматически. Шаблоны расписания, создание уроков и отчёты." },
+        {
+          title: "Контроль долгов",
+          body: "Кто и сколько должен — с первого взгляда. Список должников по филиалам, остаток и дата платежа.",
+        },
+        {
+          title: "Посещаемость",
+          body: "Преподаватель отмечает за 2 нажатия. Посещаемость по группам, опоздания и уважительные причины.",
+        },
+        {
+          title: "Расписание",
+          body: "Группы и занятия — автоматически. Шаблоны расписания, создание уроков и отчёты.",
+        },
       ],
     },
     roles: {
       title: "Для каждой роли",
       sub: "Найдите свою должность — отдельный вид для каждого",
       cards: [
-        { title: "Владелец", body: "Отчёты по всем филиалам, доходы и контроль долгов в одной панели." },
-        { title: "Менеджер", body: "Управление филиалом: группы, сотрудники и ежедневные отчёты." },
-        { title: "Оператор", body: "Быстрый ввод студентов и платежей. Есть кнопка «Сохранить и добавить ещё»." },
-        { title: "Преподаватель", body: "Свои группы и посещаемость — отметить за 2 нажатия." },
+        {
+          title: "Владелец",
+          body: "Отчёты по всем филиалам, доходы и контроль долгов в одной панели.",
+        },
+        {
+          title: "Менеджер",
+          body: "Управление филиалом: группы, сотрудники и ежедневные отчёты.",
+        },
+        {
+          title: "Оператор",
+          body: "Быстрый ввод студентов и платежей. Есть кнопка «Сохранить и добавить ещё».",
+        },
+        {
+          title: "Преподаватель",
+          body: "Свои группы и посещаемость — отметить за 2 нажатия.",
+        },
       ],
     },
     features: {
       title: "Подробные возможности",
       sub: "Каждая функция рождена из реальной потребности",
       debtorsLabel: "Должники",
-      debt: { eyebrow: "Контроль долгов", title: "Держите каждый платёж под контролем", body: "Список должников, остаток, срок долга — с первого взгляда. Полный отчёт по филиалам, просроченные долги выделены отдельно." },
-      attendance: { eyebrow: "Система посещаемости", title: "Преподаватель отмечает за 2 нажатия", body: "Откройте список группы, нажмите на студента — Пришёл / Не пришёл / Опоздал. Журнал сохраняется автоматически, повторных попыток не нужно." },
-      schedule: { eyebrow: "Расписание и группы", title: "Расписание — настройте один раз, работает всегда", body: "По шаблонам расписания уроки на следующие недели создаются автоматически. Группы, преподаватели и типы занятий — всё в одном месте." },
+      debt: {
+        eyebrow: "Контроль долгов",
+        title: "Держите каждый платёж под контролем",
+        body: "Список должников, остаток, срок долга — с первого взгляда. Полный отчёт по филиалам, просроченные долги выделены отдельно.",
+      },
+      attendance: {
+        eyebrow: "Система посещаемости",
+        title: "Преподаватель отмечает за 2 нажатия",
+        body: "Откройте список группы, нажмите на студента — Пришёл / Не пришёл / Опоздал. Журнал сохраняется автоматически, повторных попыток не нужно.",
+      },
+      schedule: {
+        eyebrow: "Расписание и группы",
+        title: "Расписание — настройте один раз, работает всегда",
+        body: "По шаблонам расписания уроки на следующие недели создаются автоматически. Группы, преподаватели и типы занятий — всё в одном месте.",
+      },
+    },
+    mock: {
+      debtorsCount: "4 должника",
+      courseSchool: "Автошкола",
+      courseFast: "Ускоренный курс",
+      paid: "Оплачено",
+      daySuffix: "д",
+      attendanceGroup: "Группа 1",
+      theory: "Теория",
+      practical: "Практика",
+      save: "Сохранить",
+      attendanceStatus: {
+        present: "Пришёл",
+        absent: "Не пришёл",
+        late: "Опоздал",
+      },
+      scheduleTitle: "Расписание на неделю",
+      days: ["Пн", "Вт", "Ср", "Чт", "Пт"],
+      groups: ["Группа 1", "Группа 2", "Группа 3"],
     },
   },
   en: {
@@ -167,9 +332,18 @@ const COPY: Record<Locale, Copy> = {
       eyebrow: "Sound familiar?",
       lead: "End of month: who paid, who didn't — scattered across notebooks, Excel, and Telegram. Pulling branch totals together takes a whole day.",
       cards: [
-        { title: "Counting debtors by hand", body: "Who hasn't paid, how much is left — impossible to see at a glance" },
-        { title: "Attendance in a paper journal", body: "Gets lost. Every teacher tracks it differently." },
-        { title: "Branch summary takes a full day", body: "Numbers are scattered — you have to pull them together every time" },
+        {
+          title: "Counting debtors by hand",
+          body: "Who hasn't paid, how much is left — impossible to see at a glance",
+        },
+        {
+          title: "Attendance in a paper journal",
+          body: "Gets lost. Every teacher tracks it differently.",
+        },
+        {
+          title: "Branch summary takes a full day",
+          body: "Numbers are scattered — you have to pull them together every time",
+        },
       ],
       bridge: "Avtomaktab CRM brings all of this into one panel.",
     },
@@ -185,10 +359,22 @@ const COPY: Record<Locale, Copy> = {
       title: "How do we get started?",
       sub: "Four simple steps — up and running from day one",
       steps: [
-        { title: "You reach out", body: "Contact us via Telegram or phone — we reply within 15 minutes" },
-        { title: "We set it up", body: "Company, branch, and staff accounts — ready in 1 day" },
-        { title: "We train your team", body: "1-hour live session + hands-on demo practice" },
-        { title: "You go live", body: "We stay close for the first days and answer every question" },
+        {
+          title: "You reach out",
+          body: "Contact us via Telegram or phone — we reply within 15 minutes",
+        },
+        {
+          title: "We set it up",
+          body: "Company, branch, and staff accounts — ready in 1 day",
+        },
+        {
+          title: "We train your team",
+          body: "1-hour live session + hands-on demo practice",
+        },
+        {
+          title: "You go live",
+          body: "We stay close for the first days and answer every question",
+        },
       ],
       badge: "First month — free",
     },
@@ -196,28 +382,80 @@ const COPY: Record<Locale, Copy> = {
       title: "Key features",
       sub: "Everything you need to run a driving school",
       cards: [
-        { title: "Debt tracking", body: "Who owes what — at a glance. Debtors by branch, remaining balance, and payment date." },
-        { title: "Attendance", body: "Teachers mark attendance in 2 taps. Per-group attendance, late arrivals, and excused absences." },
-        { title: "Schedule", body: "Groups and lessons, automated. Weekly schedule templates, lesson generation, and reports." },
+        {
+          title: "Debt tracking",
+          body: "Who owes what — at a glance. Debtors by branch, remaining balance, and payment date.",
+        },
+        {
+          title: "Attendance",
+          body: "Teachers mark attendance in 2 taps. Per-group attendance, late arrivals, and excused absences.",
+        },
+        {
+          title: "Schedule",
+          body: "Groups and lessons, automated. Weekly schedule templates, lesson generation, and reports.",
+        },
       ],
     },
     roles: {
       title: "For every role",
       sub: "Find your position — a dedicated view for each",
       cards: [
-        { title: "Owner", body: "All-branch reports, revenue and debt control in one panel." },
-        { title: "Manager", body: "Branch management: groups, staff and daily reports." },
-        { title: "Operator", body: "Fast student and payment entry. \"Save and add another\" button included." },
-        { title: "Teacher", body: "Your groups and attendance — marked in 2 taps." },
+        {
+          title: "Owner",
+          body: "All-branch reports, revenue and debt control in one panel.",
+        },
+        {
+          title: "Manager",
+          body: "Branch management: groups, staff and daily reports.",
+        },
+        {
+          title: "Operator",
+          body: 'Fast student and payment entry. "Save and add another" button included.',
+        },
+        {
+          title: "Teacher",
+          body: "Your groups and attendance — marked in 2 taps.",
+        },
       ],
     },
     features: {
       title: "Feature details",
       sub: "Every feature built from a real need",
       debtorsLabel: "Debtors",
-      debt: { eyebrow: "Debt tracking", title: "Keep every payment under control", body: "Debtor list, remaining balance, overdue days — at a glance. Full report by branch, overdue debts highlighted separately." },
-      attendance: { eyebrow: "Attendance system", title: "Teachers mark attendance in 2 taps", body: "Open the group list, tap a student — Present / Absent / Late. The attendance log saves automatically, no retry needed." },
-      schedule: { eyebrow: "Schedule & groups", title: "Set the schedule once, it runs itself", body: "Based on schedule templates, lessons for future weeks are created automatically. Groups, teachers and lesson types — all in one place." },
+      debt: {
+        eyebrow: "Debt tracking",
+        title: "Keep every payment under control",
+        body: "Debtor list, remaining balance, overdue days — at a glance. Full report by branch, overdue debts highlighted separately.",
+      },
+      attendance: {
+        eyebrow: "Attendance system",
+        title: "Teachers mark attendance in 2 taps",
+        body: "Open the group list, tap a student — Present / Absent / Late. The attendance log saves automatically, no retry needed.",
+      },
+      schedule: {
+        eyebrow: "Schedule & groups",
+        title: "Set the schedule once, it runs itself",
+        body: "Based on schedule templates, lessons for future weeks are created automatically. Groups, teachers and lesson types — all in one place.",
+      },
+    },
+    mock: {
+      debtorsCount: "4 debtors",
+      courseSchool: "Driving school",
+      courseFast: "Fast-track",
+      paid: "Paid",
+      daySuffix: "d",
+      attendanceGroup: "Group 1",
+      theory: "Theory",
+      practical: "Practical",
+      save: "Save",
+      attendanceStatus: {
+        present: "Present",
+        absent: "Absent",
+        late: "Late",
+      },
+      scheduleTitle: "Weekly schedule",
+      days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+      groups: ["Group 1", "Group 2", "Group 3"],
     },
   },
 };
@@ -266,15 +504,36 @@ const ROLE_ICONS = [
 ];
 
 // ── Feature-row vignette data ────────────────────────────────────────────
-// ponytail: illustrative example content, hardcoded Uzbek in every locale —
-// mirrors the source dashboard mock, which never localized these. Not a
-// missing-translation gap.
 
-const DEBT_ROWS = [
-  { name: "S. Toshmatov", course: "Avto maktab", amount: "450 000", days: 12, paid: false },
-  { name: "A. Karimov", course: "Tezkor", amount: "280 000", days: 7, paid: false },
-  { name: "N. Yusupova", course: "Avto maktab", amount: "520 000", days: 21, paid: false },
-  { name: "M. Umarov", course: "Tezkor", amount: "—", days: 0, paid: true },
+const DEBT_ROWS: {
+  name: string;
+  course: "school" | "fast";
+  amount: string;
+  days: number;
+  paid: boolean;
+}[] = [
+  {
+    name: "S. Toshmatov",
+    course: "school",
+    amount: "450 000",
+    days: 12,
+    paid: false,
+  },
+  {
+    name: "A. Karimov",
+    course: "fast",
+    amount: "280 000",
+    days: 7,
+    paid: false,
+  },
+  {
+    name: "N. Yusupova",
+    course: "school",
+    amount: "520 000",
+    days: 21,
+    paid: false,
+  },
+  { name: "M. Umarov", course: "fast", amount: "—", days: 0, paid: true },
 ];
 
 type AttendanceStatus = "present" | "absent" | "late";
@@ -287,12 +546,6 @@ const ATTENDANCE_ROWS: { name: string; status: AttendanceStatus }[] = [
   { name: "Zulfiya Hasanova", status: "present" },
 ];
 
-const ATTENDANCE_LABEL: Record<AttendanceStatus, string> = {
-  present: "Keldi",
-  absent: "Kelmadi",
-  late: "Kechikdi",
-};
-
 const ATTENDANCE_TONE: Record<AttendanceStatus, string> = {
   present: "bg-success/10 text-success",
   absent: "bg-destructive/10 text-destructive",
@@ -302,32 +555,32 @@ const ATTENDANCE_TONE: Record<AttendanceStatus, string> = {
 type LessonType = "T" | "A";
 
 const SCHEDULE_COLUMNS: {
-  day: string;
-  lessons: { type: LessonType; group: string; time: string }[];
+  day: 0 | 1 | 2 | 3 | 4;
+  lessons: { type: LessonType; group: 0 | 1 | 2; time: string }[];
 }[] = [
   {
-    day: "Du",
+    day: 0,
     lessons: [
-      { type: "T", group: "1-guruh", time: "09:00" },
-      { type: "A", group: "3-guruh", time: "14:00" },
+      { type: "T", group: 0, time: "09:00" },
+      { type: "A", group: 2, time: "14:00" },
     ],
   },
-  { day: "Se", lessons: [{ type: "A", group: "2-guruh", time: "10:30" }] },
+  { day: 1, lessons: [{ type: "A", group: 1, time: "10:30" }] },
   {
-    day: "Ch",
+    day: 2,
     lessons: [
-      { type: "T", group: "1-guruh", time: "09:00" },
-      { type: "A", group: "2-guruh", time: "14:00" },
+      { type: "T", group: 0, time: "09:00" },
+      { type: "A", group: 1, time: "14:00" },
     ],
   },
   {
-    day: "Pa",
+    day: 3,
     lessons: [
-      { type: "T", group: "3-guruh", time: "09:00" },
-      { type: "A", group: "1-guruh", time: "14:00" },
+      { type: "T", group: 2, time: "09:00" },
+      { type: "A", group: 0, time: "14:00" },
     ],
   },
-  { day: "Ju", lessons: [{ type: "T", group: "2-guruh", time: "09:00" }] },
+  { day: 4, lessons: [{ type: "T", group: 1, time: "09:00" }] },
 ];
 
 const SECTION_CLASS = "mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8";
@@ -338,6 +591,7 @@ export default function MidPageSections({
   locale: Locale;
 }): JSX.Element {
   const copy = COPY[locale];
+  const mock = copy.mock;
   // Not hardcoded to "3 items": dominantStat carries the section, any count
   // of secondaryStats renders as an equal-width flex row (or the section
   // doesn't render at all with zero items).
@@ -346,13 +600,13 @@ export default function MidPageSections({
   return (
     <div className="bg-background text-foreground">
       {/* ── Problem / pain ──────────────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
+      <section data-reveal className={SECTION_CLASS}>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             {/* Border wraps just the heading content (not the stretched grid
                 item) so it doesn't run past the text on the taller row. */}
             <div className="border-l-2 border-border pl-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.pain.eyebrow}
               </p>
               <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
@@ -364,10 +618,14 @@ export default function MidPageSections({
             {copy.pain.cards.map((card, i) => (
               <div
                 key={card.title}
+                data-reveal-item
                 className="flex gap-3 rounded-xl border border-border bg-card p-4"
               >
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-destructive/20 bg-destructive/10">
-                  <Icon path={PAIN_ICONS[i]} className="size-4 text-destructive" />
+                  <Icon
+                    path={PAIN_ICONS[i]}
+                    className="size-4 text-destructive"
+                  />
                 </div>
                 <div>
                   <h3 className="font-heading text-sm font-semibold text-foreground">
@@ -388,10 +646,13 @@ export default function MidPageSections({
 
       {/* ── Capability stats ────────────────────────────────────────── */}
       {dominantStat && (
-        <section className={SECTION_CLASS}>
-          <div className="overflow-hidden rounded-2xl border border-border bg-card sm:mx-auto sm:flex sm:w-fit sm:max-w-full">
+        <section data-reveal className={SECTION_CLASS}>
+          <div
+            data-reveal-item
+            className="overflow-hidden rounded-3xl border border-border bg-card sm:mx-auto sm:flex sm:w-fit sm:max-w-full"
+          >
             <div className="flex min-w-0 flex-col justify-center border-b border-border px-8 py-8 text-center sm:min-w-fit sm:border-b-0 sm:border-r sm:text-left">
-              <p className="tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
+              <p className="font-mono tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
                 {dominantStat.value}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -405,7 +666,7 @@ export default function MidPageSections({
                     key={stat.label}
                     className="flex min-w-0 flex-1 flex-col justify-center px-6 py-8 text-center sm:min-w-[7rem] sm:flex-initial"
                   >
-                    <p className="tabular-nums text-2xl font-bold text-foreground">
+                    <p className="font-mono tabular-nums text-2xl font-bold text-foreground">
                       {stat.value}
                     </p>
                     <p className="mt-1.5 text-xs text-muted-foreground">
@@ -423,20 +684,21 @@ export default function MidPageSections({
       )}
 
       {/* ── How it works ────────────────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
+      <section data-reveal className={SECTION_CLASS}>
         <div className="mb-12 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.howItWorks.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.howItWorks.sub}</p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:before:absolute lg:before:left-[12.5%] lg:before:right-[12.5%] lg:before:top-[18px] lg:before:h-px lg:before:bg-border">
           {copy.howItWorks.steps.map((step, i) => (
             <div
               key={step.title}
-              className="rounded-2xl border border-border bg-card p-6"
+              data-reveal-item
+              className="relative rounded-2xl border border-border bg-card p-6"
             >
-              <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted text-sm font-bold text-foreground">
+              <div className="relative z-10 mb-4 flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                 {i + 1}
               </div>
               <h3 className="font-heading mb-2 text-sm font-semibold text-foreground">
@@ -457,21 +719,31 @@ export default function MidPageSections({
       </section>
 
       {/* ── Benefits ─────────────────────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
+      <section data-reveal className={SECTION_CLASS}>
         <div className="mb-10 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.benefits.title}
           </h2>
           <p className="text-sm text-muted-foreground">{copy.benefits.sub}</p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-flow-dense gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {copy.benefits.cards.map((card, i) => (
             <div
               key={card.title}
-              className="rounded-2xl border border-border bg-card p-6"
+              data-reveal-item
+              className={`rounded-2xl border border-border bg-card p-6 ${
+                i === 0
+                  ? "lg:col-span-4"
+                  : i === 1
+                    ? "lg:col-span-2"
+                    : "lg:col-span-6"
+              }`}
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted">
-                <Icon path={BENEFIT_ICONS[i]} className="size-5 text-foreground" />
+                <Icon
+                  path={BENEFIT_ICONS[i]}
+                  className="size-5 text-foreground"
+                />
               </div>
               <h3 className="font-heading mb-2 text-base font-semibold text-foreground">
                 {card.title}
@@ -485,7 +757,7 @@ export default function MidPageSections({
       </section>
 
       {/* ── Role cards ───────────────────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
+      <section data-reveal className={SECTION_CLASS}>
         <div className="mb-10 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.roles.title}
@@ -496,6 +768,7 @@ export default function MidPageSections({
           {copy.roles.cards.map((card, i) => (
             <div
               key={card.title}
+              data-reveal-item
               className="rounded-2xl border border-border bg-card p-5"
             >
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted">
@@ -513,7 +786,7 @@ export default function MidPageSections({
       </section>
 
       {/* ── Feature alternating rows ────────────────────────────────── */}
-      <section className={SECTION_CLASS}>
+      <section data-reveal className={SECTION_CLASS}>
         <div className="mb-12 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.features.title}
@@ -523,9 +796,12 @@ export default function MidPageSections({
 
         <div className="space-y-20 sm:space-y-28">
           {/* Debt tracking */}
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div
+            data-reveal-item
+            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+          >
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.debt.eyebrow}
               </p>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
@@ -541,7 +817,7 @@ export default function MidPageSections({
                   {copy.features.debtorsLabel}
                 </span>
                 <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
-                  4 ta qarzdor
+                  {mock.debtorsCount}
                 </span>
               </div>
               <div className="space-y-1.5">
@@ -558,13 +834,15 @@ export default function MidPageSections({
                         {row.name}
                       </p>
                       <p className="text-[10px] text-muted-foreground">
-                        {row.course}
+                        {row.course === "school"
+                          ? mock.courseSchool
+                          : mock.courseFast}
                       </p>
                     </div>
                     <div className="text-right">
                       {row.paid ? (
                         <span className="rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-semibold text-success">
-                          To&apos;liq
+                          {mock.paid}
                         </span>
                       ) : (
                         <div>
@@ -572,7 +850,8 @@ export default function MidPageSections({
                             {row.amount}
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            {row.days}k
+                            {row.days}
+                            {mock.daySuffix}
                           </p>
                         </div>
                       )}
@@ -584,23 +863,26 @@ export default function MidPageSections({
           </div>
 
           {/* Attendance */}
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div
+            data-reveal-item
+            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+          >
             <div className="order-last rounded-2xl border border-border bg-card p-4 sm:p-5 lg:order-first">
               <div className="mb-3 flex items-center justify-between">
                 <div>
                   <p className="text-xs font-semibold text-foreground">
-                    1-guruh · Teoriya
+                    {mock.attendanceGroup} · {mock.theory}
                   </p>
                   <p className="mt-0.5 text-[10px] text-muted-foreground">
                     15.06.2026 — 09:00
                   </p>
                 </div>
-                <button
-                  type="button"
-                  className="min-h-[44px] rounded-lg bg-muted px-3 py-1.5 text-[11px] font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+                <span
+                  aria-hidden="true"
+                  className="inline-flex min-h-[44px] items-center rounded-lg bg-muted px-3 py-1.5 text-[11px] font-semibold text-foreground"
                 >
-                  Saqlash
-                </button>
+                  {mock.save}
+                </span>
               </div>
               <div className="space-y-1.5">
                 {ATTENDANCE_ROWS.map((s) => (
@@ -617,14 +899,14 @@ export default function MidPageSections({
                     <span
                       className={`rounded-full px-2.5 py-0.5 text-[10px] font-semibold ${ATTENDANCE_TONE[s.status]}`}
                     >
-                      {ATTENDANCE_LABEL[s.status]}
+                      {mock.attendanceStatus[s.status]}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.attendance.eyebrow}
               </p>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
@@ -637,9 +919,12 @@ export default function MidPageSections({
           </div>
 
           {/* Schedule */}
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div
+            data-reveal-item
+            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+          >
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 {copy.features.schedule.eyebrow}
               </p>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
@@ -652,16 +937,16 @@ export default function MidPageSections({
             <div className="rounded-2xl border border-border bg-card p-4 sm:p-5">
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-xs font-semibold text-foreground">
-                  Haftalik jadval
+                  {mock.scheduleTitle}
                 </span>
                 <div className="flex gap-1.5">
                   <span className="flex items-center gap-1 rounded-md bg-cyan-400/10 px-2 py-1 text-[10px] font-semibold text-cyan-600 dark:text-cyan-300">
                     <span className="h-1.5 w-1.5 rounded-sm bg-cyan-400" />
-                    Teoriya
+                    {mock.theory}
                   </span>
                   <span className="flex items-center gap-1 rounded-md bg-amber-400/10 px-2 py-1 text-[10px] font-semibold text-amber-600 dark:text-amber-300">
                     <span className="h-1.5 w-1.5 rounded-sm bg-amber-400" />
-                    Amaliy
+                    {mock.practical}
                   </span>
                 </div>
               </div>
@@ -669,7 +954,7 @@ export default function MidPageSections({
                 {SCHEDULE_COLUMNS.map((col) => (
                   <div key={col.day}>
                     <p className="mb-1.5 text-center text-[10px] font-semibold text-muted-foreground">
-                      {col.day}
+                      {mock.days[col.day]}
                     </p>
                     <div className="space-y-1.5">
                       {col.lessons.map((lesson) => (
@@ -682,15 +967,20 @@ export default function MidPageSections({
                           }`}
                         >
                           <p
-                            className={`text-[9px] font-semibold ${
+                            className={`text-[10px] font-semibold ${
                               lesson.type === "T"
                                 ? "text-cyan-600 dark:text-cyan-300"
                                 : "text-amber-600 dark:text-amber-300"
                             }`}
                           >
-                            {lesson.group}
+                            <span className="block text-[8px] font-bold uppercase tracking-wide opacity-75">
+                              {lesson.type === "T"
+                                ? mock.theory
+                                : mock.practical}
+                            </span>
+                            {mock.groups[lesson.group]}
                           </p>
-                          <p className="text-[9px] text-muted-foreground">
+                          <p className="text-[10px] text-muted-foreground">
                             {lesson.time}
                           </p>
                         </div>

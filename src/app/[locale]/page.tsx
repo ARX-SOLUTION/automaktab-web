@@ -3,6 +3,7 @@ import { isLocale, type Locale } from "@/i18n/config";
 import HeroSection, { LandingNav } from "@/components/landing/HeroSection";
 import MidPageSections from "@/components/landing/MidPageSections";
 import ClosingSections from "@/components/landing/ClosingSections";
+import PageMotion from "@/components/landing/PageMotion";
 
 const SKIP_LINK_COPY: Record<Locale, string> = {
   uz: "Asosiy kontentga o'tish",
@@ -72,11 +73,11 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         }}
       />
       <LandingNav locale={locale} />
-      <main id="main-content">
+      <PageMotion>
         <HeroSection locale={locale} />
         <MidPageSections locale={locale} />
         <ClosingSections locale={locale} />
-      </main>
+      </PageMotion>
     </>
   );
 }

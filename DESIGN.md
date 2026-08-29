@@ -1,8 +1,8 @@
 # DESIGN.md — automaktab-web visual design system
 
-Scope: visual/aesthetic decisions for automaktab.uz's marketing site. This is not an engineering or content-rules document — those live in `CLAUDE.md`. Where the two could overlap (accessibility baselines, motion), this document is the source of truth for *what the standard is*; `CLAUDE.md` covers *how the codebase enforces it*.
+Scope: visual/aesthetic decisions for automaktab.uz's marketing site. This is not an engineering or content-rules document — those live in `CLAUDE.md`. Where the two could overlap (accessibility baselines, motion), this document is the source of truth for _what the standard is_; `CLAUDE.md` covers _how the codebase enforces it_.
 
-Direction: "Bold Operator" — adapted from ferryman.io (confident, high-contrast, minimal-color, product-forward), softened toward trust and restraint for a B2B buyer in a market where CRM adoption is still new. Not a literal copy of any reference site.
+Direction: **"Road Signal"** — one brand shared with `app.automaktab.uz`: warm paper, road-ink typography, and a restrained amber action signal. The public site is more editorial and persuasive; the CRM stays denser and performance-first, but the tokens and product evidence remain visibly related.
 
 ## Typography
 
@@ -14,11 +14,11 @@ Direction: "Bold Operator" — adapted from ferryman.io (confident, high-contras
 
 ## Color & Surface
 
-- Dark-mode-first stays. It is already built, reviewed, and tested (`.7`) — reversing it now would discard verified work for a preference, not a defect.
-- **Cyan is the primary accent, used sparingly**: CTAs, the hero's accent word, and key numeric emphasis only. Do not apply it to eyebrows, small labels, or icon chips by default — that was correct for the "make three independently-built files consistent" fix, but is not the long-term rule. Sparse use is what makes an accent read as intentional rather than decorative.
-- **Amber (`--primary` token) becomes a deliberate secondary accent**, not a mistake to route around. Use it for a genuinely secondary signal — a badge, a distinction between two categories where cyan is already the primary category's color (mirrors how the schedule vignette already needs two distinct hues). Do not use amber and cyan for the same kind of thing on the same screen; each needs a distinct role.
-- Background: keep the current near-black (not pure `#000`) — already correct per the existing tokens.
-- No new gradients, no glow effects beyond what already exists. Two colors, used with restraint, is the whole palette.
+- Light and dark themes are equal product surfaces. Light uses warm paper `#F4F0E7`; dark uses deep road teal (`#092634` family), never pure black.
+- Road ink `#132A30` carries hierarchy and product chrome. Signal amber `#E2A42D` is reserved for primary actions, focus rings, and one high-value emphasis per view.
+- Semantic success, warning, danger, and info colors remain distinct from the brand accent. Amber must not replace error or success meaning.
+- Cards use opaque token surfaces and 1px borders. No CRT overlays, glass blur, decorative glow, or gradient fill.
+- The public site and CRM currently mirror one Road Signal token contract locally. Keep both mirrors identical until the shared `@autodrive/design-tokens` package adopts these values; local overrides may change density and layout, not brand meaning.
 
 ## Layout
 
@@ -29,9 +29,9 @@ Direction: "Bold Operator" — adapted from ferryman.io (confident, high-contras
 
 ## Motion
 
-- Current state — zero client JS, zero animation library — is a deliberate strength (near-best-case Core Web Vitals for a self-serve-demo funnel) and stays the design baseline, not a gap to fill.
+- Baseline strength: near-best-case Core Web Vitals from a mostly-static page is the goal. Content stays Server Components; JS motion is the exception, not the norm.
 - Allowed: CSS-only transitions on hover/focus/active states (already the pattern for buttons), `scroll-behavior: smooth` (already added), the FAQ disclosure transition (already added).
-- Not allowed without a separate, explicit decision: a JS animation library (GSAP or otherwise), scroll-triggered reveals, parallax. The old site's heavy GSAP choreography is not something this port inherits by default.
+- Approved exception (explicit decision, this session): GSAP + `@gsap/react` (`useGSAP` + `ScrollTrigger`) for a hero entrance stagger and per-section scroll reveals, implemented in `src/components/landing/PageMotion.tsx` and gated behind `prefers-reduced-motion: no-preference` (full static fallback when reduced motion is requested or JS is off). Still not allowed: parallax, scroll-jacking, the old site's heavy choreography. Keep reveals subtle (short fade + small rise, short stagger).
 
 ## Accessibility baseline
 
@@ -46,7 +46,7 @@ These are not one-off fixes from the review rounds — they are standing require
 ## Social proof
 
 - No fabricated numbers, testimonials, or usage stats. The current stats strip (∞ branches / 2-minute student add / zero install) is honest specifically because it's true regardless of customer count — keep that discipline.
-- Design the *slots* now (a testimonial card pattern, a live-activity-style card pattern) so real data can drop in later without a redesign — but leave them unpopulated or absent until real data exists. An empty slot is better than a fake one.
+- Design the _slots_ now (a testimonial card pattern, a live-activity-style card pattern) so real data can drop in later without a redesign — but leave them unpopulated or absent until real data exists. An empty slot is better than a fake one.
 
 ## Out of scope for this document
 
