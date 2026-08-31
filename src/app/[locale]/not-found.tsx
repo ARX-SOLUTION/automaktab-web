@@ -40,7 +40,7 @@ export default function NotFound() {
   const copy = COPY[locale];
 
   return (
-    <main className="flex min-h-[70vh] flex-col items-center justify-center gap-4 bg-background px-4 text-center text-foreground">
+    <main className="flex min-h-[100svh] flex-col items-center justify-center gap-4 bg-background px-4 text-center text-foreground">
       <span className="signal-point" aria-hidden="true" />
       <h1 className="text-3xl font-bold tracking-[-0.04em] sm:text-5xl">{copy.title}</h1>
       <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
@@ -48,8 +48,9 @@ export default function NotFound() {
       </p>
       <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="button button-primary"
+          aria-label={copy.home}
         >
           {copy.home}
         </Link>
