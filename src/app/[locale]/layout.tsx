@@ -83,7 +83,6 @@ export async function generateMetadata({
     robots: { index: true, follow: true },
     authors: [{ name: "automaktab.uz" }],
     creator: "automaktab.uz",
-    verification: { yandex: "76839dfd1ebe1b22" },
     openGraph: {
       type: "website",
       siteName: "automaktab.uz",
