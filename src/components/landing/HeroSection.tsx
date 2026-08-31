@@ -1,6 +1,9 @@
-import type { JSX } from "react";
+import { Fragment, type JSX } from "react";
 import Link from "next/link";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
+import { DEMO_FORM_COPY } from "./demo-copy";
+import DemoRequestDialog from "./DemoRequestDialog";
+import CapabilityMarquee from "./CapabilityMarquee";
 import ThemeToggle from "./ThemeToggle";
 
 // Cross-app / external targets -- ported from autodrive-frontend LandingPage.tsx.
@@ -21,6 +24,7 @@ const LOCALE_HOME_PATH: Record<Locale, string> = {
 type LandingCopy = {
   navBlog: string;
   navCta: string;
+  navAnchors: { href: string; label: string }[];
   themeToggleLabel: string;
   heroBadge: string;
   heroTitle: string;
@@ -28,6 +32,7 @@ type LandingCopy = {
   heroSub: string;
   ctaDemo: string;
   ctaContact: string;
+  marquee: string[];
   mockSubtitle: string;
   mockGreeting: string;
   mockLive: string;
@@ -53,14 +58,29 @@ const COPY: Record<Locale, LandingCopy> = {
   uz: {
     navBlog: "Blog",
     navCta: "Kirish",
+    navAnchors: [
+      { href: "#imkoniyatlar", label: "Imkoniyatlar" },
+      { href: "#faq", label: "FAQ" },
+      { href: "#demo", label: "Demo" },
+    ],
     themeToggleLabel: "Mavzuni almashtirish",
     heroBadge: "Avtomaktablar uchun CRM",
-    heroTitle: "Avtomaktabingizning har bir so’mi nazoratda",
+    heroTitle: "Avtomaktabingizning har bir so'mi nazoratda",
     heroTitleAccent: "nazoratda",
     heroSub:
-      "Qarzdorlar ro’yxati, kunlik tushum, filial hisoboti — telefoningizda.",
-    ctaDemo: "Demo bilan sinab ko’ring",
+      "Qarzdorlar ro'yxati, kunlik tushum, filial hisoboti — telefoningizda.",
+    ctaDemo: "Demo bilan sinab ko'ring",
     ctaContact: "Savol berish",
+    marquee: [
+      "Qarz nazorati",
+      "Davomat",
+      "Jadval",
+      "Qarzdorlar",
+      "Filiallar",
+      "Hisobotlar",
+      "O'qituvchilar",
+      "To'lovlar",
+    ],
     mockGreeting: "Xayrli kun, Mansur",
     mockSubtitle: "Maktabingiz bugun qanday ko'rsatkichlar bilan",
     mockLive: "Jonli",
@@ -69,7 +89,7 @@ const COPY: Record<Locale, LandingCopy> = {
     mockDebt: "Jami qarz",
     mockGraduates: "Bitiruvchilar",
     mockChartTitle: "Daromad trendi",
-    mockChartSub: "So’nggi 12 oy",
+    mockChartSub: "So'nggi 12 oy",
     mockChartPeriod: "Joriy davr",
     mockDebtorsTitle: "Qarzdorlar",
     mockDebtor1: "A. Karimov",
@@ -84,6 +104,11 @@ const COPY: Record<Locale, LandingCopy> = {
   ru: {
     navBlog: "Блог",
     navCta: "Войти",
+    navAnchors: [
+      { href: "#imkoniyatlar", label: "Возможности" },
+      { href: "#faq", label: "FAQ" },
+      { href: "#demo", label: "Демо" },
+    ],
     themeToggleLabel: "Переключить тему",
     heroBadge: "CRM для автошкол",
     heroTitle: "Каждый сум вашей автошколы под контролем",
@@ -92,6 +117,16 @@ const COPY: Record<Locale, LandingCopy> = {
       "Список должников, дневная выручка, отчёт по филиалам — в вашем телефоне.",
     ctaDemo: "Попробовать демо",
     ctaContact: "Задать вопрос",
+    marquee: [
+      "Контроль долгов",
+      "Посещаемость",
+      "Расписание",
+      "Должники",
+      "Филиалы",
+      "Отчёты",
+      "Преподаватели",
+      "Платежи",
+    ],
     mockGreeting: "Добрый день, Мансур",
     mockSubtitle: "Как идут дела в вашей школе сегодня",
     mockLive: "Онлайн",
@@ -115,6 +150,11 @@ const COPY: Record<Locale, LandingCopy> = {
   en: {
     navBlog: "Blog",
     navCta: "Sign in",
+    navAnchors: [
+      { href: "#imkoniyatlar", label: "Features" },
+      { href: "#faq", label: "FAQ" },
+      { href: "#demo", label: "Demo" },
+    ],
     themeToggleLabel: "Toggle theme",
     heroBadge: "CRM for driving schools",
     heroTitle: "Every sum in your driving school, under control",
@@ -122,6 +162,16 @@ const COPY: Record<Locale, LandingCopy> = {
     heroSub: "Debtor list, daily revenue, branch report — right in your phone.",
     ctaDemo: "Try the demo",
     ctaContact: "Ask a question",
+    marquee: [
+      "Debt tracking",
+      "Attendance",
+      "Schedule",
+      "Debtors",
+      "Branches",
+      "Reports",
+      "Teachers",
+      "Payments",
+    ],
     mockGreeting: "Good afternoon, Mansur",
     mockSubtitle: "Here's how your school is doing today",
     mockLive: "Live",
@@ -149,42 +199,46 @@ function buildKpiCards(copy: LandingCopy) {
     {
       label: copy.mockIncome,
       value: "4 800 000",
+      countTo: 4_800_000,
       unit: copy.mockCurrency,
       delta: "+12.4%",
       deltaUp: true,
       Icon: IconWallet,
-      iconBg: "bg-cyan-400/10 text-cyan-600 dark:text-cyan-300",
-      tone: "text-cyan-600 dark:text-cyan-300",
+      iconBg: "bg-primary/15 text-[hsl(var(--warning-strong))] dark:text-primary",
+      tone: "tone-signal",
     },
     {
       label: copy.mockStudents,
       value: "147",
+      countTo: 147,
       unit: "",
       delta: copy.mockNewStudents,
       deltaUp: true,
       Icon: IconUsers,
-      iconBg: "bg-blue-400/10 text-blue-600 dark:text-blue-300",
-      tone: "text-blue-600 dark:text-blue-300",
+      iconBg: "bg-info/15 text-info",
+      tone: "text-info",
     },
     {
       label: copy.mockDebt,
       value: "1 250 000",
+      countTo: 1_250_000,
       unit: copy.mockCurrency,
       delta: copy.mockDebtorStudents,
       deltaUp: false,
       Icon: IconWarning,
-      iconBg: "bg-amber-400/10 text-amber-600 dark:text-amber-300",
-      tone: "text-amber-600 dark:text-amber-300",
+      iconBg: "bg-destructive/15 text-destructive",
+      tone: "text-destructive",
     },
     {
       label: copy.mockGraduates,
       value: "38",
+      countTo: 38,
       unit: "",
       delta: copy.mockPassRate,
       deltaUp: true,
       Icon: IconBadgeCheck,
-      iconBg: "bg-emerald-400/10 text-emerald-700 dark:text-emerald-300",
-      tone: "text-emerald-700 dark:text-emerald-300",
+      iconBg: "bg-success/15 text-success",
+      tone: "text-success",
     },
   ];
 }
@@ -358,26 +412,31 @@ function IconTrendUp({ className }: { className?: string }) {
 }
 
 // Static SVG revenue sparkline (no chart library on the landing bundle).
-// currentColor stroke. DESIGN.md scopes cyan to CTAs/accent word/KPI values,
-// but a neutral currentColor here measured near-invisible (2.28:1 dark-mode
-// contrast, gradient fill under 7% opacity) -- a data viz that can't be seen
-// defeats DESIGN.md's "read as evidence" goal for DashboardMock, so this one
-// keeps the same cyan tone as the KPI values it sits next to.
+// trail path carries data-chart-line so PageMotion can draw it once the mock
+// lands; the filled area stays behind it.
 function MiniRevenueChart() {
   return (
     <svg
       viewBox="0 0 240 56"
       preserveAspectRatio="none"
-      className="h-full w-full text-cyan-600 dark:text-cyan-300"
+      className="h-full w-full text-info"
       aria-hidden="true"
     >
       <defs>
         <linearGradient id="mlg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="currentColor" stopOpacity="0.28" />
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.3" />
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path
+        d="M0,52 C20,48 32,42 48,38 C64,34 76,30 92,24 C108,18 120,16 136,13 C152,10 168,8 184,6 C200,4 220,3 240,2 L240,56 L0,56 Z"
+        fill="url(#mlg)"
+      />
+      <path
+        data-chart-line
+        pathLength={1}
+        strokeDasharray="1"
+        strokeDashoffset="0"
         d="M0,52 C20,48 32,42 48,38 C64,34 76,30 92,24 C108,18 120,16 136,13 C152,10 168,8 184,6 C200,4 220,3 240,2"
         fill="none"
         stroke="currentColor"
@@ -385,10 +444,76 @@ function MiniRevenueChart() {
         strokeLinecap="round"
         vectorEffect="non-scaling-stroke"
       />
+    </svg>
+  );
+}
+
+// The "road to the dashboard": a route line that PageMotion draws on load and
+// a little car that drives along it. Decorative, aria-hidden, desktop-only.
+const ROAD_PATH =
+  "M 40 306 C 250 300 370 214 515 180 C 655 146 760 138 880 166 C 950 180 1010 202 1064 238";
+
+function RoadToDashboard() {
+  return (
+    <svg
+      viewBox="0 0 1200 340"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-60 w-full lg:block"
+    >
+      {/* faint parallel routes, for depth */}
       <path
-        d="M0,52 C20,48 32,42 48,38 C64,34 76,30 92,24 C108,18 120,16 136,13 C152,10 168,8 184,6 C200,4 220,3 240,2 L240,56 L0,56 Z"
-        fill="url(#mlg)"
+        d="M -20 322 C 240 318 380 228 520 196 C 660 164 775 156 900 184 C 980 200 1030 220 1100 244"
+        fill="none"
+        stroke="hsl(var(--primary) / 0.14)"
+        strokeWidth="2"
+        strokeDasharray="2 11"
       />
+      <path
+        d="M 720 172 C 860 132 1000 128 1230 102"
+        fill="none"
+        stroke="hsl(var(--primary) / 0.1)"
+        strokeWidth="2"
+        strokeDasharray="2 11"
+      />
+      {/* route bed (drawn in) */}
+      <path
+        data-road-bed
+        d={ROAD_PATH}
+        pathLength={1}
+        strokeDasharray="1"
+        strokeDashoffset="0"
+        fill="none"
+        stroke="hsl(var(--primary) / 0.3)"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      {/* travelling centre-line dashes */}
+      <path
+        data-road-dash
+        d={ROAD_PATH}
+        fill="none"
+        stroke="hsl(var(--primary))"
+        strokeWidth="2.25"
+        strokeDasharray="16 18"
+        strokeLinecap="round"
+      />
+      {/* car (opacity 0 until GSAP puts it on the road) */}
+      <g data-road-car opacity="0">
+        <path
+          d="M -23 3 C -23 -1 -19 -4 -12 -5 L -6 -12 C -4 -14 0 -14 4 -12 L 10 -6 C 16 -6 20 -4 21 -1 L 22 2 C 22 4 20 5 18 5 L -20 5 C -21.5 5 -23 4.5 -23 3 Z"
+          fill="hsl(var(--foreground))"
+        />
+        <path
+          d="M -5 -11 L -1 -5 L 7 -5 L 3.5 -11 Z"
+          fill="hsl(var(--background))"
+        />
+        <circle cx="-11" cy="4" r="3.4" fill="hsl(var(--background))" />
+        <circle cx="11" cy="4" r="3.4" fill="hsl(var(--background))" />
+        <circle cx="-11" cy="4" r="1.3" fill="hsl(var(--primary))" />
+        <circle cx="11" cy="4" r="1.3" fill="hsl(var(--primary))" />
+        <circle cx="22.5" cy="-1" r="1.2" fill="hsl(var(--primary))" />
+      </g>
     </svg>
   );
 }
@@ -396,7 +521,7 @@ function MiniRevenueChart() {
 function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex shrink-0 items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <IconShieldCheck className="size-4" />
@@ -406,10 +531,24 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
             <span className="font-medium text-muted-foreground">CRM</span>
           </span>
         </div>
-        <nav className="flex items-center gap-2 max-[420px]:gap-1">
+        <nav
+          aria-label="Sections"
+          className="hidden items-center gap-6 xl:flex"
+        >
+          {copy.navAnchors.map((anchor) => (
+            <a
+              key={anchor.href}
+              href={anchor.href}
+              className="py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+            >
+              {anchor.label}
+            </a>
+          ))}
+        </nav>
+        <div className="flex items-center gap-2 max-[420px]:gap-1">
           <a
             href={PHONE_LINK}
-            className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring lg:flex"
+            className="hidden items-center gap-1.5 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring lg:flex"
           >
             <IconPhone className="size-3.5" />
             {PHONE_DISPLAY}
@@ -421,7 +560,7 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
                 href={LOCALE_HOME_PATH[lang]}
                 hrefLang={lang}
                 aria-current={lang === locale ? "page" : undefined}
-                className={`rounded-full px-2 py-1 text-xs uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring max-[380px]:px-1.5 ${
+                className={`flex min-h-9 min-w-9 items-center justify-center rounded-full px-2 text-xs uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring max-[380px]:px-1.5 ${
                   lang === locale
                     ? "bg-secondary text-secondary-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -433,7 +572,7 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
           </div>
           <ThemeToggle
             label={copy.themeToggleLabel}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
           />
           <a
             href={CRM_LOGIN_URL}
@@ -443,13 +582,19 @@ function Nav({ locale, copy }: { locale: Locale; copy: LandingCopy }) {
             <span className="max-[420px]:sr-only">{copy.navCta}</span>
             <IconArrowRight className="size-3.5" />
           </a>
-        </nav>
+        </div>
       </div>
     </header>
   );
 }
 
-function Hero({ copy }: { copy: LandingCopy }) {
+function Hero({
+  copy,
+  locale,
+}: {
+  copy: LandingCopy;
+  locale: Locale;
+}) {
   const accentIdx = copy.heroTitle.lastIndexOf(copy.heroTitleAccent);
   const titleBefore =
     accentIdx >= 0 ? copy.heroTitle.slice(0, accentIdx) : copy.heroTitle;
@@ -458,23 +603,34 @@ function Hero({ copy }: { copy: LandingCopy }) {
       ? copy.heroTitle.slice(accentIdx + copy.heroTitleAccent.length)
       : "";
 
+  // Each word gets its own span so PageMotion can roll the title in word by
+  // word. Static markup stays a plain readable headline (no JS needed).
+  const words = (text: string) => {
+    const parts = text.trim().split(" ");
+    return parts.map((word, i) => (
+      <Fragment key={`${word}-${i}`}>
+        {i > 0 && " "}
+        <span data-hero-word className="inline-block will-change-transform">
+          {word}
+        </span>
+      </Fragment>
+    ));
+  };
+
   return (
-    <div className="max-w-2xl lg:py-10">
+    <div className="max-w-2xl lg:py-8">
       <div className="text-left">
-        <div
-          data-hero-item
-          className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+        <div data-hero-item className="signal-plaque mb-7">
+          <span className="signal-dot h-1.5 w-1.5" />
           {copy.heroBadge}
         </div>
 
-        <h1
-          data-hero-item
-          className="mb-6 max-w-[14ch] text-balance font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.045em] max-[359px]:text-3xl sm:text-5xl lg:text-6xl"
-        >
-          {titleBefore}
-          <span className="relative inline-block">
+        <h1 className="mb-6 max-w-[14ch] font-heading text-4xl font-extrabold leading-[0.98] tracking-[-0.045em] max-[359px]:text-3xl sm:text-5xl lg:text-6xl">
+          {words(titleBefore)}{" "}
+          <span
+            data-hero-word
+            className="relative inline-block will-change-transform"
+          >
             <span className="relative z-10 text-foreground">
               {copy.heroTitleAccent}
             </span>
@@ -483,7 +639,12 @@ function Hero({ copy }: { copy: LandingCopy }) {
               className="absolute inset-x-0 -bottom-1 h-1 rounded-full bg-primary"
             />
           </span>
-          {titleAfter}
+          {titleAfter.trim() && (
+            <>
+              {" "}
+              {words(titleAfter)}
+            </>
+          )}
         </h1>
 
         <p
@@ -497,13 +658,11 @@ function Hero({ copy }: { copy: LandingCopy }) {
           data-hero-item
           className="flex flex-col items-start gap-3 sm:flex-row"
         >
-          <a
-            href={CRM_LOGIN_URL}
-            className="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-7 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-          >
-            {copy.ctaDemo}
-            <IconArrowRight className="size-4" />
-          </a>
+          <DemoRequestDialog
+            copy={DEMO_FORM_COPY[locale]}
+            triggerLabel={copy.ctaDemo}
+            triggerClassName="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-7 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+          />
           <a
             href={TELEGRAM_LINK}
             target="_blank"
@@ -524,10 +683,10 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
   const debtors = buildDebtors(copy);
 
   return (
-    <div data-hero-item className="relative z-10 min-w-0">
-      <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_80px_hsl(var(--foreground)/0.12)]">
+    <div data-mock className="relative z-10 min-w-0">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_32px_96px_-28px_hsl(var(--foreground)/0.45)]">
         {/* Browser chrome */}
-        <div className="flex items-center gap-2 border-b border-border bg-muted/50 px-5 py-3">
+        <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-5 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
@@ -540,15 +699,15 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
           {/* Dashboard header */}
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <p className="text-sm font-bold text-slate-800 dark:text-white/90">
+              <p className="text-sm font-bold text-foreground">
                 {copy.mockGreeting}
               </p>
-              <p className="mt-0.5 text-[11px] text-slate-400 dark:text-white/55">
+              <p className="mt-0.5 text-[11px] text-muted-foreground">
                 {copy.mockSubtitle}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400 motion-reduce:animate-none" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-2.5 py-1 text-[11px] font-semibold text-success">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success motion-reduce:animate-none" />
               {copy.mockLive}
             </span>
           </div>
@@ -558,10 +717,10 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
             {kpiCards.map((card) => (
               <div
                 key={card.label}
-                className="relative overflow-hidden rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-white/[8%] dark:bg-white/[0.035]"
+                className="relative overflow-hidden rounded-xl border border-border bg-muted/50 p-3 dark:bg-white/[0.03]"
               >
                 <div className="mb-2 flex items-center justify-between">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-white/55">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                     {card.label}
                   </p>
                   <div
@@ -573,15 +732,15 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                 <p
                   className={`font-mono tabular-nums text-base font-bold leading-tight whitespace-nowrap max-[380px]:text-[13px] sm:text-lg ${card.tone}`}
                 >
-                  {card.value}
+                  <span data-count-to={card.countTo}>{card.value}</span>
                   {card.unit && (
-                    <span className="ml-0.5 text-[10px] font-normal text-slate-400 dark:text-white/50">
+                    <span className="ml-0.5 text-[10px] font-normal text-muted-foreground">
                       {card.unit}
                     </span>
                   )}
                 </p>
                 <p
-                  className={`mt-1 text-[10px] font-semibold ${card.deltaUp ? "text-emerald-700 dark:text-emerald-400" : "text-rose-700 dark:text-rose-400"}`}
+                  className={`mt-1 text-[10px] font-semibold ${card.deltaUp ? "text-success" : "text-destructive"}`}
                 >
                   {card.delta}
                 </p>
@@ -591,17 +750,17 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
 
           {/* Revenue trend + debtors */}
           <div className="grid gap-3 sm:grid-cols-5">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/[8%] dark:bg-white/[0.02] sm:col-span-3">
+            <div className="rounded-xl border border-border bg-muted/40 p-4 dark:bg-white/[0.02] sm:col-span-3">
               <div className="mb-3 flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-semibold text-slate-600 dark:text-white/65">
+                  <p className="text-xs font-semibold text-foreground">
                     {copy.mockChartTitle}
                   </p>
-                  <p className="mt-0.5 text-[10px] text-slate-400 dark:text-white/50">
+                  <p className="mt-0.5 text-[10px] text-muted-foreground">
                     {copy.mockChartSub}
                   </p>
                 </div>
-                <span className="flex items-center gap-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
+                <span className="flex items-center gap-1 text-[10px] font-semibold text-success">
                   <IconTrendUp className="size-3" />
                   +18%
                 </span>
@@ -609,18 +768,18 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
               <div className="h-14">
                 <MiniRevenueChart />
               </div>
-              <div className="mt-2 flex items-center gap-1.5 text-[10px] text-slate-400 dark:text-white/50">
-                <span className="inline-block h-1.5 w-4 rounded-full bg-slate-400/60 dark:bg-white/50" />
+              <div className="mt-2 flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                <span className="inline-block h-1.5 w-4 rounded-full bg-muted-foreground/50" />
                 {copy.mockChartPeriod}
               </div>
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-white/[8%] dark:bg-white/[0.02] sm:col-span-2">
+            <div className="rounded-xl border border-border bg-muted/40 p-4 dark:bg-white/[0.02] sm:col-span-2">
               <div className="mb-3 flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-600 dark:text-white/65">
+                <span className="text-xs font-semibold text-foreground">
                   {copy.mockDebtorsTitle}
                 </span>
-                <span className="rounded-full border border-rose-400/25 bg-rose-400/10 px-2 py-0.5 text-[10px] font-semibold text-rose-700 dark:text-rose-300">
+                <span className="rounded-full border border-destructive/25 bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
                   {debtors.length}
                 </span>
               </div>
@@ -628,21 +787,19 @@ function DashboardMock({ copy }: { copy: LandingCopy }) {
                 {debtors.map((d) => (
                   <div
                     key={d.name}
-                    className="flex items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2 dark:border-white/5 dark:bg-white/[0.02]"
+                    className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 dark:bg-white/[0.02]"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-400/15 text-[10px] font-semibold text-rose-700 dark:text-rose-300">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-destructive/15 text-[10px] font-semibold text-destructive">
                         {d.name[0]}
                       </div>
-                      <span className="text-xs text-slate-600 dark:text-white/60">
-                        {d.name}
-                      </span>
+                      <span className="text-xs text-foreground">{d.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="font-mono tabular-nums whitespace-nowrap text-xs font-semibold text-rose-700 dark:text-rose-300">
+                      <span className="font-mono tabular-nums whitespace-nowrap text-xs font-semibold text-destructive">
                         {d.amount}
                       </span>
-                      <span className="text-[10px] text-slate-400 dark:text-white/50">
+                      <span className="text-[10px] text-muted-foreground">
                         {d.days}
                         {copy.mockDaySuffix}
                       </span>
@@ -678,17 +835,19 @@ export default function HeroSection({
     <div className="bg-background text-foreground">
       <section
         data-hero
-        className="relative isolate overflow-hidden px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-28 lg:pt-24"
+        className="relative isolate overflow-hidden px-4 pb-12 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pb-24 lg:pt-20"
       >
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-0 -z-10 h-px bg-primary"
         />
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
-          <Hero copy={copy} />
+        <RoadToDashboard />
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+          <Hero copy={copy} locale={locale} />
           <DashboardMock copy={copy} />
         </div>
       </section>
+      <CapabilityMarquee items={copy.marquee} />
     </div>
   );
 }

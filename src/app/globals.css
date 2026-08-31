@@ -148,10 +148,107 @@
   --ring: var(--brand-orange);
 }
 
+/* ── Road Signal signature utilities ──────────────────────────────────────
+   Small hand-rolled component classes (not Tailwind utilities) so the
+   amber "signal" reads identically in both themes: light mode needs the
+   dark ink amber (warning-strong) for AA contrast on paper, dark mode the
+   bright signal amber (primary). One definition, two themes, no drift. */
+@layer components {
+  .signal-plaque {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid hsl(var(--primary) / 0.5);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--warning-strong));
+    border-radius: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    font-family: var(--font-jbmono), ui-monospace, SFMono-Regular, Menlo,
+      monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+  .dark .signal-plaque {
+    color: hsl(var(--primary));
+  }
+
+  /* Amber emphasis text that stays AA-readable on both paper and road teal. */
+  .tone-signal {
+    color: hsl(var(--warning-strong));
+  }
+  .dark .tone-signal {
+    color: hsl(var(--primary));
+  }
+
+  /* Small amber "signal" dot. Pair with size utilities (w/h classes). */
+  .signal-dot {
+    display: block;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: hsl(var(--primary));
+  }
+
+  /* Dashed road centre-line: a horizontal strip of amber dashes. */
+  .road-line {
+    height: 2px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--primary) / 0.6) 0 14px,
+      transparent 14px 28px
+    );
+    background-size: 28px 2px;
+  }
+  .road-line-v {
+    width: 2px;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+      180deg,
+      hsl(var(--primary) / 0.5) 0 12px,
+      transparent 12px 24px
+    );
+  }
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
   font-optical-sizing: auto;
+}
+
+/* Kill the legacy 300ms tap delay and any double-tap zoom on interactive
+   elements (viewport meta already covers it; belt-and-braces for Safari). */
+a,
+button,
+summary,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* Dialog entrance (apple-design: subtle scale+fade from a resting state,
+   not a snap). Reduced motion disables it via motion-reduce:animate-none. */
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {

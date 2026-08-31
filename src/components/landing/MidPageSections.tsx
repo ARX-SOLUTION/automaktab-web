@@ -600,15 +600,16 @@ export default function MidPageSections({
   return (
     <div className="bg-background text-foreground">
       {/* ── Problem / pain ──────────────────────────────────────────── */}
-      <section data-reveal className={SECTION_CLASS}>
+      <section data-reveal data-reveal-dir="left" className={SECTION_CLASS}>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             {/* Border wraps just the heading content (not the stretched grid
                 item) so it doesn't run past the text on the taller row. */}
             <div className="border-l-2 border-border pl-5">
-              <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <div className="signal-plaque mb-5">
+                <span className="signal-dot h-1.5 w-1.5" />
                 {copy.pain.eyebrow}
-              </p>
+              </div>
               <h2 className="font-heading text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl">
                 {copy.pain.lead}
               </h2>
@@ -631,7 +632,7 @@ export default function MidPageSections({
                   <h3 className="font-heading text-sm font-semibold text-foreground">
                     {card.title}
                   </h3>
-                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                  <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
                     {card.body}
                   </p>
                 </div>
@@ -646,13 +647,13 @@ export default function MidPageSections({
 
       {/* ── Capability stats ────────────────────────────────────────── */}
       {dominantStat && (
-        <section data-reveal className={SECTION_CLASS}>
+        <section data-reveal data-reveal-dir="zoom" className={SECTION_CLASS}>
           <div
             data-reveal-item
             className="overflow-hidden rounded-3xl border border-border bg-card sm:mx-auto sm:flex sm:w-fit sm:max-w-full"
           >
             <div className="flex min-w-0 flex-col justify-center border-b border-border px-8 py-8 text-center sm:min-w-fit sm:border-b-0 sm:border-r sm:text-left">
-              <p className="font-mono tabular-nums text-5xl font-bold text-cyan-600 dark:text-cyan-300 sm:text-6xl">
+              <p className="tone-signal font-mono tabular-nums text-5xl font-bold sm:text-6xl">
                 {dominantStat.value}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -691,7 +692,7 @@ export default function MidPageSections({
           </h2>
           <p className="text-sm text-muted-foreground">{copy.howItWorks.sub}</p>
         </div>
-        <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:before:absolute lg:before:left-[12.5%] lg:before:right-[12.5%] lg:before:top-[18px] lg:before:h-px lg:before:bg-border">
+        <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:before:absolute lg:before:left-[12.5%] lg:before:right-[12.5%] lg:before:top-[18px] lg:before:h-0.5 lg:before:bg-[repeating-linear-gradient(90deg,hsl(var(--primary)/0.6)_0_12px,transparent_12px_24px)]">
           {copy.howItWorks.steps.map((step, i) => (
             <div
               key={step.title}
@@ -719,7 +720,7 @@ export default function MidPageSections({
       </section>
 
       {/* ── Benefits ─────────────────────────────────────────────────── */}
-      <section data-reveal className={SECTION_CLASS}>
+      <section data-reveal data-reveal-dir="zoom" id="imkoniyatlar" className={`${SECTION_CLASS} scroll-mt-24`}>
         <div className="mb-10 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.benefits.title}
@@ -757,7 +758,7 @@ export default function MidPageSections({
       </section>
 
       {/* ── Role cards ───────────────────────────────────────────────── */}
-      <section data-reveal className={SECTION_CLASS}>
+      <section data-reveal data-reveal-dir="zoom" className={SECTION_CLASS}>
         <div className="mb-10 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.roles.title}
@@ -777,7 +778,7 @@ export default function MidPageSections({
               <h3 className="font-heading mb-1.5 text-sm font-semibold text-foreground">
                 {card.title}
               </h3>
-              <p className="text-xs leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 {card.body}
               </p>
             </div>
@@ -786,7 +787,7 @@ export default function MidPageSections({
       </section>
 
       {/* ── Feature alternating rows ────────────────────────────────── */}
-      <section data-reveal className={SECTION_CLASS}>
+      <section data-reveal data-reveal-dir="zoom" className={SECTION_CLASS}>
         <div className="mb-12 text-center">
           <h2 className="font-heading mb-3 text-2xl font-bold sm:text-3xl">
             {copy.features.title}
@@ -801,9 +802,7 @@ export default function MidPageSections({
             className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
           >
             <div>
-              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                {copy.features.debt.eyebrow}
-              </p>
+              <div className="signal-plaque mb-4">{copy.features.debt.eyebrow}</div>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.debt.title}
               </h3>
@@ -906,9 +905,7 @@ export default function MidPageSections({
               </div>
             </div>
             <div>
-              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                {copy.features.attendance.eyebrow}
-              </p>
+              <div className="signal-plaque mb-4">{copy.features.attendance.eyebrow}</div>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.attendance.title}
               </h3>
@@ -924,9 +921,7 @@ export default function MidPageSections({
             className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
           >
             <div>
-              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                {copy.features.schedule.eyebrow}
-              </p>
+              <div className="signal-plaque mb-4">{copy.features.schedule.eyebrow}</div>
               <h3 className="font-heading mb-4 text-xl font-bold leading-tight sm:text-2xl">
                 {copy.features.schedule.title}
               </h3>
@@ -940,8 +935,8 @@ export default function MidPageSections({
                   {mock.scheduleTitle}
                 </span>
                 <div className="flex gap-1.5">
-                  <span className="flex items-center gap-1 rounded-md bg-cyan-400/10 px-2 py-1 text-[10px] font-semibold text-cyan-600 dark:text-cyan-300">
-                    <span className="h-1.5 w-1.5 rounded-sm bg-cyan-400" />
+                  <span className="flex items-center gap-1 rounded-md bg-info/10 px-2 py-1 text-[10px] font-semibold text-info">
+                    <span className="h-1.5 w-1.5 rounded-sm bg-info" />
                     {mock.theory}
                   </span>
                   <span className="flex items-center gap-1 rounded-md bg-amber-400/10 px-2 py-1 text-[10px] font-semibold text-amber-600 dark:text-amber-300">
@@ -962,14 +957,14 @@ export default function MidPageSections({
                           key={`${col.day}-${lesson.time}`}
                           className={`rounded-md border p-1.5 ${
                             lesson.type === "T"
-                              ? "border-cyan-400/15 bg-cyan-400/10"
+                              ? "border-info/15 bg-info/10"
                               : "border-amber-400/15 bg-amber-400/10"
                           }`}
                         >
                           <p
                             className={`text-[10px] font-semibold ${
                               lesson.type === "T"
-                                ? "text-cyan-600 dark:text-cyan-300"
+                                ? "text-info"
                                 : "text-amber-600 dark:text-amber-300"
                             }`}
                           >

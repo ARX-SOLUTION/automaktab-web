@@ -1,5 +1,7 @@
 import type { JSX } from "react";
 import type { Locale } from "@/i18n/config";
+import { DEMO_FORM_COPY } from "./demo-copy";
+import DemoRequestDialog from "./DemoRequestDialog";
 
 const TELEGRAM_LINK = "https://t.me/Xamidullo_xudoyberdiyev";
 const PHONE_LINK = "tel:+998946110066";
@@ -21,12 +23,6 @@ interface ClosingSectionsCopy {
   faq: {
     title: string;
     items: FaqEntry[];
-  };
-  demo: {
-    eyebrow: string;
-    title: string;
-    sub: string;
-    placeholder: string;
   };
   cta: {
     title: string;
@@ -86,12 +82,6 @@ const COPY: Record<Locale, ClosingSectionsCopy> = {
         },
       ],
     },
-    demo: {
-      eyebrow: "Demo so’rov",
-      title: "Demo qoldiring",
-      sub: "Ma’lumotlaringizni qoldiring — biz siz bilan bog’lanamiz",
-      placeholder: "Demo forma shu yerga keladi",
-    },
     cta: {
       title: "Maktabingizni bugundan nazoratga oling",
       sub: "Demo versiyasi bilan boshlang — o’rnatish shart emas.",
@@ -148,12 +138,6 @@ const COPY: Record<Locale, ClosingSectionsCopy> = {
         },
       ],
     },
-    demo: {
-      eyebrow: "Запрос демо",
-      title: "Оставьте заявку",
-      sub: "Расскажите о вашей школе — мы свяжемся с вами",
-      placeholder: "Форма демо-заявки появится здесь",
-    },
     cta: {
       title: "Возьмите школу под контроль — с сегодняшнего дня",
       sub: "Начните с демо-версии — установка не требуется.",
@@ -209,12 +193,6 @@ const COPY: Record<Locale, ClosingSectionsCopy> = {
           a: "No. Each school's data is fully isolated — daily backups run automatically.",
         },
       ],
-    },
-    demo: {
-      eyebrow: "Request a demo",
-      title: "Leave your details",
-      sub: "Tell us about your school and we'll get back to you",
-      placeholder: "Demo request form goes here",
     },
     cta: {
       title: "Put your school under control — starting today",
@@ -273,7 +251,8 @@ export default function ClosingSections({
       {/* FAQ */}
       <section
         data-reveal
-        className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-24 lg:px-8"
+        id="faq"
+        className="mx-auto max-w-3xl scroll-mt-24 px-4 py-20 sm:px-6 sm:py-24 lg:px-8"
       >
         <h2 className="mb-10 text-center font-heading text-2xl font-bold text-foreground sm:text-3xl">
           {copy.faq.title}
@@ -293,7 +272,7 @@ export default function ClosingSections({
               data-reveal-item
               className="group rounded-2xl border border-border bg-card px-5"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 sm:text-base">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-semibold text-foreground [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring sm:text-base">
                 {item.q}
                 <ChevronDownIcon />
               </summary>
@@ -310,7 +289,8 @@ export default function ClosingSections({
       {/* Bottom CTA */}
       <section
         data-reveal
-        className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 lg:px-8"
+        id="demo"
+        className="mx-auto max-w-7xl scroll-mt-24 px-4 pb-24 pt-12 sm:px-6 lg:px-8"
       >
         <div
           data-reveal-item
@@ -327,12 +307,11 @@ export default function ClosingSections({
             {copy.cta.sub}
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <a
-              href={LOGIN_LINK}
-              className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-            >
-              {copy.cta.free}
-            </a>
+            <DemoRequestDialog
+              copy={DEMO_FORM_COPY[locale]}
+              triggerLabel={copy.cta.free}
+              triggerClassName="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-sm font-bold text-primary-foreground transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+            />
             <a
               href={PHONE_LINK}
               className="inline-flex h-12 items-center justify-center rounded-lg border border-background/25 px-8 text-sm font-semibold text-background transition-[background-color,transform] hover:bg-background/10 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
@@ -351,7 +330,7 @@ export default function ClosingSections({
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <a
               href={LOGIN_LINK}
-              className="transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              className="py-2 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               {copy.footer.login}
             </a>
@@ -359,13 +338,13 @@ export default function ClosingSections({
               href={TELEGRAM_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              className="py-2 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               Telegram
             </a>
             <a
               href={PHONE_LINK}
-              className="transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
+              className="py-2 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
             >
               {PHONE_DISPLAY}
             </a>
