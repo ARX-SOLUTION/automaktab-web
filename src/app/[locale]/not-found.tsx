@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
-
-// Cross-app target -- see HeroSection.tsx for the same URL.
-const CRM_LOGIN_URL = "https://app.automaktab.uz/login";
+import DemoLink from "@/components/landing/DemoLink";
 
 type NotFoundCopy = { title: string; body: string; home: string; demo: string };
 
@@ -43,23 +41,21 @@ export default function NotFound() {
 
   return (
     <main className="flex min-h-[70vh] flex-col items-center justify-center gap-4 bg-background px-4 text-center text-foreground">
-      <h1 className="text-3xl font-bold sm:text-4xl">{copy.title}</h1>
-      <p className="max-w-md text-sm text-muted-foreground sm:text-base">
+      <span className="signal-point" aria-hidden="true" />
+      <h1 className="text-3xl font-bold tracking-[-0.04em] sm:text-5xl">{copy.title}</h1>
+      <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
         {copy.body}
       </p>
       <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row">
         <Link
           href="/"
-          className="inline-flex h-11 items-center justify-center rounded-md bg-cyan-400 px-6 text-sm font-medium text-slate-950 transition-colors hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700 focus-visible:outline-offset-2"
+          className="button button-primary"
         >
           {copy.home}
         </Link>
-        <a
-          href={CRM_LOGIN_URL}
-          className="inline-flex h-11 items-center justify-center rounded-md border border-border px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-700"
-        >
+        <DemoLink locale={locale} className="button button-secondary">
           {copy.demo}
-        </a>
+        </DemoLink>
       </div>
     </main>
   );

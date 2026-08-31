@@ -114,7 +114,3 @@ When measuring, be aware that a bot-challenge page in front of the site produces
 Vercel, its own project, separate from the CRM. Do **not** set `output: "standalone"` — that is for container deploys and breaks Vercel's build output.
 
 The domain move to this project is gated behind a parity check and is not part of routine work.
-
-## Blocked on a decision
-
-Do not write or rewrite marketing copy yet. The recorded positioning (practical-lesson scheduling, double-booking, YHXBB compliance) and the live site's copy (payments, debtors) contradict each other, and the workspace glossary is the source of truth for which wins. Porting existing copy unchanged is fine; writing new copy is not, until that is settled.

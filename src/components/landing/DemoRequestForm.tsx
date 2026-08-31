@@ -1,8 +1,17 @@
 "use client";
 
-import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
+import {
+  useId,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from "react";
+import type { Locale } from "@/i18n/config";
+import { trackUmami } from "@/lib/umami";
 
 export type DemoFormCopy = {
+  eyebrow: string;
   title: string;
   subtitle: string;
   fullName: string;
@@ -14,12 +23,11 @@ export type DemoFormCopy = {
   centerName: string;
   centerNamePlaceholder: string;
   studentCount: string;
-  note: string;
-  notePlaceholder: string;
   submit: string;
   submitting: string;
   successTitle: string;
   successBody: string;
+  telegram: string;
   errorTitle: string;
   errorBody: string;
   close: string;
@@ -28,27 +36,35 @@ export type DemoFormCopy = {
   studentCountLabels: [string, string, string, string];
 };
 
+const TELEGRAM_URL = "https://t.me/Xamidullo_xudoyberdiyev";
 const STUDENT_COUNT_BUCKETS = ["<50", "50-150", "150-300", "300+"] as const;
 const PHONE_RE = /^\+?998\d{9}$/;
 type Status = "idle" | "submitting" | "success" | "error";
 
 function formatPhone(raw: string): string {
-  let d = raw.replace(/\D/g, "");
-  if (d.startsWith("998")) d = d.slice(3);
-  else if (d.startsWith("0")) d = d.slice(1);
-  d = d.slice(0, 9);
-  let out = "+998";
-  if (d.length > 0) out += " " + d.slice(0, 2);
-  if (d.length >= 3) out += " " + d.slice(2, 5);
-  if (d.length >= 5) out += " " + d.slice(5, 7);
-  if (d.length >= 7) out += " " + d.slice(7, 9);
-  return out;
+  let digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("998")) digits = digits.slice(3);
+  else if (digits.startsWith("0")) digits = digits.slice(1);
+  digits = digits.slice(0, 9);
+
+  let value = "+998";
+  if (digits.length > 0) value += ` ${digits.slice(0, 2)}`;
+  if (digits.length >= 3) value += ` ${digits.slice(2, 5)}`;
+  if (digits.length >= 5) value += ` ${digits.slice(5, 7)}`;
+  if (digits.length >= 7) value += ` ${digits.slice(7, 9)}`;
+  return value;
 }
 
-export default function DemoRequestForm({ copy }: { copy: DemoFormCopy }) {
+export default function DemoRequestForm({
+  copy,
+  locale,
+}: {
+  copy: DemoFormCopy;
+  locale: Locale;
+}) {
   const base = useId();
-  const fid = (n: string) => `${base}-${n}`;
-  const eid = (n: string) => `${base}-${n}-err`;
+  const fieldId = (name: string) => `${base}-${name}`;
+  const errorId = (name: string) => `${base}-${name}-error`;
   const formRef = useRef<HTMLFormElement>(null);
   const submittingRef = useRef(false);
 
@@ -57,35 +73,39 @@ export default function DemoRequestForm({ copy }: { copy: DemoFormCopy }) {
   const [region, setRegion] = useState("");
   const [centerName, setCenterName] = useState("");
   const [studentCount, setStudentCount] = useState("");
-  const [note, setNote] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>("idle");
 
   function validate(): Record<string, string> {
     const next: Record<string, string> = {};
     if (!fullName.trim()) next.fullName = "required";
+
     const normalizedPhone = phone.replace(/[\s-]/g, "");
     if (!normalizedPhone) next.phone = "required";
     else if (!PHONE_RE.test(normalizedPhone)) next.phone = "invalid";
+
     if (!region.trim()) next.region = "required";
     setErrors(next);
     return next;
   }
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (submittingRef.current) return;
-    const errs = validate();
-    if (Object.keys(errs).length > 0) {
+
+    const nextErrors = validate();
+    if (Object.keys(nextErrors).length > 0) {
       formRef.current
-        ?.querySelector<HTMLElement>(`[name="${Object.keys(errs)[0]}"]`)
+        ?.querySelector<HTMLElement>(`[name="${Object.keys(nextErrors)[0]}"]`)
         ?.focus();
       return;
     }
+
     submittingRef.current = true;
     setStatus("submitting");
+
     try {
-      const res = await fetch("/api/demo-request", {
+      const response = await fetch("/api/demo-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -94,10 +114,16 @@ export default function DemoRequestForm({ copy }: { copy: DemoFormCopy }) {
           region: region.trim(),
           center_name: centerName.trim() || undefined,
           student_count: studentCount || undefined,
-          note: note.trim() || undefined,
         }),
       });
-      setStatus(res.ok ? "success" : "error");
+
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+
+      trackUmami("intro_submit", { locale });
+      setStatus("success");
     } catch {
       setStatus("error");
     } finally {
@@ -107,169 +133,140 @@ export default function DemoRequestForm({ copy }: { copy: DemoFormCopy }) {
 
   if (status === "success") {
     return (
-      <div role="status" className="py-8 text-center">
-        <h3 className="mb-2 font-heading text-xl font-bold uppercase tracking-tight text-foreground">
-          {copy.successTitle}
-        </h3>
-        <p className="text-sm text-muted-foreground">
-          {copy.successBody}
-        </p>
+      <div role="status" className="form-success">
+        <span className="form-success-mark" aria-hidden="true">
+          ✓
+        </span>
+        <h3>{copy.successTitle}</h3>
+        <p>{copy.successBody}</p>
+        <a href={TELEGRAM_URL} target="_blank" rel="noreferrer">
+          {copy.telegram}
+          <ArrowUpRight />
+        </a>
       </div>
     );
   }
-
-  const input =
-    "w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring";
 
   return (
     <form
       ref={formRef}
       onSubmit={onSubmit}
       noValidate
-      className="space-y-4"
-      aria-describedby={status === "error" ? eid("form") : undefined}
+      className="intro-form"
+      aria-describedby={status === "error" ? errorId("form") : undefined}
     >
       {status === "error" && (
-        <p
-          id={eid("form")}
-          role="alert"
-          className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive"
-        >
-          <span className="font-semibold">{copy.errorTitle}</span>{" "}
-          {copy.errorBody}
+        <p id={errorId("form")} role="alert" className="form-alert">
+          <strong>{copy.errorTitle}</strong> {copy.errorBody}
         </p>
       )}
 
       <Field
-        id={fid("fullName")}
-        errId={eid("fullName")}
+        id={fieldId("fullName")}
+        errorId={errorId("fullName")}
         label={copy.fullName}
         error={errors.fullName ? copy.requiredError : undefined}
       >
         <input
-          id={fid("fullName")}
+          id={fieldId("fullName")}
           name="fullName"
           autoComplete="name"
-          type="text"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={(event) => setFullName(event.target.value)}
           required
-          aria-invalid={!!errors.fullName}
-          aria-describedby={errors.fullName ? eid("fullName") : undefined}
-          className={input}
+          aria-invalid={Boolean(errors.fullName)}
+          aria-describedby={errors.fullName ? errorId("fullName") : undefined}
           placeholder={copy.fullNamePlaceholder}
         />
       </Field>
 
       <Field
-        id={fid("phone")}
-        errId={eid("phone")}
+        id={fieldId("phone")}
+        errorId={errorId("phone")}
         label={copy.phone}
         error={
-          errors.phone
-            ? errors.phone === "required"
+          errors.phone === "invalid"
+            ? copy.phoneError
+            : errors.phone
               ? copy.requiredError
-              : copy.phoneError
-            : undefined
+              : undefined
         }
       >
         <input
-          id={fid("phone")}
+          id={fieldId("phone")}
           name="phone"
           autoComplete="tel"
           type="tel"
           inputMode="tel"
           value={phone}
-          onChange={(e) => setPhone(formatPhone(e.target.value))}
+          onChange={(event) => setPhone(formatPhone(event.target.value))}
           required
-          aria-invalid={!!errors.phone}
-          aria-describedby={errors.phone ? eid("phone") : undefined}
-          className={input}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? errorId("phone") : undefined}
           placeholder={copy.phonePlaceholder}
         />
       </Field>
 
       <Field
-        id={fid("region")}
-        errId={eid("region")}
+        id={fieldId("region")}
+        errorId={errorId("region")}
         label={copy.region}
         error={errors.region ? copy.requiredError : undefined}
+        wide
       >
         <input
-          id={fid("region")}
+          id={fieldId("region")}
           name="region"
           autoComplete="address-level1"
-          type="text"
           value={region}
-          onChange={(e) => setRegion(e.target.value)}
+          onChange={(event) => setRegion(event.target.value)}
           required
-          aria-invalid={!!errors.region}
-          aria-describedby={errors.region ? eid("region") : undefined}
-          className={input}
+          aria-invalid={Boolean(errors.region)}
+          aria-describedby={errors.region ? errorId("region") : undefined}
           placeholder={copy.regionPlaceholder}
         />
       </Field>
 
       <Field
-        id={fid("centerName")}
-        errId={eid("centerName")}
+        id={fieldId("centerName")}
+        errorId={errorId("centerName")}
         label={copy.centerName}
+        wide
       >
         <input
-          id={fid("centerName")}
+          id={fieldId("centerName")}
           name="centerName"
           autoComplete="organization"
-          type="text"
           value={centerName}
-          onChange={(e) => setCenterName(e.target.value)}
-          className={input}
+          onChange={(event) => setCenterName(event.target.value)}
           placeholder={copy.centerNamePlaceholder}
         />
       </Field>
 
       <Field
-        id={fid("studentCount")}
-        errId={eid("studentCount")}
+        id={fieldId("studentCount")}
+        errorId={errorId("studentCount")}
         label={copy.studentCount}
+        wide
       >
         <select
-          id={fid("studentCount")}
+          id={fieldId("studentCount")}
           name="studentCount"
           value={studentCount}
-          onChange={(e) => setStudentCount(e.target.value)}
-          className={input}
+          onChange={(event) => setStudentCount(event.target.value)}
         >
           <option value="">—</option>
-          {STUDENT_COUNT_BUCKETS.map((b, i) => (
-            <option key={b} value={b}>
-              {copy.studentCountLabels[i]}
+          {STUDENT_COUNT_BUCKETS.map((bucket, index) => (
+            <option key={bucket} value={bucket}>
+              {copy.studentCountLabels[index]}
             </option>
           ))}
         </select>
       </Field>
 
-      <Field id={fid("note")} errId={eid("note")} label={copy.note}>
-        <textarea
-          id={fid("note")}
-          name="note"
-          rows={3}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          maxLength={500}
-          className={input}
-          placeholder={copy.notePlaceholder}
-        />
-        <p className="mt-1 text-right text-xs text-muted-foreground">
-          {note.length}/500
-        </p>
-      </Field>
-
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-primary px-8 text-sm font-semibold text-primary-foreground transition-[background-color,opacity] hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 disabled:opacity-60"
-      >
+      <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? copy.submitting : copy.submit}
+        <ArrowRight />
       </button>
     </form>
   );
@@ -277,31 +274,46 @@ export default function DemoRequestForm({ copy }: { copy: DemoFormCopy }) {
 
 function Field({
   id,
-  errId,
+  errorId,
   label,
   error,
+  wide = false,
   children,
 }: {
   id: string;
-  errId: string;
+  errorId: string;
   label: string;
   error?: string;
+  wide?: boolean;
   children: ReactNode;
 }) {
   return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1 block text-xs font-medium uppercase tracking-wide text-muted-foreground"
-      >
-        {label}
-      </label>
+    <div className={`form-field${wide ? " form-field-wide" : ""}`}>
+      <div className="form-label-row">
+        <label htmlFor={id}>{label}</label>
+        {error && (
+          <span id={errorId} role="alert">
+            {error}
+          </span>
+        )}
+      </div>
       {children}
-      {error && (
-        <p id={errId} className="mt-1 text-xs text-destructive">
-          {error}
-        </p>
-      )}
     </div>
+  );
+}
+
+function ArrowRight() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M3 10h13M11 5l5 5-5 5" />
+    </svg>
+  );
+}
+
+function ArrowUpRight() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M6 14 14 6M7 6h7v7" />
+    </svg>
   );
 }

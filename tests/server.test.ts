@@ -119,15 +119,10 @@ const LOCALE_ROUTES: Array<{ route: string; locale: Locale }> = [
   { route: "/en", locale: "en" },
 ];
 
-// The hero h1 (HeroSection.tsx's Hero()) splits every word into its own
-// <span data-hero-word> for the GSAP roll-in, so the full sentence never
-// appears as one contiguous run in the rendered HTML. The first word and the
-// accent word are the safe substring checks (crawlers still read the joined
-// textContent, so this does not weaken the SEO contract).
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Avtomaktabingizning", accent: "nazoratda" },
-  ru: { prefix: "Каждый", accent: "контролем" },
-  en: { prefix: "Every", accent: "under control" },
+  uz: { prefix: "Siz yo‘qligingizda", accent: "nazoratda" },
+  ru: { prefix: "Автошкола под контролем", accent: "вас нет" },
+  en: { prefix: "Your driving school", accent: "under control" },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<
@@ -136,15 +131,15 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 > = {
   uz: {
     title: "Avtomaktab CRM",
-    description: "Qarzdorlar",
+    description: "qarzdorlik",
   },
   ru: {
     title: "CRM для автошколы",
-    description: "Должники",
+    description: "долги",
   },
   en: {
     title: "Driving School CRM",
-    description: "Track debtors",
+    description: "debt",
   },
 };
 
@@ -155,28 +150,20 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 // sides before comparing.
 const normalizeUrl = (u: string) => u.replace(/\/$/, "");
 
-// One distinctive, locale-specific string per locale from MidPageSections'
-// "benefits" section and ClosingSections' FAQ heading (COPY.benefits.title /
-// COPY.faq.title in those files) -- neither uses a straight apostrophe, so
-// no escapeApostrophe needed against the served HTML body text.
-const MID_PAGE_BENEFITS_TITLE: Record<Locale, string> = {
-  uz: "Asosiy imkoniyatlar",
-  ru: "Ключевые возможности",
-  en: "Key features",
+const CAPABILITIES_TITLE: Record<Locale, string> = {
+  uz: "Rahbar ko‘radi. Jamoa bir xil tizimda ishlaydi.",
+  ru: "Руководитель видит. Команда работает в одной системе.",
+  en: "The owner sees. The team works in one system.",
 };
 
-const CLOSING_FAQ_TITLE: Record<Locale, string> = {
-  uz: "Ko’p so‘raladigan savollar",
-  ru: "Часто задаваемые вопросы",
-  en: "Frequently asked questions",
+const FAQ_TITLE: Record<Locale, string> = {
+  uz: "Savol qolmasin.",
+  ru: "Без скрытых условий.",
+  en: "No hidden claims.",
 };
 
-const FAQ_ITEM_COUNT = 8;
+const FAQ_ITEM_COUNT = 6;
 
-// Two application/ld+json <script> tags, each rendered as a single line
-// (JSON.stringify output, not pretty-printed):
-//   1. page.tsx's Organization + SoftwareApplication @graph
-//   2. ClosingSections.tsx's FAQPage
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
 
@@ -233,40 +220,45 @@ describe.each(LOCALE_ROUTES)(
       }
     });
 
-    it(`serves ${locale} HTML with MidPageSections and ClosingSections content`, async () => {
+    it(`serves ${locale} product proof, CTA, and localized supporting content`, async () => {
       const res = await fetch(`${BASE_URL}${route}`);
       const html = await res.text();
-      expect(html).toContain(MID_PAGE_BENEFITS_TITLE[locale]);
-      expect(html).toContain(CLOSING_FAQ_TITLE[locale]);
+      expect(html).toContain(CAPABILITIES_TITLE[locale]);
+      expect(html).toContain(FAQ_TITLE[locale]);
+      expect(html).toContain("/images/product/dashboard.webp");
+      expect(html).toContain("/images/product/schedule.webp");
+      expect(html).toContain("/images/product/attendance.webp");
+      expect(html).toContain("https://app.automaktab.uz/login?demo=1");
+      expect(html).not.toContain("AutoDrive");
     });
 
-    it(`serves ${locale} HTML with two well-formed JSON-LD blocks, the FAQPage one with 8 questions`, async () => {
+    it(`serves ${locale} HTML with one coherent Organization, SoftwareApplication, and FAQ graph`, async () => {
       const res = await fetch(`${BASE_URL}${route}`);
       const html = await res.text();
 
       const matches = [...html.matchAll(JSON_LD_SCRIPT_RE)];
-      expect(matches).toHaveLength(2);
+      expect(matches).toHaveLength(1);
 
-      // JSON.parse throws on malformed JSON -- this is the "well-formed" check.
-      const parsed = matches.map(([, json]) => JSON.parse(json));
-
-      const organizationGraph = parsed.find((doc) =>
-        Array.isArray(doc["@graph"]),
-      );
-      expect(organizationGraph).toBeTruthy();
+      const organizationGraph = JSON.parse(matches[0][1]);
+      expect(Array.isArray(organizationGraph["@graph"])).toBe(true);
       const organization = organizationGraph["@graph"].find(
         (node: { "@type"?: string }) => node["@type"] === "Organization",
       );
       expect(organization).toBeTruthy();
+      expect(organization.name).toBe("automaktab.uz");
       expect(organization.logo).toBe("https://automaktab.uz/icon.svg");
 
-      const softwareApp = parsed
-        .flatMap((doc) => doc["@graph"] ?? [doc])
-        .find((entry) => entry["@type"] === "SoftwareApplication");
+      const softwareApp = organizationGraph["@graph"]
+        .find(
+          (entry: { "@type"?: string }) =>
+            entry["@type"] === "SoftwareApplication",
+        );
       expect(softwareApp).toBeTruthy();
-      expect(softwareApp.name).toBe("Auto Maktab CRM");
+      expect(softwareApp.name).toBe("automaktab.uz");
 
-      const faqPage = parsed.find((doc) => doc["@type"] === "FAQPage");
+      const faqPage = organizationGraph["@graph"].find(
+        (entry: { "@type"?: string }) => entry["@type"] === "FAQPage",
+      );
       expect(faqPage).toBeTruthy();
       expect(faqPage.mainEntity).toHaveLength(FAQ_ITEM_COUNT);
     });
@@ -284,5 +276,26 @@ describe("GET /fr (unsupported locale)", () => {
   it("404s instead of rendering", async () => {
     const res = await fetch(`${BASE_URL}/fr`);
     expect(res.status).toBe(404);
+  });
+});
+
+describe("blog and sitemap surfaces", () => {
+  it("serves the localized blog index without requiring article data", async () => {
+    const res = await fetch(`${BASE_URL}/blog`);
+    const html = await res.text();
+
+    expect(res.status).toBe(200);
+    expect(html).toContain("Tartibli boshqaruv uchun sodda qo‘llanmalar.");
+    expect(html).toContain('rel="canonical" href="https://automaktab.uz/blog"');
+  });
+
+  it("lists the localized blog indexes in sitemap.xml", async () => {
+    const res = await fetch(`${BASE_URL}/sitemap.xml`);
+    const xml = await res.text();
+
+    expect(res.status).toBe(200);
+    expect(xml).toContain("https://automaktab.uz/blog");
+    expect(xml).toContain("https://automaktab.uz/ru/blog");
+    expect(xml).toContain("https://automaktab.uz/en/blog");
   });
 });
