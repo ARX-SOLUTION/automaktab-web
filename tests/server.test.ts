@@ -119,14 +119,15 @@ const LOCALE_ROUTES: Array<{ route: string; locale: Locale }> = [
   { route: "/en", locale: "en" },
 ];
 
-// The hero h1 (HeroSection.tsx's Hero()) splits its text around the accent
-// word with nested <span> tags, so the full sentence never appears as one
-// contiguous run in the rendered HTML -- only the text before the accent,
-// and the accent word itself, are safe substring checks.
+// The hero h1 (HeroSection.tsx's Hero()) splits every word into its own
+// <span data-hero-word> for the GSAP roll-in, so the full sentence never
+// appears as one contiguous run in the rendered HTML. The first word and the
+// accent word are the safe substring checks (crawlers still read the joined
+// textContent, so this does not weaken the SEO contract).
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Avtomaktabingizning har bir so’mi", accent: "nazoratda" },
-  ru: { prefix: "Каждый сум вашей автошколы под", accent: "контролем" },
-  en: { prefix: "Every sum in your driving school,", accent: "under control" },
+  uz: { prefix: "Avtomaktabingizning", accent: "nazoratda" },
+  ru: { prefix: "Каждый", accent: "контролем" },
+  en: { prefix: "Every", accent: "under control" },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<

@@ -30,8 +30,10 @@ Direction: **"Road Signal"** — one brand shared with `app.automaktab.uz`: warm
 ## Motion
 
 - Baseline strength: near-best-case Core Web Vitals from a mostly-static page is the goal. Content stays Server Components; JS motion is the exception, not the norm.
-- Allowed: CSS-only transitions on hover/focus/active states (already the pattern for buttons), `scroll-behavior: smooth` (already added), the FAQ disclosure transition (already added).
-- Approved exception (explicit decision, this session): GSAP + `@gsap/react` (`useGSAP` + `ScrollTrigger`) for a hero entrance stagger and per-section scroll reveals, implemented in `src/components/landing/PageMotion.tsx` and gated behind `prefers-reduced-motion: no-preference` (full static fallback when reduced motion is requested or JS is off). Still not allowed: parallax, scroll-jacking, the old site's heavy choreography. Keep reveals subtle (short fade + small rise, short stagger).
+- Allowed: CSS-only transitions on hover/focus/active states (already the pattern for buttons), `scroll-behavior: smooth`, the FAQ disclosure transition.
+- GSAP + `@gsap/react` (`useGSAP` + `ScrollTrigger`) drives the motion identity, implemented in `src/components/landing/PageMotion.tsx` (hero + scroll) and `CapabilityMarquee.tsx` (ticker), all gated behind `prefers-reduced-motion: no-preference` (full static fallback when reduced motion is requested or JS is off). The data-attribute contract lives in PageMotion's header comment.
+- Approved motion vocabulary (the "Signal" identity): hero title word-roll (per-word `data-hero-word` rise, no clipping), hero item fade-stagger, product-mock settle (tilt→flat), sparkline draw + KPI count-up, the road-to-dashboard route draw + travelling car (`data-road-bed` / `data-road-dash` / `data-road-car`), the capability marquee, the right-edge scroll-signal progress line (`data-scroll-signal`), and direction-aware section reveals (`data-reveal` + `data-reveal-dir`: up/left/right/zoom).
+- Still not allowed: parallax, scroll-jacking/pinning, the old site's heavy choreography. Motion accents content; it never hides or gates it — every animated element has a visible static render before JS runs.
 
 ## Accessibility baseline
 
