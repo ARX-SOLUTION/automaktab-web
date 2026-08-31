@@ -1,56 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Manrope } from "next/font/google";
+import { Manrope, Unbounded } from "next/font/google";
 import { notFound } from "next/navigation";
+import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
 import { isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
 import "../globals.css";
 
-// DESIGN.md: display/heading font. cyrillic + cyrillic-ext subsets verified
-// present in next/font's own Manrope metadata -- ru pages get real Manrope,
-// not a system-font fallback.
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
-  // 600 loaded too: MidPageSections uses font-heading + font-semibold, and
-  // without a real 600 face the browser's ascending-weight match silently
-  // substitutes 700, erasing the semibold/bold distinction those headings
-  // rely on. Found by review (reviewer-alpha/beta, both independently).
-  weight: ["600", "700", "800"],
   variable: "--font-manrope",
   display: "swap",
 });
 
-// Telemetry micro-typography (labels, KPI readouts). Loaded weights must
-// cover every font-weight used on font-mono elements.
-const jbMono = JetBrains_Mono({
+const unbounded = Unbounded({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "600", "700"],
-  variable: "--font-jbmono",
+  variable: "--font-unbounded",
   display: "swap",
 });
 
-// This is the app's root layout -- there is no app/layout.tsx above it
-// anymore. All three locales, including unprefixed uz, render through this
-// one [locale] tree, so there is exactly one <html> and its `lang` is
-// always correct. proxy.ts rewrites unprefixed requests to /uz/... before
-// they reach here.
 export function generateStaticParams() {
-  return [{ locale: "uz" }, { locale: "ru" }, { locale: "en" }];
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-// Ported from autodrive-frontend/index.html -- deprecated on Metadata itself
-// (see metadata-interface.d.ts: "Use the new viewport configuration
-// instead"), so these go through the Viewport export, not generateMetadata.
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F4F0E7" },
-    { media: "(prefers-color-scheme: dark)", color: "#092634" },
-  ],
-  colorScheme: "dark light",
+  themeColor: "#F5F7F2",
+  colorScheme: "light",
 };
 
-// Open Graph locale codes (language_TERRITORY). Source only ever hardcoded
-// uz_UZ + a single ru_RU alternate; en_US fills the gap using the same
-// convention so all three locales get a real og:locale/og:locale:alternate.
 const OG_LOCALE: Record<Locale, string> = {
   uz: "uz_UZ",
   ru: "ru_RU",
@@ -59,22 +35,29 @@ const OG_LOCALE: Record<Locale, string> = {
 
 const SEO_METADATA: Record<
   Locale,
-  { title: string; description: string }
+  { title: string; description: string; keywords: string[] }
 > = {
   uz: {
-    title: "Avtomaktab CRM — to'lov, davomat, jadval | Auto Maktab",
+    title: "Avtomaktab CRM va boshqaruv tizimi | automaktab.uz",
     description:
-      "Qarzdorlar ro'yxati, kunlik tushum, davomat va dars jadvali — bitta tizimda. Birinchi oy bepul, o'rnatish shart emas: brauzerda ishlaydi.",
+      "Avtomaktab to‘lovlari, qarzdorlik, dars jadvali va davomatini bitta CRM boshqaruv tizimida nazorat qiling. 30 kun bepul sinab ko‘ring.",
+    keywords: [
+      "avtomaktab CRM",
+      "avtomaktab boshqaruv tizimi",
+      "avtomaktab dasturi",
+    ],
   },
   ru: {
-    title: "CRM для автошколы — оплата и посещаемость | Auto Maktab",
+    title: "CRM для автошколы и система управления | automaktab.uz",
     description:
-      "Должники, выручка, посещаемость и расписание — в одной системе. Первый месяц бесплатно, установка не нужна: работает в браузере.",
+      "Контролируйте оплаты, долги, расписание и посещаемость автошколы в одной CRM-системе. Откройте демо и попробуйте 30 дней бесплатно.",
+    keywords: ["CRM для автошколы", "система управления автошколой"],
   },
   en: {
-    title: "Driving School CRM — Payments and Attendance | Auto Maktab",
+    title: "Driving School CRM & Management | automaktab.uz",
     description:
-      "Track debtors, daily revenue, attendance, and schedules in one system. The first month is free, with no installation required.",
+      "Manage driving-school payments, debt, lesson schedules, and attendance in one CRM. Open the product demo and try it free for 30 days.",
+    keywords: ["driving school CRM", "driving school management system"],
   },
 };
 
@@ -83,49 +66,45 @@ export async function generateMetadata({
 }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+
+  const seo = SEO_METADATA[locale];
   const alternates = buildLocaleAlternates("/", locale);
-  const canonicalUrl =
+  const canonical =
     typeof alternates?.canonical === "string"
       ? alternates.canonical
       : undefined;
-  const seo = SEO_METADATA[locale];
 
   return {
-    // Resolves og:image / twitter:image to absolute production URLs; without
-    // it Next falls back to http://localhost:3000 and social cards break.
     metadataBase: new URL("https://automaktab.uz"),
     title: seo.title,
     description: seo.description,
+    keywords: seo.keywords,
     alternates,
-    robots: "index, follow",
-    authors: [{ name: "Auto Maktab" }],
+    robots: { index: true, follow: true },
+    authors: [{ name: "automaktab.uz" }],
+    creator: "automaktab.uz",
     verification: { yandex: "76839dfd1ebe1b22" },
     openGraph: {
       type: "website",
-      siteName: "Auto Maktab CRM",
+      siteName: "automaktab.uz",
+      title: seo.title,
+      description: seo.description,
       locale: OG_LOCALE[locale],
-      alternateLocale: SUPPORTED_LOCALES.filter((loc) => loc !== locale).map(
-        (loc) => OG_LOCALE[loc],
+      alternateLocale: SUPPORTED_LOCALES.flatMap((item) =>
+        item === locale ? [] : [OG_LOCALE[item]],
       ),
-      url: canonicalUrl,
+      url: canonical,
     },
-    // og:image/twitter:image are generated by app/[locale]/opengraph-image.tsx
-    // (branded, on-brand, no external asset). Next wires them automatically.
     twitter: {
       card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
     },
   };
 }
 
-// Sets `.dark` on <html> before first paint. Checks localStorage for
-// persisted user choice first, then falls back to system preference.
-// Rendered as a raw <script> in this Server Component's JSX; React 19
-// hoists it into <head> so it runs before paint without the
-// "Encountered a script tag" error. See Next's "Preventing Flash" guide
-// (node_modules/next/dist/docs/01-app/02-guides/
-// preventing-flash-before-hydration.md).
-const THEME_SCRIPT =
-  "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()";
+const JS_ENHANCEMENT_SCRIPT =
+  "document.documentElement.classList.add('js')";
 
 export default async function LocaleLayout({
   children,
@@ -137,16 +116,18 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${jbMono.variable}`}
+      className={`${manrope.variable} ${unbounded.variable}`}
       suppressHydrationWarning
     >
-      <head />
-      <body>
+      <head>
         <script
-          id="theme-flash-prevention"
-          dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }}
+          id="js-enhancement"
+          dangerouslySetInnerHTML={{ __html: JS_ENHANCEMENT_SCRIPT }}
         />
+      </head>
+      <body>
         {children}
+        <UmamiAnalytics />
       </body>
     </html>
   );

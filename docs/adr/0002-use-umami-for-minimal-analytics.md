@@ -1,0 +1,13 @@
+# Use Umami only for public-site analytics
+
+Use Umami Cloud for the seven-day pre-cutover baseline and the redesigned public-site funnel. Do not install Yandex Metrica or run two analytics systems in parallel. The existing Yandex Webmaster verification meta tag is a search-ownership signal, not analytics, and is unaffected by this decision.
+
+The supplied `https://cloud.umami.is/q/e7B0ayOYQ` URL is a tracked redirect to `www.automaktab.uz`; both browser navigation and its `302` response expose only that destination. It is not used for the embedded tracker or internal site navigation. The authoritative Website ID is `cc618e43-ab67-474d-9530-2c6d5bf20230`, verified from the tracker currently rendered by `app.automaktab.uz/login`; use the same public ID as `NEXT_PUBLIC_UMAMI_WEBSITE_ID` so the marketing and demo-entry events share one funnel. The root layout loads `https://cloud.umami.is/script.js` once, after interaction, restricted to `automaktab.uz,www.automaktab.uz`, with search parameters excluded, Do Not Track respected, and performance collection enabled.
+
+Automatic pageviews and the custom events `demo_open`, `demo_enter`, and `intro_submit` are in scope. Event payloads contain only the stable event name and locale; names, telephone numbers, schools, locations, free text, credentials, and user identifiers are never sent. `umami.identify`, session replay, heatmaps, and form-value analytics are out of scope.
+
+`demo_open` is emitted by the explicit public-site CTA. That navigation opens a dedicated demo intent on the existing login route in `app.automaktab.uz`, where the client initiates the existing synthetic-demo authentication once after hydration and emits `demo_enter` only after a successful session is established. No credential appears in the URL, link prefetch is disabled, a plain GET does not authenticate on the server, repeated renders cannot retry automatically, and failure produces a visible manual retry. This is the only approved cross-repository implementation in this redesign.
+
+`autodrive-frontend` already injects the same Umami tracker through `src/lib/umami.ts` and already records generic `login_success`; do not add another script, analytics package, or backend endpoint. Extend the existing wrapper with a bounded early-event queue so an immediate demo login cannot finish before the asynchronously loaded tracker is ready, then emit the distinct `demo_enter` event from the demo-success path.
+
+Analytics failure must never block rendering, navigation, or form submission. Local development and preview deployments do not emit production analytics when the Website ID is absent.

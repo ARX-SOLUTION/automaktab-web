@@ -1,57 +1,18 @@
 # DESIGN.md — automaktab-web visual design system
 
-Scope: visual/aesthetic decisions for automaktab.uz's marketing site. This is not an engineering or content-rules document — those live in `CLAUDE.md`. Where the two could overlap (accessibility baselines, motion), this document is the source of truth for _what the standard is_; `CLAUDE.md` covers _how the codebase enforces it_.
+> **Decision status (2026-08-31):** Approved with `TASDIQ`. “Nazorat markazi” is the active implementation baseline; [ADR 0001](./docs/adr/0001-public-brand-and-control-center-direction.md) records the decision.
 
-Direction: **"Road Signal"** — one brand shared with `app.automaktab.uz`: warm paper, road-ink typography, and a restrained amber action signal. The public site is more editorial and persuasive; the CRM stays denser and performance-first, but the tokens and product evidence remain visibly related.
+## Resolved replacement brief
 
-## Typography
-
-- Display/heading font: **Manrope**, loaded via `next/font/google`. This is the CRM ecosystem's already-intended brand font (present in `@autodrive/design-tokens`'s dead `tailwind-preset.cjs`, never wired up — tracked as `autodrive-1r14`). Load it directly in this repo rather than waiting on the upstream fix.
-  - **Before using it**: confirm Manrope's Google Fonts delivery includes a Cyrillic subset. Russian-locale pages are non-negotiable — if Cyrillic coverage is incomplete or degraded, do not ship it as the Cyrillic body/heading font; fall back to the system stack for `ru` until a font with verified full Cyrillic coverage is chosen.
-- Body font: system stack (current behavior). No change — Manrope is for headings/display text, not paragraph copy.
-- Headline weight: 700–800. Tight tracking (negative letter-spacing) at display sizes, matching the redesign checklist's "headlines lack presence" guidance.
-- Numbers: tabular figures on any KPI/money value (already the convention in `DashboardMock` — keep it, extend it to any new numeric UI).
-
-## Color & Surface
-
-- Light and dark themes are equal product surfaces. Light uses warm paper `#F4F0E7`; dark uses deep road teal (`#092634` family), never pure black.
-- Road ink `#132A30` carries hierarchy and product chrome. Signal amber `#E2A42D` is reserved for primary actions, focus rings, and one high-value emphasis per view.
-- Semantic success, warning, danger, and info colors remain distinct from the brand accent. Amber must not replace error or success meaning.
-- Cards use opaque token surfaces and 1px borders. No CRT overlays, glass blur, decorative glow, or gradient fill.
-- The public site and CRM currently mirror one Road Signal token contract locally. Keep both mirrors identical until the shared `@autodrive/design-tokens` package adopts these values; local overrides may change density and layout, not brand meaning.
-
-## Layout
-
-- The five identical `eyebrow → h2 → sub → N-column equal card grid` section shells (Pain, Stats, How It Works, Benefits, Roles) are the strongest generic-template signal on the current page (audit finding #11). Not all five need to change — Benefits and Roles are simple enough that a clean grid is the right choice, not a compromise. Pain and Stats should move to an asymmetric/editorial treatment (unequal column widths, a dominant element instead of N equal cards).
-- Features keeps its existing alternating left/right row pattern — it's already the one section that isn't a generic grid.
-- `DashboardMock` moves from "flat card" toward "captured screenshot": a device-frame treatment, a more pronounced shadow, and slight overlap with the hero text above it (negative margin) for depth. It's the closest thing this product has to a real product screenshot — it should read as evidence, not decoration.
-- Card border-radius: vary it. Tighter radius on nested/inner elements, softer on outer containers — not one uniform value everywhere.
-
-## Motion
-
-- Baseline strength: near-best-case Core Web Vitals from a mostly-static page is the goal. Content stays Server Components; JS motion is the exception, not the norm.
-- Allowed: CSS-only transitions on hover/focus/active states (already the pattern for buttons), `scroll-behavior: smooth`, the FAQ disclosure transition.
-- GSAP + `@gsap/react` (`useGSAP` + `ScrollTrigger`) drives the motion identity, implemented in `src/components/landing/PageMotion.tsx` (hero + scroll) and `CapabilityMarquee.tsx` (ticker), all gated behind `prefers-reduced-motion: no-preference` (full static fallback when reduced motion is requested or JS is off). The data-attribute contract lives in PageMotion's header comment.
-- Approved motion vocabulary (the "Signal" identity): hero title word-roll (per-word `data-hero-word` rise, no clipping), hero item fade-stagger, product-mock settle (tilt→flat), sparkline draw + KPI count-up, the road-to-dashboard route draw + travelling car (`data-road-bed` / `data-road-dash` / `data-road-car`), the capability marquee, the right-edge scroll-signal progress line (`data-scroll-signal`), and direction-aware section reveals (`data-reveal` + `data-reveal-dir`: up/left/right/zoom).
-- Still not allowed: parallax, scroll-jacking/pinning, the old site's heavy choreography. Motion accents content; it never hides or gates it — every animated element has a visible static render before JS runs.
-
-## Accessibility baseline
-
-These are not one-off fixes from the review rounds — they are standing requirements for anything added to this site going forward:
-
-- Every interactive element gets a visible `focus-visible` state. No exceptions for "it's just a stub."
-- Text contrast meets WCAG AA (4.5:1 normal text, 3:1 large text) in both light and dark mode — verify against the actual rendered color, not the token name.
-- Semantic landmarks: exactly one `<main>`, `<nav>` for navigation link clusters, correct heading hierarchy with no level skips.
-- A skip-to-content link precedes all other focusable content.
-- Any new section-level color-coding (like the schedule legend) must be distinguishable by contrast, not hue alone — check it, don't assume two named colors look different enough.
-
-## Social proof
-
-- No fabricated numbers, testimonials, or usage stats. The current stats strip (∞ branches / 2-minute student add / zero install) is honest specifically because it's true regardless of customer count — keep that discipline.
-- Design the _slots_ now (a testimonial card pattern, a live-activity-style card pattern) so real data can drop in later without a redesign — but leave them unpopulated or absent until real data exists. An empty slot is better than a fake one.
-
-## Out of scope for this document
-
-- Copy/positioning — blocked on a separate decision (see `CLAUDE.md`, "Blocked on a decision"). This document governs how things look, not what they say.
-- i18n routing, content-file structure, blog data handling — see `CLAUDE.md`.
-- New pages (pricing, feature pages, FAQ) inherit this system; they don't get their own design language.
+- Direction: **Nazorat markazi** — a precision-editorial light canvas, fixed deep-ink product zones, and one signal-lime control point. There is one curated composition and no public theme toggle. Generic pink brutalism, glassmorphism, and corporate-blue SaaS templates are not the direction.
+- Brand: a prominent `automaktab.uz` wordmark plus the signal point. `AutoDrive`, car, wheel, road, and traffic-light motifs are absent. A complete logo system is not part of this wave.
+- Palette: Control Ink `#0B1720`; Field Paper `#F5F7F2`; Evidence Surface `#FFFFFF`; Signal Lime `#C6FF3D`; Data Blue `#2F6BFF`; Muted Text `#52606D`. Ink on Field is 16.82:1, Ink on Lime is 15.35:1, and Muted on Field is 5.99:1. Lime is not body text on a light surface; Data Blue does not compete with Lime for the primary CTA.
+- Typography: `Unbounded` only for the wordmark and short display statements; `Manrope` for body, UI, CTA, and localized reading. Do not add a third font. Body is at least 16px with a 1.5–1.75 line height and a controlled reading measure.
+- Story: operational disorder → control center → three product proofs → immediate demo → objections answered.
+- Proof: real captures from the synthetic demo account, initially Dashboard, Schedule, and Attendance. The live demo was verified on 2026-08-31: the three views are populated and the visible roster/staff data comes from `prisma/seed-demo.ts`. Cropping for composition is allowed; redrawing or changing product state is not. Fabricated dashboard mockups do not count as evidence.
+- Conversion: `Demo’ni hozir oching` is the sole primary action; its explicit click opens the app’s dedicated demo-intent route and automatically establishes the synthetic demo session without a second CTA. Link prefetch is disabled, credentials never enter the URL, and a failed automatic attempt becomes a visible manual retry. `15 daqiqalik tanishuv` is secondary. The form requires name, telephone, and region; school name and student count are optional. Labels stay visible, errors sit beside their fields, and Telegram is offered only after success.
+- Trust: use only verified product behavior and the confirmed 30-day trial. Do not publish unsupported operational or integration promises.
+- SEO: the H1 carries the human promise; title, description, and supporting copy naturally include the localized equivalents of `avtomaktab boshqaruv tizimi` and `avtomaktab CRM`. The first localized article addresses the Excel/daftar workflow. The currently published article must have its unsupported double-booking, YHXBB/compliance, and unlimited-branch claims corrected before the new blog route exposes it to indexing; the frontend does not sanitize content selectively. Search text is semantic HTML and is never created only by animation.
+- Motion: GSAP provides two signature moments, not site-wide decoration. The hero orchestrates a short SplitText statement, the signal point, CTA, and first evidence surface. One desktop-only pinned proof sequence uses ScrollTrigger and Flip to move that same point through Dashboard, Schedule, and Attendance; mobile becomes an ordinary vertical sequence. Use scoped `useGSAP`, `gsap.matchMedia`, transform/opacity, interruptible timelines, and cleanup on unmount. No scroll-jacking, smooth-scroll replacement, custom cursor, body-copy parallax, infinite decorative motion, or more than one pinned section. Reduced-motion and no-JS render the complete static story.
+- Performance: no video or 3D. Reserve screenshot dimensions, use responsive AVIF/WebP, prioritize only the LCP asset, lazy-load lower proofs, and keep per-frame work within the 60fps budget. Pre-launch target is mobile Lighthouse Performance ≥90; production targets are LCP ≤2.5s, INP ≤200ms, and CLS ≤0.1 at the 75th percentile.
+- Interaction: every target is at least 44×44px, focus remains visible, color is never the only state, and the layout is verified at 375, 768, 1024, and 1440px without horizontal scrolling.
