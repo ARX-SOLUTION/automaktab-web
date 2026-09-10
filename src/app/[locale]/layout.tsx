@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Unbounded } from "next/font/google";
+import { Manrope, Outfit } from "next/font/google";
 import { notFound } from "next/navigation";
 import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
 import { isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
@@ -12,9 +12,9 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const unbounded = Unbounded({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-unbounded",
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -23,8 +23,8 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#F5F7F2",
-  colorScheme: "light",
+  themeColor: "#10120e",
+  colorScheme: "dark",
 };
 
 const OG_LOCALE: Record<Locale, string> = {
@@ -115,7 +115,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${unbounded.variable}`}
+      className={`${manrope.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <head>

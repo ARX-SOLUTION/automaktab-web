@@ -120,9 +120,9 @@ const LOCALE_ROUTES: Array<{ route: string; locale: Locale }> = [
 ];
 
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Siz yo‘qligingizda", accent: "nazoratda" },
-  ru: { prefix: "Автошкола под контролем", accent: "вас нет" },
-  en: { prefix: "Your driving school", accent: "under control" },
+  uz: { prefix: "Avtomaktabingiz.", accent: "Doim nazoratda." },
+  ru: { prefix: "Ваша автошкола.", accent: "Под контролем." },
+  en: { prefix: "Your driving school.", accent: "Under control." },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<
