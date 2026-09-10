@@ -1,20 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  CalendarDays,
+  Check,
+  CheckCheck,
+  Layers3,
+  LockKeyhole,
+  Plus,
+  Users,
+  Wallet,
+} from "lucide-react";
 import type { Locale } from "@/i18n/config";
-import { LANDING_COPY, type ProductProof } from "@/config/landing";
+import { LANDING_COPY } from "@/config/landing";
+import { HeroSection } from "@/components/ui/hero-section-dark";
 import DemoLink from "./DemoLink";
 import DemoRequestDialog from "./DemoRequestDialog";
 import { DEMO_FORM_COPY } from "./demo-copy";
+import {
+  ProductAccordion,
+  TrialCarousel,
+  WorkflowMarquee,
+} from "./LandingInteractions";
 import PageMotion from "./PageMotion";
 
 const LOGIN_URL = "https://app.automaktab.uz/login";
-
-const HOME_PATH: Record<Locale, string> = {
-  uz: "/",
-  ru: "/ru",
-  en: "/en",
-};
-
+const HOME_PATH: Record<Locale, string> = { uz: "/", ru: "/ru", en: "/en" };
 const BLOG_PATH: Record<Locale, string> = {
   uz: "/blog",
   ru: "/ru/blog",
@@ -23,261 +36,278 @@ const BLOG_PATH: Record<Locale, string> = {
 
 export default function LandingPage({ locale }: { locale: Locale }) {
   const copy = LANDING_COPY[locale];
+  const features = copy.capabilities.items;
+  const [payments, students, schedule, attendance, branches, roles] = features;
 
   return (
     <>
       <SiteHeader locale={locale} />
-
       <PageMotion>
-      <section className="hero section-shell" aria-labelledby="hero-title">
-        <div className="hero-copy">
-          <p className="eyebrow" data-hero-eyebrow>
-            <span className="signal-point" aria-hidden="true" />
-            {copy.hero.eyebrow}
-          </p>
-          <h1 id="hero-title" data-hero-title>
-            {copy.hero.title}
-          </h1>
-          <p className="hero-lead" data-hero-item>
-            {copy.hero.body}
-          </p>
-          <div className="hero-actions" data-hero-item>
-            <DemoLink locale={locale} className="button button-primary">
-              {copy.hero.primary}
-              <ArrowRight />
-            </DemoLink>
-            <DemoRequestDialog
-              copy={DEMO_FORM_COPY[locale]}
-              locale={locale}
-              triggerLabel={copy.hero.secondary}
-              triggerClassName="button button-secondary"
-            />
-          </div>
-          <ul className="trust-list" data-hero-item>
+        <HeroSection
+          title={copy.hero.eyebrow}
+          subtitle={{ regular: copy.hero.title, gradient: copy.hero.accent }}
+          description={copy.hero.body}
+          bottomImage={{
+            light: "/images/product/dashboard.webp",
+            dark: "/images/product/dashboard.webp",
+            alt: copy.proof.items[0].imageAlt,
+            caption: copy.hero.screenshotCaption,
+            width: 1430,
+            height: 894,
+          }}
+          actions={
+            <>
+              <DemoLink locale={locale} className="button button-primary">
+                {copy.hero.primary}
+                <ArrowUpRight aria-hidden="true" />
+              </DemoLink>
+              <DemoRequestDialog
+                copy={DEMO_FORM_COPY[locale]}
+                locale={locale}
+                triggerLabel={copy.hero.secondary}
+                triggerClassName="button button-secondary"
+              />
+            </>
+          }
+        />
+
+        <div className="hero-footnote section-shell">
+          <ul className="trust-list">
             {copy.hero.trust.map((item) => (
               <li key={item}>
-                <Check />
+                <Check aria-hidden="true" />
                 {item}
               </li>
             ))}
           </ul>
+          <a className="explore-link" href="#capabilities">
+            {copy.nav.capabilities}
+            <ArrowDown aria-hidden="true" />
+          </a>
         </div>
 
-        <figure className="hero-evidence" data-hero-proof>
-          <div className="evidence-topline">
-            <span>{copy.hero.screenshotCaption}</span>
-            <span className="evidence-status">
-              <span aria-hidden="true" /> {copy.hero.liveStatus}
-            </span>
+        <section
+          id="capabilities"
+          className="capabilities-section section-shell chapter"
+          aria-labelledby="capabilities-title"
+        >
+          <header className="section-heading">
+            <p className="eyebrow">{copy.capabilities.eyebrow}</p>
+            <h2 id="capabilities-title">{copy.capabilities.title}</h2>
+            <p>{copy.capabilities.body}</p>
+          </header>
+          <div className="capability-grid grid-flow-dense">
+            <article className="feature-card feature-finance group">
+              <div className="feature-copy">
+                <Wallet className="feature-icon" aria-hidden="true" />
+                <h3>{payments.title}</h3>
+                <p>{payments.body}</p>
+              </div>
+              <div className="feature-image overflow-hidden">
+                <Image
+                  src="/images/product/dashboard.webp"
+                  alt={copy.proof.items[0].imageAlt}
+                  width={1430}
+                  height={894}
+                  sizes="(max-width: 767px) 90vw, 45vw"
+                  className="transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
+              <div className="feature-bottom">
+                <span>{copy.proof.items[0].eyebrow}</span>
+                <ArrowUpRight aria-hidden="true" />
+              </div>
+            </article>
+            <article className="feature-card feature-schedule group">
+              <div className="feature-copy">
+                <CalendarDays className="feature-icon" aria-hidden="true" />
+                <h3>{schedule.title}</h3>
+                <p>{schedule.body}</p>
+              </div>
+              <div className="schedule-crop overflow-hidden">
+                <Image
+                  src="/images/product/schedule.webp"
+                  alt={copy.proof.items[1].imageAlt}
+                  width={1430}
+                  height={894}
+                  sizes="(max-width: 767px) 70vw, 30vw"
+                  className="transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
+            </article>
+            <article className="feature-card feature-attendance">
+              <CheckCheck className="feature-icon" aria-hidden="true" />
+              <h3>{attendance.title}</h3>
+              <p>{attendance.body}</p>
+              <div className="attendance-marks" aria-hidden="true">
+                <Check />
+                <Check />
+                <Check />
+                <span>—</span>
+                <Check />
+              </div>
+              <div className="feature-detail">
+                <Users aria-hidden="true" />
+                <div>
+                  <h4>{students.title}</h4>
+                  <p>{students.body}</p>
+                </div>
+              </div>
+            </article>
+            <article className="feature-card feature-access">
+              <Layers3 className="feature-icon" aria-hidden="true" />
+              <h3>{branches.title}</h3>
+              <p>{branches.body}</p>
+              <div className="branch-orbit" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <Layers3 />
+              </div>
+              <div className="feature-detail">
+                <LockKeyhole aria-hidden="true" />
+                <div>
+                  <h4>{roles.title}</h4>
+                  <p>{roles.body}</p>
+                </div>
+              </div>
+            </article>
           </div>
-          <div className="hero-image-frame">
-            <Image
-              src="/images/product/dashboard.webp"
-              alt={copy.proof.items[0].imageAlt}
-              fill
-              preload
-              quality={86}
-              sizes="(max-width: 767px) 92vw, (max-width: 1199px) 86vw, 58vw"
-            />
-          </div>
-          <figcaption>
-            <strong>{copy.proof.items[0].metric}</strong>
-            <span>{copy.proof.items[0].metricLabel}</span>
-          </figcaption>
-        </figure>
-      </section>
+        </section>
 
-      <section className="disorder-section section-shell" aria-labelledby="disorder-title">
-        <header className="section-heading split-heading">
-          <p className="eyebrow">{copy.disorder.eyebrow}</p>
-          <h2 id="disorder-title">{copy.disorder.title}</h2>
-          <p>{copy.disorder.body}</p>
-        </header>
-        <ol className="disorder-list">
-          {copy.disorder.items.map((item) => (
-            <li key={item.index}>
-              <span>{item.index}</span>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
+        <WorkflowMarquee
+          items={features.map((item) => item.title)}
+          pauseLabel={copy.pauseMotion}
+        />
 
-      <section id="product" className="proof-section" aria-labelledby="proof-title">
-        <div className="section-shell">
-          <header className="section-heading proof-heading">
-            <p className="eyebrow">{copy.proof.eyebrow}</p>
-            <h2 id="proof-title">{copy.proof.title}</h2>
+        <section
+          id="product"
+          className="proof-section section-shell chapter"
+          aria-labelledby="proof-title"
+        >
+          <header className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">{copy.proof.eyebrow}</p>
+              <h2 id="proof-title">{copy.proof.title}</h2>
+            </div>
             <p>{copy.proof.body}</p>
           </header>
+          <ProductAccordion
+            items={copy.proof.items}
+            label={copy.proof.liveLabel}
+          />
+        </section>
 
-          <div className="proof-mobile">
-            {copy.proof.items.map((item, index) => (
-              <ProofCard
-                key={item.id}
-                proof={item}
-                liveLabel={copy.proof.liveLabel}
-                eager={index === 0}
-              />
-            ))}
-          </div>
-
-          <div className="proof-desktop" data-proof-desktop>
-            <div className="proof-pin" data-proof-pin>
-              <ol className="proof-rail">
-                {copy.proof.items.map((item, index) => (
-                  <li
-                    key={item.id}
-                    data-proof-step
-                    data-active={index === 0 ? "true" : "false"}
-                  >
-                    <div className="proof-signal-target" data-proof-target>
-                      {index === 0 && (
-                        <span data-proof-signal aria-hidden="true" />
-                      )}
-                    </div>
-                    <span className="proof-index">{item.index}</span>
-                    <div>
-                      <p>{item.eyebrow}</p>
-                      <h3>{item.title}</h3>
-                      <span>{item.body}</span>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              <div className="proof-stage">
-                {copy.proof.items.map((item, index) => (
-                  <figure
-                    key={item.id}
-                    className="proof-frame"
-                    data-proof-frame
-                    data-active={index === 0 ? "true" : "false"}
-                  >
-                    <div className="evidence-topline">
-                      <span>{copy.proof.liveLabel}</span>
-                      <span>{item.index} / 03</span>
-                    </div>
-                    <div className="proof-image-frame">
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt}
-                        fill
-                        quality={84}
-                        sizes="60vw"
-                      />
-                    </div>
-                    <figcaption>
-                      <strong>{item.metric}</strong>
-                      <span>{item.metricLabel}</span>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="capabilities"
-        className="capabilities-section section-shell"
-        aria-labelledby="capabilities-title"
-      >
-        <header className="section-heading split-heading">
-          <p className="eyebrow">{copy.capabilities.eyebrow}</p>
-          <h2 id="capabilities-title">{copy.capabilities.title}</h2>
-          <p>{copy.capabilities.body}</p>
-        </header>
-        <div className="capability-grid">
-          {copy.capabilities.items.map((item, index) => (
-            <article key={item.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="trial-section" aria-labelledby="trial-title">
-        <div className="section-shell trial-inner">
-          <header>
-            <p className="eyebrow">{copy.trial.eyebrow}</p>
-            <h2 id="trial-title">{copy.trial.title}</h2>
-            <p>{copy.trial.body}</p>
-            <DemoLink locale={locale} className="button button-primary">
-              {copy.hero.primary}
-              <ArrowRight />
-            </DemoLink>
+        <section
+          className="disorder-section section-shell chapter"
+          aria-labelledby="disorder-title"
+        >
+          <header className="section-heading">
+            <p className="eyebrow">{copy.disorder.eyebrow}</p>
+            <h2 id="disorder-title">{copy.disorder.title}</h2>
+            <p>{copy.disorder.body}</p>
           </header>
-          <ol>
-            {copy.trial.steps.map((step) => (
-              <li key={step.index}>
-                <span>{step.index}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
+          <ol className="disorder-list" data-card-stack>
+            {copy.disorder.items.map((item, index) => (
+              <li key={item.index} data-stack-card>
+                <span className="story-symbol" aria-hidden="true">
+                  {index === 0 ? (
+                    <Wallet />
+                  ) : index === 1 ? (
+                    <CheckCheck />
+                  ) : (
+                    <CalendarDays />
+                  )}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </li>
             ))}
           </ol>
-        </div>
-      </section>
+        </section>
 
-      <section className="blog-teaser section-shell" aria-labelledby="blog-teaser-title">
-        <p className="eyebrow">{copy.blog.eyebrow}</p>
-        <div>
-          <h2 id="blog-teaser-title">{copy.blog.title}</h2>
-          <p>{copy.blog.body}</p>
-        </div>
-        <Link href={BLOG_PATH[locale]} className="text-link">
-          {copy.blog.link}
-          <ArrowUpRight />
-        </Link>
-      </section>
+        <section
+          className="trial-section chapter"
+          aria-labelledby="trial-title"
+        >
+          <div className="section-shell trial-inner">
+            <header className="section-heading">
+              <p className="eyebrow">{copy.trial.eyebrow}</p>
+              <h2 id="trial-title">{copy.trial.title}</h2>
+              <p>{copy.trial.body}</p>
+              <DemoLink locale={locale} className="button button-primary">
+                {copy.hero.primary}
+                <ArrowUpRight aria-hidden="true" />
+              </DemoLink>
+            </header>
+            <TrialCarousel copy={copy.trial} />
+          </div>
+        </section>
 
-      <section id="faq" className="faq-section section-shell" aria-labelledby="faq-title">
-        <header className="section-heading split-heading">
-          <p className="eyebrow">{copy.faq.eyebrow}</p>
-          <h2 id="faq-title">{copy.faq.title}</h2>
-        </header>
-        <div className="faq-list">
-          {copy.faq.items.map((item, index) => (
-            <details key={item.question}>
-              <summary>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {item.question}
-                <Chevron />
-              </summary>
-              <p>{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+        <section
+          className="blog-teaser section-shell"
+          aria-labelledby="blog-teaser-title"
+        >
+          <div className="blog-teaser-icon" aria-hidden="true">
+            <Layers3 />
+          </div>
+          <div>
+            <p className="eyebrow">{copy.blog.eyebrow}</p>
+            <h2 id="blog-teaser-title">{copy.blog.title}</h2>
+            <p>{copy.blog.body}</p>
+          </div>
+          <Link href={BLOG_PATH[locale]} className="text-link">
+            {copy.blog.link}
+            <ArrowUpRight aria-hidden="true" />
+          </Link>
+        </section>
 
-      <section id="demo" className="closing-section section-shell" aria-labelledby="closing-title">
-        <div>
-          <p className="eyebrow">{copy.closing.eyebrow}</p>
-          <h2 id="closing-title">{copy.closing.title}</h2>
-          <p>{copy.closing.body}</p>
-        </div>
-        <div className="closing-actions">
-          <DemoLink locale={locale} className="button button-primary">
-            {copy.closing.primary}
-            <ArrowRight />
-          </DemoLink>
-          <DemoRequestDialog
-            copy={DEMO_FORM_COPY[locale]}
-            locale={locale}
-            triggerLabel={copy.closing.secondary}
-            triggerClassName="button button-on-dark"
-          />
-        </div>
-      </section>
+        <section
+          id="faq"
+          className="faq-section section-shell chapter"
+          aria-labelledby="faq-title"
+        >
+          <header className="section-heading">
+            <p className="eyebrow">{copy.faq.eyebrow}</p>
+            <h2 id="faq-title">{copy.faq.title}</h2>
+          </header>
+          <div className="faq-list">
+            {copy.faq.items.map((item) => (
+              <details key={item.question}>
+                <summary>
+                  {item.question}
+                  <Plus aria-hidden="true" />
+                </summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="demo"
+          className="closing-section"
+          aria-labelledby="closing-title"
+        >
+          <div className="section-shell">
+            <p className="eyebrow">{copy.closing.eyebrow}</p>
+            <h2 id="closing-title">{copy.closing.title}</h2>
+            <p>{copy.closing.body}</p>
+            <div className="closing-actions">
+              <DemoLink locale={locale} className="button button-primary">
+                {copy.closing.primary}
+                <ArrowUpRight aria-hidden="true" />
+              </DemoLink>
+              <DemoRequestDialog
+                copy={DEMO_FORM_COPY[locale]}
+                locale={locale}
+                triggerLabel={copy.closing.secondary}
+                triggerClassName="button button-secondary"
+              />
+            </div>
+          </div>
+        </section>
       </PageMotion>
-
       <SiteFooter locale={locale} />
     </>
   );
@@ -285,7 +315,16 @@ export default function LandingPage({ locale }: { locale: Locale }) {
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const copy = LANDING_COPY[locale];
-
+  const localeLinks = (["uz", "ru", "en"] as const).map((item) => (
+    <Link
+      key={item}
+      href={HOME_PATH[item]}
+      lang={item}
+      aria-current={item === locale ? "page" : undefined}
+    >
+      {item.toUpperCase()}
+    </Link>
+  ));
   const navigation = (
     <>
       <a href={`${HOME_PATH[locale]}#product`}>{copy.nav.proof}</a>
@@ -298,35 +337,57 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header className="site-header">
       <div className="section-shell header-inner">
-        <Link href={HOME_PATH[locale]} className="wordmark" aria-label="automaktab.uz">
-          automaktab<span>.uz</span>
+        <Link
+          href={HOME_PATH[locale]}
+          className="wordmark"
+          aria-label="automaktab.uz"
+        >
+          <Image src="/icon.svg" alt="" width={30} height={30} />
+          <span>
+            automaktab<span className="wordmark-domain">.uz</span>
+          </span>
         </Link>
         <nav className="desktop-nav" aria-label={copy.nav.mainNavigation}>
           {navigation}
         </nav>
         <div className="header-actions">
-          <div className="locale-switcher" aria-label={copy.nav.language}>
-            {(["uz", "ru", "en"] as const).map((item) => (
-              <Link
-                key={item}
-                href={HOME_PATH[item]}
-                lang={item}
-                aria-current={item === locale ? "page" : undefined}
-              >
-                {item.toUpperCase()}
-              </Link>
-            ))}
+          <div
+            className="locale-switcher"
+            role="group"
+            aria-label={copy.nav.language}
+          >
+            {localeLinks}
           </div>
+          <details className="mobile-locale-menu" name="header-menu">
+            <summary
+              aria-label={`${copy.nav.language}: ${locale.toUpperCase()}`}
+            >
+              {locale.toUpperCase()}
+            </summary>
+            <div
+              className="locale-switcher"
+              role="group"
+              aria-label={copy.nav.language}
+            >
+              {localeLinks}
+            </div>
+          </details>
           <a href={LOGIN_URL} className="login-link">
             {copy.nav.login}
-            <ArrowUpRight />
+            <ArrowUpRight aria-hidden="true" />
           </a>
-          <details className="mobile-menu">
+          <details className="mobile-menu" name="header-menu">
             <summary aria-label={copy.nav.menu}>
               <span />
               <span />
             </summary>
-            <nav aria-label={copy.nav.mobileNavigation}>{navigation}</nav>
+            <nav aria-label={copy.nav.mobileNavigation}>
+              {navigation}
+              <a href={LOGIN_URL}>
+                {copy.nav.login}
+                <ArrowRight aria-hidden="true" />
+              </a>
+            </nav>
           </details>
         </div>
       </div>
@@ -336,84 +397,25 @@ export function SiteHeader({ locale }: { locale: Locale }) {
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const copy = LANDING_COPY[locale];
-
   return (
     <footer className="site-footer section-shell">
-      <Link href={HOME_PATH[locale]} className="wordmark">
-        automaktab<span>.uz</span>
-      </Link>
-      <p>{copy.footer.descriptor}</p>
-      <p>© {new Date().getFullYear()} automaktab.uz · {copy.footer.rights}</p>
-    </footer>
-  );
-}
-
-function ProofCard({
-  proof,
-  liveLabel,
-  eager,
-}: {
-  proof: ProductProof;
-  liveLabel: string;
-  eager: boolean;
-}) {
-  return (
-    <article className="proof-card">
-      <div className="proof-card-copy">
-        <span>{proof.index}</span>
-        <p className="eyebrow">{proof.eyebrow}</p>
-        <h3>{proof.title}</h3>
-        <p>{proof.body}</p>
+      <div className="footer-top">
+        <Link href={HOME_PATH[locale]} className="wordmark">
+          <Image src="/icon.svg" alt="" width={30} height={30} />
+          <span>
+            automaktab<span className="wordmark-domain">.uz</span>
+          </span>
+        </Link>
+        <p>{copy.footer.descriptor}</p>
+        <Link href={BLOG_PATH[locale]} className="text-link">
+          {copy.nav.blog}
+          <ArrowUpRight aria-hidden="true" />
+        </Link>
       </div>
-      <figure>
-        <div className="evidence-topline">
-          <span>{liveLabel}</span>
-          <span>{proof.metric}</span>
-        </div>
-        <div className="proof-image-frame">
-          <Image
-            src={proof.image}
-            alt={proof.imageAlt}
-            fill
-            quality={84}
-            loading={eager ? "eager" : "lazy"}
-            sizes="(max-width: 767px) 92vw, (max-width: 1023px) 88vw, 60vw"
-          />
-        </div>
-        <figcaption>{proof.metricLabel}</figcaption>
-      </figure>
-    </article>
-  );
-}
-
-function ArrowRight() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="M3 10h13M11 5l5 5-5 5" />
-    </svg>
-  );
-}
-
-function ArrowUpRight() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="M6 14 14 6M7 6h7v7" />
-    </svg>
-  );
-}
-
-function Chevron() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="m5 7 5 5 5-5" />
-    </svg>
-  );
-}
-
-function Check() {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden="true">
-      <path d="m3 8 3 3 7-7" />
-    </svg>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} automaktab.uz</p>
+        <p>{copy.footer.rights}</p>
+      </div>
+    </footer>
   );
 }

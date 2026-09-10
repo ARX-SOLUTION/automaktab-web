@@ -2,12 +2,10 @@
 
 import { useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
-import { Flip } from "gsap/Flip";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(Flip, ScrollTrigger, SplitText, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function PageMotion({ children }: { children: ReactNode }) {
   const root = useRef<HTMLElement>(null);
@@ -16,149 +14,83 @@ export default function PageMotion({ children }: { children: ReactNode }) {
     () => {
       const element = root.current;
       if (!element) return;
-
       const media = gsap.matchMedia();
 
       media.add("(prefers-reduced-motion: no-preference)", () => {
-        const title = element.querySelector<HTMLElement>("[data-hero-title]");
-        if (!title) return;
-
-        const split = SplitText.create(title, {
-          type: "words",
-          wordsClass: "hero-word",
-          aria: "auto",
-        });
-        const eyebrow = element.querySelector("[data-hero-eyebrow]");
-        const items = element.querySelectorAll("[data-hero-item]");
+        gsap.from(
+          element.querySelectorAll("[data-hero-title], [data-hero-item]"),
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.65,
+            stagger: 0.08,
+            ease: "power3.out",
+            clearProps: "all",
+          },
+        );
         const proof = element.querySelector("[data-hero-proof]");
-
-        const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
-        hero
-          .from(eyebrow, { opacity: 0, y: 12, duration: 0.45 })
-          .from(
-            split.words,
-            {
-              opacity: 0,
-              yPercent: 105,
-              rotateX: -28,
-              transformOrigin: "50% 100%",
-              duration: 0.8,
-              stagger: 0.045,
-              ease: "power4.out",
-            },
-            0.08,
-          )
-          .from(
-            items,
-            { opacity: 0, y: 16, duration: 0.55, stagger: 0.09 },
-            0.32,
-          )
-          .from(
+        if (proof) {
+          gsap.fromTo(
             proof,
+            { scale: 0.8, opacity: 0 },
             {
-              opacity: 0,
-              y: 34,
-              rotate: 0.8,
-              scale: 0.985,
-              duration: 0.9,
-              ease: "power4.out",
+              scale: 1,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
             },
-            0.42,
           );
-
-        return () => split.revert();
+          gsap.to(proof.querySelector(".hero-image-frame"), {
+            opacity: 0.2,
+            ease: "none",
+            scrollTrigger: {
+              trigger: proof,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
       });
 
       media.add(
         "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
         () => {
-          const pin = element.querySelector<HTMLElement>("[data-proof-pin]");
-          const frames = gsap.utils.toArray<HTMLElement>(
-            "[data-proof-frame]",
-            element,
+          const stack = element.querySelector<HTMLElement>("[data-card-stack]");
+          if (!stack) return;
+          const cards = gsap.utils.toArray<HTMLElement>(
+            "[data-stack-card]",
+            stack,
           );
-          const steps = gsap.utils.toArray<HTMLElement>(
-            "[data-proof-step]",
-            element,
-          );
-          const targets = gsap.utils.toArray<HTMLElement>(
-            "[data-proof-target]",
-            element,
-          );
-          const signal = element.querySelector<HTMLElement>(
-            "[data-proof-signal]",
-          );
-
-          if (
-            !pin ||
-            frames.length !== 3 ||
-            steps.length !== 3 ||
-            targets.length !== 3 ||
-            !signal
-          ) {
-            return;
-          }
-
-          gsap.set(frames.slice(1), {
-            autoAlpha: 0,
-            yPercent: 4,
-            scale: 0.985,
-          });
-
-          let activeIndex = 0;
-          let activeFlip: gsap.core.Animation | undefined;
-
-          const activate = (nextIndex: number) => {
-            if (nextIndex === activeIndex) return;
-            activeFlip?.kill();
-
-            const state = Flip.getState(signal);
-            targets[nextIndex].appendChild(signal);
-            activeFlip = Flip.from(state, {
-              absolute: true,
-              duration: 0.42,
-              ease: "power3.inOut",
-            });
-
-            steps.forEach((step, index) => {
-              step.dataset.active = String(index === nextIndex);
-            });
-            frames.forEach((frame, index) => {
-              frame.dataset.active = String(index === nextIndex);
-            });
-            activeIndex = nextIndex;
-          };
-
-          const proofTimeline = gsap.timeline({
-            defaults: { ease: "power2.inOut" },
-            scrollTrigger: {
-              trigger: pin,
-              start: "top top",
-              end: "+=220%",
+          cards.slice(0, -1).forEach((card, index) => {
+            ScrollTrigger.create({
+              trigger: card,
+              start: "top 24%",
+              endTrigger: cards[cards.length - 1],
+              end: "top 24%",
               pin: true,
-              scrub: 0.75,
-              anticipatePin: 1,
+              pinSpacing: false,
               invalidateOnRefresh: true,
-              onUpdate: (self) => activate(Math.min(2, Math.round(self.progress * 2))),
-            },
+            });
+            gsap.to(card, {
+              scale: 0.94,
+              opacity: 0.35,
+              transformOrigin: "top center",
+              ease: "none",
+              scrollTrigger: {
+                trigger: cards[index + 1],
+                start: "top 65%",
+                end: "top 24%",
+                scrub: true,
+              },
+            });
           });
 
-          proofTimeline
-            .to(frames[0], { autoAlpha: 0, yPercent: -3, scale: 0.99, duration: 0.3 }, 0.55)
-            .to(frames[1], { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.38 }, 0.66)
-            .to(frames[1], { autoAlpha: 0, yPercent: -3, scale: 0.99, duration: 0.3 }, 1.55)
-            .to(frames[2], { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.38 }, 1.66);
-
-          return () => {
-            activeFlip?.kill();
-            targets[0].appendChild(signal);
-            steps.forEach((step, index) => {
-              step.dataset.active = String(index === 0);
-            });
-            frames.forEach((frame, index) => {
-              frame.dataset.active = String(index === 0);
-            });
-          };
+          const accordion = element.querySelector(".product-accordion");
+          if (!accordion) return;
+          const observer = new ResizeObserver(() => ScrollTrigger.refresh());
+          observer.observe(accordion);
+          return () => observer.disconnect();
         },
       );
 
@@ -168,7 +100,12 @@ export default function PageMotion({ children }: { children: ReactNode }) {
   );
 
   return (
-    <main id="main-content" ref={root}>
+    <main
+      id="main-content"
+      ref={root}
+      className="overflow-x-hidden w-full max-w-full"
+      tabIndex={-1}
+    >
       {children}
     </main>
   );

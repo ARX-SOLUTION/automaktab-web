@@ -7,6 +7,7 @@ import {
   useState,
   type KeyboardEvent,
 } from "react";
+import { createPortal } from "react-dom";
 import type { Locale } from "@/i18n/config";
 import type { DemoFormCopy } from "./DemoRequestForm";
 import DemoRequestForm from "./DemoRequestForm";
@@ -88,7 +89,7 @@ export default function DemoRequestDialog({
         <ArrowRight />
       </button>
 
-      {open && (
+      {open && createPortal(
         <div className="dialog-layer">
           <button
             type="button"
@@ -122,7 +123,8 @@ export default function DemoRequestDialog({
             </p>
             <DemoRequestForm copy={copy} locale={locale} />
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

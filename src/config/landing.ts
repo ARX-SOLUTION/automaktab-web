@@ -11,11 +11,14 @@ export type ProductProof = {
   metric: string;
   metricLabel: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   imageAlt: string;
 };
 
 export type LandingCopy = {
   skipLink: string;
+  pauseMotion: string;
   nav: {
     proof: string;
     capabilities: string;
@@ -30,6 +33,7 @@ export type LandingCopy = {
   hero: {
     eyebrow: string;
     title: string;
+    accent: string;
     body: string;
     primary: string;
     secondary: string;
@@ -57,6 +61,8 @@ export type LandingCopy = {
     items: Array<{ title: string; body: string }>;
   };
   trial: {
+    previous: string;
+    next: string;
     eyebrow: string;
     title: string;
     body: string;
@@ -89,6 +95,7 @@ export type LandingCopy = {
 export const LANDING_COPY: Record<Locale, LandingCopy> = {
   uz: {
     skipLink: "Asosiy kontentga o‘tish",
+    pauseMotion: "Harakatni to‘xtatish",
     nav: {
       proof: "Tizim ichida",
       capabilities: "Imkoniyatlar",
@@ -102,7 +109,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     },
     hero: {
       eyebrow: "Avtomaktablar uchun boshqaruv tizimi",
-      title: "Siz yo‘qligingizda ham avtomaktab nazoratda.",
+      title: "Avtomaktabingiz.",
+      accent: "Doim nazoratda.",
       body: "Tushum, qarzdorlik, dars jadvali va davomatni bitta boshqaruv maydonida ko‘ring — Excel, daftar va xotira orasida sakramasdan.",
       primary: "Demo’ni hozir oching",
       secondary: "15 daqiqalik tanishuv",
@@ -147,6 +155,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
           metric: "91,45 mln",
           metricLabel: "demo davri tushumi",
           image: "/images/product/dashboard.webp",
+          imageWidth: 1430,
+          imageHeight: 894,
           imageAlt: "Sintetik demo owner dashboardida tushum, qarzdorlik va trend grafigi",
         },
         {
@@ -158,6 +168,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
           metric: "7 kun",
           metricLabel: "haftalik ko‘rinish",
           image: "/images/product/schedule.webp",
+          imageWidth: 1430,
+          imageHeight: 894,
           imageAlt: "Sintetik demo haftalik dars jadvalida nazariya va amaliy mashg‘ulotlar",
         },
         {
@@ -169,6 +181,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
           metric: "10/10",
           metricLabel: "demo darsida belgilangan",
           image: "/images/product/attendance.webp",
+          imageWidth: 1440,
+          imageHeight: 900,
           imageAlt: "Sintetik demo davomat panelida keldi, kechikdi, kelmadi va uzrli statuslari",
         },
       ],
@@ -187,6 +201,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       ],
     },
     trial: {
+      previous: "Oldingi qadam",
+      next: "Keyingi qadam",
       eyebrow: "Kutmasdan tekshiring",
       title: "Demo — prezentatsiya emas. Tizimning o‘zi.",
       body: "Callback kutmaysiz. Sintetik ma’lumotlar bilan mahsulot ichiga kirib, ish oqimini o‘zingiz tekshirasiz.",
@@ -228,6 +244,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
   },
   ru: {
     skipLink: "Перейти к основному содержимому",
+    pauseMotion: "Приостановить движение",
     nav: {
       proof: "Внутри системы",
       capabilities: "Возможности",
@@ -241,7 +258,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     },
     hero: {
       eyebrow: "Система управления для автошкол",
-      title: "Автошкола под контролем, даже когда вас нет на месте.",
+      title: "Ваша автошкола.",
+      accent: "Под контролем.",
       body: "Выручка, задолженность, расписание и посещаемость в едином рабочем поле — без постоянного переключения между Excel, журналом и памятью.",
       primary: "Открыть демо сейчас",
       secondary: "15-минутное знакомство",
@@ -265,9 +283,9 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       body: "Эти кадры сняты в реальном синтетическом демо-аккаунте. Здесь нет нарисованных интерфейсов и клиентских данных.",
       liveLabel: "Кадр живого продукта",
       items: [
-        { id: "dashboard", index: "01", eyebrow: "Панель владельца", title: "Выручка и задолженность одним взглядом", body: "Выручка за период, активные ученики, общий долг и состояние филиалов в одном рабочем поле.", metric: "91,45 млн", metricLabel: "выручка демо-периода", image: "/images/product/dashboard.webp", imageAlt: "Синтетическая панель владельца с выручкой, задолженностью и графиком" },
-        { id: "schedule", index: "02", eyebrow: "Расписание", title: "Теория и практика на одной неделе", body: "Группа, преподаватель, время и тип занятия показаны в едином недельном календаре.", metric: "7 дней", metricLabel: "недельный обзор", image: "/images/product/schedule.webp", imageAlt: "Недельное расписание теоретических и практических занятий в синтетическом демо" },
-        { id: "attendance", index: "03", eyebrow: "Посещаемость", title: "Точный статус по каждому занятию", body: "Присутствовал, опоздал, отсутствовал и уважительная причина хранятся рядом со списком урока.", metric: "10/10", metricLabel: "отмечено в демо-уроке", image: "/images/product/attendance.webp", imageAlt: "Панель посещаемости со статусами учеников в синтетическом демо" },
+        { id: "dashboard", index: "01", eyebrow: "Панель владельца", title: "Выручка и задолженность одним взглядом", body: "Выручка за период, активные ученики, общий долг и состояние филиалов в одном рабочем поле.", metric: "91,45 млн", metricLabel: "выручка демо-периода", image: "/images/product/dashboard.webp", imageWidth: 1430, imageHeight: 894, imageAlt: "Синтетическая панель владельца с выручкой, задолженностью и графиком" },
+        { id: "schedule", index: "02", eyebrow: "Расписание", title: "Теория и практика на одной неделе", body: "Группа, преподаватель, время и тип занятия показаны в едином недельном календаре.", metric: "7 дней", metricLabel: "недельный обзор", image: "/images/product/schedule.webp", imageWidth: 1430, imageHeight: 894, imageAlt: "Недельное расписание теоретических и практических занятий в синтетическом демо" },
+        { id: "attendance", index: "03", eyebrow: "Посещаемость", title: "Точный статус по каждому занятию", body: "Присутствовал, опоздал, отсутствовал и уважительная причина хранятся рядом со списком урока.", metric: "10/10", metricLabel: "отмечено в демо-уроке", image: "/images/product/attendance.webp", imageWidth: 1440, imageHeight: 900, imageAlt: "Панель посещаемости со статусами учеников в синтетическом демо" },
       ],
     },
     capabilities: {
@@ -284,6 +302,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       ],
     },
     trial: {
+      previous: "Предыдущий шаг",
+      next: "Следующий шаг",
       eyebrow: "Проверьте без ожидания",
       title: "Демо — не презентация. Это сама система.",
       body: "Не нужно ждать звонка. Войдите в продукт с синтетическими данными и проверьте рабочие процессы сами.",
@@ -322,6 +342,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
   },
   en: {
     skipLink: "Skip to main content",
+    pauseMotion: "Pause motion",
     nav: {
       proof: "Inside the product",
       capabilities: "Capabilities",
@@ -335,7 +356,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     },
     hero: {
       eyebrow: "Management system for driving schools",
-      title: "Your driving school stays under control, even when you are away.",
+      title: "Your driving school.",
+      accent: "Under control.",
       body: "Revenue, debt, schedules, and attendance in one operating view — without jumping between Excel, paper logs, and memory.",
       primary: "Open the demo now",
       secondary: "15-minute introduction",
@@ -359,9 +381,9 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       body: "These frames come from the live synthetic demo account. No fabricated dashboard and no customer data.",
       liveLabel: "Live product frame",
       items: [
-        { id: "dashboard", index: "01", eyebrow: "Owner dashboard", title: "Revenue and debt at a glance", body: "Period revenue, active students, total debt, and branch performance in one operating view.", metric: "UZS 91.45m", metricLabel: "demo-period revenue", image: "/images/product/dashboard.webp", imageAlt: "Synthetic owner dashboard showing revenue, debt, and a trend chart" },
-        { id: "schedule", index: "02", eyebrow: "Lesson schedule", title: "Theory and practice across one week", body: "Group, teacher, time, and lesson type follow one consistent weekly calendar.", metric: "7 days", metricLabel: "weekly view", image: "/images/product/schedule.webp", imageAlt: "Synthetic weekly schedule with theory and practical lessons" },
-        { id: "attendance", index: "03", eyebrow: "Attendance", title: "A clear status for every lesson", body: "Present, late, absent, and excused statuses live alongside the lesson roster.", metric: "10/10", metricLabel: "marked in the demo lesson", image: "/images/product/attendance.webp", imageAlt: "Synthetic attendance panel with student status controls" },
+        { id: "dashboard", index: "01", eyebrow: "Owner dashboard", title: "Revenue and debt at a glance", body: "Period revenue, active students, total debt, and branch performance in one operating view.", metric: "UZS 91.45m", metricLabel: "demo-period revenue", image: "/images/product/dashboard.webp", imageWidth: 1430, imageHeight: 894, imageAlt: "Synthetic owner dashboard showing revenue, debt, and a trend chart" },
+        { id: "schedule", index: "02", eyebrow: "Lesson schedule", title: "Theory and practice across one week", body: "Group, teacher, time, and lesson type follow one consistent weekly calendar.", metric: "7 days", metricLabel: "weekly view", image: "/images/product/schedule.webp", imageWidth: 1430, imageHeight: 894, imageAlt: "Synthetic weekly schedule with theory and practical lessons" },
+        { id: "attendance", index: "03", eyebrow: "Attendance", title: "A clear status for every lesson", body: "Present, late, absent, and excused statuses live alongside the lesson roster.", metric: "10/10", metricLabel: "marked in the demo lesson", image: "/images/product/attendance.webp", imageWidth: 1440, imageHeight: 900, imageAlt: "Synthetic attendance panel with student status controls" },
       ],
     },
     capabilities: {
@@ -378,6 +400,8 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       ],
     },
     trial: {
+      previous: "Previous step",
+      next: "Next step",
       eyebrow: "Verify without waiting",
       title: "The demo is not a presentation. It is the system.",
       body: "There is no callback gate. Enter the product with synthetic data and inspect the workflow yourself.",
