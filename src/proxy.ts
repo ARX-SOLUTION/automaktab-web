@@ -4,7 +4,7 @@ import { DEFAULT_LOCALE, isLocale, type Locale } from "@/i18n/config";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
-// uz is unprefixed by design (see CLAUDE.md's i18n section), so a leading
+// uz is unprefixed by design (see CONTEXT.md's localization section), so a leading
 // path segment only ever names a locale prefix for ru/en -- "uz" itself is
 // never a prefix, it's just Uzbek content living at an unprefixed path.
 function resolveLocale(pathname: string): Locale {
@@ -31,6 +31,11 @@ function resolveLocale(pathname: string): Locale {
 // tree and 404s on its own -- no separate guard needed.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === `/${DEFAULT_LOCALE}`) {
+    return new NextResponse(null, { status: 404 });
+  }
+
   const locale = resolveLocale(pathname);
 
   let response: NextResponse;
