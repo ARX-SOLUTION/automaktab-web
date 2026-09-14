@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">Open Control A</title>
+  <desc id="desc">An open A monogram frames one active control point.</desc>
+  <g fill="currentColor">
+    <path d="M12 78 40.8 23h15.6L86 78H70.7L48.7 36.7 27.6 78H12Z"/>
+    <rect x="34" y="57" width="32" height="10" rx="5" opacity="0.34"/>
+    <circle cx="74" cy="28" r="5"/>
+  </g>
+</svg>

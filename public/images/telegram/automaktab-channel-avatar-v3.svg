@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">automaktab.uz — buklangan yo‘l belgisi</title>
+  <desc id="desc">Buklangan ko‘k yo‘l tasdiq belgisiga aylanib, avtomaktab boshqaruvi va oldinga harakatni anglatadi.</desc>
+  <defs>
+    <linearGradient id="front" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2F6BFF"/>
+      <stop offset="1" stop-color="#4CAEFF"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2459C7"/>
+      <stop offset="1" stop-color="#0B1720"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="180%" height="180%">
+      <feDropShadow dx="28" dy="34" stdDeviation="30" flood-color="#0B1720" flood-opacity="0.20"/>
+    </filter>
+    <filter id="floorShadow" x="-100%" y="-200%" width="300%" height="500%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="#F5F1EA"/>
+  <ellipse cx="502" cy="822" rx="154" ry="27" fill="#0B1720" opacity="0.16" filter="url(#floorShadow)"/>
+
+  <g filter="url(#shadow)">
+    <path d="M108 760 316 428c14-23 38-36 65-36h65L260 760H108Z" fill="url(#front)"/>
+    <path d="M381 392h65l137 230-96 171-181-301 75-100Z" fill="url(#fold)"/>
+    <path d="M460 795 786 190c13-24 38-39 65-39h100L578 808c-11 20-32 32-55 32h-89l26-45Z" fill="url(#front)"/>
+  </g>
+
+</svg>

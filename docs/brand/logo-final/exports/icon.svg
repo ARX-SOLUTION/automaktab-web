@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">automaktab.uz Folded Ascent icon</title>
+  <desc id="desc">A folded blue control flow rises toward a decisive result, marked by a lime signal point.</desc>
+  <g id="icon">
+    <path d="M88 336 207 150 289 278 425 64" fill="none" stroke="#2F6BFF" stroke-width="68" stroke-linecap="butt" stroke-linejoin="round"/>
+    <circle cx="88" cy="336" r="34" fill="#2F6BFF"/>
+    <path d="M207 150 289 278" fill="none" stroke="#174BC5" stroke-width="68" stroke-linecap="butt"/>
+    <path d="M289 278 425 64" fill="none" stroke="#2F6BFF" stroke-width="68" stroke-linecap="butt"/>
+    <circle cx="289" cy="278" r="16" fill="#C6FF3D"/>
+  </g>
+</svg>

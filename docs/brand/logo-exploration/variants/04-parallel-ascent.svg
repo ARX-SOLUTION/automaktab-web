@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">Parallel Ascent</title>
+  <desc id="desc">Six synchronized lines express operational flow moving upward together.</desc>
+  <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 72 34 39 47 60 76 25"/>
+    <path d="M17 75 37 44 49 64 79 28" opacity="0.86"/>
+    <path d="M21 78 40 49 51 68 82 31" opacity="0.72"/>
+    <path d="M29 78 43 56 53 73 85 35" opacity="0.58"/>
+    <path d="M37 78 46 64 55 78 87 40" opacity="0.44"/>
+    <path d="M45 78 48 72 57 84 89 46" opacity="0.3"/>
+  </g>
+</svg>

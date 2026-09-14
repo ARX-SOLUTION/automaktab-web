@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Demo so'rov — prototip (automaktab-web)</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0a0a0a;
+    --muted: #64748b;
+    --line: #cbd5e1;
+    --line-strong: #0a0a0a;
+    --accent: #22d3ee;
+    --accent-fg: #0a0a0a;
+    --danger: #e11d48;
+    --danger-bg: #ffe4e6;
+    --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0a; --fg: #f8fafc; --muted: #94a3b8; --line: #334155;
+      --line-strong: #e2e8f0; --accent: #22d3ee; --accent-fg: #0a0a0a;
+      --danger: #fb7185; --danger-bg: #4c0519; --card: #0a0a0a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 3rem 1rem; }
+  .badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    border: 1px solid var(--line); background: color-mix(in srgb, var(--fg) 5%, transparent);
+    padding: .375rem 1rem; font: 600 .75rem/1 ui-monospace, monospace;
+    text-transform: uppercase; letter-spacing: .08em;
+  }
+  .badge .dot { width: .375rem; height: .375rem; border-radius: 9999px; background: var(--muted); }
+  h1 { font-size: clamp(2rem, 6vw, 3.5rem); text-transform: uppercase; letter-spacing: -.03em; line-height: .95; margin: 1.25rem 0 .75rem; }
+  .accent { color: var(--accent); }
+  .sub { color: var(--muted); max-width: 36rem; font-size: 1.05rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 2rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem; height: 3rem; padding: 0 2rem;
+    border-radius: 0; font-weight: 600; cursor: pointer; border: 1px solid transparent;
+    transition: background .15s, transform .05s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--accent); color: var(--accent-fg); }
+  .btn-primary:hover { background: color-mix(in srgb, var(--accent) 85%, #fff); }
+  .btn-ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+  .btn-ghost:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+
+  .overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 50; }
+  .overlay.open { display: flex; }
+  .scrim { position: absolute; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(2px); }
+  .modal {
+    position: relative; z-index: 1; width: 100%; max-width: 32rem; max-height: 90vh; overflow-y: auto;
+    background: var(--card); border: 2px solid var(--line-strong); padding: 1.5rem;
+  }
+  .modal h2 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: -.02em; margin: 0 2rem .25rem 0; }
+  .modal .msub { color: var(--muted); font-size: .9rem; margin: 0 0 1.25rem; }
+  .close {
+    position: absolute; top: .75rem; right: .75rem; width: 2rem; height: 2rem;
+    display: flex; align-items: center; justify-content: center; border: 1px solid var(--line);
+    background: transparent; color: var(--fg); cursor: pointer; border-radius: 0;
+  }
+  .close:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+  .close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  form { display: grid; gap: 1rem; }
+  .field label { display: block; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .25rem; }
+  .field input, .field select, .field textarea {
+    width: 100%; border: 1px solid var(--line); background: var(--bg); color: var(--fg);
+    padding: .5rem .75rem; font-size: .9rem; border-radius: 0; outline: none;
+  }
+  .field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent);
+  }
+  .field [aria-invalid="true"] { border-color: var(--danger); }
+  .err { color: var(--danger); font-size: .75rem; margin-top: .25rem; }
+  .counter { text-align: right; font-size: .7rem; color: var(--muted); margin-top: .25rem; }
+  .alert { border: 1px solid var(--danger); background: var(--danger-bg); color: var(--fg); padding: .75rem; font-size: .85rem; }
+  .alert b { display: block; margin-bottom: .15rem; }
+  .success { text-align: center; padding: 2rem 0; }
+  .success h3 { text-transform: uppercase; margin: 0 0 .5rem; }
+  .success p { color: var(--muted); }
+  .langs { display: flex; gap: .25rem; justify-content: center; margin-top: 1rem; }
+  .langs button { border: 1px solid var(--line); background: transparent; color: var(--muted); padding: .25rem .5rem; font: 600 .7rem/1 ui-monospace, monospace; cursor: pointer; text-transform: uppercase; }
+  .langs button[aria-pressed="true"] { background: color-mix(in srgb, var(--fg) 10%, transparent); color: var(--fg); }
+  .note { text-align: center; color: var(--muted); font-size: .75rem; margin-top: 2rem; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="badge"><span class="dot"></span><span id="t-heroBadge">Avtomaktablar uchun CRM</span></span>
+    <h1><span id="t-heroTitle">Har bir so'mingiz</span> <span class="accent" id="t-heroAccent">nazoratda</span></h1>
+    <p class="sub" id="t-heroSub">Qarzdorlar ro'yxati, kunlik tushum, filial hisoboti — telefoningizda.</p>
+
+    <div class="cta-row">
+      <button class="btn btn-primary" id="openBtn" aria-haspopup="dialog">
+        <span id="t-ctaDemo">Demo so'rov qoldiring</span>
+      </button>
+      <a class="btn btn-ghost" href="https://t.me/Xamidullo_xudoyberdiyev" target="_blank" rel="noopener">
+        <span id="t-ctaFree">Telegram orqali yozish</span>
+      </a>
+    </div>
+
+    <nav class="langs" aria-label="Til">
+      <button data-lang="uz" aria-pressed="true">UZ</button>
+      <button data-lang="ru" aria-pressed="false">RU</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </nav>
+
+    <p class="note">Prototip — ishlab chiqarish kodi emas. Backend o'rniga so'rov simulyatsiya qilinadi.</p>
+  </main>
+
+  <div class="overlay" id="overlay">
+    <div class="scrim" id="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="d-title" id="modal">
+      <button class="close" id="closeBtn" aria-label="Yopish" type="button">✕</button>
+      <h2 id="d-title">Demo so'rov</h2>
+      <p class="msub" id="d-sub">Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="f-name" id="l-name">Ism familiya</label>
+          <input id="f-name" name="fullName" type="text" autocomplete="name" placeholder="Alisher Karimov" />
+          <p class="err" id="e-name" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="f-phone" id="l-phone">Telefon</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67" />
+          <p class="err" id="e-phone" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="f-region" id="l-region">Viloyat / shahar</label>
+          <input id="f-region" name="region" type="text" placeholder="Toshkent" />
+          <p class="err" id="e-region" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="f-center" id="l-center">Markaz nomi (ixtiyoriy)</label>
+          <input id="f-center" name="centerName" type="text" placeholder="AutoSchool Pro" />
+        </div>
+
+        <div class="field">
+          <label for="f-count" id="l-count">O'quvchilar soni</label>
+          <select id="f-count" name="studentCount">
+            <option value="">—</option>
+            <option value="<50">50 dan kam</option>
+            <option value="50-150">50–150</option>
+            <option value="150-300">150–300</option>
+            <option value="300+">300+</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="f-note" id="l-note">Qo'shimcha izoh (ixtiyoriy)</label>
+          <textarea id="f-note" name="note" rows="3" maxlength="500" placeholder="Qisqacha yozing..."></textarea>
+          <p class="counter"><span id="noteCount">0</span>/500</p>
+        </div>
+
+        <p class="alert" id="formError" role="alert" hidden><b id="e-title">Xatolik</b> <span id="e-body">So'rovni yuborib bo'lmadi.</span></p>
+
+        <button class="btn btn-primary" type="submit" id="submitBtn">
+          <span id="t-submit">So'rov yuborish</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+<script>
+const COPY = {
+  uz: {
+    heroBadge: "Avtomaktablar uchun CRM", heroTitle: "Har bir so'mingiz", heroAccent: "nazoratda",
+    heroSub: "Qarzdorlar ro'yxati, kunlik tushum, filial hisoboti — telefoningizda.",
+    ctaDemo: "Demo so'rov qoldiring", ctaFree: "Telegram orqali yozish",
+    dTitle: "Demo so'rov", dSub: "Ma'lumotlaringizni qoldiring — biz siz bilan bog'lanamiz.",
+    lName: "Ism familiya", lPhone: "Telefon", lRegion: "Viloyat / shahar", lCenter: "Markaz nomi (ixtiyoriy)",
+    lCount: "O'quvchilar soni", lNote: "Qo'shimcha izoh (ixtiyoriy)",
+    submit: "So'rov yuborish", submitting: "Yuborilmoqda...",
+    successTitle: "So'rov qabul qilindi", successBody: "Bir ish kuni ichida siz bilan telefon orqali bog'lanamiz.",
+    eTitle: "Xatolik", eBody: "So'rovni yuborib bo'lmadi. Keyinroq qayta urinib ko'ring.",
+    req: "To'ldirish shart", phoneErr: "O'zbek raqamini kiriting (+998 90 123 45 67)",
+    retry: "Qayta urinib ko'ring"
+  },
+  ru: {
+    heroBadge: "CRM для автошкол", heroTitle: "Каждый рубль", heroAccent: "под контролем",
+    heroSub: "Список должников, дневная выручка, отчёт по филиалам — в телефоне.",
+    ctaDemo: "Оставить заявку", ctaFree: "Написать в Telegram",
+    dTitle: "Заявка на демо", dSub: "Оставьте данные — мы свяжемся с вами.",
+    lName: "Имя и фамилия", lPhone: "Телефон", lRegion: "Область / город", lCenter: "Название центра (необязательно)",
+    lCount: "Количество учеников", lNote: "Комментарий (необязательно)",
+    submit: "Отправить заявку", submitting: "Отправка...",
+    successTitle: "Заявка принята", successBody: "Мы свяжемся с вами в течение рабочего дня.",
+    eTitle: "Ошибка", eBody: "Не удалось отправить заявку. Попробуйте позже.",
+    req: "Обязательно для заполнения", phoneErr: "Введите узбекский номер (+998 90 123 45 67)",
+    retry: "Попробуйте снова"
+  },
+  en: {
+    heroBadge: "CRM for driving schools", heroTitle: "Every sum", heroAccent: "under control",
+    heroSub: "Debtor list, daily revenue, branch report — right in your phone.",
+    ctaDemo: "Request a demo", ctaFree: "Write on Telegram",
+    dTitle: "Demo request", dSub: "Leave your details — we'll contact you.",
+    lName: "Full name", lPhone: "Phone", lRegion: "Region / city", lCenter: "Center name (optional)",
+    lCount: "Number of students", lNote: "Additional note (optional)",
+    submit: "Submit request", submitting: "Submitting...",
+    successTitle: "Request received", successBody: "We'll get in touch within one business day.",
+    eTitle: "Error", eBody: "Couldn't submit the request. Please try again.",
+    req: "Required", phoneErr: "Enter an Uzbek number (+998 90 123 45 67)",
+    retry: "Please try again"
+  }
+};
+
+let lang = "uz";
+function applyLang(l) {
+  lang = l;
+  const c = COPY[l];
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set("t-heroBadge", c.heroBadge); set("t-heroTitle", c.heroTitle); set("t-heroAccent", c.heroAccent);
+  set("t-heroSub", c.heroSub); set("t-ctaDemo", c.ctaDemo); set("t-ctaFree", c.ctaFree);
+  set("d-title", c.dTitle); set("d-sub", c.dSub);
+  set("l-name", c.lName); set("l-phone", c.lPhone); set("l-region", c.lRegion);
+  set("l-center", c.lCenter); set("l-count", c.lCount); set("l-note", c.lNote);
+  set("t-submit", c.submit); set("e-title", c.eTitle); set("e-body", c.eBody);
+  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
+}
+document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+const overlay = document.getElementById("overlay");
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+const scrim = document.getElementById("scrim");
+const form = document.getElementById("form");
+const submitBtn = document.getElementById("submitBtn");
+const formError = document.getElementById("formError");
+const phoneInput = document.getElementById("f-phone");
+const noteInput = document.getElementById("f-note");
+const noteCount = document.getElementById("noteCount");
+let lastFocused = null;
+
+const PHONE_RE = /^\+?998\d{9}$/;
+function formatPhone(raw) {
+  let d = raw.replace(/\D/g, "");
+  if (d.startsWith("998")) d = d.slice(3);
+  d = d.slice(0, 9);
+  if (!d) return "+998 ";
+  const p1 = d.slice(0,2), p2 = d.slice(2,5), p3 = d.slice(5,7), p4 = d.slice(7,9);
+  let s = "+998";
+  if (p1) s += " " + p1;
+  if (p2) s += " " + p2;
+  if (p3) s += " " + p3;
+  if (p4) s += " " + p4;
+  return s;
+}
+phoneInput.addEventListener("input", () => {
+  const pos = phoneInput.selectionStart;
+  phoneInput.value = formatPhone(phoneInput.value);
+  phoneInput.setSelectionRange(pos, pos);
+});
+
+noteInput.addEventListener("input", () => { noteCount.textContent = String(noteInput.value.length); });
+
+function openDialog() {
+  lastFocused = document.activeElement;
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  requestAnimationFrame(() => modal.querySelector("input,textarea,select")?.focus());
+}
+function closeDialog() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+  formError.hidden = true;
+  lastFocused?.focus();
+}
+openBtn.addEventListener("click", openDialog);
+closeBtn.addEventListener("click", closeDialog);
+scrim.addEventListener("click", closeDialog);
+document.addEventListener("keydown", (e) => {
+  if (!overlay.classList.contains("open")) return;
+  if (e.key === "Escape") closeDialog();
+  if (e.key === "Tab") {
+    const f = Array.from(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1], active = document.activeElement;
+    if (e.shiftKey && (active === first || !modal.contains(active))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (active === last || !modal.contains(active))) { e.preventDefault(); first.focus(); }
+  }
+});
+
+function setErr(name, msg) {
+  const el = document.getElementById("e-" + name);
+  if (!el) return;
+  if (msg) { el.textContent = msg; el.hidden = false; document.getElementById("f-" + name)?.setAttribute("aria-invalid", "true"); }
+  else { el.hidden = true; document.getElementById("f-" + name)?.removeAttribute("aria-invalid"); }
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const c = COPY[lang];
+  const data = {
+    full_name: document.getElementById("f-name").value.trim(),
+    phone: phoneInput.value.replace(/[\s-]/g, ""),
+    region: document.getElementById("f-region").value.trim(),
+    center_name: document.getElementById("f-center").value.trim() || undefined,
+    student_count: document.getElementById("f-count").value || undefined,
+    note: noteInput.value.trim() || undefined,
+  };
+  const errs = {};
+  if (!data.full_name) errs.name = c.req;
+  if (!data.phone) errs.phone = c.req;
+  else if (!PHONE_RE.test(data.phone)) errs.phone = c.phoneErr;
+  if (!data.region) errs.region = c.req;
+
+  ["name","phone","region"].forEach(n => setErr(n, errs[n]));
+  if (Object.keys(errs).length) {
+    document.getElementById("f-" + Object.keys(errs)[0])?.focus();
+    return;
+  }
+
+  submitBtn.disabled = true;
+  document.getElementById("t-submit").textContent = c.submitting;
+  formError.hidden = true;
+  try {
+    // Prototype: simulate the backend. Replace with fetch("/api/demo-request", ...)
+    await new Promise(r => setTimeout(r, 900));
+    const ok = Math.random() > 0.15; // mostly succeeds
+    if (!ok) throw new Error("simulated");
+    form.innerHTML = `<div class="success" role="status"><h3>${c.successTitle}</h3><p>${c.successBody}</p></div>`;
+  } catch {
+    submitBtn.disabled = false;
+    document.getElementById("t-submit").textContent = c.submit;
+    formError.hidden = false;
+  }
+});
+
+applyLang("uz");
+</script>
+</body>
+</html>
