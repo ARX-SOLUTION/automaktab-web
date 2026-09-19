@@ -48,7 +48,7 @@ export default function NotFound() {
       </p>
       <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row">
         <Link
-          href={`/${locale}`}
+          href="/"
           className="button button-primary"
           aria-label={copy.home}
         >

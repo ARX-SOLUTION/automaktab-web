@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { buildLocaleAlternates } from "./locale-metadata";
+import {
+  buildLocalizedAlternates,
+  buildLocaleAlternates,
+} from "./locale-metadata";
 
 describe("buildLocaleAlternates", () => {
   it("builds alternates for a uz (default, unprefixed) path", () => {
@@ -23,6 +26,27 @@ describe("buildLocaleAlternates", () => {
       ru: "https://automaktab.uz/ru/pricing",
       en: "https://automaktab.uz/en/pricing",
       "x-default": "https://automaktab.uz/pricing",
+    });
+  });
+
+  it("keeps canonical and alternate URLs correct when localized slugs differ", () => {
+    const alternates = buildLocalizedAlternates(
+      {
+        uz: "/imkoniyatlar/tolovlar-va-qarzdorlik",
+        ru: "/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+        en: "/en/features/payments-and-debt",
+      },
+      "ru",
+    );
+
+    expect(alternates?.canonical).toBe(
+      "https://automaktab.uz/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+    );
+    expect(alternates?.languages).toEqual({
+      uz: "https://automaktab.uz/imkoniyatlar/tolovlar-va-qarzdorlik",
+      ru: "https://automaktab.uz/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      en: "https://automaktab.uz/en/features/payments-and-debt",
+      "x-default": "https://automaktab.uz/imkoniyatlar/tolovlar-va-qarzdorlik",
     });
   });
 });

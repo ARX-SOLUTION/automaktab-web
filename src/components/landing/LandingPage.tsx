@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import { LANDING_COPY } from "@/config/landing";
+import { getSeoPagePath } from "@/config/seo-pages";
 import { HeroSection } from "@/components/ui/hero-section-dark";
 import DemoLink from "./DemoLink";
 import DemoRequestDialog from "./DemoRequestDialog";
@@ -100,7 +101,11 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             <article className="feature-card feature-finance group">
               <div className="feature-copy">
                 <Wallet className="feature-icon" aria-hidden="true" />
-                <h3>{payments.title}</h3>
+                <h3>
+                  <Link href={getSeoPagePath("payments", locale)}>
+                    {payments.title}
+                  </Link>
+                </h3>
                 <p>{payments.body}</p>
               </div>
               <div className="feature-image overflow-hidden">
@@ -121,7 +126,11 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             <article className="feature-card feature-schedule group">
               <div className="feature-copy">
                 <CalendarDays className="feature-icon" aria-hidden="true" />
-                <h3>{schedule.title}</h3>
+                <h3>
+                  <Link href={getSeoPagePath("schedule", locale)}>
+                    {schedule.title}
+                  </Link>
+                </h3>
                 <p>{schedule.body}</p>
               </div>
               <div className="schedule-crop overflow-hidden">
@@ -137,7 +146,11 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             </article>
             <article className="feature-card feature-attendance">
               <CheckCheck className="feature-icon" aria-hidden="true" />
-              <h3>{attendance.title}</h3>
+              <h3>
+                <Link href={getSeoPagePath("attendance", locale)}>
+                  {attendance.title}
+                </Link>
+              </h3>
               <p>{attendance.body}</p>
               <div className="attendance-marks" aria-hidden="true">
                 <Check />
@@ -156,7 +169,11 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             </article>
             <article className="feature-card feature-access">
               <Layers3 className="feature-icon" aria-hidden="true" />
-              <h3>{branches.title}</h3>
+              <h3>
+                <Link href={getSeoPagePath("branches", locale)}>
+                  {branches.title}
+                </Link>
+              </h3>
               <p>{branches.body}</p>
               <div className="branch-orbit" aria-hidden="true">
                 <span />
@@ -330,6 +347,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       <a href={`${HOME_PATH[locale]}#product`}>{copy.nav.proof}</a>
       <a href={`${HOME_PATH[locale]}#capabilities`}>{copy.nav.capabilities}</a>
       <a href={`${HOME_PATH[locale]}#faq`}>{copy.nav.faq}</a>
+      <Link href={getSeoPagePath("pricing", locale)}>{copy.nav.pricing}</Link>
       <Link href={BLOG_PATH[locale]}>{copy.nav.blog}</Link>
     </>
   );
