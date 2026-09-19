@@ -36,3 +36,25 @@ export function buildLocaleAlternates(
     },
   };
 }
+
+// Some translated pages intentionally use localized slugs rather than a
+// common route suffix. Their public paths are already fully localized, so
+// applying localePath() a second time would produce duplicate prefixes.
+export function buildLocalizedAlternates(
+  paths: Record<Locale, string>,
+  locale: Locale,
+): Metadata["alternates"] {
+  const languages = Object.fromEntries(
+    SUPPORTED_LOCALES.map(
+      (loc): [Locale, string] => [loc, `${SITE_URL}${paths[loc]}`],
+    ),
+  ) as Record<Locale, string>;
+
+  return {
+    canonical: languages[locale],
+    languages: {
+      ...languages,
+      "x-default": languages[DEFAULT_LOCALE],
+    },
+  };
+}

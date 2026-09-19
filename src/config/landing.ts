@@ -23,6 +23,7 @@ export type LandingCopy = {
     proof: string;
     capabilities: string;
     faq: string;
+    pricing: string;
     blog: string;
     login: string;
     menu: string;
@@ -100,6 +101,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       proof: "Tizim ichida",
       capabilities: "Imkoniyatlar",
       faq: "Savollar",
+      pricing: "Tariflar",
       blog: "Blog",
       login: "Kirish",
       menu: "Menyuni ochish",
@@ -249,6 +251,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       proof: "Внутри системы",
       capabilities: "Возможности",
       faq: "Вопросы",
+      pricing: "Тарифы",
       blog: "Блог",
       login: "Войти",
       menu: "Открыть меню",
@@ -347,6 +350,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       proof: "Inside the product",
       capabilities: "Capabilities",
       faq: "Questions",
+      pricing: "Pricing",
       blog: "Blog",
       login: "Sign in",
       menu: "Open menu",

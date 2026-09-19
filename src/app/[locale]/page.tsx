@@ -29,16 +29,6 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         inLanguage: ["uz", "ru", "en"],
         description: copy.hero.body,
         publisher: { "@id": "https://automaktab.uz/#organization" },
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "UZS",
-          eligibleDuration: {
-            "@type": "QuantitativeValue",
-            value: 30,
-            unitText: "day",
-          },
-        },
       },
       {
         "@type": "FAQPage",

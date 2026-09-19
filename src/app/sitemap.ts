@@ -1,4 +1,10 @@
 import type { MetadataRoute } from "next";
+import {
+  getSeoPagePath,
+  getSeoPagePaths,
+  SEO_PAGE_IDS,
+  SEO_PAGES,
+} from "@/config/seo-pages";
 import { getBlogPosts } from "@/lib/blog";
 import type { Locale } from "@/i18n/config";
 
@@ -26,6 +32,18 @@ function alternates(path: string) {
   };
 }
 
+function seoAlternates(id: (typeof SEO_PAGE_IDS)[number]) {
+  const paths = getSeoPagePaths(id);
+  return {
+    languages: {
+      uz: `${BASE_URL}${paths.uz}`,
+      ru: `${BASE_URL}${paths.ru}`,
+      en: `${BASE_URL}${paths.en}`,
+      "x-default": `${BASE_URL}${paths.uz}`,
+    },
+  };
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getBlogPosts();
   const locales: Locale[] = ["uz", "ru", "en"];
@@ -33,6 +51,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/", priority: 1, changeFrequency: "weekly" as const },
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
   ];
+  const seoPages = SEO_PAGE_IDS.flatMap((id) =>
+    locales.map((locale) => ({
+      url: `${BASE_URL}${getSeoPagePath(id, locale)}`,
+      lastModified: new Date(SEO_PAGES[id][locale].updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: locale === "uz" ? 0.85 : 0.75,
+      alternates: seoAlternates(id),
+    })),
+  );
 
   return [
     ...staticPages.flatMap((page) =>
@@ -43,6 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: alternates(page.path),
       })),
     ),
+    ...seoPages,
     ...posts.flatMap((post) => {
       const path = `/blog/${encodeURIComponent(post.slug)}`;
       return locales.map((locale) => ({

@@ -119,6 +119,96 @@ const LOCALE_ROUTES: Array<{ route: string; locale: Locale }> = [
   { route: "/en", locale: "en" },
 ];
 
+type SeoRouteGroup = {
+  id: string;
+  paths: Record<Locale, string>;
+  headings: Record<Locale, string>;
+  titleSignals: Record<Locale, string>;
+};
+
+const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
+  {
+    id: "payments",
+    paths: {
+      uz: "/imkoniyatlar/tolovlar-va-qarzdorlik",
+      ru: "/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      en: "/en/features/payments-and-debt",
+    },
+    headings: {
+      uz: "Avtomaktab to‘lovlari va qarzdorligini boshqaring.",
+      ru: "Управляйте оплатами и задолженностью автошколы.",
+      en: "Manage driving-school payments and debt.",
+    },
+    titleSignals: { uz: "To‘lovlar", ru: "Оплаты", en: "payments" },
+  },
+  {
+    id: "schedule",
+    paths: {
+      uz: "/imkoniyatlar/dars-jadvali-va-guruhlar",
+      ru: "/ru/vozmozhnosti/raspisanie-i-gruppy",
+      en: "/en/features/schedules-and-groups",
+    },
+    headings: {
+      uz: "Dars jadvali va guruhlar bir tizimda.",
+      ru: "Расписание занятий и группы — в одной системе.",
+      en: "Schedule groups and lessons in one place.",
+    },
+    titleSignals: { uz: "jadvali", ru: "Расписание", en: "schedules" },
+  },
+  {
+    id: "attendance",
+    paths: {
+      uz: "/imkoniyatlar/raqamli-davomat",
+      ru: "/ru/vozmozhnosti/tsifrovaya-poseshchaemost",
+      en: "/en/features/digital-attendance",
+    },
+    headings: {
+      uz: "Raqamli davomat bilan dars holatini ko‘ring.",
+      ru: "Ведите цифровую посещаемость по каждому уроку.",
+      en: "Track attendance for every lesson digitally.",
+    },
+    titleSignals: { uz: "davomat", ru: "посещаемость", en: "attendance" },
+  },
+  {
+    id: "branches",
+    paths: {
+      uz: "/imkoniyatlar/filiallar-boshqaruvi",
+      ru: "/ru/vozmozhnosti/upravlenie-filialami",
+      en: "/en/features/branch-management",
+    },
+    headings: {
+      uz: "Avtomaktab filiallarini bir ko‘rinishda boshqaring.",
+      ru: "Управляйте филиалами автошколы из одного места.",
+      en: "Manage driving-school branches from one view.",
+    },
+    titleSignals: { uz: "Filiallar", ru: "филиалами", en: "branch" },
+  },
+  {
+    id: "pricing",
+    paths: {
+      uz: "/tariflar",
+      ru: "/ru/tarify",
+      en: "/en/pricing",
+    },
+    headings: {
+      uz: "Tariflar: 30 kun bepul sinov bilan boshlang.",
+      ru: "Тарифы: начните с 30-дневного бесплатного периода.",
+      en: "Pricing: start with a 30-day free trial.",
+    },
+    titleSignals: { uz: "Tariflar", ru: "Тарифы", en: "Pricing" },
+  },
+];
+
+const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
+  (Object.entries(group.paths) as Array<[Locale, string]>).map(
+    ([locale, route]) => ({
+      ...group,
+      locale,
+      route,
+    }),
+  ),
+);
+
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
   uz: { prefix: "Avtomaktabingiz.", accent: "Doim nazoratda." },
   ru: { prefix: "Ваша автошкола.", accent: "Под контролем." },
@@ -197,6 +287,8 @@ describe.each(LOCALE_ROUTES)(
       expect(html).toContain(
         `name="twitter:description" content="${description}"`,
       );
+      expect(html).toContain('property="og:image"');
+      expect(html).toContain('name="twitter:image"');
       expect(html).toContain('rel="icon" href="/icon.svg?');
       const heading = HERO_HEADING[locale];
       expect(html).toContain(heading.prefix);
@@ -255,6 +347,7 @@ describe.each(LOCALE_ROUTES)(
         );
       expect(softwareApp).toBeTruthy();
       expect(softwareApp.name).toBe("automaktab.uz");
+      expect(softwareApp.offers).toBeUndefined();
 
       const faqPage = organizationGraph["@graph"].find(
         (entry: { "@type"?: string }) => entry["@type"] === "FAQPage",
@@ -279,6 +372,76 @@ describe("GET /fr (unsupported locale)", () => {
   });
 });
 
+describe.each([
+  "/__route_probe__",
+  "/ru/__route_probe__",
+  "/en/__route_probe__",
+  "/imkoniyatlar/mavjud-emas",
+])("GET %s (unmatched route)", (route) => {
+  it("keeps the 404 status and renders the branded noindex recovery page", async () => {
+    const res = await fetch(`${BASE_URL}${route}`);
+    const html = await res.text();
+
+    expect(res.status).toBe(404);
+    expect(html).toContain("Sahifa topilmadi");
+    expect(html).toContain('name="robots" content="noindex');
+    expect(html).toContain('href="/"');
+    expect(html).not.toContain("404: This page could not be found.");
+  });
+});
+
+describe("localized not-found recovery", () => {
+  it("does not send a visitor from a missing blog URL to the invalid /uz duplicate", async () => {
+    const res = await fetch(`${BASE_URL}/blog/__route_probe__`);
+    const html = await res.text();
+
+    expect(res.status).toBe(404);
+    expect(html).toContain("Sahifa topilmadi");
+    // A nested notFound() response is streamed as an RSC payload before
+    // hydration, while the global 404 is emitted as plain HTML. Accept both
+    // serializations but keep the recovery target an actual canonical root.
+    const hasCanonicalHomeHref =
+      html.includes('href="/"') || html.includes('href\\":\\"/\\"');
+    const hasInvalidUzHref =
+      html.includes('href="/uz"') || html.includes('href\\":\\"/uz\\"');
+    expect(hasCanonicalHomeHref).toBe(true);
+    expect(hasInvalidUzHref).toBe(false);
+  });
+});
+
+describe.each(SEO_ROUTES)(
+  "GET $route ($id SEO entry page)",
+  ({ locale, route, paths, headings, titleSignals, id }) => {
+    it("serves static localized content with canonical, hreflang, and a demo CTA", async () => {
+      const res = await fetch(`${BASE_URL}${route}`);
+      const html = await res.text();
+
+      expect(res.status).toBe(200);
+      expect(html).toContain(`<html lang="${locale}"`);
+      expect(html).toContain(headings[locale]);
+      expect(html.match(/<title>(.*?)<\/title>/)?.[1]).toContain(
+        titleSignals[locale],
+      );
+      expect(html).toMatch(/<meta name="description" content="[^\"]{1,155}"\/?/);
+      expect(html).toContain(
+        `rel="canonical" href="https://automaktab.uz${paths[locale]}"`,
+      );
+      for (const [alternateLocale, alternatePath] of Object.entries(paths)) {
+        expect(html).toContain(
+          `rel="alternate" hrefLang="${alternateLocale}" href="https://automaktab.uz${alternatePath}"`,
+        );
+      }
+      expect(html).toContain(
+        `rel="alternate" hrefLang="x-default" href="https://automaktab.uz${paths.uz}"`,
+      );
+      expect(html).toContain("https://app.automaktab.uz/login?demo=1");
+      if (id === "pricing") {
+        expect(html).not.toContain("priceCurrency");
+      }
+    });
+  },
+);
+
 describe("blog and sitemap surfaces", () => {
   it("serves the localized blog index without requiring article data", async () => {
     const res = await fetch(`${BASE_URL}/blog`);
@@ -297,5 +460,19 @@ describe("blog and sitemap surfaces", () => {
     expect(xml).toContain("https://automaktab.uz/blog");
     expect(xml).toContain("https://automaktab.uz/ru/blog");
     expect(xml).toContain("https://automaktab.uz/en/blog");
+    for (const group of SEO_ROUTE_GROUPS) {
+      for (const path of Object.values(group.paths)) {
+        expect(xml).toContain(`https://automaktab.uz${path}`);
+      }
+    }
+  });
+
+  it("publishes a valid Uzbek RSS feed even when no articles are available", async () => {
+    const res = await fetch(`${BASE_URL}/feed.xml`);
+    const xml = await res.text();
+
+    expect(res.status).toBe(200);
+    expect(xml).toContain('<rss version="2.0"');
+    expect(xml).toContain("<title>automaktab.uz blog</title>");
   });
 });
