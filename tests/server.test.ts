@@ -98,6 +98,24 @@ afterAll(async () => {
   });
 });
 
+describe("security headers", () => {
+  it("protects public pages with baseline browser-security headers", async () => {
+    for (const route of ["/", "/ru"]) {
+      const res = await fetch(`${BASE_URL}${route}`);
+
+      expect(res.status).toBe(200);
+      expect(res.headers.get("content-security-policy")).toContain(
+        "default-src 'self'",
+      );
+      expect(res.headers.get("x-frame-options")).toBe("DENY");
+      expect(res.headers.get("x-content-type-options")).toBe("nosniff");
+      expect(res.headers.get("referrer-policy")).toBe(
+        "strict-origin-when-cross-origin",
+      );
+    }
+  });
+});
+
 // Backstop for exits that skip afterAll (uncaught exception, SIGINT,
 // SIGTERM). 'exit' handlers must be synchronous, so this can only send the
 // signal, not await it; the watchdog above covers SIGKILL, which no
