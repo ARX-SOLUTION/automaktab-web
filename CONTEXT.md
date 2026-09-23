@@ -25,7 +25,7 @@ Token colors are HSL components and must be wrapped with `hsl(var(--token))` in 
 ## Localization
 
 - Locales are `uz`, `ru`, and `en`; Uzbek is unprefixed, while Russian and English use URL prefixes.
-- The URL determines the locale. Unprefixed paths are always Uzbek; the locale cookie records that result but is not read to redirect a locale-less request.
+- The URL determines the locale. Unprefixed non-root paths are always Uzbek; at `/` only, a valid `NEXT_LOCALE=ru|en` cookie redirects to that locale's prefixed root.
 - Every page emits all locale alternates, `x-default`, and a self-referencing canonical.
 - `src/i18n/config.ts` is the locale source of truth. Keep derived locale lists in metadata, sitemap, and navigation aligned with it.
 - Next.js 16 locale routing lives in `proxy.ts`, not `middleware.ts`.
