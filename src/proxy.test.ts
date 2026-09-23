@@ -66,3 +66,47 @@ describe("proxy", () => {
     expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz/opengraph-image`);
   });
 });
+
+describe("proxy legacy SEO path redirects", () => {
+  it.each([
+    ["/maxfiylik", "/privacy"],
+    ["/oferta", "/terms"],
+    ["/tariflar", "/pricing"],
+    [
+      "/imkoniyatlar/tolovlar-va-qarzdorlik",
+      "/features/payments-and-debt",
+    ],
+    [
+      "/imkoniyatlar/dars-jadvali-va-guruhlar",
+      "/features/schedules-and-groups",
+    ],
+    ["/imkoniyatlar/raqamli-davomat", "/features/digital-attendance"],
+    ["/imkoniyatlar/filiallar-boshqaruvi", "/features/branch-management"],
+    ["/uz/maxfiylik", "/privacy"],
+    ["/uz/tariflar", "/pricing"],
+    ["/ru/konfidencialnost", "/ru/privacy"],
+    ["/ru/oferta", "/ru/terms"],
+    ["/ru/tarify", "/ru/pricing"],
+    [
+      "/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      "/ru/features/payments-and-debt",
+    ],
+    [
+      "/ru/vozmozhnosti/raspisanie-i-gruppy",
+      "/ru/features/schedules-and-groups",
+    ],
+    [
+      "/ru/vozmozhnosti/tsifrovaya-poseshchaemost",
+      "/ru/features/digital-attendance",
+    ],
+    [
+      "/ru/vozmozhnosti/upravlenie-filialami",
+      "/ru/features/branch-management",
+    ],
+  ] as const)("308 redirects %s → %s", (from, to) => {
+    const response = proxy(new NextRequest(`${ORIGIN}${from}`));
+
+    expect(response.status).toBe(308);
+    expect(getRedirectUrl(response)).toBe(`${ORIGIN}${to}`);
+  });
+});
