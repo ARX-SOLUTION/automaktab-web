@@ -30,24 +30,24 @@ describe("buildLocaleAlternates", () => {
     });
   });
 
-  it("keeps canonical and alternate URLs correct when localized slugs differ", () => {
+  it("builds hreflang for English-segment SEO paths across locales", () => {
     const alternates = buildLocalizedAlternates(
       {
-        uz: "/imkoniyatlar/tolovlar-va-qarzdorlik",
-        ru: "/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+        uz: "/features/payments-and-debt",
+        ru: "/ru/features/payments-and-debt",
         en: "/en/features/payments-and-debt",
       },
       "ru",
     );
 
     expect(alternates?.canonical).toBe(
-      "https://automaktab.uz/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      "https://automaktab.uz/ru/features/payments-and-debt",
     );
     expect(alternates?.languages).toEqual({
-      uz: "https://automaktab.uz/imkoniyatlar/tolovlar-va-qarzdorlik",
-      ru: "https://automaktab.uz/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      uz: "https://automaktab.uz/features/payments-and-debt",
+      ru: "https://automaktab.uz/ru/features/payments-and-debt",
       en: "https://automaktab.uz/en/features/payments-and-debt",
-      "x-default": "https://automaktab.uz/imkoniyatlar/tolovlar-va-qarzdorlik",
+      "x-default": "https://automaktab.uz/features/payments-and-debt",
     });
   });
 });

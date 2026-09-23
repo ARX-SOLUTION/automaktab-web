@@ -55,7 +55,7 @@ export const SEO_PAGES: Record<
 > = {
   payments: {
     uz: {
-      segments: ["imkoniyatlar", "tolovlar-va-qarzdorlik"],
+      segments: ["features", "payments-and-debt"],
       title: "Avtomaktab: To‘lovlar va qarzdorlik | automaktab.uz",
       description:
         "Avtomaktab to‘lovlari talaba kartasiga bog‘lanadi, qarzdorlar esa alohida ko‘rinishda nazorat qilinadi.",
@@ -94,7 +94,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-19",
     },
     ru: {
-      segments: ["vozmozhnosti", "platezhi-i-zadolzhennost"],
+      segments: ["features", "payments-and-debt"],
       title: "Оплаты и задолженность автошколы | automaktab.uz",
       description:
         "Оплаты автошколы привязаны к карточке ученика, а задолженность контролируется в отдельном представлении.",
@@ -166,7 +166,7 @@ export const SEO_PAGES: Record<
   },
   schedule: {
     uz: {
-      segments: ["imkoniyatlar", "dars-jadvali-va-guruhlar"],
+      segments: ["features", "schedules-and-groups"],
       title: "Avtomaktab: Dars jadvali va guruhlar | automaktab.uz",
       description:
         "Nazariya va amaliy darslarni guruh hamda o‘qituvchi bilan haftalik jadvalda rejalashtiring.",
@@ -201,7 +201,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-19",
     },
     ru: {
-      segments: ["vozmozhnosti", "raspisanie-i-gruppy"],
+      segments: ["features", "schedules-and-groups"],
       title: "Расписание и группы автошколы | automaktab.uz",
       description:
         "Планируйте теорию и практику в недельном расписании с группой и преподавателем.",
@@ -273,7 +273,7 @@ export const SEO_PAGES: Record<
   },
   attendance: {
     uz: {
-      segments: ["imkoniyatlar", "raqamli-davomat"],
+      segments: ["features", "digital-attendance"],
       title: "Avtomaktab: Raqamli davomat | automaktab.uz",
       description:
         "Har bir avtomaktab darsi uchun kelgan, kechikkan, kelmagan va uzrli davomat statuslarini belgilang.",
@@ -308,7 +308,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-19",
     },
     ru: {
-      segments: ["vozmozhnosti", "tsifrovaya-poseshchaemost"],
+      segments: ["features", "digital-attendance"],
       title: "Цифровая посещаемость автошколы | automaktab.uz",
       description:
         "Отмечайте для каждого урока автошколы понятные статусы: был, опоздал, отсутствовал или отсутствовал по уважительной причине.",
@@ -380,7 +380,7 @@ export const SEO_PAGES: Record<
   },
   branches: {
     uz: {
-      segments: ["imkoniyatlar", "filiallar-boshqaruvi"],
+      segments: ["features", "branch-management"],
       title: "Avtomaktab: Filiallar boshqaruvi | automaktab.uz",
       description:
         "Avtomaktab filiallari natijalarini owner dashboardda bir ko‘rinishda taqqoslang va nazorat qiling.",
@@ -415,7 +415,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-19",
     },
     ru: {
-      segments: ["vozmozhnosti", "upravlenie-filialami"],
+      segments: ["features", "branch-management"],
       title: "Управление филиалами автошколы | automaktab.uz",
       description:
         "Сравнивайте результаты филиалов автошколы в единой панели владельца и контролируйте общую картину.",
@@ -487,7 +487,7 @@ export const SEO_PAGES: Record<
   },
   pricing: {
     uz: {
-      segments: ["tariflar"],
+      segments: ["pricing"],
       title: "Tariflar | automaktab.uz",
       description:
         "automaktab.uz bilan 30 kun bepul sinovni boshlang. Keyingi shartlar maktabingiz ehtiyojiga qarab tanishuvda kelishiladi.",
@@ -522,7 +522,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-19",
     },
     ru: {
-      segments: ["tarify"],
+      segments: ["pricing"],
       title: "Тарифы automaktab.uz | 30 дней бесплатно",
       description:
         "Начните с 30-дневного бесплатного периода automaktab.uz. Дальнейшие условия обсуждаются с учётом потребностей автошколы.",
@@ -594,7 +594,7 @@ export const SEO_PAGES: Record<
   },
   privacy: {
     uz: {
-      segments: ["maxfiylik"],
+      segments: ["privacy"],
       title: "Maxfiylik siyosati | automaktab.uz",
       description:
         "automaktab.uz maxfiylik siyosati: CRM ishlashi uchun qanday ma’lumotlar ishlatiladi va qanday bog‘lanish mumkin.",
@@ -634,7 +634,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-24",
     },
     ru: {
-      segments: ["konfidencialnost"],
+      segments: ["privacy"],
       title: "Политика конфиденциальности | automaktab.uz",
       description:
         "Краткая политика конфиденциальности automaktab.uz: какие данные нужны для работы CRM и как связаться с оператором.",
@@ -720,7 +720,7 @@ export const SEO_PAGES: Record<
   },
   terms: {
     uz: {
-      segments: ["oferta"],
+      segments: ["terms"],
       title: "Foydalanish shartlari (oferta) | automaktab.uz",
       description:
         "automaktab.uz sayti va CRM sinovi uchun qisqa foydalanish shartlari. Batafsil shartlar shartnomada kelishiladi.",
@@ -760,7 +760,7 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-24",
     },
     ru: {
-      segments: ["oferta"],
+      segments: ["terms"],
       title: "Условия использования (оферта) | automaktab.uz",
       description:
         "Краткие условия использования сайта и пробного периода CRM automaktab.uz. Коммерческие детали согласуются в договоре.",
@@ -840,6 +840,35 @@ export const SEO_PAGES: Record<
       updatedAt: "2026-09-24",
     },
   },
+};
+
+
+/** Old localized marketing paths → English-segment URLs (308 in proxy). */
+export const SEO_LEGACY_PATH_REDIRECTS: Readonly<Record<string, string>> = {
+  // uz (unprefixed)
+  "/imkoniyatlar/tolovlar-va-qarzdorlik": "/features/payments-and-debt",
+  "/imkoniyatlar/dars-jadvali-va-guruhlar": "/features/schedules-and-groups",
+  "/imkoniyatlar/raqamli-davomat": "/features/digital-attendance",
+  "/imkoniyatlar/filiallar-boshqaruvi": "/features/branch-management",
+  "/tariflar": "/pricing",
+  "/maxfiylik": "/privacy",
+  "/oferta": "/terms",
+  // /uz/* soft URLs → same English targets (avoid double hop with /uz strip)
+  "/uz/imkoniyatlar/tolovlar-va-qarzdorlik": "/features/payments-and-debt",
+  "/uz/imkoniyatlar/dars-jadvali-va-guruhlar": "/features/schedules-and-groups",
+  "/uz/imkoniyatlar/raqamli-davomat": "/features/digital-attendance",
+  "/uz/imkoniyatlar/filiallar-boshqaruvi": "/features/branch-management",
+  "/uz/tariflar": "/pricing",
+  "/uz/maxfiylik": "/privacy",
+  "/uz/oferta": "/terms",
+  // ru
+  "/ru/vozmozhnosti/platezhi-i-zadolzhennost": "/ru/features/payments-and-debt",
+  "/ru/vozmozhnosti/raspisanie-i-gruppy": "/ru/features/schedules-and-groups",
+  "/ru/vozmozhnosti/tsifrovaya-poseshchaemost": "/ru/features/digital-attendance",
+  "/ru/vozmozhnosti/upravlenie-filialami": "/ru/features/branch-management",
+  "/ru/tarify": "/ru/pricing",
+  "/ru/konfidencialnost": "/ru/privacy",
+  "/ru/oferta": "/ru/terms",
 };
 
 export function getSeoPagePath(id: SeoPageId, locale: Locale): string {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { SEO_LEGACY_PATH_REDIRECTS } from "@/config/seo-pages";
 import { DEFAULT_LOCALE, isLocale, type Locale } from "@/i18n/config";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
@@ -20,6 +21,13 @@ function resolveLocale(pathname: string): Locale {
 // internally to the /uz route tree.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  const legacyTarget = SEO_LEGACY_PATH_REDIRECTS[pathname];
+  if (legacyTarget) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = legacyTarget;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
 
   // Public Uzbek URLs are unprefixed. Send /uz and /uz/* to the canonical
   // unprefixed path so metadata/crawlers never keep a soft-404 /uz URL.
