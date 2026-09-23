@@ -58,3 +58,10 @@ export function buildLocalizedAlternates(
     },
   };
 }
+
+// OG images are served from /[locale]/opengraph-image (route handler) but
+// public Uzbek URLs stay unprefixed, so metadata must advertise
+// /opengraph-image for uz (and /ru|/en/... for the others).
+export function buildOpenGraphImageUrl(locale: Locale): string {
+  return localeUrl("/opengraph-image", locale);
+}

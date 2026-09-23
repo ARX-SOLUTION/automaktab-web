@@ -342,7 +342,7 @@ describe.each(LOCALE_ROUTES)(
       expect(html).not.toContain("AutoDrive");
     });
 
-    it(`serves ${locale} HTML with one coherent Organization, SoftwareApplication, and FAQ graph`, async () => {
+    it(`serves ${locale} HTML with one coherent Organization, WebSite, SoftwareApplication, and FAQ graph`, async () => {
       const res = await fetch(`${BASE_URL}${route}`);
       const html = await res.text();
 
@@ -356,7 +356,20 @@ describe.each(LOCALE_ROUTES)(
       );
       expect(organization).toBeTruthy();
       expect(organization.name).toBe("automaktab.uz");
-      expect(organization.logo).toBe("https://automaktab.uz/icon.svg");
+      expect(organization.logo).toEqual({
+        "@type": "ImageObject",
+        url: "https://automaktab.uz/icon.png",
+        width: 512,
+        height: 512,
+      });
+
+      const website = organizationGraph["@graph"].find(
+        (entry: { "@type"?: string }) => entry["@type"] === "WebSite",
+      );
+      expect(website).toBeTruthy();
+      expect(website.name).toBe("automaktab.uz");
+      expect(website.url).toBe("https://automaktab.uz/");
+      expect(website.potentialAction).toBeUndefined();
 
       const softwareApp = organizationGraph["@graph"]
         .find(
@@ -377,9 +390,20 @@ describe.each(LOCALE_ROUTES)(
 );
 
 describe("GET /uz (must not exist as a duplicate of the unprefixed root)", () => {
-  it("404s — uz's canonical URL is /, never /uz", async () => {
-    const res = await fetch(`${BASE_URL}/uz`);
-    expect(res.status).toBe(404);
+  it("redirects to / — uz's canonical URL is unprefixed", async () => {
+    const res = await fetch(`${BASE_URL}/uz`, { redirect: "manual" });
+    expect(res.status).toBeGreaterThanOrEqual(300);
+    expect(res.status).toBeLessThan(400);
+    expect(res.headers.get("location")).toBe("/");
+  });
+
+  it("redirects /uz/* to the unprefixed path", async () => {
+    const res = await fetch(`${BASE_URL}/uz/opengraph-image`, {
+      redirect: "manual",
+    });
+    expect(res.status).toBeGreaterThanOrEqual(300);
+    expect(res.status).toBeLessThan(400);
+    expect(res.headers.get("location")).toBe("/opengraph-image");
   });
 });
 

@@ -1,9 +1,7 @@
 import { ImageResponse } from "next/og";
 import { isLocale, type Locale } from "@/i18n/config";
 
-export const alt = "automaktab.uz — driving school management system";
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
 const COPY: Record<Locale, { label: string; title: string; footer: string }> = {
   uz: {
@@ -23,11 +21,10 @@ const COPY: Record<Locale, { label: string; title: string; footer: string }> = {
   },
 };
 
-export default async function OpengraphImage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ locale: string }> },
+) {
   const { locale: candidate } = await params;
   const locale: Locale = isLocale(candidate) ? candidate : "uz";
   const copy = COPY[locale];

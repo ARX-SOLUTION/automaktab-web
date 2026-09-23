@@ -10,10 +10,16 @@ import { proxy } from "./proxy";
 const ORIGIN = "https://automaktab.uz";
 
 describe("proxy", () => {
-  it("returns 404 for a direct /uz request", () => {
+  it("redirects a direct /uz request to the unprefixed root", () => {
     const response = proxy(new NextRequest(`${ORIGIN}/uz`));
 
-    expect(response.status).toBe(404);
+    expect(getRedirectUrl(response)).toBe(`${ORIGIN}/`);
+  });
+
+  it("redirects /uz/* paths to the unprefixed canonical URL", () => {
+    const response = proxy(new NextRequest(`${ORIGIN}/uz/opengraph-image`));
+
+    expect(getRedirectUrl(response)).toBe(`${ORIGIN}/opengraph-image`);
   });
 
   it.each(["ru", "en"])(
@@ -51,5 +57,12 @@ describe("proxy", () => {
     expect(isRewrite(response)).toBe(true);
     expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz/pricing`);
     expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
+  });
+
+  it("rewrites /opengraph-image to the internal uz route (no public /uz prefix)", () => {
+    const response = proxy(new NextRequest(`${ORIGIN}/opengraph-image`));
+
+    expect(isRewrite(response)).toBe(true);
+    expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz/opengraph-image`);
   });
 });

@@ -5,8 +5,8 @@ The public localized marketing site for Automaktab.
 ## Language
 
 **Canonical Uzbek URL**:
-Uzbek content uses an unprefixed public URL. A direct `/uz` request is invalid and returns `404`.
-_Avoid_: `/uz` URL, Uzbek prefix
+Uzbek content uses an unprefixed public URL. A direct `/uz` or `/uz/*` request redirects to the unprefixed canonical path.
+_Avoid_: advertising `/uz` URLs; keep public Uzbek paths unprefixed
 
 ## Product boundary
 
