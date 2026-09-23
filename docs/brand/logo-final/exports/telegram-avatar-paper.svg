@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">automaktab.uz Telegram avatar on Field Paper</title>
+  <desc id="desc">Folded Ascent icon inside the Telegram circular safe area.</desc>
+  <rect width="1024" height="1024" fill="#F5F7F2"/>
+  <g id="icon" transform="translate(114 190) scale(1.55)">
+    <path d="M88 336 207 150 289 278 425 64" fill="none" stroke="#2F6BFF" stroke-width="68" stroke-linecap="butt" stroke-linejoin="round"/>
+    <circle cx="88" cy="336" r="34" fill="#2F6BFF"/>
+    <path d="M207 150 289 278" fill="none" stroke="#174BC5" stroke-width="68" stroke-linecap="butt"/>
+    <path d="M289 278 425 64" fill="none" stroke="#2F6BFF" stroke-width="68" stroke-linecap="butt"/>
+    <circle cx="289" cy="278" r="16" fill="#C6FF3D"/>
+  </g>
+</svg>

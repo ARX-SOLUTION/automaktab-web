@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "pnpm run build && pnpm run test:unit && pnpm run test:browser",
+    "test:unit": "vitest run --exclude 'tests/browser/**'",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@autodrive/design-tokens": "git+https://github.com/ARX-SOLUTION/autodrive-design-tokens.git#b8210edfadb1abc720108389c793161cc8382013",
@@ -22,9 +24,11 @@
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

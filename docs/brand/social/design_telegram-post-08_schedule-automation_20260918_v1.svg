@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title desc">
+  <title id="title">Jadvalni qayta-qayta tuzmang</title>
+  <desc id="desc">Haftalik jadval shablonidan kelajak haftalari uchun darslarni avtomatik yaratish va mavjud darslarni takror qo‘shmaslik jarayoni.</desc>
+
+  <rect width="1080" height="1350" fill="#F5F7F2"/>
+
+  <g font-family="Manrope, Arial, sans-serif" fill="#0B1720">
+    <text x="80" y="92" font-size="22" font-weight="700" letter-spacing="3">AUTOMAKTAB.UZ · NAZORAT OQIMI</text>
+    <circle cx="996" cy="84" r="12" fill="#C6FF3D"/>
+
+    <text x="80" y="190" font-size="64" font-weight="800">Jadvalni qayta-qayta</text>
+    <text x="80" y="262" font-size="64" font-weight="800">tuzmang.</text>
+    <text x="80" y="316" font-size="26" font-weight="500" fill="#31404A">Bir marta shablon. Keyingi haftalar — tayyor.</text>
+  </g>
+
+  <g transform="translate(80 382)">
+    <rect width="430" height="350" rx="28" fill="#FFFFFF" stroke="#0B1720" stroke-width="3"/>
+    <rect width="430" height="72" rx="26" fill="#0B1720"/>
+    <path d="M0 47H430V72H0Z" fill="#0B1720"/>
+    <text x="28" y="46" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800" letter-spacing="1.2" fill="#F5F7F2">01 · HAFTALIK SHABLON</text>
+
+    <g transform="translate(28 106)" font-family="Manrope, Arial, sans-serif">
+      <rect width="374" height="58" rx="14" fill="#EEF2FF" stroke="#2F6BFF" stroke-width="2"/>
+      <text x="18" y="36" font-size="21" font-weight="700" fill="#0B1720">Dushanba</text>
+      <text x="285" y="36" font-size="21" font-weight="800" fill="#174BC5">14:00</text>
+
+      <rect y="72" width="374" height="58" rx="14" fill="#EEF2FF" stroke="#2F6BFF" stroke-width="2"/>
+      <text x="18" y="108" font-size="21" font-weight="700" fill="#0B1720">Chorshanba</text>
+      <text x="285" y="108" font-size="21" font-weight="800" fill="#174BC5">14:00</text>
+
+      <rect y="144" width="374" height="58" rx="14" fill="#EEF2FF" stroke="#2F6BFF" stroke-width="2"/>
+      <text x="18" y="180" font-size="21" font-weight="700" fill="#0B1720">Juma</text>
+      <text x="285" y="180" font-size="21" font-weight="800" fill="#174BC5">14:00</text>
+    </g>
+  </g>
+
+  <g transform="translate(570 382)">
+    <rect width="430" height="350" rx="28" fill="#2F6BFF"/>
+    <text x="28" y="48" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800" letter-spacing="1.2" fill="#FFFFFF">02 · BIR MARTA YARATING</text>
+
+    <g transform="translate(58 103)">
+      <path d="M45 22V0M45 0L34 12M45 0L56 12" fill="none" stroke="#C6FF3D" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="0" y="44" width="314" height="116" rx="22" fill="#174BC5" stroke="#FFFFFF" stroke-width="3"/>
+      <text x="157" y="94" text-anchor="middle" font-family="Manrope, Arial, sans-serif" font-size="20" font-weight="600" fill="#DCE6FF">Keyingi haftalar uchun</text>
+      <text x="157" y="128" text-anchor="middle" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF">DARSLARNI YARATISH</text>
+      <circle cx="278" cy="192" r="28" fill="#C6FF3D"/>
+      <path d="M265 192L274 201L292 182" fill="none" stroke="#0B1720" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <g transform="translate(80 790)">
+    <rect width="920" height="330" rx="28" fill="#0B1720"/>
+    <text x="32" y="52" font-family="Manrope, Arial, sans-serif" font-size="23" font-weight="800" letter-spacing="1.2" fill="#FFFFFF">03 · KEYINGI HAFTALAR TAYYOR</text>
+
+    <g transform="translate(32 88)" font-family="Manrope, Arial, sans-serif">
+      <g>
+        <rect width="252" height="164" rx="20" fill="#FFFFFF"/>
+        <rect width="252" height="46" rx="18" fill="#2F6BFF"/>
+        <path d="M0 30H252V46H0Z" fill="#2F6BFF"/>
+        <text x="20" y="31" font-size="19" font-weight="800" fill="#FFFFFF">1-HAFTA</text>
+        <path d="M24 82H228M24 113H228M24 144H176" stroke="#BBC6CE" stroke-width="9" stroke-linecap="round"/>
+      </g>
+
+      <g transform="translate(284)">
+        <rect width="252" height="164" rx="20" fill="#FFFFFF"/>
+        <rect width="252" height="46" rx="18" fill="#2F6BFF"/>
+        <path d="M0 30H252V46H0Z" fill="#2F6BFF"/>
+        <text x="20" y="31" font-size="19" font-weight="800" fill="#FFFFFF">2-HAFTA</text>
+        <path d="M24 82H228M24 113H228M24 144H176" stroke="#BBC6CE" stroke-width="9" stroke-linecap="round"/>
+      </g>
+
+      <g transform="translate(568)">
+        <rect width="252" height="164" rx="20" fill="#FFFFFF"/>
+        <rect width="252" height="46" rx="18" fill="#2F6BFF"/>
+        <path d="M0 30H252V46H0Z" fill="#2F6BFF"/>
+        <text x="20" y="31" font-size="19" font-weight="800" fill="#FFFFFF">3-HAFTA</text>
+        <path d="M24 82H228M24 113H228M24 144H176" stroke="#BBC6CE" stroke-width="9" stroke-linecap="round"/>
+      </g>
+
+      <circle cx="820" cy="192" r="34" fill="#C6FF3D"/>
+      <path d="M804 192L815 203L837 180" fill="none" stroke="#0B1720" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="0" y="225" font-size="25" font-weight="700" fill="#FFFFFF">Mavjud dars takror qo‘shilmaydi.</text>
+    </g>
+  </g>
+
+  <g transform="translate(80 1182)" font-family="Manrope, Arial, sans-serif">
+    <rect width="920" height="94" rx="24" fill="#C6FF3D"/>
+    <text x="34" y="59" font-size="28" font-weight="800" fill="#0B1720">Demo’ni ko‘ring</text>
+    <text x="886" y="59" text-anchor="end" font-size="27" font-weight="800" fill="#0B1720">automaktab.uz</text>
+    <path d="M320 47H650" stroke="#0B1720" stroke-width="3"/>
+    <path d="M630 34L650 47L630 60" fill="none" stroke="#0B1720" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

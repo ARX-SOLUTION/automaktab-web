@@ -5,7 +5,7 @@ const SITE_URL = "https://automaktab.uz";
 
 // uz is unprefixed ("/", "/foo"); ru/en get a "/ru" or "/en" prefix, with no
 // trailing slash on their bare homepage ("/ru", not "/ru/") -- matches
-// CLAUDE.md's i18n section exactly.
+// CONTEXT.md's localization section exactly.
 function localePath(path: string, locale: Locale): string {
   if (locale === DEFAULT_LOCALE) return path;
   return path === "/" ? `/${locale}` : `/${locale}${path}`;

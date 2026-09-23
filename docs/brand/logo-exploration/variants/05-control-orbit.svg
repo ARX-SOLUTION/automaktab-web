@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">Control Orbit</title>
+  <desc id="desc">A complete control field opens around a confident rising decision.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M73.5 27.5A31 31 0 1 0 80 65" stroke-width="9"/>
+    <path d="m29 53 14 14 31-36" stroke-width="10"/>
+  </g>
+  <circle cx="79" cy="65" r="5" fill="currentColor"/>
+</svg>

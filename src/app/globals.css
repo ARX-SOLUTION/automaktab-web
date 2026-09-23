@@ -1277,7 +1277,8 @@ svg {
 }
 
 .form-field input,
-.form-field select {
+.form-field select,
+.form-field textarea {
   width: 100%;
   min-height: 50px;
   border: 1px solid var(--line);
@@ -1289,16 +1290,19 @@ svg {
 }
 
 .form-field input:focus,
-.form-field select:focus {
+.form-field select:focus,
+.form-field textarea:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 2px rgb(47 107 255 / 18%);
 }
 
-.form-field input[aria-invalid="true"] {
+.form-field input[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
   border-color: var(--danger);
 }
 
-.form-field input::placeholder {
+.form-field input::placeholder,
+.form-field textarea::placeholder {
   color: #86918a;
 }
 

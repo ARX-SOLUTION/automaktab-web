@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">automaktab.uz Telegram avatar on Control Ink</title>
+  <desc id="desc">Reverse Folded Ascent icon inside the Telegram circular safe area.</desc>
+  <defs>
+    <mask id="signal-cut">
+      <rect width="512" height="512" fill="#fff"/>
+      <circle cx="289" cy="278" r="16" fill="#000"/>
+    </mask>
+  </defs>
+  <rect width="1024" height="1024" fill="#0B1720"/>
+  <g id="icon" transform="translate(114 190) scale(1.55)" fill="#F5F7F2" mask="url(#signal-cut)">
+    <path d="M88 336 207 150 289 278 425 64" fill="none" stroke="#F5F7F2" stroke-width="68" stroke-linecap="butt" stroke-linejoin="round"/>
+    <circle cx="88" cy="336" r="34"/>
+  </g>
+</svg>
