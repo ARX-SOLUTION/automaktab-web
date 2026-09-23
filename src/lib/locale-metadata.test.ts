@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildLocalizedAlternates,
   buildLocaleAlternates,
+  buildOpenGraphImageUrl,
 } from "./locale-metadata";
 
 describe("buildLocaleAlternates", () => {
@@ -48,5 +49,22 @@ describe("buildLocaleAlternates", () => {
       en: "https://automaktab.uz/en/features/payments-and-debt",
       "x-default": "https://automaktab.uz/imkoniyatlar/tolovlar-va-qarzdorlik",
     });
+  });
+});
+
+describe("buildOpenGraphImageUrl", () => {
+  it("keeps the default (uz) OG image unprefixed", () => {
+    expect(buildOpenGraphImageUrl("uz")).toBe(
+      "https://automaktab.uz/opengraph-image",
+    );
+  });
+
+  it("prefixes OG images for non-default locales", () => {
+    expect(buildOpenGraphImageUrl("ru")).toBe(
+      "https://automaktab.uz/ru/opengraph-image",
+    );
+    expect(buildOpenGraphImageUrl("en")).toBe(
+      "https://automaktab.uz/en/opengraph-image",
+    );
   });
 });

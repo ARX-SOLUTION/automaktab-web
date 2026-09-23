@@ -3,7 +3,10 @@ import { Manrope, Outfit } from "next/font/google";
 import { notFound } from "next/navigation";
 import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
 import { isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
-import { buildLocaleAlternates } from "@/lib/locale-metadata";
+import {
+  buildLocaleAlternates,
+  buildOpenGraphImageUrl,
+} from "@/lib/locale-metadata";
 import "../globals.css";
 
 const manrope = Manrope({
@@ -93,11 +96,20 @@ export async function generateMetadata({
         item === locale ? [] : [OG_LOCALE[item]],
       ),
       url: canonical,
+      images: [
+        {
+          url: buildOpenGraphImageUrl(locale),
+          width: 1200,
+          height: 630,
+          alt: seo.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
+      images: [buildOpenGraphImageUrl(locale)],
     },
   };
 }

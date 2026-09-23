@@ -21,8 +21,18 @@ function resolveLocale(pathname: string): Locale {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname === `/${DEFAULT_LOCALE}`) {
-    return new NextResponse(null, { status: 404 });
+  // Public Uzbek URLs are unprefixed. Send /uz and /uz/* to the canonical
+  // unprefixed path so metadata/crawlers never keep a soft-404 /uz URL.
+  if (
+    pathname === `/${DEFAULT_LOCALE}` ||
+    pathname.startsWith(`/${DEFAULT_LOCALE}/`)
+  ) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname =
+      pathname === `/${DEFAULT_LOCALE}`
+        ? "/"
+        : pathname.slice(`/${DEFAULT_LOCALE}`.length) || "/";
+    return NextResponse.redirect(redirectUrl);
   }
 
   if (pathname === "/") {

@@ -106,7 +106,9 @@ export default async function BlogArticle({
       name: "automaktab.uz",
       logo: {
         "@type": "ImageObject",
-        url: "https://automaktab.uz/icon.svg",
+        url: "https://automaktab.uz/icon.png",
+        width: 512,
+        height: 512,
       },
     },
   };

@@ -16,8 +16,21 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         "@id": "https://automaktab.uz/#organization",
         name: "automaktab.uz",
         url: "https://automaktab.uz/",
-        logo: "https://automaktab.uz/icon.svg",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://automaktab.uz/icon.png",
+          width: 512,
+          height: 512,
+        },
         areaServed: "UZ",
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://automaktab.uz/#website",
+        name: "automaktab.uz",
+        url: "https://automaktab.uz/",
+        publisher: { "@id": "https://automaktab.uz/#organization" },
+        inLanguage: ["uz", "ru", "en"],
       },
       {
         "@type": "SoftwareApplication",
