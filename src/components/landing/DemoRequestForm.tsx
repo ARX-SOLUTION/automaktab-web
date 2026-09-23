@@ -269,8 +269,12 @@ export default function DemoRequestForm({
         </select>
       </Field>
 
-      <div>
-        <label htmlFor={fieldId("note")}>{copy.note}</label>
+      <Field
+        id={fieldId("note")}
+        errorId={errorId("note")}
+        label={copy.note}
+        wide
+      >
         <textarea
           id={fieldId("note")}
           name="note"
@@ -280,7 +284,7 @@ export default function DemoRequestForm({
           placeholder={copy.notePlaceholder}
           maxLength={500}
         />
-      </div>
+      </Field>
 
       <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? copy.submitting : copy.submit}
