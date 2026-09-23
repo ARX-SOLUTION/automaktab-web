@@ -23,6 +23,8 @@ export type DemoFormCopy = {
   centerName: string;
   centerNamePlaceholder: string;
   studentCount: string;
+  note: string;
+  notePlaceholder: string;
   submit: string;
   submitting: string;
   successTitle: string;
@@ -73,6 +75,7 @@ export default function DemoRequestForm({
   const [region, setRegion] = useState("");
   const [centerName, setCenterName] = useState("");
   const [studentCount, setStudentCount] = useState("");
+  const [note, setNote] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>("idle");
 
@@ -114,6 +117,8 @@ export default function DemoRequestForm({
           region: region.trim(),
           center_name: centerName.trim() || undefined,
           student_count: studentCount || undefined,
+          note: note.trim() || undefined,
+          source: `landing:${locale}`,
         }),
       });
 
@@ -263,6 +268,19 @@ export default function DemoRequestForm({
           ))}
         </select>
       </Field>
+
+      <div>
+        <label htmlFor={fieldId("note")}>{copy.note}</label>
+        <textarea
+          id={fieldId("note")}
+          name="note"
+          rows={3}
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder={copy.notePlaceholder}
+          maxLength={500}
+        />
+      </div>
 
       <button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? copy.submitting : copy.submit}
