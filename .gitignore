@@ -18,6 +18,8 @@
 # unanchored: `next build` invoked from a subdirectory writes .next there,
 # and an anchored rule would let 5MB of build output through unnoticed
 .next/
+.open-next/
+.wrangler/
 /out/
 
 # production
@@ -36,6 +38,7 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+.dev.vars*
 
 # vercel
 .vercel
