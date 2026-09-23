@@ -9,8 +9,10 @@ import {
   getSeoPagePaths,
   getSeoPageStaticParams,
   getSeoPagePath,
-  SEO_PAGE_IDS,
+  SEO_LEGAL_PAGE_IDS,
   SEO_PAGES,
+  SEO_RELATED_PAGE_IDS,
+  type SeoPageId,
 } from "@/config/seo-pages";
 import { LANDING_COPY } from "@/config/landing";
 import { isLocale } from "@/i18n/config";
@@ -97,15 +99,13 @@ export default async function SeoPage({
         </article>
 
         <nav className="article-tags" aria-label={copy.relatedLabel}>
-          {SEO_PAGE_IDS.filter((candidateId) => candidateId !== id).map(
-            (candidateId) => (
-              <li key={candidateId}>
-                <Link href={getSeoPagePath(candidateId, candidate)}>
-                  {SEO_PAGES[candidateId][candidate].eyebrow}
-                </Link>
-              </li>
-            ),
-          )}
+          {relatedPageIds(id).map((candidateId) => (
+            <li key={candidateId}>
+              <Link href={getSeoPagePath(candidateId, candidate)}>
+                {SEO_PAGES[candidateId][candidate].eyebrow}
+              </Link>
+            </li>
+          ))}
         </nav>
 
         <aside className="article-cta">
@@ -122,4 +122,11 @@ export default async function SeoPage({
       <SiteFooter locale={candidate} />
     </>
   );
+}
+
+function relatedPageIds(id: SeoPageId): readonly SeoPageId[] {
+  if ((SEO_LEGAL_PAGE_IDS as readonly SeoPageId[]).includes(id)) {
+    return SEO_LEGAL_PAGE_IDS.filter((candidateId) => candidateId !== id);
+  }
+  return SEO_RELATED_PAGE_IDS.filter((candidateId) => candidateId !== id);
 }

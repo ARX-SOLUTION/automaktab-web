@@ -90,8 +90,15 @@ export type LandingCopy = {
   footer: {
     descriptor: string;
     rights: string;
+    privacy: string;
+    terms: string;
+    legalNav: string;
   };
 };
+
+/** Published pillar guide linked from the home blog teaser. */
+export const PILLAR_ARTICLE_SLUG =
+  "avtomaktab-crm-nima-tolov-davomat-jadval";
 
 export const LANDING_COPY: Record<Locale, LandingCopy> = {
   uz: {
@@ -218,7 +225,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       eyebrow: "Amaliy qo‘llanma",
       title: "Excel va daftardan boshqaruv tizimiga o‘tish",
       body: "Avtomaktab CRM nimani o‘zgartiradi, qaysi jarayonni avval raqamlashtirish kerak — sodda tilda.",
-      link: "Maqolalarni o‘qing",
+      link: "Qo‘llanmani o‘qing",
     },
     faq: {
       eyebrow: "Aniq javoblar",
@@ -242,6 +249,9 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     footer: {
       descriptor: "Avtomaktablar uchun boshqaruv tizimi",
       rights: "Barcha huquqlar himoyalangan.",
+      privacy: "Maxfiylik",
+      terms: "Oferta",
+      legalNav: "Huquqiy sahifalar",
     },
   },
   ru: {
@@ -320,7 +330,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       eyebrow: "Практическое руководство",
       title: "От Excel и журнала к системе управления",
       body: "Что меняет CRM для автошколы и какой процесс стоит оцифровать первым — простым языком.",
-      link: "Читать статьи",
+      link: "Читать руководство",
     },
     faq: {
       eyebrow: "Прямые ответы",
@@ -341,7 +351,13 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       primary: "Открыть демо сейчас",
       secondary: "15-минутное знакомство",
     },
-    footer: { descriptor: "Система управления для автошкол", rights: "Все права защищены." },
+    footer: {
+      descriptor: "Система управления для автошкол",
+      rights: "Все права защищены.",
+      privacy: "Конфиденциальность",
+      terms: "Оферта",
+      legalNav: "Правовые страницы",
+    },
   },
   en: {
     skipLink: "Skip to main content",
@@ -419,7 +435,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       eyebrow: "Practical guide",
       title: "Moving from Excel and paper logs to one system",
       body: "What a driving-school CRM changes and which workflow to digitize first, explained plainly.",
-      link: "Read the articles",
+      link: "Read the guide",
     },
     faq: {
       eyebrow: "Straight answers",
@@ -440,6 +456,12 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       primary: "Open the demo now",
       secondary: "15-minute introduction",
     },
-    footer: { descriptor: "Management system for driving schools", rights: "All rights reserved." },
+    footer: {
+      descriptor: "Management system for driving schools",
+      rights: "All rights reserved.",
+      privacy: "Privacy",
+      terms: "Terms",
+      legalNav: "Legal",
+    },
   },
 };
