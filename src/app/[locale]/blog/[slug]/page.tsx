@@ -10,11 +10,19 @@ import { BLOG_COPY } from "@/config/blog";
 import {
   estimateReadingMinutes,
   getBlogPost,
+  getBlogPosts,
   localizeBlogBody,
   localizeBlogPost,
 } from "@/lib/blog";
 import { isLocale, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
+
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 const BLOG_PATH: Record<Locale, string> = {
   uz: "/blog",

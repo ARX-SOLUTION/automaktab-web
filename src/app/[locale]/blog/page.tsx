@@ -7,6 +7,8 @@ import { getBlogPosts, localizeBlogPost } from "@/lib/blog";
 import { isLocale, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
 
+export const revalidate = 3600;
+
 const ARTICLE_PATH: Record<Locale, (slug: string) => string> = {
   uz: (slug) => `/blog/${slug}`,
   ru: (slug) => `/ru/blog/${slug}`,

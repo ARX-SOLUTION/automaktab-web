@@ -14,7 +14,7 @@ import {
   Wallet,
 } from "lucide-react";
 import type { Locale } from "@/i18n/config";
-import { LANDING_COPY } from "@/config/landing";
+import { LANDING_COPY, PILLAR_ARTICLE_SLUG } from "@/config/landing";
 import { getSeoPagePath } from "@/config/seo-pages";
 import { HeroSection } from "@/components/ui/hero-section-dark";
 import DemoLink from "./DemoLink";
@@ -34,6 +34,11 @@ const BLOG_PATH: Record<Locale, string> = {
   ru: "/ru/blog",
   en: "/en/blog",
 };
+
+function pillarArticlePath(locale: Locale) {
+  const path = `/blog/${PILLAR_ARTICLE_SLUG}`;
+  return locale === "uz" ? path : `/${locale}${path}`;
+}
 
 export default function LandingPage({ locale }: { locale: Locale }) {
   const copy = LANDING_COPY[locale];
@@ -273,7 +278,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             <h2 id="blog-teaser-title">{copy.blog.title}</h2>
             <p>{copy.blog.body}</p>
           </div>
-          <Link href={BLOG_PATH[locale]} className="text-link">
+          <Link href={pillarArticlePath(locale)} className="text-link">
             {copy.blog.link}
             <ArrowUpRight aria-hidden="true" />
           </Link>
@@ -432,6 +437,12 @@ export function SiteFooter({ locale }: { locale: Locale }) {
       </div>
       <div className="footer-bottom">
         <p>© {new Date().getFullYear()} automaktab.uz</p>
+        <nav className="footer-legal" aria-label={copy.footer.legalNav}>
+          <Link href={getSeoPagePath("privacy", locale)}>
+            {copy.footer.privacy}
+          </Link>
+          <Link href={getSeoPagePath("terms", locale)}>{copy.footer.terms}</Link>
+        </nav>
         <p>{copy.footer.rights}</p>
       </div>
     </footer>

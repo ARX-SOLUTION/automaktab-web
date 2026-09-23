@@ -6,9 +6,25 @@ export const SEO_PAGE_IDS = [
   "attendance",
   "branches",
   "pricing",
+  "privacy",
+  "terms",
 ] as const;
 
 export type SeoPageId = (typeof SEO_PAGE_IDS)[number];
+
+/** Cross-links for product SEO surfaces (legal stubs excluded). */
+export const SEO_RELATED_PAGE_IDS = [
+  "payments",
+  "schedule",
+  "attendance",
+  "branches",
+  "pricing",
+] as const satisfies readonly SeoPageId[];
+
+export const SEO_LEGAL_PAGE_IDS = [
+  "privacy",
+  "terms",
+] as const satisfies readonly SeoPageId[];
 
 type SeoSection = {
   title: string;
@@ -574,6 +590,254 @@ export const SEO_PAGES: Record<
         label: "Open the demo",
       },
       updatedAt: "2026-09-19",
+    },
+  },
+  privacy: {
+    uz: {
+      segments: ["maxfiylik"],
+      title: "Maxfiylik siyosati | automaktab.uz",
+      description:
+        "automaktab.uz maxfiylik siyosati: CRM ishlashi uchun qanday ma’lumotlar ishlatiladi va qanday bog‘lanish mumkin.",
+      keywords: ["maxfiylik siyosati", "avtomaktab CRM ma’lumotlari", "automaktab.uz"],
+      eyebrow: "Maxfiylik",
+      heading: "Maxfiylik siyosati",
+      intro:
+        "Bu qisqa siyosat automaktab.uz marketing sayti va avtomaktablar uchun boshqaruv tizimi (CRM) operatori sifatida qanday ma’lumotlar bilan ishlashini tushuntiradi. Bu yuridik maslahat o‘rnini bosmaydi; kerak bo‘lsa, alohida shartnoma va yangilangan matn taqdim etiladi.",
+      sections: [
+        {
+          title: "Kim operator",
+          body:
+            "Ushbu sahifalar va xizmatning operatori — automaktab.uz brendi ostida faoliyat yurituvchi jamoa. Aniq yuridik rekvizitlar (nom, manzil, STIR) shartnoma yoki hisob-faktura hujjatlarida ko‘rsatiladi; bu stubda ular ixtiro qilinmagan.",
+        },
+        {
+          title: "Qanday ma’lumotlar ishlatiladi",
+          body:
+            "CRM maktabning kundalik ishi uchun kerakli ma’lumotlarni saqlaydi: talabalar, guruhlar, to‘lov va qarzdorlik yozuvlari, dars jadvali, davomat va xodim akkauntlari. Marketing saytidagi tanishuv formasi orqali yuborilgan ism, telefon va maktab haqidagi qisqa ma’lumot faqat bog‘lanish uchun ishlatiladi. Sintetik demo akkaunti haqiqiy mijoz ma’lumotlaridan foydalanmaydi.",
+        },
+        {
+          title: "Saqlash, kirish va huquqlar",
+          body:
+            "Ma’lumotlar xizmatni ko‘rsatish, xavfsizlik va qo‘llab-quvvatlash uchun ishlatiladi. Maktab jamoasi rolga mos kirish orqali o‘z ma’lumotlarini boshqaradi. So‘rov, tuzatish yoki o‘chirish bo‘yicha murojaatni mahsulot kanallari orqali yuboring — saytdagi tanishuv formasi yoki shartnomada ko‘rsatilgan aloqa.",
+        },
+        {
+          title: "Yangilanishlar",
+          body:
+            "Siyosat yangilansa, ushbu sahifa yangilanadi. Muhim o‘zgarishlar faol mijozlarga mavjud aloqa kanallari orqali yetkazilishi mumkin.",
+        },
+      ],
+      relatedLabel: "Huquqiy sahifalar",
+      cta: {
+        title: "Savol qoldimi?",
+        body: "Tanishuv formasi orqali bog‘laning yoki sintetik demoda mahsulotni ko‘ring — haqiqiy mijoz ma’lumotlari talab qilinmaydi.",
+        label: "Demo’ni oching",
+      },
+      updatedAt: "2026-09-24",
+    },
+    ru: {
+      segments: ["konfidencialnost"],
+      title: "Политика конфиденциальности | automaktab.uz",
+      description:
+        "Краткая политика конфиденциальности automaktab.uz: какие данные нужны для работы CRM и как связаться с оператором.",
+      keywords: [
+        "политика конфиденциальности",
+        "данные CRM автошколы",
+        "automaktab.uz",
+      ],
+      eyebrow: "Конфиденциальность",
+      heading: "Политика конфиденциальности",
+      intro:
+        "Эта краткая политика объясняет, как оператор automaktab.uz обрабатывает данные на маркетинговом сайте и в системе управления для автошкол (CRM). Она не заменяет юридическую консультацию; при необходимости предоставляются договор и обновлённый текст.",
+      sections: [
+        {
+          title: "Кто оператор",
+          body:
+            "Оператор этих страниц и сервиса — команда под брендом automaktab.uz. Точные юридические реквизиты (наименование, адрес, ИНН) указываются в договоре или счёт-фактуре; в этой заглушке они не выдуманы.",
+        },
+        {
+          title: "Какие данные используются",
+          body:
+            "CRM хранит данные, нужные для повседневной работы школы: ученики, группы, оплаты и задолженность, расписание, посещаемость и учётные записи сотрудников. Данные из формы знакомства на сайте (имя, телефон, краткие сведения о школе) используются для связи. Синтетическое демо не использует данные реальных клиентов.",
+        },
+        {
+          title: "Хранение, доступ и права",
+          body:
+            "Данные используются для оказания услуги, безопасности и поддержки. Команда школы управляет своими данными через ролевой доступ. Запросы на доступ, исправление или удаление направляйте через продуктовые каналы — форму знакомства на сайте или контакт из договора.",
+        },
+        {
+          title: "Обновления",
+          body:
+            "При изменении политики обновляется эта страница. О существенных изменениях активным клиентам могут сообщить по доступным каналам связи.",
+        },
+      ],
+      relatedLabel: "Правовые страницы",
+      cta: {
+        title: "Остались вопросы?",
+        body: "Свяжитесь через форму знакомства или откройте синтетическое демо — данные реальных клиентов не нужны.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-09-24",
+    },
+    en: {
+      segments: ["privacy"],
+      title: "Privacy policy | automaktab.uz",
+      description:
+        "Short privacy policy for automaktab.uz: what data the CRM needs to operate and how to contact the operator.",
+      keywords: ["privacy policy", "driving school CRM data", "automaktab.uz"],
+      eyebrow: "Privacy",
+      heading: "Privacy policy",
+      intro:
+        "This short policy explains how the operator of automaktab.uz handles data on the marketing site and in the driving-school management system (CRM). It is not legal advice; a contract and updated text are provided when needed.",
+      sections: [
+        {
+          title: "Who operates the service",
+          body:
+            "These pages and the service are operated by the team behind the automaktab.uz brand. Exact legal details (legal name, address, tax ID) appear on contracts or invoices; they are not invented in this stub.",
+        },
+        {
+          title: "What data we use",
+          body:
+            "The CRM stores data needed for day-to-day school operations: students, groups, payments and debt, schedules, attendance, and staff accounts. Introduction-form details on the marketing site (name, phone, brief school info) are used to get in touch. The synthetic demo does not use real customer data.",
+        },
+        {
+          title: "Storage, access, and requests",
+          body:
+            "Data is used to provide the service, protect security, and offer support. School teams manage their own data through role-based access. For access, correction, or deletion requests, use product channels — the on-site introduction form or the contact listed in your agreement.",
+        },
+        {
+          title: "Updates",
+          body:
+            "When this policy changes, this page is updated. Material changes may be communicated to active customers through available contact channels.",
+        },
+      ],
+      relatedLabel: "Legal pages",
+      cta: {
+        title: "Still have questions?",
+        body: "Reach out via the introduction form or open the synthetic demo — no real customer data is required.",
+        label: "Open the demo",
+      },
+      updatedAt: "2026-09-24",
+    },
+  },
+  terms: {
+    uz: {
+      segments: ["oferta"],
+      title: "Foydalanish shartlari (oferta) | automaktab.uz",
+      description:
+        "automaktab.uz sayti va CRM sinovi uchun qisqa foydalanish shartlari. Batafsil shartlar shartnomada kelishiladi.",
+      keywords: ["oferta", "foydalanish shartlari", "avtomaktab CRM"],
+      eyebrow: "Oferta",
+      heading: "Foydalanish shartlari",
+      intro:
+        "Ushbu qisqa shartlar automaktab.uz marketing sayti va avtomaktablar uchun boshqaruv tizimidan (CRM) foydalanishning asosiy qoidalarini bayon etadi. Bu stub to‘liq yuridik oferta o‘rnini bosmaydi; tijorat shartlari alohida kelishiladi.",
+      sections: [
+        {
+          title: "Xizmat nima",
+          body:
+            "automaktab.uz avtomaktablarga talabalar, to‘lovlar, jadval va davomatni bitta tizimda boshqarishga yordam beradi. Saytdagi materiallar axborot xarakterida; mahsulot imkoniyatlari sinov va shartnomada tasdiqlangan doirada beriladi.",
+        },
+        {
+          title: "Demo va sinov",
+          body:
+            "“Demo’ni oching” sintetik ma’lumotli sessiyani ochadi va haqiqiy mijoz ma’lumotlarini talab qilmaydi. Tasdiqlangan bepul sinov muddati 30 kun; keyingi shartlar maktab ehtiyojiga qarab tanishuvda muhokama qilinadi.",
+        },
+        {
+          title: "Maktabning majburiyatlari",
+          body:
+            "Mijoz o‘z xodimlarining kirish huquqini boshqaradi, faqat qonuniy asosda ma’lumot kiritadi va akkaunt xavfsizligini saqlaydi. Xizmatni suiiste’mol qilish, buzishga urinish yoki uchinchi shaxslarga ruxsatsiz ulashish taqiqlanadi.",
+        },
+        {
+          title: "Javobgarlik va aloqa",
+          body:
+            "Xizmat “boricha” taqdim etiladi; kafolatlar shartnomada yoziladi. Nizolarni avval muzokara orqali hal etishga harakat qilinadi. Bog‘lanish: saytdagi tanishuv formasi yoki shartnomadagi aloqa kanallari. Operator — automaktab.uz brendi ostidagi jamoa; rekvizitlar hujjatlarda ko‘rsatiladi.",
+        },
+      ],
+      relatedLabel: "Huquqiy sahifalar",
+      cta: {
+        title: "Avval mahsulotni ko‘ring.",
+        body: "Sintetik demo darhol ochiladi. Keyingi tijorat shartlari tanishuvda kelishiladi.",
+        label: "Demo’ni oching",
+      },
+      updatedAt: "2026-09-24",
+    },
+    ru: {
+      segments: ["oferta"],
+      title: "Условия использования (оферта) | automaktab.uz",
+      description:
+        "Краткие условия использования сайта и пробного периода CRM automaktab.uz. Коммерческие детали согласуются в договоре.",
+      keywords: ["оферта", "условия использования", "CRM автошколы"],
+      eyebrow: "Оферта",
+      heading: "Условия использования",
+      intro:
+        "Эти краткие условия описывают основные правила маркетингового сайта automaktab.uz и системы управления для автошкол (CRM). Заглушка не заменяет полную юридическую оферту; коммерческие условия согласуются отдельно.",
+      sections: [
+        {
+          title: "Что это за сервис",
+          body:
+            "automaktab.uz помогает автошколам вести учеников, оплаты, расписание и посещаемость в одной системе. Материалы сайта носят информационный характер; возможности продукта предоставляются в рамках пробного периода и договора.",
+        },
+        {
+          title: "Демо и пробный период",
+          body:
+            "Кнопка «Открыть демо» запускает сессию с синтетическими данными и не требует данных реальных клиентов. Подтверждённый бесплатный период — 30 дней; дальнейшие условия обсуждаются с учётом задач школы.",
+        },
+        {
+          title: "Обязанности школы",
+          body:
+            "Клиент управляет доступом сотрудников, вносит данные на законном основании и обеспечивает безопасность учётных записей. Запрещены злоупотребление сервисом, попытки взлома и передача доступа третьим лицам без разрешения.",
+        },
+        {
+          title: "Ответственность и связь",
+          body:
+            "Сервис предоставляется «как есть»; гарантии фиксируются в договоре. Споры сначала стараются решить переговорами. Связь: форма знакомства на сайте или контакты из договора. Оператор — команда под брендом automaktab.uz; реквизиты указываются в документах.",
+        },
+      ],
+      relatedLabel: "Правовые страницы",
+      cta: {
+        title: "Сначала посмотрите продукт.",
+        body: "Синтетическое демо открывается сразу. Коммерческие условия обсуждаются при знакомстве.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-09-24",
+    },
+    en: {
+      segments: ["terms"],
+      title: "Terms of use | automaktab.uz",
+      description:
+        "Short terms for the automaktab.uz site and CRM trial. Commercial details are agreed in a contract.",
+      keywords: ["terms of use", "offer", "driving school CRM"],
+      eyebrow: "Terms",
+      heading: "Terms of use",
+      intro:
+        "These short terms outline the main rules for the automaktab.uz marketing site and the driving-school management system (CRM). This stub is not a full legal offer; commercial terms are agreed separately.",
+      sections: [
+        {
+          title: "What the service is",
+          body:
+            "automaktab.uz helps driving schools manage students, payments, schedules, and attendance in one system. Site materials are informational; product capabilities are provided within the trial and any signed agreement.",
+        },
+        {
+          title: "Demo and trial",
+          body:
+            "“Open the demo” starts a synthetic-data session and does not require real customer data. The confirmed free trial is 30 days; further terms are discussed around the school’s needs.",
+        },
+        {
+          title: "School responsibilities",
+          body:
+            "Customers manage staff access, enter data on a lawful basis, and keep accounts secure. Abuse of the service, attempts to compromise it, or sharing access with third parties without permission is not allowed.",
+        },
+        {
+          title: "Liability and contact",
+          body:
+            "The service is provided as available; warranties are stated in the agreement. Disputes are first addressed through discussion. Contact: the on-site introduction form or channels listed in your agreement. The operator is the team behind automaktab.uz; formal details appear in documents.",
+        },
+      ],
+      relatedLabel: "Legal pages",
+      cta: {
+        title: "See the product first.",
+        body: "The synthetic demo opens immediately. Commercial terms are discussed during an introduction.",
+        label: "Open the demo",
+      },
+      updatedAt: "2026-09-24",
     },
   },
 };
