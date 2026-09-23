@@ -9,6 +9,8 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next (unanchored to match nested builds):
     "**/.next/**",
+    "**/.open-next/**",
+    "**/.wrangler/**",
     "**/out/**",
     "**/build/**",
     "**/next-env.d.ts",
