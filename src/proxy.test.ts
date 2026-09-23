@@ -23,7 +23,7 @@ describe("proxy", () => {
   });
 
   it.each(["ru", "en"])(
-    "redirects the locale-less root to a valid %s cookie preference",
+    "keeps the locale-less root as Uzbek despite a %s cookie",
     (locale) => {
       const response = proxy(
         new NextRequest(`${ORIGIN}/`, {
@@ -31,7 +31,10 @@ describe("proxy", () => {
         }),
       );
 
-      expect(getRedirectUrl(response)).toBe(`${ORIGIN}/${locale}`);
+      expect(getRedirectUrl(response)).toBeNull();
+      expect(isRewrite(response)).toBe(true);
+      expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz`);
+      expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
     },
   );
 

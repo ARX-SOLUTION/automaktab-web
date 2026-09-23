@@ -16,9 +16,9 @@ function resolveLocale(pathname: string): Locale {
   return DEFAULT_LOCALE;
 }
 
-// Explicit URL locales always win. Only the locale-less root consults the
-// cookie; every other unprefixed path remains canonical Uzbek and is rewritten
-// internally to the /uz route tree.
+// Explicit URL locales always win. Unprefixed paths (including /) are always
+// canonical Uzbek and are rewritten internally to the /uz route tree. Cookie
+// NEXT_LOCALE is updated from the URL but never redirects / away from Uzbek.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -41,19 +41,6 @@ export function proxy(request: NextRequest) {
         ? "/"
         : pathname.slice(`/${DEFAULT_LOCALE}`.length) || "/";
     return NextResponse.redirect(redirectUrl);
-  }
-
-  if (pathname === "/") {
-    const preferredLocale = request.cookies.get(LOCALE_COOKIE)?.value;
-    if (
-      preferredLocale &&
-      preferredLocale !== DEFAULT_LOCALE &&
-      isLocale(preferredLocale)
-    ) {
-      const redirectUrl = request.nextUrl.clone();
-      redirectUrl.pathname = `/${preferredLocale}`;
-      return NextResponse.redirect(redirectUrl);
-    }
   }
 
   const locale = resolveLocale(pathname);
