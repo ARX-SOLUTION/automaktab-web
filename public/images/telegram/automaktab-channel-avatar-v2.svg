@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">automaktab.uz kanal avatari — avtomaktab belgisi</title>
+  <desc id="desc">O‘quv qalpog‘i va rul birikmasi avtomaktabni, ko‘k tassel nuqtasi esa faol nazorat signalini anglatadi.</desc>
+  <rect width="1024" height="1024" fill="#0B1720"/>
+
+  <g aria-hidden="true">
+    <circle cx="512" cy="600" r="252" fill="none" stroke="#C6FF3D" stroke-width="72"/>
+    <path d="M512 600H296M512 600h216M512 600v242" fill="none" stroke="#C6FF3D" stroke-width="72" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="512" cy="600" r="78" fill="#C6FF3D"/>
+    <circle cx="512" cy="600" r="31" fill="#0B1720"/>
+
+    <path d="M512 146 236 282l276 136 276-136L512 146Z" fill="#F5F7F2"/>
+    <path d="M334 337v104c48 56 111 84 178 84s130-28 178-84V337L512 425 334 337Z" fill="#F5F7F2"/>
+    <path d="M788 286v104" fill="none" stroke="#2F6BFF" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="788" cy="432" r="42" fill="#2F6BFF"/>
+  </g>
+</svg>
