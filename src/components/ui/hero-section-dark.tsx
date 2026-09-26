@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
+import { HeroAtmosphere } from "@/components/landing/HeroAtmosphere";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 import { cn } from "@/lib/utils";
 
 interface HeroSectionProps extends HTMLAttributes<HTMLElement> {
@@ -18,36 +20,6 @@ interface HeroSectionProps extends HTMLAttributes<HTMLElement> {
     width?: number;
     height?: number;
   };
-  gridOptions?: {
-    angle?: number;
-    cellSize?: number;
-    opacity?: number;
-    lightLineColor?: string;
-    darkLineColor?: string;
-  };
-}
-
-function RetroGrid({
-  angle = 65,
-  cellSize = 64,
-  opacity = 0.22,
-  darkLineColor = "#79885d",
-  lightLineColor = "#79885d",
-}: NonNullable<HeroSectionProps["gridOptions"]>) {
-  const style = {
-    "--grid-angle": `${angle}deg`,
-    "--cell-size": `${cellSize}px`,
-    "--grid-opacity": opacity,
-    "--grid-line": darkLineColor || lightLineColor,
-  } as CSSProperties;
-
-  return (
-    <div className="retro-grid" style={style} aria-hidden="true">
-      <div className="retro-grid-plane">
-        <div />
-      </div>
-    </div>
-  );
 }
 
 export function HeroSection({
@@ -59,7 +31,6 @@ export function HeroSection({
   ctaHref,
   actions,
   bottomImage,
-  gridOptions,
   ...props
 }: HeroSectionProps) {
   return (
@@ -68,8 +39,7 @@ export function HeroSection({
       aria-labelledby="hero-title"
       {...props}
     >
-      <RetroGrid {...gridOptions} />
-      <div className="hero-ambient" aria-hidden="true" />
+      <HeroAtmosphere />
       <div className="section-shell hero-inner">
         <div className="hero-copy">
           <p className="hero-kicker" data-hero-item>
@@ -91,7 +61,12 @@ export function HeroSection({
           </div>
         </div>
         {bottomImage && (
-          <figure className="hero-evidence group" data-hero-proof>
+          <GlassPanel
+            as="figure"
+            tier="proof"
+            className="hero-evidence group"
+            data-hero-proof
+          >
             <figcaption className="evidence-topline">
               <span className="window-dots" aria-hidden="true">
                 <i />
@@ -112,7 +87,7 @@ export function HeroSection({
                 className="transition-transform duration-700 ease-out group-hover:scale-105"
               />
             </div>
-          </figure>
+          </GlassPanel>
         )}
       </div>
     </section>

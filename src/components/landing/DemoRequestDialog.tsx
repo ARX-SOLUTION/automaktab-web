@@ -104,7 +104,7 @@ export default function DemoRequestDialog({
             aria-labelledby={titleId}
             aria-describedby={descriptionId}
             onKeyDown={trapFocus}
-            className="dialog-panel"
+            className="dialog-panel glass glass-form"
           >
             <button
               type="button"

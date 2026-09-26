@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Avtomaktablar uchun boshqaruv tizimi — to‘lov, jadval va davomat bir joyda.",
     start_url: "/",
     display: "standalone",
-    background_color: "#F5F7F2",
-    theme_color: "#10120e",
+    background_color: "#08140F",
+    theme_color: "#08140F",
     lang: "uz",
     icons: [
       {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "@/components/landing/LandingPage";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 import { BLOG_COPY } from "@/config/blog";
 import { getBlogPosts, localizeBlogPost } from "@/lib/blog";
 import { isLocale, type Locale } from "@/i18n/config";
@@ -91,7 +92,7 @@ export default async function BlogIndex({
             {posts.map((post, index) => {
               const localized = localizeBlogPost(post, locale);
               return (
-                <li key={post.id}>
+                <GlassPanel as="li" key={post.id}>
                   <span className="blog-index-number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -118,16 +119,16 @@ export default async function BlogIndex({
                       <ArrowUpRight />
                     </Link>
                   </div>
-                </li>
+                </GlassPanel>
               );
             })}
           </ol>
         ) : (
-          <div className="blog-empty">
+          <GlassPanel className="blog-empty">
             <span aria-hidden="true">01</span>
             <h2>{copy.emptyTitle}</h2>
             <p>{copy.emptyBody}</p>
-          </div>
+          </GlassPanel>
         )}
       </main>
       <SiteFooter locale={locale} />

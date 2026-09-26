@@ -31,7 +31,7 @@ The design follows the current [Brand markazi](https://app.notion.com/p/3cd9ee20
 - `master/lockup-stacked.svg` — centred, compact lockup.
 - `master/*-reverse.svg` — reverse lockups for Ink backgrounds.
 
-The wordmark is converted to vector paths, so the master lockups do not depend on an installed font. New supporting typography should use Unbounded for display and Manrope for body copy.
+The wordmark is converted to vector paths, so the master lockups do not depend on an installed font. Page UI type is set in `DESIGN.md`: Outfit for Latin display, Manrope for reading text. These master files stay outlined paths.
 
 ## Minimum size and clear space
 

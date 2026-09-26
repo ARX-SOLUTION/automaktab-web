@@ -16,6 +16,7 @@ import {
 import type { Locale } from "@/i18n/config";
 import { LANDING_COPY, PILLAR_ARTICLE_SLUG } from "@/config/landing";
 import { getSeoPagePath } from "@/config/seo-pages";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 import { HeroSection } from "@/components/ui/hero-section-dark";
 import DemoLink from "./DemoLink";
 import DemoRequestDialog from "./DemoRequestDialog";
@@ -103,7 +104,10 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             <p>{copy.capabilities.body}</p>
           </header>
           <div className="capability-grid grid-flow-dense">
-            <article className="feature-card feature-finance group">
+            <GlassPanel
+              as="article"
+              className="feature-card feature-finance group"
+            >
               <div className="feature-copy">
                 <Wallet className="feature-icon" aria-hidden="true" />
                 <h3>
@@ -127,8 +131,11 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                 <span>{copy.proof.items[0].eyebrow}</span>
                 <ArrowUpRight aria-hidden="true" />
               </div>
-            </article>
-            <article className="feature-card feature-schedule group">
+            </GlassPanel>
+            <GlassPanel
+              as="article"
+              className="feature-card feature-schedule group"
+            >
               <div className="feature-copy">
                 <CalendarDays className="feature-icon" aria-hidden="true" />
                 <h3>
@@ -148,8 +155,8 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                   className="transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </div>
-            </article>
-            <article className="feature-card feature-attendance">
+            </GlassPanel>
+            <GlassPanel as="article" className="feature-card feature-attendance">
               <CheckCheck className="feature-icon" aria-hidden="true" />
               <h3>
                 <Link href={getSeoPagePath("attendance", locale)}>
@@ -171,8 +178,8 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                   <p>{students.body}</p>
                 </div>
               </div>
-            </article>
-            <article className="feature-card feature-access">
+            </GlassPanel>
+            <GlassPanel as="article" className="feature-card feature-access">
               <Layers3 className="feature-icon" aria-hidden="true" />
               <h3>
                 <Link href={getSeoPagePath("branches", locale)}>
@@ -193,7 +200,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                   <p>{roles.body}</p>
                 </div>
               </div>
-            </article>
+            </GlassPanel>
           </div>
         </section>
 
@@ -231,7 +238,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
           </header>
           <ol className="disorder-list" data-card-stack>
             {copy.disorder.items.map((item, index) => (
-              <li key={item.index} data-stack-card>
+              <GlassPanel as="li" key={item.index} data-stack-card>
                 <span className="story-symbol" aria-hidden="true">
                   {index === 0 ? (
                     <Wallet />
@@ -243,7 +250,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                 </span>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
-              </li>
+              </GlassPanel>
             ))}
           </ol>
         </section>
@@ -266,7 +273,8 @@ export default function LandingPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section
+        <GlassPanel
+          as="section"
           className="blog-teaser section-shell"
           aria-labelledby="blog-teaser-title"
         >
@@ -282,7 +290,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
             {copy.blog.link}
             <ArrowUpRight aria-hidden="true" />
           </Link>
-        </section>
+        </GlassPanel>
 
         <section
           id="faq"
@@ -295,13 +303,13 @@ export default function LandingPage({ locale }: { locale: Locale }) {
           </header>
           <div className="faq-list">
             {copy.faq.items.map((item) => (
-              <details key={item.question}>
+              <GlassPanel as="details" key={item.question}>
                 <summary>
                   {item.question}
                   <Plus aria-hidden="true" />
                 </summary>
                 <p>{item.answer}</p>
-              </details>
+              </GlassPanel>
             ))}
           </div>
         </section>
@@ -311,7 +319,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
           className="closing-section"
           aria-labelledby="closing-title"
         >
-          <div className="section-shell">
+          <GlassPanel className="section-shell closing-panel">
             <p className="eyebrow">{copy.closing.eyebrow}</p>
             <h2 id="closing-title">{copy.closing.title}</h2>
             <p>{copy.closing.body}</p>
@@ -327,7 +335,7 @@ export default function LandingPage({ locale }: { locale: Locale }) {
                 triggerClassName="button button-secondary"
               />
             </div>
-          </div>
+          </GlassPanel>
         </section>
       </PageMotion>
       <SiteFooter locale={locale} />
@@ -358,7 +366,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   );
 
   return (
-    <header className="site-header">
+    <GlassPanel as="header" tier="nav" className="site-header">
       <div className="section-shell header-inner">
         <Link
           href={HOME_PATH[locale]}
@@ -388,7 +396,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               {locale.toUpperCase()}
             </summary>
             <div
-              className="locale-switcher"
+              className="locale-switcher glass glass-panel"
               role="group"
               aria-label={copy.nav.language}
             >
@@ -404,7 +412,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               <span />
               <span />
             </summary>
-            <nav aria-label={copy.nav.mobileNavigation}>
+            <nav className="glass glass-panel" aria-label={copy.nav.mobileNavigation}>
               {navigation}
               <a href={LOGIN_URL}>
                 {copy.nav.login}
@@ -414,14 +422,14 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           </details>
         </div>
       </div>
-    </header>
+    </GlassPanel>
   );
 }
 
 export function SiteFooter({ locale }: { locale: Locale }) {
   const copy = LANDING_COPY[locale];
   return (
-    <footer className="site-footer section-shell">
+    <GlassPanel as="footer" className="site-footer section-shell">
       <div className="footer-top">
         <Link href={HOME_PATH[locale]} className="wordmark">
           <Image src="/icon.svg" alt="" width={30} height={30} />
@@ -445,6 +453,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </nav>
         <p>{copy.footer.rights}</p>
       </div>
-    </footer>
+    </GlassPanel>
   );
 }
