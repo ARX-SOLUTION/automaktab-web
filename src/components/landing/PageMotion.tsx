@@ -20,35 +20,20 @@ export default function PageMotion({ children }: { children: ReactNode }) {
         gsap.from(
           element.querySelectorAll("[data-hero-title], [data-hero-item]"),
           {
-            y: 20,
-            opacity: 0,
-            duration: 0.65,
-            stagger: 0.08,
+            y: 16,
+            duration: 0.6,
+            stagger: 0.06,
             ease: "power3.out",
-            clearProps: "all",
+            clearProps: "transform",
           },
         );
         const proof = element.querySelector("[data-hero-proof]");
         if (proof) {
-          gsap.fromTo(
-            proof,
-            { scale: 0.8, opacity: 0 },
-            {
-              scale: 1,
-              opacity: 1,
-              duration: 1,
-              ease: "power3.out",
-            },
-          );
-          gsap.to(proof.querySelector(".hero-image-frame"), {
-            opacity: 0.2,
-            ease: "none",
-            scrollTrigger: {
-              trigger: proof,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
+          gsap.from(proof, {
+            y: 18,
+            duration: 0.8,
+            ease: "power3.out",
+            clearProps: "transform",
           });
         }
       });

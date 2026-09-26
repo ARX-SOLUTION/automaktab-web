@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import DemoLink from "@/components/landing/DemoLink";
 import { SiteFooter, SiteHeader } from "@/components/landing/LandingPage";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 import {
   getSeoPage,
   getSeoPagePaths,
@@ -100,15 +101,15 @@ export default async function SeoPage({
 
         <nav className="article-tags" aria-label={copy.relatedLabel}>
           {relatedPageIds(id).map((candidateId) => (
-            <li key={candidateId}>
+            <GlassPanel as="li" tier="inset" key={candidateId}>
               <Link href={getSeoPagePath(candidateId, candidate)}>
                 {SEO_PAGES[candidateId][candidate].eyebrow}
               </Link>
-            </li>
+            </GlassPanel>
           ))}
         </nav>
 
-        <aside className="article-cta">
+        <GlassPanel as="aside" className="article-cta">
           <div>
             <h2>{copy.cta.title}</h2>
             <p>{copy.cta.body}</p>
@@ -117,7 +118,7 @@ export default async function SeoPage({
             {copy.cta.label}
             <ArrowUpRight aria-hidden="true" />
           </DemoLink>
-        </aside>
+        </GlassPanel>
       </main>
       <SiteFooter locale={candidate} />
     </>

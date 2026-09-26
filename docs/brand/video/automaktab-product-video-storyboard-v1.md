@@ -11,6 +11,8 @@ Checkpoint 1 includes the locked narration layout, two generated atmosphere stil
 
 Production approach: [Automaktab product video production approach](../../plans/2026-09-17-automaktab-product-video.md).
 
+The website visual baseline is liquid glass ([ADR 0004](../../adr/0004-liquid-glass-public-visual-system.md)). This storyboard remains the campaign-video spec.
+
 ## Frame 01 — the control question
 
 **Time:** `00:00–00:03`

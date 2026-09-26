@@ -11,6 +11,8 @@ title: Automaktab product video production approach
 
 Create a product-led campaign video for Uzbek driving-school owners that moves from operational disorder to a visible control center and sends viewers to the live synthetic demo.
 
+This storyboard is the campaign video. The public website visual baseline is liquid glass in ADR 0004. This document does not restyle the site.
+
 Primary CTA: `Demo’ni hozir oching — automaktab.uz`.
 
 ## Scope

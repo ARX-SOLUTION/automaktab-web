@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { SiteFooter, SiteHeader } from "@/components/landing/LandingPage";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 import DemoLink from "@/components/landing/DemoLink";
 import { BLOG_COPY } from "@/config/blog";
 import {
@@ -158,7 +159,7 @@ export default async function BlogArticle({
           </div>
         </header>
 
-        <figure className="article-evidence">
+        <GlassPanel as="figure" tier="proof" className="article-evidence">
           <div className="evidence-topline">
             <span>{copy.evidenceLabel}</span>
             <span>01 / 01</span>
@@ -173,7 +174,7 @@ export default async function BlogArticle({
               sizes="(max-width: 767px) 92vw, 78vw"
             />
           </div>
-        </figure>
+        </GlassPanel>
 
         <article className="article-prose">
           <ReactMarkdown
@@ -187,12 +188,14 @@ export default async function BlogArticle({
         {post.tags.length > 0 && (
           <ul className="article-tags" aria-label={copy.tagsLabel}>
             {post.tags.map((tag) => (
-              <li key={tag}>{tag}</li>
+              <GlassPanel as="li" tier="inset" key={tag}>
+                {tag}
+              </GlassPanel>
             ))}
           </ul>
         )}
 
-        <aside className="article-cta">
+        <GlassPanel as="aside" className="article-cta">
           <div>
             <h2>{copy.closingTitle}</h2>
             <p>{copy.closingBody}</p>
@@ -201,7 +204,7 @@ export default async function BlogArticle({
             {copy.closingCta}
             <ArrowRight />
           </DemoLink>
-        </aside>
+        </GlassPanel>
       </main>
       <SiteFooter locale={locale} />
     </>

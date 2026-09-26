@@ -11,6 +11,7 @@ import {
   Play,
 } from "lucide-react";
 import type { LandingCopy, ProductProof } from "@/config/landing";
+import { GlassPanel } from "@/components/ui/GlassPanel";
 
 export function ProductAccordion({
   items,
@@ -24,7 +25,9 @@ export function ProductAccordion({
   return (
     <div className="product-accordion">
       {items.map((item) => (
-        <article
+        <GlassPanel
+          as="article"
+          tier="proof"
           key={item.id}
           className="product-panel"
           data-active={active === item.id}
@@ -64,7 +67,7 @@ export function ProductAccordion({
               <figcaption>{label}</figcaption>
             </figure>
           </div>
-        </article>
+        </GlassPanel>
       ))}
     </div>
   );
@@ -80,7 +83,7 @@ export function WorkflowMarquee({
   const [paused, setPaused] = useState(false);
 
   return (
-    <div className="workflow-strip" data-paused={paused}>
+    <GlassPanel className="workflow-strip" data-paused={paused}>
       <div className="workflow-mask">
         <div className="workflow-track">
           {[0, 1].map((copy) => (
@@ -108,7 +111,7 @@ export function WorkflowMarquee({
       >
         {paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
       </button>
-    </div>
+    </GlassPanel>
   );
 }
 
@@ -116,7 +119,11 @@ export function TrialCarousel({ copy }: { copy: LandingCopy["trial"] }) {
   const [active, setActive] = useState(0);
 
   return (
-    <div className="trial-carousel" role="region" aria-label={copy.title}>
+    <GlassPanel
+      className="trial-carousel"
+      role="region"
+      aria-label={copy.title}
+    >
       <div className="trial-progress" aria-hidden="true">
         {copy.steps.map((step, index) => (
           <span key={step.index} data-active={index === active} />
@@ -154,6 +161,6 @@ export function TrialCarousel({ copy }: { copy: LandingCopy["trial"] }) {
           </button>
         </div>
       </div>
-    </div>
+    </GlassPanel>
   );
 }

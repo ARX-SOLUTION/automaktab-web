@@ -16,7 +16,9 @@ The landing is the single conversion path. Pricing, feature, FAQ, and similar pa
 
 ## Design tokens
 
-Colors, spacing, and radius come from `@autodrive/design-tokens/tokens.css`. The package's `tailwind-preset.cjs` targets Tailwind v3 and is not consumable here.
+The public visual system is liquid glass, specified in `DESIGN.md` and ADR 0004. Marketing surfaces use the CSS variables in `src/app/globals.css`. They do not use the CRM amber primary as the page accent.
+
+Shared color primitives still exist in `@autodrive/design-tokens/tokens.css`. The package's `tailwind-preset.cjs` targets Tailwind v3 and is not consumable here.
 
 Typography is a known upstream gap: the brand fonts exist only in the preset, while `tokens.css` has no font variables. Fix that in the token package and bump the pinned SHA; do not import the preset as a workaround.
 
