@@ -46,3 +46,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local agent tooling and reports; keep project/product Markdown tracked
+AGENTS.md
+CLAUDE.md
+/.agents/
+/.claude/
+/.codex/
+/.pi/
+/.omp/
+/skills/
+/skills-lock.json
+/docs/agents/
+/.reviews/
+/.review-scratch/
+/.plans/
+/anti-slop/
+/deploy-evidence/
+/graphify-out/
+# Reproducible test and compiler output
+/test-results/
+/playwright-report/
+*.tsbuildinfo
+
+# Local review snapshots
+/docs/ui-ux-audit-research.md
