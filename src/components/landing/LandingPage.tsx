@@ -1,458 +1,132 @@
-import Image from "next/image";
-import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUpRight,
-  CalendarDays,
-  Check,
-  CheckCheck,
-  Layers3,
-  LockKeyhole,
-  Plus,
-  Users,
-  Wallet,
-} from "lucide-react";
+import React from "react";
 import type { Locale } from "@/i18n/config";
-import { LANDING_COPY, PILLAR_ARTICLE_SLUG } from "@/config/landing";
-import { getSeoPagePath } from "@/config/seo-pages";
-import { GlassPanel } from "@/components/ui/GlassPanel";
-import { HeroSection } from "@/components/ui/hero-section-dark";
-import DemoLink from "./DemoLink";
-import DemoRequestDialog from "./DemoRequestDialog";
-import { DEMO_FORM_COPY } from "./demo-copy";
-import {
-  ProductAccordion,
-  TrialCarousel,
-  WorkflowMarquee,
-} from "./LandingInteractions";
-import PageMotion from "./PageMotion";
+import type { LandingContent } from "@/content/uz";
+import { contentUz } from "@/content/uz";
+import { contentRu } from "@/content/ru";
+import { contentEn } from "@/content/en";
+import { getLandingConfig } from "@/config/landing-config";
+import SiteHeader from "./SiteHeader";
+import HeroSign from "./HeroSign";
+import LaneCTA from "./LaneCTA";
+import ProofFrame from "./ProofFrame";
+import MorningReportWidget from "./MorningReportWidget";
+import ProblemChips from "./ProblemChips";
+import RoadStepper from "./RoadStepper";
+import AttendanceDemo from "./AttendanceDemo";
+import RoleTabs from "./RoleTabs";
+import ResourceCards from "./ResourceCards";
+import TrafficStep from "./TrafficStep";
+import PricingCards from "./PricingCards";
+import FaqAccordion from "./FaqAccordion";
+import FinalCTA from "./FinalCTA";
+import SiteFooter from "./SiteFooter";
 
-const LOGIN_URL = "https://app.automaktab.uz/login";
-const HOME_PATH: Record<Locale, string> = { uz: "/", ru: "/ru", en: "/en" };
-const BLOG_PATH: Record<Locale, string> = {
-  uz: "/blog",
-  ru: "/ru/blog",
-  en: "/en/blog",
+export { SiteHeader, SiteFooter };
+
+interface LandingPageProps {
+  locale?: Locale;
+}
+
+const contentByLocale: Record<Locale, LandingContent> = {
+  uz: contentUz,
+  ru: contentRu,
+  en: contentEn,
 };
 
-function pillarArticlePath(locale: Locale) {
-  const path = `/blog/${PILLAR_ARTICLE_SLUG}`;
-  return locale === "uz" ? path : `/${locale}${path}`;
-}
-
-export default function LandingPage({ locale }: { locale: Locale }) {
-  const copy = LANDING_COPY[locale];
-  const features = copy.capabilities.items;
-  const [payments, students, schedule, attendance, branches, roles] = features;
+export default function LandingPage({ locale = "uz" }: LandingPageProps) {
+  const content = contentByLocale[locale] || contentUz;
+  const config = getLandingConfig();
 
   return (
-    <>
-      <SiteHeader locale={locale} />
-      <PageMotion>
-        <HeroSection
-          title={copy.hero.eyebrow}
-          subtitle={{ regular: copy.hero.title, gradient: copy.hero.accent }}
-          description={copy.hero.body}
-          bottomImage={{
-            light: "/images/product/dashboard.webp",
-            dark: "/images/product/dashboard.webp",
-            alt: copy.proof.items[0].imageAlt,
-            caption: copy.hero.screenshotCaption,
-            width: 1430,
-            height: 894,
-          }}
-          actions={
-            <>
-              <DemoLink locale={locale} className="button button-primary">
-                {copy.hero.primary}
-                <ArrowUpRight aria-hidden="true" />
-              </DemoLink>
-              <DemoRequestDialog
-                copy={DEMO_FORM_COPY[locale]}
-                locale={locale}
-                triggerLabel={copy.hero.secondary}
-                triggerClassName="button button-secondary"
-              />
-            </>
-          }
-        />
+    <div className="min-h-screen bg-[#F4EFE4] text-[#14211A] flex flex-col font-['Barlow',system-ui,sans-serif] selection:bg-[#E8A317] selection:text-[#0B2B1F]">
+      {/* 00 Sticky Header */}
+      <SiteHeader content={content.header} locale={locale} />
 
-        <div className="hero-footnote section-shell">
-          <ul className="trust-list">
-            {copy.hero.trust.map((item) => (
-              <li key={item}>
-                <Check aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-          <a className="explore-link" href="#capabilities">
-            {copy.nav.capabilities}
-            <ArrowDown aria-hidden="true" />
-          </a>
-        </div>
-
+      <main id="main-content" className="flex-1">
+        {/* 01 Hero Section */}
         <section
-          id="capabilities"
-          className="capabilities-section section-shell chapter"
-          aria-labelledby="capabilities-title"
+          data-screen-label="01 Hero"
+          className="bg-[#0B2B1F] text-white pt-16 sm:pt-20 pb-44 sm:pb-52 px-6 relative overflow-hidden"
+          aria-labelledby="hero-heading"
         >
-          <header className="section-heading">
-            <p className="eyebrow">{copy.capabilities.eyebrow}</p>
-            <h2 id="capabilities-title">{copy.capabilities.title}</h2>
-            <p>{copy.capabilities.body}</p>
-          </header>
-          <div className="capability-grid grid-flow-dense">
-            <GlassPanel
-              as="article"
-              className="feature-card feature-finance group"
-            >
-              <div className="feature-copy">
-                <Wallet className="feature-icon" aria-hidden="true" />
-                <h3>
-                  <Link href={getSeoPagePath("payments", locale)}>
-                    {payments.title}
-                  </Link>
-                </h3>
-                <p>{payments.body}</p>
-              </div>
-              <div className="feature-image overflow-hidden">
-                <Image
-                  src="/images/product/dashboard.webp"
-                  alt={copy.proof.items[0].imageAlt}
-                  width={1430}
-                  height={894}
-                  sizes="(max-width: 767px) 90vw, 45vw"
-                  className="transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              </div>
-              <div className="feature-bottom">
-                <span>{copy.proof.items[0].eyebrow}</span>
-                <ArrowUpRight aria-hidden="true" />
-              </div>
-            </GlassPanel>
-            <GlassPanel
-              as="article"
-              className="feature-card feature-schedule group"
-            >
-              <div className="feature-copy">
-                <CalendarDays className="feature-icon" aria-hidden="true" />
-                <h3>
-                  <Link href={getSeoPagePath("schedule", locale)}>
-                    {schedule.title}
-                  </Link>
-                </h3>
-                <p>{schedule.body}</p>
-              </div>
-              <div className="schedule-crop overflow-hidden">
-                <Image
-                  src="/images/product/schedule.webp"
-                  alt={copy.proof.items[1].imageAlt}
-                  width={1430}
-                  height={894}
-                  sizes="(max-width: 767px) 70vw, 30vw"
-                  className="transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              </div>
-            </GlassPanel>
-            <GlassPanel as="article" className="feature-card feature-attendance">
-              <CheckCheck className="feature-icon" aria-hidden="true" />
-              <h3>
-                <Link href={getSeoPagePath("attendance", locale)}>
-                  {attendance.title}
-                </Link>
-              </h3>
-              <p>{attendance.body}</p>
-              <div className="attendance-marks" aria-hidden="true">
-                <Check />
-                <Check />
-                <Check />
-                <span>—</span>
-                <Check />
-              </div>
-              <div className="feature-detail">
-                <Users aria-hidden="true" />
-                <div>
-                  <h4>{students.title}</h4>
-                  <p>{students.body}</p>
-                </div>
-              </div>
-            </GlassPanel>
-            <GlassPanel as="article" className="feature-card feature-access">
-              <Layers3 className="feature-icon" aria-hidden="true" />
-              <h3>
-                <Link href={getSeoPagePath("branches", locale)}>
-                  {branches.title}
-                </Link>
-              </h3>
-              <p>{branches.body}</p>
-              <div className="branch-orbit" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <Layers3 />
-              </div>
-              <div className="feature-detail">
-                <LockKeyhole aria-hidden="true" />
-                <div>
-                  <h4>{roles.title}</h4>
-                  <p>{roles.body}</p>
-                </div>
-              </div>
-            </GlassPanel>
-          </div>
-        </section>
-
-        <WorkflowMarquee
-          items={features.map((item) => item.title)}
-          pauseLabel={copy.pauseMotion}
-        />
-
-        <section
-          id="product"
-          className="proof-section section-shell chapter"
-          aria-labelledby="proof-title"
-        >
-          <header className="section-heading split-heading">
-            <div>
-              <p className="eyebrow">{copy.proof.eyebrow}</p>
-              <h2 id="proof-title">{copy.proof.title}</h2>
-            </div>
-            <p>{copy.proof.body}</p>
-          </header>
-          <ProductAccordion
-            items={copy.proof.items}
-            label={copy.proof.liveLabel}
-          />
-        </section>
-
-        <section
-          className="disorder-section section-shell chapter"
-          aria-labelledby="disorder-title"
-        >
-          <header className="section-heading">
-            <p className="eyebrow">{copy.disorder.eyebrow}</p>
-            <h2 id="disorder-title">{copy.disorder.title}</h2>
-            <p>{copy.disorder.body}</p>
-          </header>
-          <ol className="disorder-list" data-card-stack>
-            {copy.disorder.items.map((item, index) => (
-              <GlassPanel as="li" key={item.index} data-stack-card>
-                <span className="story-symbol" aria-hidden="true">
-                  {index === 0 ? (
-                    <Wallet />
-                  ) : index === 1 ? (
-                    <CheckCheck />
-                  ) : (
-                    <CalendarDays />
-                  )}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </GlassPanel>
-            ))}
-          </ol>
-        </section>
-
-        <section
-          className="trial-section chapter"
-          aria-labelledby="trial-title"
-        >
-          <div className="section-shell trial-inner">
-            <header className="section-heading">
-              <p className="eyebrow">{copy.trial.eyebrow}</p>
-              <h2 id="trial-title">{copy.trial.title}</h2>
-              <p>{copy.trial.body}</p>
-              <DemoLink locale={locale} className="button button-primary">
-                {copy.hero.primary}
-                <ArrowUpRight aria-hidden="true" />
-              </DemoLink>
-            </header>
-            <TrialCarousel copy={copy.trial} />
-          </div>
-        </section>
-
-        <GlassPanel
-          as="section"
-          className="blog-teaser section-shell"
-          aria-labelledby="blog-teaser-title"
-        >
-          <div className="blog-teaser-icon" aria-hidden="true">
-            <Layers3 />
-          </div>
-          <div>
-            <p className="eyebrow">{copy.blog.eyebrow}</p>
-            <h2 id="blog-teaser-title">{copy.blog.title}</h2>
-            <p>{copy.blog.body}</p>
-          </div>
-          <Link href={pillarArticlePath(locale)} className="text-link">
-            {copy.blog.link}
-            <ArrowUpRight aria-hidden="true" />
-          </Link>
-        </GlassPanel>
-
-        <section
-          id="faq"
-          className="faq-section section-shell chapter"
-          aria-labelledby="faq-title"
-        >
-          <header className="section-heading">
-            <p className="eyebrow">{copy.faq.eyebrow}</p>
-            <h2 id="faq-title">{copy.faq.title}</h2>
-          </header>
-          <div className="faq-list">
-            {copy.faq.items.map((item) => (
-              <GlassPanel as="details" key={item.question}>
-                <summary>
-                  {item.question}
-                  <Plus aria-hidden="true" />
-                </summary>
-                <p>{item.answer}</p>
-              </GlassPanel>
-            ))}
-          </div>
-        </section>
-
-        <section
-          id="demo"
-          className="closing-section"
-          aria-labelledby="closing-title"
-        >
-          <GlassPanel className="section-shell closing-panel">
-            <p className="eyebrow">{copy.closing.eyebrow}</p>
-            <h2 id="closing-title">{copy.closing.title}</h2>
-            <p>{copy.closing.body}</p>
-            <div className="closing-actions">
-              <DemoLink locale={locale} className="button button-primary">
-                {copy.closing.primary}
-                <ArrowUpRight aria-hidden="true" />
-              </DemoLink>
-              <DemoRequestDialog
-                copy={DEMO_FORM_COPY[locale]}
-                locale={locale}
-                triggerLabel={copy.closing.secondary}
-                triggerClassName="button button-secondary"
-              />
-            </div>
-          </GlassPanel>
-        </section>
-      </PageMotion>
-      <SiteFooter locale={locale} />
-    </>
-  );
-}
-
-export function SiteHeader({ locale }: { locale: Locale }) {
-  const copy = LANDING_COPY[locale];
-  const localeLinks = (["uz", "ru", "en"] as const).map((item) => (
-    <Link
-      key={item}
-      href={HOME_PATH[item]}
-      lang={item}
-      aria-current={item === locale ? "page" : undefined}
-    >
-      {item.toUpperCase()}
-    </Link>
-  ));
-  const navigation = (
-    <>
-      <a href={`${HOME_PATH[locale]}#product`}>{copy.nav.proof}</a>
-      <a href={`${HOME_PATH[locale]}#capabilities`}>{copy.nav.capabilities}</a>
-      <a href={`${HOME_PATH[locale]}#faq`}>{copy.nav.faq}</a>
-      <Link href={getSeoPagePath("pricing", locale)}>{copy.nav.pricing}</Link>
-      <Link href={BLOG_PATH[locale]}>{copy.nav.blog}</Link>
-    </>
-  );
-
-  return (
-    <GlassPanel as="header" tier="nav" className="site-header">
-      <div className="section-shell header-inner">
-        <Link
-          href={HOME_PATH[locale]}
-          className="wordmark"
-          aria-label="automaktab.uz"
-        >
-          <Image src="/icon.svg" alt="" width={30} height={30} />
-          <span>
-            automaktab<span className="wordmark-domain">.uz</span>
-          </span>
-        </Link>
-        <nav className="desktop-nav" aria-label={copy.nav.mainNavigation}>
-          {navigation}
-        </nav>
-        <div className="header-actions">
+          {/* Dashed Road Line */}
           <div
-            className="locale-switcher"
-            role="group"
-            aria-label={copy.nav.language}
-          >
-            {localeLinks}
-          </div>
-          <details className="mobile-locale-menu" name="header-menu">
-            <summary
-              aria-label={`${copy.nav.language}: ${locale.toUpperCase()}`}
-            >
-              {locale.toUpperCase()}
-            </summary>
-            <div
-              className="locale-switcher glass glass-panel"
-              role="group"
-              aria-label={copy.nav.language}
-            >
-              {localeLinks}
-            </div>
-          </details>
-          <a href={LOGIN_URL} className="login-link">
-            {copy.nav.login}
-            <ArrowUpRight aria-hidden="true" />
-          </a>
-          <details className="mobile-menu" name="header-menu">
-            <summary aria-label={copy.nav.menu}>
-              <span />
-              <span />
-            </summary>
-            <nav className="glass glass-panel" aria-label={copy.nav.mobileNavigation}>
-              {navigation}
-              <a href={LOGIN_URL}>
-                {copy.nav.login}
-                <ArrowRight aria-hidden="true" />
-              </a>
-            </nav>
-          </details>
-        </div>
-      </div>
-    </GlassPanel>
-  );
-}
+            className="absolute inset-x-0 bottom-28 h-1.5 opacity-20 pointer-events-none select-none"
+            style={{
+              background:
+                "repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0 56px, transparent 56px 96px)",
+            }}
+            aria-hidden="true"
+          />
 
-export function SiteFooter({ locale }: { locale: Locale }) {
-  const copy = LANDING_COPY[locale];
-  return (
-    <GlassPanel as="footer" className="site-footer section-shell">
-      <div className="footer-top">
-        <Link href={HOME_PATH[locale]} className="wordmark">
-          <Image src="/icon.svg" alt="" width={30} height={30} />
-          <span>
-            automaktab<span className="wordmark-domain">.uz</span>
-          </span>
-        </Link>
-        <p>{copy.footer.descriptor}</p>
-        <Link href={BLOG_PATH[locale]} className="text-link">
-          {copy.nav.blog}
-          <ArrowUpRight aria-hidden="true" />
-        </Link>
-      </div>
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} automaktab.uz</p>
-        <nav className="footer-legal" aria-label={copy.footer.legalNav}>
-          <Link href={getSeoPagePath("privacy", locale)}>
-            {copy.footer.privacy}
-          </Link>
-          <Link href={getSeoPagePath("terms", locale)}>{copy.footer.terms}</Link>
-        </nav>
-        <p>{copy.footer.rights}</p>
-      </div>
-    </GlassPanel>
+          <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 items-center relative z-10">
+            {/* Left Value Proposition */}
+            <div className="flex flex-col gap-6 sm:gap-7">
+              <div className="flex items-center gap-2.5 font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#E8A317] uppercase">
+                <span className="w-5 h-0.5 bg-[#E8A317]" aria-hidden="true" />
+                <span>{content.hero.eyebrow}</span>
+              </div>
+
+              <h1
+                id="hero-heading"
+                className="m-0 font-['Barlow_Condensed'] font-extrabold text-[clamp(48px,6vw,76px)] leading-[0.92] tracking-[-0.01em] [text-wrap:balance]"
+              >
+                {content.hero.title}
+                <span className="text-[#E8A317]">{content.hero.titleAccent}</span>
+              </h1>
+
+              <p className="m-0 max-w-[560px] font-['Barlow'] font-normal text-[19px] leading-[1.6] text-[#C4D3CA] [text-wrap:pretty]">
+                {content.hero.description}
+              </p>
+
+              {/* 2-Lane CTA */}
+              <LaneCTA content={content.hero} demoAccess={config.demoAccess} />
+            </div>
+
+            {/* Right Highway Direction Sign */}
+            <HeroSign content={content.hero} />
+          </div>
+        </section>
+
+        {/* 02 Proof Frame Section (overlaps hero by -150px) */}
+        <ProofFrame content={content.proof} />
+
+        {/* 03 Problem (Muammo) */}
+        <ProblemChips content={content.problem} />
+
+        {/* 03b Morning Telegram Report (08:00 Nazorat Hisoboti) */}
+        <MorningReportWidget content={content.morningReport} />
+
+        {/* 04 Student Journey (Talaba yo‘li) */}
+        <RoadStepper content={content.journey} />
+
+        {/* 05 Live Attendance Demo (Sinab ko‘ring) */}
+        <AttendanceDemo content={content.attendanceDemo} />
+
+        {/* 06 Personas (Kimlar uchun) */}
+        <RoleTabs content={content.roles} />
+
+        {/* 07 Resources & Roadmap (Resurslar) */}
+        <ResourceCards
+          content={content.resources}
+          showRoadmap={config.showRoadmap}
+        />
+
+        {/* 08 How It Works (Qanday ishlaydi) */}
+        <TrafficStep content={content.howItWorks} />
+
+        {/* 09 Pricing & Onboarding Form (Tariflar) */}
+        <PricingCards content={content.pricing} demoAccess={config.demoAccess} />
+
+        {/* 10 FAQ (Savollar) */}
+        <FaqAccordion content={content.faq} demoAccess={config.demoAccess} />
+
+        {/* 11 Final Call To Action */}
+        <FinalCTA content={content.finalCta} />
+      </main>
+
+      {/* 12 Site Footer */}
+      <SiteFooter content={content.footer} locale={locale} />
+    </div>
   );
 }

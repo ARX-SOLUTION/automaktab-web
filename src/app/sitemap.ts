@@ -50,6 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [
     { path: "/", priority: 1, changeFrequency: "weekly" as const },
     { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/changelog", priority: 0.85, changeFrequency: "weekly" as const },
   ];
   const seoPages = SEO_PAGE_IDS.flatMap((id) =>
     locales.map((locale) => ({

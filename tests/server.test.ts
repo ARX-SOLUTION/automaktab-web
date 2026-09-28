@@ -148,8 +148,8 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
   {
     id: "payments",
     paths: {
-      uz: "/imkoniyatlar/tolovlar-va-qarzdorlik",
-      ru: "/ru/vozmozhnosti/platezhi-i-zadolzhennost",
+      uz: "/features/payments-and-debt",
+      ru: "/ru/features/payments-and-debt",
       en: "/en/features/payments-and-debt",
     },
     headings: {
@@ -162,8 +162,8 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
   {
     id: "schedule",
     paths: {
-      uz: "/imkoniyatlar/dars-jadvali-va-guruhlar",
-      ru: "/ru/vozmozhnosti/raspisanie-i-gruppy",
+      uz: "/features/schedules-and-groups",
+      ru: "/ru/features/schedules-and-groups",
       en: "/en/features/schedules-and-groups",
     },
     headings: {
@@ -176,8 +176,8 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
   {
     id: "attendance",
     paths: {
-      uz: "/imkoniyatlar/raqamli-davomat",
-      ru: "/ru/vozmozhnosti/tsifrovaya-poseshchaemost",
+      uz: "/features/digital-attendance",
+      ru: "/ru/features/digital-attendance",
       en: "/en/features/digital-attendance",
     },
     headings: {
@@ -190,8 +190,8 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
   {
     id: "branches",
     paths: {
-      uz: "/imkoniyatlar/filiallar-boshqaruvi",
-      ru: "/ru/vozmozhnosti/upravlenie-filialami",
+      uz: "/features/branch-management",
+      ru: "/ru/features/branch-management",
       en: "/en/features/branch-management",
     },
     headings: {
@@ -204,8 +204,8 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
   {
     id: "pricing",
     paths: {
-      uz: "/tariflar",
-      ru: "/ru/tarify",
+      uz: "/pricing",
+      ru: "/ru/pricing",
       en: "/en/pricing",
     },
     headings: {
@@ -228,9 +228,9 @@ const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
 );
 
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Avtomaktabingiz.", accent: "Doim nazoratda." },
-  ru: { prefix: "Ваша автошкола.", accent: "Под контролем." },
-  en: { prefix: "Your driving school.", accent: "Under control." },
+  uz: { prefix: "Qarz, dars va mashinalar", accent: "har kuni 08:00 da Telegram’da" },
+  ru: { prefix: "Долги, занятия и машины", accent: "каждый день в 08:00 в Telegram" },
+  en: { prefix: "Debts, lessons and cars", accent: "in Telegram every day at 08:00" },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<
@@ -259,18 +259,18 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 const normalizeUrl = (u: string) => u.replace(/\/$/, "");
 
 const CAPABILITIES_TITLE: Record<Locale, string> = {
-  uz: "Rahbar ko‘radi. Jamoa bir xil tizimda ishlaydi.",
-  ru: "Руководитель видит. Команда работает в одной системе.",
-  en: "The owner sees. The team works in one system.",
+  uz: "Qabuldan imtihongacha: bitta tizimda.",
+  ru: "От набора до экзамена: в одной системе.",
+  en: "From enrollment to exam: one system.",
 };
 
 const FAQ_TITLE: Record<Locale, string> = {
-  uz: "Savol qolmasin.",
-  ru: "Без скрытых условий.",
-  en: "No hidden claims.",
+  uz: "Ochiq savol, ochiq javob.",
+  ru: "Прямые вопросы, понятные ответы.",
+  en: "Direct questions, straight answers.",
 };
 
-const FAQ_ITEM_COUNT = 6;
+const FAQ_ITEM_COUNT = 7;
 
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
@@ -335,9 +335,9 @@ describe.each(LOCALE_ROUTES)(
       const html = await res.text();
       expect(html).toContain(CAPABILITIES_TITLE[locale]);
       expect(html).toContain(FAQ_TITLE[locale]);
-      expect(html).toContain("/images/product/dashboard.webp");
-      expect(html).toContain("/images/product/schedule.webp");
-      expect(html).toContain("/images/product/attendance.webp");
+      expect(html).toContain("/images/demo/dashboard.webp");
+      expect(html).toContain("/images/demo/davomat.webp");
+      expect(html).toContain("/images/demo/talabalar.webp");
       expect(html).toContain("https://app.automaktab.uz/login?demo=1");
       expect(html).not.toContain("AutoDrive");
     });
