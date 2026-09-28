@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Outfit } from "next/font/google";
+import { Barlow_Condensed, Barlow, JetBrains_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
 import { isLocale, SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
@@ -9,15 +9,24 @@ import {
 } from "@/lib/locale-metadata";
 import "../globals.css";
 
-const manrope = Manrope({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-barlow-condensed",
   display: "swap",
 });
 
-const outfit = Outfit({
+const barlow = Barlow({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -26,7 +35,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08140f",
+  themeColor: "#0B2B1F",
   colorScheme: "dark",
 };
 
@@ -43,7 +52,7 @@ const SEO_METADATA: Record<
   uz: {
     title: "Avtomaktab CRM va boshqaruv tizimi | automaktab.uz",
     description:
-      "Avtomaktab to‘lovlari, qarzdorlik, dars jadvali va davomatini bitta CRM boshqaruv tizimida nazorat qiling. 30 kun bepul sinab ko‘ring.",
+      "Avtomaktabdagi talabalar, guruhlar, to‘lov va qarzdorlik, dars jadvali, davomat hamda filial holatini bir platformada ko‘ring. Namuna demoni oching.",
     keywords: [
       "avtomaktab CRM",
       "avtomaktab boshqaruv tizimi",
@@ -127,7 +136,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${manrope.variable} ${outfit.variable}`}
+      className={`${barlowCondensed.variable} ${barlow.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>

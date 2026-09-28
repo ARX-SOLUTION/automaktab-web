@@ -16,7 +16,7 @@ The landing is the single conversion path. Pricing, feature, FAQ, and similar pa
 
 ## Design tokens
 
-The public visual system is liquid glass, specified in `DESIGN.md` and ADR 0004. Marketing surfaces use the CSS variables in `src/app/globals.css`. They do not use the CRM amber primary as the page accent.
+The public visual system is the road-signal system in ADR 0005: forest `#0B2B1F` and sand `#F4EFE4` grounds, amber `#E8A317` as the single action accent, Barlow Condensed, Barlow, and JetBrains Mono. ADR 0004 (liquid glass) is superseded. Marketing surfaces use the CSS variables in `src/app/globals.css`. ADR 0005 also sets the copy budget for titles, descriptions, bullets, and CTAs.
 
 Shared color primitives still exist in `@autodrive/design-tokens/tokens.css`. The package's `tailwind-preset.cjs` targets Tailwind v3 and is not consumable here.
 

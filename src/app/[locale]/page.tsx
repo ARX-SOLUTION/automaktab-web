@@ -1,13 +1,27 @@
 import { notFound } from "next/navigation";
 import LandingPage from "@/components/landing/LandingPage";
-import { LANDING_COPY } from "@/config/landing";
-import { isLocale } from "@/i18n/config";
+import type { LandingContent } from "@/content/uz";
+import { contentUz } from "@/content/uz";
+import { contentRu } from "@/content/ru";
+import { contentEn } from "@/content/en";
+import { isLocale, type Locale } from "@/i18n/config";
 
-export default async function Home({ params }: PageProps<"/[locale]">) {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+const contentByLocale: Record<Locale, LandingContent> = {
+  uz: contentUz,
+  ru: contentRu,
+  en: contentEn,
+};
+
+export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const copy = LANDING_COPY[locale];
+  const content = contentByLocale[locale] || contentUz;
+
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -40,15 +54,15 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         operatingSystem: "Web",
         url: "https://automaktab.uz/",
         inLanguage: ["uz", "ru", "en"],
-        description: copy.hero.body,
+        description: content.hero.description,
         publisher: { "@id": "https://automaktab.uz/#organization" },
       },
       {
         "@type": "FAQPage",
-        mainEntity: copy.faq.items.map((item) => ({
+        mainEntity: content.faq.items.map((item) => ({
           "@type": "Question",
           name: item.question,
-          acceptedAnswer: { "@type": "Answer", text: item.answer },
+          acceptedAnswer: { "@type": "Answer", text: item.answerLogin },
         })),
       },
     ],
@@ -57,7 +71,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        {copy.skipLink}
+        Asosiy kontentga o‘tish
       </a>
       <script
         type="application/ld+json"
@@ -65,7 +79,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
           __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
-      <LandingPage locale={locale} />
+      <LandingPage locale={locale as Locale} />
     </>
   );
 }

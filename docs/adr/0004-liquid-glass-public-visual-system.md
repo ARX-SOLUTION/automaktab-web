@@ -1,5 +1,7 @@
 # Use liquid glass as the public visual system
 
+> Superseded by [ADR 0005](./0005-road-signal-landing-visual-system.md). The visual system below no longer applies; ADR 0001 story, proof, and claim limits still do.
+
 The marketing site’s visual baseline is liquid glass. [ADR 0001](./0001-public-brand-and-control-center-direction.md) still governs the public name `automaktab.uz`, the story from operational disorder to a control center, real synthetic-demo proof, the immediate demo as the primary action, and the ban on unsupported claims. Its light editorial canvas, the ban on glass, and the ban on a single hero WebGL scene are superseded here.
 
 Liquid glass is the material the page is built from. The hero is one slow liquid field. Navigation, proof frames, capability cards, objection panels, the introduction form, and shared article chrome are glass surfaces defined by tokens. A frosted rectangle added on top of the previous canvas is not this system.
