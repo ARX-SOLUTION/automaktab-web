@@ -228,9 +228,9 @@ const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
 );
 
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Qarz, dars va mashinalar", accent: "har kuni 08:00 da Telegram’da" },
-  ru: { prefix: "Долги, занятия и машины", accent: "каждый день в 08:00 в Telegram" },
-  en: { prefix: "Debts, lessons and cars", accent: "in Telegram every day at 08:00" },
+  uz: { prefix: "Avtomaktabingizdagi holat", accent: "bir qarashda aniq." },
+  ru: { prefix: "Вся автошкола", accent: "под вашим контролем." },
+  en: { prefix: "Your driving school,", accent: "clear at a glance." },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<
@@ -239,7 +239,7 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 > = {
   uz: {
     title: "Avtomaktab CRM",
-    description: "qarzdorlik",
+    description: "qarzdor",
   },
   ru: {
     title: "CRM для автошколы",
@@ -259,13 +259,13 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 const normalizeUrl = (u: string) => u.replace(/\/$/, "");
 
 const CAPABILITIES_TITLE: Record<Locale, string> = {
-  uz: "Qabuldan imtihongacha: bitta tizimda.",
+  uz: "Har bir talabaning holati ko‘z oldingizda.",
   ru: "От набора до экзамена: в одной системе.",
   en: "From enrollment to exam: one system.",
 };
 
 const FAQ_TITLE: Record<Locale, string> = {
-  uz: "Ochiq savol, ochiq javob.",
+  uz: "Tizimga o‘tishdan oldingi savollar.",
   ru: "Прямые вопросы, понятные ответы.",
   en: "Direct questions, straight answers.",
 };
