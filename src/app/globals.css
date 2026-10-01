@@ -1,6 +1,11 @@
 @import "@autodrive/design-tokens/tokens.css";
 @import "tailwindcss";
 
+/* The public site is light-only (<meta name="color-scheme" content="light">).
+   Bind dark: to a .dark class that is never set, so OS dark mode cannot
+   turn text white on the light shell. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-forest-900: var(--c-forest-900);
   --color-forest-800: var(--c-forest-800);
@@ -113,7 +118,8 @@
 }
 
 /* Landing layout: product proof and controls share a bounded, wrapping grid. */
-.landing-container {
+.landing-container,
+.section-shell {
   width: 100%;
   max-width: calc(var(--container) + 2 * var(--gutter));
   margin-inline: auto;
@@ -838,6 +844,21 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   line-height: 1.1;
 }
 
+.article-prose h2 {
+  margin: 3.5rem 0 1rem;
+}
+
+.article-prose h3 {
+  margin: 2.5rem 0 0.8rem;
+}
+
+.article-prose p,
+.article-prose ul,
+.article-prose ol,
+.article-prose blockquote {
+  margin-block: 1.2rem;
+}
+
 .article-prose a {
   color: var(--c-forest-600);
   text-decoration: underline;
@@ -848,4 +869,237 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   padding: 0.5rem 0 0.5rem 1.25rem;
   border-left: 1px solid var(--c-sand-300);
   color: var(--c-muted);
+}
+
+/* ──────────────────────────────────────────────────────────── */
+/* Shared supporting-page components (pricing, features, legal, */
+/* blog, changelog, not-found). Removed with the liquid-glass   */
+/* styles in #23; restored here in road-signal tokens. Kept in  */
+/* the components layer so Tailwind utilities can refine them.  */
+/* ──────────────────────────────────────────────────────────── */
+
+@layer components {
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+    color: var(--c-amber-700);
+    font-family: var(--f-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .signal-point {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 2px solid #85B828;
+    border-radius: 50%;
+    background: var(--c-amber-500);
+  }
+
+  .glass {
+    position: relative;
+    background: var(--c-paper);
+    border: 1px solid var(--c-sand-300);
+    border-radius: var(--r-l);
+  }
+
+  .glass-nav,
+  .glass-inset {
+    border-radius: var(--r-pill);
+  }
+
+  .glass-panel {
+    border-radius: var(--r-l);
+  }
+
+  .glass-proof {
+    border-radius: var(--r-l);
+    box-shadow: var(--shadow-proof);
+  }
+
+  .glass-form {
+    border-radius: var(--r-xl);
+  }
+
+  .glass-inset {
+    background: var(--c-sand-100);
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: var(--r-s);
+    font-family: var(--f-body);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: background-color 200ms, transform 200ms, box-shadow 200ms;
+  }
+
+  .button svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  .button:active {
+    transform: translateY(3px);
+  }
+
+  .button-primary {
+    border-bottom: 5px solid #85B828;
+    background: var(--c-amber-500);
+    color: var(--c-forest-800);
+    box-shadow: 0 5px 12px rgba(11, 23, 32, .09);
+  }
+
+  .button-primary:hover {
+    background: var(--c-amber-400);
+  }
+
+  .button-secondary {
+    border-color: var(--c-sand-300);
+    border-bottom-width: 5px;
+    background: var(--c-paper);
+    color: var(--c-ink);
+    box-shadow: 0 5px 12px rgba(11, 23, 32, .06);
+  }
+
+  .button-secondary:hover {
+    background: var(--c-sand-100);
+  }
+
+  .article-tags {
+    display: flex;
+    max-width: 48rem;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 4rem auto 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-tags li {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--c-body-2);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .article-tags a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--c-ink);
+  }
+
+  .article-tags a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .article-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 2rem 3rem;
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .article-cta h2 {
+    max-width: 24ch;
+    margin: 0 0 0.75rem;
+    font-family: var(--f-display);
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  .article-cta p {
+    max-width: 52ch;
+    margin: 0;
+    color: var(--c-body-2);
+    line-height: 1.65;
+  }
+
+  .article-back,
+  .blog-index-meta a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--c-forest-600);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .article-back {
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .article-back svg,
+  .blog-index-meta svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.5rem;
+    margin-top: 1.5rem;
+    color: var(--c-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .blog-empty {
+    max-width: 45rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: 2rem;
+  }
+
+  .blog-empty > span {
+    color: var(--c-amber-700);
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .blog-empty h2 {
+    margin: 1.5rem 0 0.75rem;
+    font-family: var(--f-display);
+    font-weight: 800;
+  }
+
+  .blog-empty p {
+    margin: 0;
+    color: var(--c-muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 767px) {
+    .article-cta {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
 }

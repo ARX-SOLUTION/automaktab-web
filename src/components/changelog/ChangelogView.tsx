@@ -159,30 +159,30 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
           <span>{copy.eyebrow}</span>
         </p>
 
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl text-[#0B2B1F] dark:text-white font-['Barlow_Condensed'] uppercase">
+        <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl text-[#0B2B1F] dark:text-white font-display uppercase">
           {copy.title}
         </h1>
 
-        <p className="text-base text-[#36453D] dark:text-[#B9C9BF] leading-relaxed max-w-2xl font-['Barlow']">
+        <p className="text-base text-[#36453D] dark:text-[#B9C9BF] leading-relaxed max-w-2xl font-body">
           {copy.description}
         </p>
 
         {/* Demo Data Notice (Audit compliance: C-5 & R-17) */}
-        <div className="flex items-center gap-2 text-xs font-['Barlow'] text-[#36453D] dark:text-[#B9C9BF] bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[6px] px-3 py-1.5 w-fit">
-          <span className="text-[#E8A317] font-bold" aria-hidden="true">i</span>
+        <div className="flex items-center gap-2 text-xs font-body text-[#36453D] dark:text-[#B9C9BF] bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] border border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] rounded-[6px] px-3 py-1.5 w-fit">
+          <span className="text-warn-text font-bold" aria-hidden="true">i</span>
           <span>{copy.demoNotice}</span>
         </div>
 
         {/* Filter Bar */}
         <div className="pt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] pb-4">
-          {/* Category Tabs: R-06 (Barlow font instead of generic mono) */}
+          {/* Category Tabs: R-06 (site body font instead of generic mono) */}
           <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label={copy.title}>
             <button
               type="button"
               role="tab"
               aria-selected={selectedCategory === 'all'}
               onClick={() => setSelectedCategory('all')}
-              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-['Barlow'] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
+              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
                 selectedCategory === 'all'
                   ? 'bg-[#E8A317] text-[#0B2B1F] shadow-sm'
                   : 'bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.06)] text-[#36453D] dark:text-[#B9C9BF] hover:bg-[rgba(0,0,0,0.08)]'
@@ -196,7 +196,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
               role="tab"
               aria-selected={selectedCategory === 'feature'}
               onClick={() => setSelectedCategory('feature')}
-              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-['Barlow'] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
+              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
                 selectedCategory === 'feature'
                   ? 'bg-[#E8A317] text-[#0B2B1F] shadow-sm'
                   : 'bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.06)] text-[#36453D] dark:text-[#B9C9BF] hover:bg-[rgba(0,0,0,0.08)]'
@@ -210,7 +210,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
               role="tab"
               aria-selected={selectedCategory === 'improvement'}
               onClick={() => setSelectedCategory('improvement')}
-              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-['Barlow'] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
+              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
                 selectedCategory === 'improvement'
                   ? 'bg-[#E8A317] text-[#0B2B1F] shadow-sm'
                   : 'bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.06)] text-[#36453D] dark:text-[#B9C9BF] hover:bg-[rgba(0,0,0,0.08)]'
@@ -224,7 +224,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
               role="tab"
               aria-selected={selectedCategory === 'fix'}
               onClick={() => setSelectedCategory('fix')}
-              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-['Barlow'] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
+              className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold font-body transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
                 selectedCategory === 'fix'
                   ? 'bg-[#E8A317] text-[#0B2B1F] shadow-sm'
                   : 'bg-[rgba(0,0,0,0.04)] dark:bg-[rgba(255,255,255,0.06)] text-[#36453D] dark:text-[#B9C9BF] hover:bg-[rgba(0,0,0,0.08)]'
@@ -242,7 +242,8 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={copy.searchPlaceholder}
-                className="h-8 w-44 sm:w-52 rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-3 text-xs placeholder:text-[#5A6660] dark:placeholder:text-[#B9C9BF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-['Barlow']"
+                aria-label={copy.searchPlaceholder}
+                className="h-11 sm:h-8 w-44 sm:w-52 rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-3 text-base sm:text-xs placeholder:text-[#5A6660] dark:placeholder:text-[#B9C9BF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-body"
               />
             </div>
 
@@ -250,7 +251,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
               value={selectedPillar}
               aria-label={copy.allPillars}
               onChange={(e) => setSelectedPillar(e.target.value as ProductPillar | 'all')}
-              className="h-8 min-w-0 max-w-full rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-2.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-['Barlow']"
+              className="h-11 sm:h-8 min-w-0 max-w-full rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-2.5 text-base sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-body"
             >
               <option value="all" className="bg-[#0B2B1F] text-white">
                 {copy.allPillars}
@@ -323,30 +324,30 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
 
                   <div className="md:sticky md:top-28 space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-['JetBrains_Mono'] text-sm font-bold text-[#0B2B1F] dark:text-white bg-[#E8A317]/15 border border-[#E8A317]/30 px-2.5 py-0.5 rounded-[6px]">
+                      <span className="font-mono text-sm font-bold text-[#0B2B1F] dark:text-white bg-[#E8A317]/15 border border-[#E8A317]/30 px-2.5 py-0.5 rounded-[6px]">
                         {item.version}
                       </span>
                       {item.isPlanned ? (
-                        <span className="text-[10px] font-semibold uppercase tracking-wider font-['Barlow'] bg-[#3B82F6]/20 text-[#2563EB] dark:text-[#60A5FA] border border-[#3B82F6]/30 px-2 py-0.5 rounded-[4px]">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider font-body bg-[#3B82F6]/20 text-[#2563EB] dark:text-[#60A5FA] border border-[#3B82F6]/30 px-2 py-0.5 rounded-[4px]">
                           {copy.plannedBadge}
                         </span>
                       ) : isLatest ? (
-                        <span className="text-[10px] font-semibold uppercase tracking-wider font-['Barlow'] bg-[#0E6B43]/20 text-[#0E6B43] dark:text-[#C6FF3D] border border-[#0E6B43]/30 px-2 py-0.5 rounded-[4px]">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider font-body bg-[#0E6B43]/20 text-[#0E6B43] dark:text-[#C6FF3D] border border-[#0E6B43]/30 px-2 py-0.5 rounded-[4px]">
                           {copy.latestBadge}
                         </span>
                       ) : null}
                     </div>
 
-                    <div className="text-xs text-[#36453D] dark:text-[#B9C9BF] font-['JetBrains_Mono']">
+                    <div className="text-xs text-[#36453D] dark:text-[#B9C9BF] font-mono">
                       <time dateTime={item.releaseDate}>{item.releaseDate}</time>
                     </div>
 
-                    <div className="text-xs text-[#36453D] dark:text-[#B9C9BF] font-['Barlow']">
+                    <div className="text-xs text-[#36453D] dark:text-[#B9C9BF] font-body">
                       <span>{authorRole}</span>
                     </div>
 
                     <div className="flex items-center gap-2 pt-0.5">
-                      <span className="inline-block text-[11px] font-medium font-['Barlow'] text-[#36453D] dark:text-[#B9C9BF] border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.1)] px-2 py-0.5 rounded-[4px]">
+                      <span className="inline-block text-[11px] font-medium font-body text-[#36453D] dark:text-[#B9C9BF] border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.1)] px-2 py-0.5 rounded-[4px]">
                         {pillarLabels[item.pillar]}
                       </span>
 
@@ -372,10 +373,10 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                 <div className="flex-1 min-w-0">
                   <GlassPanel className="p-5 sm:p-7 space-y-5 transition-all duration-200 group-hover:border-[#E8A317]/40 shadow-sm">
                     <div>
-                      <h2 className="text-2xl font-bold tracking-tight text-[#0B2B1F] dark:text-white font-['Barlow_Condensed'] uppercase [overflow-wrap:anywhere]">
+                      <h2 className="text-2xl font-bold tracking-tight text-[#0B2B1F] dark:text-white font-display uppercase [overflow-wrap:anywhere]">
                         {itemTitle}
                       </h2>
-                      <p className="mt-2 text-sm leading-relaxed text-[#2F3B35] dark:text-[#B9C9BF] font-['Barlow']">
+                      <p className="mt-2 text-sm leading-relaxed text-[#2F3B35] dark:text-[#B9C9BF] font-body">
                         {itemExcerpt}
                       </p>
                     </div>
@@ -386,17 +387,17 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                       <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] px-3 py-2 bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.03)]">
                         <div className="flex min-w-0 max-w-full items-center gap-2">
                           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0E6B43] dark:bg-[#C6FF3D]" aria-hidden="true" />
-                          <span className="min-w-0 [overflow-wrap:anywhere] font-['JetBrains_Mono'] text-[11px] text-[#36453D] dark:text-[#9DB5A7]">
+                          <span className="min-w-0 [overflow-wrap:anywhere] font-mono text-[11px] text-[#36453D] dark:text-[#9DB5A7]">
                             {item.routeHint}
                           </span>
                         </div>
-                        <span className="min-w-0 [overflow-wrap:anywhere] font-['Barlow'] text-[11px] font-medium text-[#0E6B43] dark:text-[#C6FF3D]">
+                        <span className="min-w-0 [overflow-wrap:anywhere] font-body text-[11px] font-medium text-[#0E6B43] dark:text-[#C6FF3D]">
                           {copy.testedBadge}
                         </span>
                       </div>
 
                       {/* Component Slice Representation */}
-                      <div className="p-4 space-y-3 [overflow-wrap:anywhere] font-['Barlow']">
+                      <div className="p-4 space-y-3 [overflow-wrap:anywhere] font-body">
                         <div className="flex min-w-0 flex-wrap items-center justify-between gap-2">
                           <span className="min-w-0 text-xs font-semibold text-[#0B2B1F] dark:text-white flex items-center gap-1.5">
                             <span className="text-[#0E6B43] dark:text-[#C6FF3D]" aria-hidden="true">✓</span>
@@ -427,7 +428,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                         {item.id === 'release-2-3-0' && (
                           <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono">
                             <span className="bg-[#0E6B43]/20 text-[#0E6B43] dark:text-[#C6FF3D] px-2 py-0.5 rounded">{locale === 'ru' ? "Пришёл (18)" : locale === 'en' ? "Present (18)" : "Keldi (18)"}</span>
-                            <span className="bg-[#E8A317]/20 text-[#E8A317] px-2 py-0.5 rounded">{locale === 'ru' ? "Опоздал (2)" : locale === 'en' ? "Late (2)" : "Kechikdi (2)"}</span>
+                            <span className="bg-[#E8A317]/20 text-warn-text px-2 py-0.5 rounded">{locale === 'ru' ? "Опоздал (2)" : locale === 'en' ? "Late (2)" : "Kechikdi (2)"}</span>
                             <span className="bg-[#C93B2B]/20 text-[#C93B2B] px-2 py-0.5 rounded">{locale === 'ru' ? "Не пришёл (2)" : locale === 'en' ? "Absent (2)" : "Kelmadi (2)"}</span>
                             <span className="bg-[rgba(0,0,0,0.08)] dark:bg-[rgba(255,255,255,0.1)] px-2 py-0.5 rounded">{locale === 'ru' ? "Уваж. причина (1)" : locale === 'en' ? "Excused (1)" : "Uzrli (1)"}</span>
                           </div>
@@ -501,11 +502,11 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                       {/* Features */}
                       {itemFeatures.length > 0 && (
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-['Barlow'] text-[#0E6B43] dark:text-[#C6FF3D]">
+                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-body text-[#0E6B43] dark:text-[#C6FF3D]">
                             <span>•</span>
                             <span>{copy.labelFeatures}</span>
                           </div>
-                          <ul className="space-y-1.5 pl-4 text-xs text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#0E6B43] dark:marker:text-[#C6FF3D] font-['Barlow']">
+                          <ul className="space-y-1.5 pl-4 text-[15px] text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#0E6B43] dark:marker:text-[#C6FF3D] font-body">
                             {itemFeatures.map((feat, i) => (
                               <li key={i} className="leading-relaxed">
                                 {feat}
@@ -518,11 +519,11 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                       {/* Improvements */}
                       {itemImprovements.length > 0 && (
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-['Barlow'] text-[#E8A317]">
+                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-body text-warn-text">
                             <span>•</span>
                             <span>{copy.labelImprovements}</span>
                           </div>
-                          <ul className="space-y-1.5 pl-4 text-xs text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#E8A317] font-['Barlow']">
+                          <ul className="space-y-1.5 pl-4 text-[15px] text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#E8A317] font-body">
                             {itemImprovements.map((imp, i) => (
                               <li key={i} className="leading-relaxed">
                                 {imp}
@@ -535,11 +536,11 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                       {/* Fixes */}
                       {itemFixes.length > 0 && (
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-['Barlow'] text-[#36453D] dark:text-[#9DB5A7]">
+                          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-body text-[#36453D] dark:text-[#9DB5A7]">
                             <span>•</span>
                             <span>{copy.labelFixes}</span>
                           </div>
-                          <ul className="space-y-1.5 pl-4 text-xs text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#36453D] dark:marker:text-[#9DB5A7] font-['Barlow']">
+                          <ul className="space-y-1.5 pl-4 text-[15px] text-[#14211A] dark:text-[#F3F6EE] list-disc marker:text-[#36453D] dark:marker:text-[#9DB5A7] font-body">
                             {itemFixes.map((fix, i) => (
                               <li key={i} className="leading-relaxed">
                                 {fix}
@@ -557,10 +558,10 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
 
           {filteredItems.length === 0 && (
             <GlassPanel className="p-12 text-center space-y-3">
-              <h2 className="text-xl font-bold text-[#0B2B1F] dark:text-white font-['Barlow_Condensed']">
+              <h2 className="text-xl font-bold text-[#0B2B1F] dark:text-white font-display">
                 {copy.emptyTitle}
               </h2>
-              <p className="text-sm text-[#36453D] dark:text-[#B9C9BF] max-w-md mx-auto font-['Barlow']">
+              <p className="text-sm text-[#36453D] dark:text-[#B9C9BF] max-w-md mx-auto font-body">
                 {copy.emptyBody}
               </p>
             </GlassPanel>
@@ -569,7 +570,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
 
         {/* Right Sticky Sidebar: Linear-Grade Table of Contents */}
         <aside className="hidden lg:block w-48 shrink-0 sticky top-28 space-y-2 text-xs">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-[#36453D] dark:text-[#B9C9BF] pb-1 border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] font-['Barlow']">
+          <div className="text-[11px] font-bold uppercase tracking-wider text-[#36453D] dark:text-[#B9C9BF] pb-1 border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] font-body">
             {copy.tableOfContents}
           </div>
           <nav aria-label={copy.tableOfContents} className="space-y-0.5">
@@ -582,12 +583,12 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                   aria-current={isActive ? 'location' : undefined}
                   className={`group flex items-center justify-between px-2.5 py-1.5 rounded-[4px] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] ${
                     isActive
-                      ? 'bg-[#E8A317]/15 text-[#E8A317] font-bold border-l-2 border-[#E8A317]'
+                      ? 'bg-[#E8A317]/15 text-warn-text font-bold border-l-2 border-[#E8A317]'
                       : 'text-[#36453D] dark:text-[#B9C9BF] hover:text-[#0B2B1F] dark:hover:text-white hover:bg-[rgba(0,0,0,0.03)]'
                   }`}
                 >
-                  <span className="font-['JetBrains_Mono']">{item.version}</span>
-                  <span className="text-[10px] font-['Barlow'] text-[#36453D]/70 dark:text-[#B9C9BF]/70 font-normal">
+                  <span className="font-mono">{item.version}</span>
+                  <span className="text-[10px] font-body text-[#36453D]/70 dark:text-[#B9C9BF]/70 font-normal">
                     {item.releaseDate.slice(5)}
                   </span>
                 </a>

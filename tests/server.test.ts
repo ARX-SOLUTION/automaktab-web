@@ -117,6 +117,20 @@ describe("security headers", () => {
       );
     }
   });
+
+  it("lets the Umami tracker load and deliver events to its collection host", async () => {
+    const res = await fetch(`${BASE_URL}/`);
+    const directives = Object.fromEntries(
+      (res.headers.get("content-security-policy") ?? "")
+        .split(";")
+        .map((directive) => directive.trim().split(/\s+/))
+        .map(([name, ...sources]) => [name, sources]),
+    );
+
+    expect(directives["script-src"]).toContain("https://cloud.umami.is");
+    // cloud.umami.is/script.js posts pageviews to gateway.umami.is/api/send.
+    expect(directives["connect-src"]).toContain("https://gateway.umami.is");
+  });
 });
 
 // Backstop for exits that skip afterAll (uncaught exception, SIGINT,
