@@ -172,17 +172,17 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
                   </div>
                   <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 px-2 sm:px-3.5 py-3 items-center border-b border-[#EEE7D8] bg-err-bg">
                     <span className="font-body font-semibold text-[14px] sm:text-[16px] text-ink">Saidova Feruza</span>
-                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px]">3 500 000</span>
-                    <span className="text-right font-mono font-semibold text-[12px] sm:text-[14px] text-err-text">▲ 3 500 000</span>
+                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px]">{"3\u00A0500\u00A0000"}</span>
+                    <span className="text-right font-mono font-semibold text-[12px] sm:text-[14px] text-err-text">▲ {"3\u00A0500\u00A0000"}</span>
                   </div>
                   <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 px-2 sm:px-3.5 py-3 items-center border-b border-[#EEE7D8]">
                     <span className="font-body font-semibold text-[14px] sm:text-[16px] text-ink">Tojiyeva Rustam</span>
-                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px]">2 800 000</span>
-                    <span className="text-right font-mono font-semibold text-[12px] sm:text-[14px] text-err-text">▲ 560 000</span>
+                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px]">{"2\u00A0800\u00A0000"}</span>
+                    <span className="text-right font-mono font-semibold text-[12px] sm:text-[14px] text-err-text">▲ {"560\u00A0000"}</span>
                   </div>
                   <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)] gap-2 px-2 sm:px-3.5 py-3 items-center">
                     <span className="font-body font-semibold text-[14px] sm:text-[16px] text-muted">Tojiyeva Feruza</span>
-                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px] text-muted">3 500 000</span>
+                    <span className="text-right font-mono font-medium text-[12px] sm:text-[14px] text-muted">{"3\u00A0500\u00A0000"}</span>
                     <span className="text-right font-mono font-semibold text-[12px] sm:text-[14px] text-ok-text">✓ {preview.payments.paidInFull}</span>
                   </div>
                 </div>

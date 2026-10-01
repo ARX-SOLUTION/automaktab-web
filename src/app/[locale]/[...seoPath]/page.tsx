@@ -103,14 +103,16 @@ export default async function SeoPage({
           ))}
         </article>
 
-        <nav className="article-tags" aria-label={copy.relatedLabel}>
-          {relatedPageIds(id).map((candidateId) => (
-            <GlassPanel as="li" tier="inset" key={candidateId}>
-              <Link href={getSeoPagePath(candidateId, candidate)}>
-                {SEO_PAGES[candidateId][candidate].eyebrow}
-              </Link>
-            </GlassPanel>
-          ))}
+        <nav aria-label={copy.relatedLabel}>
+          <ul className="article-tags">
+            {relatedPageIds(id).map((candidateId) => (
+              <GlassPanel as="li" tier="inset" key={candidateId}>
+                <Link href={getSeoPagePath(candidateId, candidate)}>
+                  {SEO_PAGES[candidateId][candidate].eyebrow}
+                </Link>
+              </GlassPanel>
+            ))}
+          </ul>
         </nav>
 
         <GlassPanel as="aside" className="article-cta">
