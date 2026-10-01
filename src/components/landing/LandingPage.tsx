@@ -38,58 +38,50 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
   const config = getLandingConfig();
 
   return (
-    <div className="min-h-screen bg-[#F4EFE4] text-[#14211A] flex flex-col font-['Barlow',system-ui,sans-serif] selection:bg-[#E8A317] selection:text-[#0B2B1F]">
-      {/* 00 Sticky Header */}
+    <div className="min-h-screen bg-sand-100 text-ink flex flex-col font-body selection:bg-amber-500 selection:text-forest-800">
+      {/* 00 Header */}
       <SiteHeader content={content.header} locale={locale} />
 
       <main id="main-content" className="flex-1">
         {/* 01 Hero Section */}
         <section
           data-screen-label="01 Hero"
-          className="bg-[#0B2B1F] text-white pt-16 sm:pt-20 pb-44 sm:pb-52 px-6 relative overflow-hidden"
+          className="landing-hero bg-forest-800 text-white"
           aria-labelledby="hero-heading"
         >
-          {/* Dashed Road Line */}
-          <div
-            className="absolute inset-x-0 bottom-28 h-1.5 opacity-20 pointer-events-none select-none"
-            style={{
-              background:
-                "repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0 56px, transparent 56px 96px)",
-            }}
-            aria-hidden="true"
-          />
+          <div className="landing-container">
+            <div className="landing-hero-grid">
+              <div className="landing-hero-intro min-w-0 flex flex-col gap-5 sm:gap-6">
+                <div className="flex items-center gap-2.5 font-mono font-semibold text-xs tracking-[0.08em] text-amber-500 uppercase">
+                  <span className="w-5 h-0.5 bg-amber-500 shrink-0" aria-hidden="true" />
+                  <span>{content.hero.eyebrow}</span>
+                </div>
 
-          <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 items-center relative z-10">
-            {/* Left Value Proposition */}
-            <div className="flex flex-col gap-6 sm:gap-7">
-              <div className="flex items-center gap-2.5 font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#E8A317] uppercase">
-                <span className="w-5 h-0.5 bg-[#E8A317]" aria-hidden="true" />
-                <span>{content.hero.eyebrow}</span>
+                <h1
+                  id="hero-heading"
+                  className="m-0 font-display font-extrabold text-[clamp(36px,4.6vw,64px)] leading-[1.02] tracking-tight [text-wrap:balance] [overflow-wrap:anywhere]"
+                >
+                  {content.hero.title}
+                  <span className="text-amber-500">{content.hero.titleAccent}</span>
+                </h1>
+
+                <p className="m-0 max-w-[560px] text-[17px] sm:text-lg leading-[1.6] text-on-dark-2 [text-wrap:pretty]">
+                  {content.hero.description}
+                </p>
               </div>
 
-              <h1
-                id="hero-heading"
-                className="m-0 font-['Barlow_Condensed'] font-extrabold text-[clamp(48px,6vw,76px)] leading-[0.92] tracking-[-0.01em] [text-wrap:balance]"
-              >
-                {content.hero.title}
-                <span className="text-[#E8A317]">{content.hero.titleAccent}</span>
-              </h1>
+              <ProofFrame content={content.proof} />
 
-              <p className="m-0 max-w-[560px] font-['Barlow'] font-normal text-[19px] leading-[1.6] text-[#C4D3CA] [text-wrap:pretty]">
-                {content.hero.description}
-              </p>
-
-              {/* 2-Lane CTA */}
-              <LaneCTA content={content.hero} demoAccess={config.demoAccess} />
+              <div className="landing-hero-actions min-w-0">
+                <LaneCTA content={content.hero} demoAccess={config.demoAccess} />
+              </div>
             </div>
 
-            {/* Right Highway Direction Sign */}
-            <HeroSign content={content.hero} />
+            <div className="mt-8 lg:mt-10">
+              <HeroSign content={content.hero} />
+            </div>
           </div>
         </section>
-
-        {/* 02 Proof Frame Section (overlaps hero by -150px) */}
-        <ProofFrame content={content.proof} />
 
         {/* 03 Problem (Muammo) */}
         <ProblemChips content={content.problem} />

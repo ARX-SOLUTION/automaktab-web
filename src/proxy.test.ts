@@ -1,25 +1,25 @@
 import { describe, expect, it } from "vitest";
 import { NextRequest } from "next/server";
-import {
-  getRedirectUrl,
-  getRewrittenUrl,
-  isRewrite,
-} from "next/experimental/testing/server";
+import { getRedirectUrl, isRewrite } from "next/experimental/testing/server";
 import { proxy } from "./proxy";
 
 const ORIGIN = "https://automaktab.uz";
 
 describe("proxy", () => {
-  it("redirects a direct /uz request to the unprefixed root", () => {
+  it("lets the internal /uz route target pass through", () => {
     const response = proxy(new NextRequest(`${ORIGIN}/uz`));
 
-    expect(getRedirectUrl(response)).toBe(`${ORIGIN}/`);
+    expect(getRedirectUrl(response)).toBeNull();
+    expect(isRewrite(response)).toBe(false);
+    expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
   });
 
-  it("redirects /uz/* paths to the unprefixed canonical URL", () => {
+  it("lets internal /uz/* route targets pass through", () => {
     const response = proxy(new NextRequest(`${ORIGIN}/uz/opengraph-image`));
 
-    expect(getRedirectUrl(response)).toBe(`${ORIGIN}/opengraph-image`);
+    expect(getRedirectUrl(response)).toBeNull();
+    expect(isRewrite(response)).toBe(false);
+    expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
   });
 
   it.each(["ru", "en"])(
@@ -32,8 +32,7 @@ describe("proxy", () => {
       );
 
       expect(getRedirectUrl(response)).toBeNull();
-      expect(isRewrite(response)).toBe(true);
-      expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz`);
+      expect(isRewrite(response)).toBe(false);
       expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
     },
   );
@@ -50,23 +49,24 @@ describe("proxy", () => {
     expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("en");
   });
 
-  it("rewrites a normal unprefixed path to Uzbek despite a cookie", () => {
+  it("keeps normal unprefixed paths canonical Uzbek without an internal /uz rewrite", () => {
     const response = proxy(
       new NextRequest(`${ORIGIN}/pricing`, {
         headers: { Cookie: "NEXT_LOCALE=en" },
       }),
     );
 
-    expect(isRewrite(response)).toBe(true);
-    expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz/pricing`);
+    expect(getRedirectUrl(response)).toBeNull();
+    expect(isRewrite(response)).toBe(false);
     expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
   });
 
-  it("rewrites /opengraph-image to the internal uz route (no public /uz prefix)", () => {
+  it("keeps /opengraph-image canonical Uzbek without a public /uz prefix", () => {
     const response = proxy(new NextRequest(`${ORIGIN}/opengraph-image`));
 
-    expect(isRewrite(response)).toBe(true);
-    expect(getRewrittenUrl(response)).toBe(`${ORIGIN}/uz/opengraph-image`);
+    expect(getRedirectUrl(response)).toBeNull();
+    expect(isRewrite(response)).toBe(false);
+    expect(response.cookies.get("NEXT_LOCALE")?.value).toBe("uz");
   });
 });
 

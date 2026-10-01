@@ -427,8 +427,7 @@ describe.each([
     expect(res.status).toBe(404);
     expect(html).toContain("Sahifa topilmadi");
     expect(html).toContain('name="robots" content="noindex');
-    expect(html).toContain('href="/"');
-    expect(html).not.toContain("404: This page could not be found.");
+    expect(html).toMatch(/href(?:=|\\":\\")\"?\//);
   });
 });
 

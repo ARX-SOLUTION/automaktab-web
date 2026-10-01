@@ -1,11 +1,54 @@
 import { describe, it, expect } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { formatMoney } from "@/lib/money";
 import { normalizePhone } from "@/app/api/lead/route";
+import LandingPage from "@/components/landing/LandingPage";
+import FinalCTA from "@/components/landing/FinalCTA";
+import ProofFrame from "@/components/landing/ProofFrame";
+import { buildDemoUrl } from "@/lib/analytics";
 
 describe("automaktab.uz marketing page verification", () => {
+  it.each([
+    ["uz", contentUz],
+    ["ru", contentRu],
+    ["en", contentEn],
+  ] as const)("keeps labelled, eager product proof in the %s hero", (locale, content) => {
+    const html = renderToStaticMarkup(createElement(LandingPage, { locale }));
+    const hero = html.match(/<section[^>]*data-screen-label="01 Hero"[\s\S]*?<\/section>/)?.[0];
+
+    expect(hero).toContain("dashboard.webp");
+    expect(hero).toContain(content.proof.badge);
+    expect(hero).toContain(content.proof.caption);
+    expect(hero).toContain('loading="eager"');
+    expect(hero).toContain('width="1353"');
+    expect(hero).toContain('height="929"');
+  });
+
+  it.each([contentUz, contentRu, contentEn])("sends the final demo action to the tracked CRM login", (content) => {
+    const html = renderToStaticMarkup(createElement(FinalCTA, { content: content.finalCta }));
+
+    expect(html).toContain(`href="${buildDemoUrl("footer").replaceAll("&", "&amp;")}"`);
+    expect(html).not.toContain("https://demo.automaktab.uz");
+    expect(html).toContain(content.finalCta.demoButton);
+  });
+
+  it.each([
+    ["uz", contentUz],
+    ["ru", contentRu],
+    ["en", contentEn],
+  ] as const)("positions the %s proof pins with valid percentage coordinates", (_locale, content) => {
+    const html = renderToStaticMarkup(createElement(ProofFrame, { content: content.proof }));
+
+    expect(html).not.toContain("%%");
+    for (const callout of content.proof.callouts) {
+      expect(html).toContain(`style="top:${callout.topPct};left:${callout.leftPct}"`);
+    }
+  });
+
   it("includes all 11 sections required by design.md §7", () => {
     expect(contentUz.hero).toBeDefined();
     expect(contentUz.proof).toBeDefined();
