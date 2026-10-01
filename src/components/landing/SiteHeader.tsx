@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { switchLocalePath, preserveLocaleSuffix } from "@/lib/locale-metadata";
 import type { LandingContent } from "@/content/uz";
@@ -21,6 +21,7 @@ export default function SiteHeader({
   availableLocales,
   content = locale === "ru" ? contentRu.header : locale === "en" ? contentEn.header : contentUz.header,
 }: SiteHeaderProps) {
+  const header = useRef<HTMLElement>(null);
   const pathname = usePathname() || (locale === "uz" ? "/" : `/${locale}`);
   const home = locale === "uz" ? "/" : `/${locale}`;
   const demoUrl = buildDemoUrl("header");
@@ -37,8 +38,35 @@ export default function SiteHeader({
     { code: "en", href: switchLocalePath(pathname, "en", availableLocales), label: "English" },
   ];
 
+  useEffect(() => {
+    const element = header.current;
+    const brand = element?.querySelector<HTMLElement>(".site-header-brand");
+    const controls = element?.querySelector<HTMLElement>(".site-header-controls");
+    if (!element || !brand || !controls) return;
+    let frame = 0;
+    // Layout offsets ignore transforms, so the compact distance stays correct while scrolled.
+    const measure = () => element.style.setProperty("--site-header-compact", `${Math.max(0, controls.offsetTop + controls.offsetHeight - brand.offsetTop - brand.offsetHeight)}px`);
+    const update = () => {
+      frame = 0;
+      element.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const resize = new ResizeObserver(measure);
+    resize.observe(element);
+    measure();
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
-    <header className="site-header z-50 bg-paper border-b-2 border-sand-300">
+    <header ref={header} className="site-header z-50">
       <div className="landing-container site-header-inner">
         {/* Brand logo */}
         <a
