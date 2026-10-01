@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 import { track, buildDemoUrl } from "@/lib/analytics";
 
@@ -37,21 +38,21 @@ export default function LaneCTA({ content, demoAccess }: LaneCTAProps) {
         <a
           href={demoUrl}
           onClick={() => track("cta_demo_click", { location: "hero_lane" })}
-          className="min-w-0 min-h-[52px] px-5 py-3 flex items-center justify-between gap-4 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-base rounded-[var(--r-s)] no-underline transition-colors"
+          className="action-primary min-w-0 min-h-[52px] px-5 py-3 flex items-center justify-between gap-4 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-base rounded-[var(--r-s)] no-underline transition-colors"
         >
           <span>{content.lane1.button}</span>
-          <span className="text-[19px] leading-none shrink-0" aria-hidden="true">↗</span>
+          <ArrowUpRight size={20} className="shrink-0" aria-hidden="true" />
         </a>
         <a
           href="#tariflar"
           onClick={handleTrialClick}
-          className="min-w-0 min-h-[52px] px-5 py-3 flex items-center justify-between gap-4 hover:bg-white/10 text-white border border-white/25 font-body font-semibold text-base rounded-[var(--r-s)] no-underline transition-colors"
+          className="action-secondary min-w-0 min-h-[52px] px-5 py-3 flex items-center justify-between gap-4 hover:bg-sand-100 text-ink border-2 border-sand-300 font-body font-bold text-base rounded-[var(--r-s)] no-underline transition-colors"
         >
           <span>{content.lane2.button}</span>
-          <span className="text-[19px] leading-none shrink-0" aria-hidden="true">→</span>
+          <ArrowRight size={20} className="shrink-0" aria-hidden="true" />
         </a>
       </div>
-      <p className="m-0 text-sm leading-relaxed text-on-dark-2">
+      <p className="m-0 text-sm leading-relaxed text-muted">
         {helperText} {content.lane2.helper}
       </p>
     </div>

@@ -1,3 +1,4 @@
+import { buildHomeMetadata } from "../../home-metadata";
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -44,18 +45,21 @@ export async function generateMetadata({
   );
   const canonical = alternates?.canonical as string;
 
+  const sharedMetadata = buildHomeMetadata(candidate);
+
   return {
     title: page.copy.title,
     description: page.copy.description,
-    keywords: [...page.copy.keywords],
     alternates,
     openGraph: {
+      ...sharedMetadata.openGraph,
       type: "website",
       title: page.copy.title,
       description: page.copy.description,
       url: canonical,
     },
     twitter: {
+      ...sharedMetadata.twitter,
       card: "summary_large_image",
       title: page.copy.title,
       description: page.copy.description,

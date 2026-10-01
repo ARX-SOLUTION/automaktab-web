@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 import { buildDemoUrl } from "@/lib/analytics";
 
@@ -12,7 +13,7 @@ export default function FinalCTA({ content }: FinalCTAProps) {
   return (
     <section className="bg-forest-800 border-t border-white/10 py-16 sm:py-20 px-4 sm:px-6">
       <div className="max-w-[760px] mx-auto text-center flex flex-col items-center gap-7">
-        <h2 className="m-0 font-display font-extrabold text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-white uppercase [overflow-wrap:anywhere] [text-wrap:balance]">
+        <h2 className="m-0 font-display font-extrabold text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-white [overflow-wrap:anywhere] [text-wrap:balance]">
           {content.title}
         </h2>
 
@@ -21,10 +22,10 @@ export default function FinalCTA({ content }: FinalCTAProps) {
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="min-w-0 min-h-[52px] px-6 py-3 flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-base rounded-[var(--r-s)] no-underline transition-colors"
+            className="action-primary min-w-0 min-h-[52px] px-6 py-3 flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-base rounded-[var(--r-s)] no-underline transition-colors"
           >
             <span>{content.demoButton}</span>
-            <span className="text-xl leading-none shrink-0" aria-hidden="true">↗</span>
+            <ArrowUpRight size={20} className="shrink-0" aria-hidden="true" />
           </a>
           <a
             href="#tariflar"

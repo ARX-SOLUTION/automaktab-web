@@ -6,6 +6,7 @@ import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { getLandingConfig } from "@/config/landing-config";
 import SiteHeader from "./SiteHeader";
+import PageMotion from "./PageMotion";
 import HeroSign from "./HeroSign";
 import LaneCTA from "./LaneCTA";
 import ProofFrame from "./ProofFrame";
@@ -38,69 +39,68 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
   const config = getLandingConfig();
 
   return (
-    <div className="min-h-screen bg-sand-100 text-ink flex flex-col font-body selection:bg-amber-500 selection:text-forest-800">
+    <div className="landing-site min-h-screen bg-paper text-ink flex flex-col font-body selection:bg-amber-500 selection:text-ink">
       {/* 00 Header */}
       <SiteHeader content={content.header} locale={locale} />
 
-      <main id="main-content" className="flex-1">
+      <PageMotion>
         {/* 01 Hero Section */}
         <section
           data-screen-label="01 Hero"
-          className="landing-hero bg-forest-800 text-white"
+          className="landing-hero bg-paper text-ink"
           aria-labelledby="hero-heading"
         >
           <div className="landing-container">
             <div className="landing-hero-grid">
               <div className="landing-hero-intro min-w-0 flex flex-col gap-5 sm:gap-6">
-                <div className="flex items-center gap-2.5 font-mono font-semibold text-xs tracking-[0.08em] text-amber-500 uppercase">
-                  <span className="w-5 h-0.5 bg-amber-500 shrink-0" aria-hidden="true" />
-                  <span>{content.hero.eyebrow}</span>
-                </div>
-
                 <h1
                   id="hero-heading"
-                  className="m-0 font-display font-extrabold text-[clamp(36px,4.6vw,64px)] leading-[1.02] tracking-tight [text-wrap:balance] [overflow-wrap:anywhere]"
+                  data-hero-item
+                  className="m-0 font-display font-black text-[clamp(36px,3.8vw,54px)] leading-[1.08] tracking-[-0.03em] [text-wrap:balance]"
                 >
                   {content.hero.title}
-                  <span className="text-amber-500">{content.hero.titleAccent}</span>
+                  <span className="hero-accent">{content.hero.titleAccent}</span>
                 </h1>
 
-                <p className="m-0 max-w-[560px] text-[17px] sm:text-lg leading-[1.6] text-on-dark-2 [text-wrap:pretty]">
+                <p data-hero-item className="m-0 max-w-[560px] text-[17px] sm:text-lg leading-[1.7] text-body-2 [text-wrap:pretty]">
                   {content.hero.description}
                 </p>
               </div>
 
-              <ProofFrame content={content.proof} />
+              <ProblemChips content={content.problem} />
 
-              <div className="landing-hero-actions min-w-0">
+              <div data-hero-item className="landing-hero-actions min-w-0">
                 <LaneCTA content={content.hero} demoAccess={config.demoAccess} />
               </div>
             </div>
 
-            <div className="mt-8 lg:mt-10">
-              <HeroSign content={content.hero} />
-            </div>
           </div>
         </section>
 
-        {/* 03 Problem (Muammo) */}
-        <ProblemChips content={content.problem} />
+        <section className="product-proof bg-sand-100" aria-labelledby="proof-heading">
+          <div className="landing-container">
+            <h2 id="proof-heading" className="font-display font-black text-ink m-0 mb-8">{content.proof.title}</h2>
+            <ProofFrame content={content.proof} scenes={content.scenes} />
+            <div className="mt-8"><HeroSign content={content.hero} /></div>
+          </div>
+        </section>
 
         {/* 03b Morning Telegram Report (08:00 Nazorat Hisoboti) */}
         <MorningReportWidget content={content.morningReport} />
 
         {/* 04 Student Journey (Talaba yo‘li) */}
-        <RoadStepper content={content.journey} />
+        <RoadStepper content={content.journey} scenes={content.scenes} />
 
         {/* 05 Live Attendance Demo (Sinab ko‘ring) */}
         <AttendanceDemo content={content.attendanceDemo} />
 
         {/* 06 Personas (Kimlar uchun) */}
-        <RoleTabs content={content.roles} />
+        <RoleTabs content={content.roles} scenes={content.scenes} />
 
         {/* 07 Resources & Roadmap (Resurslar) */}
         <ResourceCards
           content={content.resources}
+          scenes={content.scenes}
           showRoadmap={config.showRoadmap}
         />
 
@@ -115,7 +115,7 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
 
         {/* 11 Final Call To Action */}
         <FinalCTA content={content.finalCta} />
-      </main>
+      </PageMotion>
 
       {/* 12 Site Footer */}
       <SiteFooter content={content.footer} locale={locale} />

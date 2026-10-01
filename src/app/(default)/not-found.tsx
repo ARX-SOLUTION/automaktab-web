@@ -7,21 +7,21 @@ type NotFoundCopy = { title: string; body: string; home: string; demo: string };
 const COPY: Record<Locale, NotFoundCopy> = {
   uz: {
     title: "Sahifa topilmadi",
-    body: "Siz izlagan sahifa mavjud emas yoki ko'chirilgan.",
+    body: "Bu sahifa yo‘q yoki boshqa manzilga ko‘chirilgan.",
     home: "Bosh sahifaga qaytish",
-    demo: "Demo bilan sinab ko'ring",
+    demo: "Demoni ochish",
   },
   ru: {
     title: "Страница не найдена",
     body: "Запрошенная страница не существует или была перемещена.",
     home: "Вернуться на главную",
-    demo: "Попробовать демо",
+    demo: "Открыть демо",
   },
   en: {
     title: "Page not found",
     body: "The page you're looking for doesn't exist or has moved.",
     home: "Back to homepage",
-    demo: "Try the demo",
+    demo: "Open demo",
   },
 };
 

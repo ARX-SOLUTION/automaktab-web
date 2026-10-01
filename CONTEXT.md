@@ -16,13 +16,11 @@ The landing is the single conversion path. Pricing, feature, FAQ, and similar pa
 
 ## Design tokens
 
-The public visual system is the road-signal system in ADR 0005: forest `#0B2B1F` and sand `#F4EFE4` grounds, amber `#E8A317` as the single action accent, Barlow Condensed, Barlow, and JetBrains Mono. ADR 0004 (liquid glass) is superseded. Marketing surfaces use the CSS variables in `src/app/globals.css`. ADR 0005 also sets the copy budget for titles, descriptions, bullets, and CTAs.
+The current user-directed public system is recorded in `DESIGN.md`: Duolingo-inspired rounded Nunito display, Manrope body, Paper/White surfaces, Ink text, Signal Lime actions and restrained System Blue relationships. It replaces the earlier road-signal and liquid-glass visual directions. ADR 0005 still supplies the copy budget; the current visual source is `src/app/globals.css` and `src/app/LocaleDocument.tsx`.
 
-Shared color primitives still exist in `@autodrive/design-tokens/tokens.css`. The package's `tailwind-preset.cjs` targets Tailwind v3 and is not consumable here.
+Public product examples are authored HTML/SVG GSAP scenes with localized synthetic labels. The landing renders no CRM screenshots. Finite scene timelines pause offscreen or when the document is hidden, respect live reduced-motion changes, and clean up on unmount or role changes. Student and role chapters advance their GSAP preview during natural scrolling on tall desktop screens. Phones, short screens, reduced motion and no JavaScript retain complete native sequential examples. Sticky enhancement activates only after its scoped controller is ready; focused optional controls keep their selection.
 
-Typography is a known upstream gap: the brand fonts exist only in the preset, while `tokens.css` has no font variables. Fix that in the token package and bump the pinned SHA; do not import the preset as a workaround.
-
-Token colors are HSL components and must be wrapped with `hsl(var(--token))` in Tailwind v4. The landing currently does not use the amber `--primary` token, so inspect the shipped design before treating it as the marketing brand color.
+Shared primitives remain in `@autodrive/design-tokens/tokens.css`; local public tokens and `next/font` variables implement this approved visual direction. Do not import the package's Tailwind v3 preset into this Tailwind v4 site.
 
 ## Localization
 
@@ -31,11 +29,11 @@ Token colors are HSL components and must be wrapped with `hsl(var(--token))` in 
 - Every page emits all locale alternates, `x-default`, and a self-referencing canonical.
 - `src/i18n/config.ts` is the locale source of truth. Keep derived locale lists in metadata, sitemap, and navigation aligned with it.
 - Next.js 16 locale routing lives in `proxy.ts`, not `middleware.ts`.
-- Localized copy comes from typed objects in `src/config/` and is selected by the validated route locale; this repo does not use `next-intl` hooks.
+- Landing copy comes from typed objects in `src/content/`; SEO copy comes from `src/config/` and is selected by the validated route locale; this repo does not use `next-intl` hooks.
 
 ## Content and blog contract
 
-Marketing copy lives in version-controlled modules under `src/config/`, one set per locale. The build schema requires all three locales. Blog content is the exception and comes from the backend's public `GET /blog-posts` and `GET /blog-posts/:slug` endpoints.
+Marketing copy lives in version-controlled modules under `src/content/` and `src/config/`, one set per locale. The build schema requires all three locales. Blog content is the exception and comes from the backend's public `GET /blog-posts` and `GET /blog-posts/:slug` endpoints.
 
 The list response is `{ success: true, data: { items, total, page, limit } }`; pagination metadata is flat inside `data`. The single response uses the same success wrapper. Missing and draft slugs intentionally return the same 404 error envelope.
 

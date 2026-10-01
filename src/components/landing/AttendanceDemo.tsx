@@ -1,9 +1,14 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import type { LandingContent } from "@/content/uz";
 import { track, buildDemoUrl } from "@/lib/analytics";
 import StatusButton from "./StatusButton";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 interface AttendanceDemoProps {
   content: LandingContent["attendanceDemo"];
@@ -16,6 +21,9 @@ function getTimestamp(): number {
 }
 
 export default function AttendanceDemo({ content }: AttendanceDemoProps) {
+  const root = useRef<HTMLElement>(null);
+  const worksheet = useRef<HTMLDivElement>(null);
+  const toolbar = useRef<HTMLElement>(null);
   // 6 students attendance state (null if unmarked)
   const [attendance, setAttendance] = useState<Array<StatusKey | null>>([
     null,
@@ -29,6 +37,62 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
   const startTimeRef = useRef<number | null>(null);
 
   const demoUrl = buildDemoUrl("attendance_demo");
+
+  useGSAP((_context, contextSafe) => {
+    const element = root.current;
+    const sheet = worksheet.current;
+    const header = toolbar.current;
+    if (!element || !sheet || !header || !contextSafe) return;
+    let active = true;
+    let frame = 0;
+    sheet.dataset.attendanceReady = "true";
+    const offset = () => parseFloat(getComputedStyle(header).getPropertyValue("--attendance-sticky-top"));
+    ScrollTrigger.create({
+      trigger: sheet,
+      start: () => `top ${offset()}px`,
+      end: () => `bottom ${offset() + header.offsetHeight}px`,
+      toggleClass: { targets: header, className: "is-scrolled" },
+      invalidateOnRefresh: true,
+    });
+    const refresh = contextSafe(() => {
+      if (!active) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(contextSafe(() => { if (active) ScrollTrigger.refresh(); }));
+    });
+    const resize = new ResizeObserver(refresh);
+    resize.observe(sheet);
+    void document.fonts.ready.then(refresh);
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", (_context, childSafe) => {
+      if (!childSafe) return;
+      const safe = childSafe as ReturnType<typeof useGSAP>["contextSafe"];
+      let live = true;
+      let visible = false;
+      const entrance = gsap.timeline({ paused: true }).from(element.querySelectorAll(".attendance-row"), {
+        y: 6, duration: 0.32, stagger: 0.035, ease: "power3.out", clearProps: "transform",
+      });
+      const sync = safe(() => {
+        if (!live || entrance.progress() === 1) return;
+        if (visible && !document.hidden) entrance.play();
+        else entrance.pause();
+      });
+      const observer = new IntersectionObserver(safe(([entry]: IntersectionObserverEntry[]) => {
+        visible = entry.isIntersecting;
+        sync();
+      }), { threshold: 0.1 });
+      observer.observe(sheet);
+      document.addEventListener("visibilitychange", sync);
+      return () => { live = false; observer.disconnect(); document.removeEventListener("visibilitychange", sync); };
+    });
+    return () => {
+      active = false;
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      media.revert();
+      delete sheet.dataset.attendanceReady;
+      header.classList.remove("is-scrolled");
+    };
+  }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   // Calculate KPIs
   const counts = {
@@ -99,157 +163,57 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
       ? content.allMarkedMsg
       : content.unmarkedTemplate.replace("{count}", String(counts.unmarked));
 
-  const kpis = [
+  const marked = attendance.length - counts.unmarked;
+  const countItems = [
     ...content.statuses.map((s) => ({
+      key: s.key,
       label: s.label,
       count: counts[s.key],
       color: s.color,
     })),
-    { label: content.unmarkedLabel, count: counts.unmarked, color: "#CFC6B3" },
+    { key: "unmarked", label: content.unmarkedLabel, count: counts.unmarked, color: "var(--c-sand-400)" },
   ];
 
   return (
-    <section
-      id="sinab"
-      data-screen-label="05 Sinab ko‘ring"
-      className="py-16 sm:py-28 bg-forest-800 text-white scroll-mt-[68px]"
-      aria-labelledby="attendance-heading"
-    >
-      <div className="landing-container min-w-0 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-14 items-center">
-        {/* Left Explanatory Column */}
-        <div className="min-w-0 flex flex-col gap-5">
-          <span className="font-mono font-semibold text-[13px] tracking-[0.08em] text-amber-500 uppercase">
-            {content.eyebrow}
-          </span>
-          <h2
-            id="attendance-heading"
-            className="m-0 font-display font-extrabold text-[clamp(40px,5vw,64px)] leading-[0.95] [text-wrap:balance]"
-          >
-            {content.title}
-          </h2>
-          <p className="m-0 font-body font-normal text-[19px] leading-[1.6] text-on-dark-2 [text-wrap:pretty]">
-            {content.description}
-          </p>
-
-          {/* Legend */}
-          <div className="grid grid-cols-2 gap-2.5 max-w-[440px] mt-2 select-none">
-            {content.statuses.map((s) => (
-              <div
-                key={s.key}
-                className="flex items-center gap-2.5 font-body font-medium text-[16px] text-white"
-              >
-                <span
-                  style={{ backgroundColor: s.color }}
-                  className="w-7 h-7 rounded-[7px] grid place-items-center font-bold text-white leading-none shrink-0"
-                  aria-hidden="true"
-                >
-                  {s.icon}
-                </span>
-                <span>{s.label}</span>
+    <section ref={root} id="sinab" data-screen-label="05 Sinab ko‘ring" className="attendance-demo" aria-labelledby="attendance-heading">
+      <div className="landing-container">
+        <header className="attendance-intro">
+          <h2 id="attendance-heading">{content.title}</h2>
+          <p id="attendance-instruction">{content.description}</p>
+        </header>
+        <div ref={worksheet} className="attendance-worksheet" role="group" aria-labelledby="attendance-lesson-heading" aria-describedby="attendance-instruction attendance-sample-note">
+          <header ref={toolbar} className="attendance-toolbar">
+            <div className="attendance-lesson">
+              <h3 id="attendance-lesson-heading">{content.lessonSubject}</h3>
+              <p><span>{content.lessonTitle}</span><span id="attendance-sample-note">{content.banner}</span></p>
+            </div>
+            <button type="button" onClick={handleMarkAll} className="attendance-bulk">{content.markAllButton}</button>
+            <div className="attendance-summary">
+              <p className="attendance-marked"><strong>{marked}<span>/{attendance.length}</span></strong><span>{content.markedLabel}</span></p>
+              <dl className="attendance-counts">
+                {countItems.map((item) => <div key={item.key} data-attendance-count={item.key} style={{ "--attendance-count-color": item.color } as React.CSSProperties}><dt>{item.label}</dt><dd>{item.count}</dd></div>)}
+              </dl>
+              <progress className="attendance-progress" value={marked} max={attendance.length} aria-label={content.markedLabel} />
+            </div>
+          </header>
+          <ol className="attendance-roster">
+            {content.students.map((name, index) => <li key={name} className="attendance-row">
+              <div className="attendance-student"><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><strong>{name}</strong></div>
+              <div role="radiogroup" aria-label={content.attendanceStatusTemplate.replace("{name}", name)} className="attendance-choices">
+                {content.statuses.map((status, statusIndex) => <StatusButton
+                  key={status.key} label={status.label} icon={status.icon} color={status.color} background={status.bg} text={status.text}
+                  isSelected={attendance[index] === status.key}
+                  tabIndex={attendance[index] === status.key || (!attendance[index] && statusIndex === 0) ? 0 : -1}
+                  onKeyDown={(event) => handleStatusKeyDown(event, index, statusIndex)}
+                  onToggle={() => handleToggle(index, status.key)} studentName={name}
+                />)}
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Interactive Card */}
-        <div className="min-w-0 bg-sand-100 text-ink rounded-[var(--r-xl)] overflow-hidden shadow-[var(--shadow-demo)]">
-          {/* Banner */}
-          <div className="bg-[#8B5A12] text-white text-center py-2 px-3 font-body font-medium text-[14px] select-none">
-            {content.banner}
-          </div>
-
-          <div className="p-4 sm:p-5 flex flex-col gap-4">
-            {/* Header info + bulk button */}
-            <div className="flex justify-between items-start gap-3 flex-wrap">
-              <div>
-                <div className="font-mono font-medium text-[13px] text-muted">
-                  {content.lessonTitle}
-                </div>
-                <div className="font-display font-extrabold text-[26px] sm:text-[28px] leading-tight text-ink">
-                  {content.lessonSubject}
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleMarkAll}
-                className="min-h-11 px-3.5 py-2 rounded-[10px] border border-sand-400 bg-white hover:border-ink font-body font-semibold text-[15px] text-ink cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-              >
-                {content.markAllButton}
-              </button>
-            </div>
-
-            {/* KPI Counters */}
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 select-none">
-              {kpis.map((k) => (
-                <div
-                  key={k.label}
-                  style={{ borderTopColor: k.color }}
-                  className="min-w-0 bg-white rounded-[10px] p-2 sm:p-2.5 border-t-[3px] shadow-xs"
-                >
-                  <div className="font-display font-extrabold text-[24px] sm:text-[28px] leading-none text-ink">
-                    {k.count}
-                  </div>
-                  <div className="font-body font-semibold text-[12px] sm:text-[13px] leading-snug text-muted mt-1 break-words">
-                    {k.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Student Rows */}
-            <div className="flex flex-col gap-1.5">
-              {content.students.map((name, idx) => (
-                <div
-                  key={name}
-                  className="flex flex-wrap items-center justify-between gap-2 bg-white rounded-[12px] p-2 pl-3.5 border border-sand-300"
-                >
-                  <span className="min-w-0 font-body font-semibold text-[16px] text-ink">
-                    {name}
-                  </span>
-
-                  <div
-                    role="radiogroup"
-                    aria-label={content.attendanceStatusTemplate.replace("{name}", name)}
-                    className="flex gap-2"
-                  >
-                    {content.statuses.map((s, statusIndex) => (
-                      <StatusButton
-                        key={s.key}
-                        label={s.label}
-                        icon={s.icon}
-                        color={s.color}
-                        isSelected={attendance[idx] === s.key}
-                        tabIndex={attendance[idx] === s.key || (!attendance[idx] && statusIndex === 0) ? 0 : -1}
-                        onKeyDown={(event) => handleStatusKeyDown(event, idx, statusIndex)}
-                        onToggle={() => handleToggle(idx, s.key)}
-                        studentName={name}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer with Polite Live Region & CTA */}
-            <div className="flex items-center justify-between gap-3 flex-wrap pt-2">
-              <span
-                aria-live="polite"
-                className="font-body font-medium text-[14px] text-muted"
-              >
-                {liveMessage}
-              </span>
-
-              <a
-                href={demoUrl}
-                onClick={() => track("cta_demo_click", { location: "attendance_demo" })}
-                className="min-h-12 px-4.5 py-2 flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-[16px] rounded-[10px] no-underline shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-              >
-                <span>{content.ctaButton}</span>
-                <span className="text-[18px] leading-none">↗</span>
-              </a>
-            </div>
-          </div>
+            </li>)}
+          </ol>
+          <footer className="attendance-footer">
+            <p role="status" aria-live="polite" aria-atomic="true">{liveMessage}</p>
+            <a href={demoUrl} onClick={() => track("cta_demo_click", { location: "attendance_demo" })} className="attendance-demo-link">{content.ctaButton}<span aria-hidden="true">↗</span></a>
+          </footer>
         </div>
       </div>
     </section>

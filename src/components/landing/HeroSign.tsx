@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { ChevronRight } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 import { track } from "@/lib/analytics";
 
@@ -30,28 +31,26 @@ export default function HeroSign({ content }: HeroSignProps) {
   };
 
   return (
-    <div className="w-full bg-forest-600 rounded-[var(--r-l)] border border-white/15 p-4 sm:p-5">
-      <p className="m-0 mb-3 font-mono font-semibold text-xs tracking-[0.08em] text-white/90 uppercase">
+    <div className="hero-shortcuts w-full border-t-2 border-sand-300 pt-6">
+      <p className="m-0 mb-3 font-body font-bold text-sm text-muted">
         {content.signTitle}
       </p>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
         {content.signRows.map((row) => (
           <button
             key={row.title}
             type="button"
             onClick={() => handleRowClick(row.stopIndex)}
-            className="min-w-0 min-h-[72px] text-left p-3 flex items-start gap-2.5 border border-white/15 rounded-[var(--r-m)] hover:bg-white/10 transition-colors cursor-pointer"
+            className="min-w-0 min-h-[72px] text-left p-3 flex items-start gap-2.5 rounded-2xl hover:bg-white transition-colors cursor-pointer"
           >
-            <span className="font-display font-bold text-2xl leading-none text-white shrink-0" aria-hidden="true">
-              {row.arrow}
-            </span>
+            <ChevronRight size={20} className="text-forest-600 shrink-0" aria-hidden="true" />
 
             <span className="min-w-0 flex flex-col gap-1 [overflow-wrap:anywhere]">
-              <span className="font-body font-semibold text-sm sm:text-[15px] leading-snug text-white">
+              <span className="font-body font-bold text-sm sm:text-[15px] leading-snug text-ink">
                 {row.title}
               </span>
-              <span className="font-body text-xs sm:text-[13px] leading-relaxed text-white/90">
+              <span className="font-body text-xs sm:text-[13px] leading-relaxed text-muted">
                 {row.sub}
               </span>
             </span>

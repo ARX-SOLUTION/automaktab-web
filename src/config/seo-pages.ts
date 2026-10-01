@@ -56,9 +56,9 @@ export const SEO_PAGES: Record<
   payments: {
     uz: {
       segments: ["features", "payments-and-debt"],
-      title: "Avtomaktab: To‘lovlar va qarzdorlik | automaktab.uz",
+      title: "Avtomaktab to‘lovlari va qarzdorlik | automaktab.uz",
       description:
-        "Avtomaktab to‘lovlari talaba kartasiga bog‘lanadi, qarzdorlar esa alohida ko‘rinishda nazorat qilinadi.",
+        "Talabalar to‘lovlari va qolgan qarzni bir joyda ko‘ring. Qarzdorlarni filial va guruh bo‘yicha toping.",
       keywords: [
         "avtomaktab to‘lovlari",
         "qarzdorlik nazorati",
@@ -67,29 +67,29 @@ export const SEO_PAGES: Record<
       eyebrow: "To‘lovlar nazorati",
       heading: "Avtomaktab to‘lovlari va qarzdorligini boshqaring.",
       intro:
-        "To‘lovlar tarqoq fayllarda emas, talabaning o‘z kartasida ko‘rinadi. Qarzdorlar alohida ko‘rinishda qoladi — rahbar bugungi holatni tez tekshiradi.",
+        "Kim qancha to‘laganini va qancha qarzi qolganini ko‘ring. Talaba kartasi va qarzdorlar ro‘yxati bir tizimda.",
       sections: [
         {
-          title: "Har bir to‘lov talaba kartasiga bog‘lanadi",
+          title: "To‘lovlar talaba kartasida",
           body:
-            "To‘lovni talaba bilan bir joyda kuzatish jamoaga kimning holati yangilangani va qaysi yozuvlar tekshirilishi kerakligini tushunishga yordam beradi.",
+            "Talabaning to‘lov tarixi va qolgan qarzini kartasidan tekshiring. Kerakli ma’lumot boshqa faylda qolib ketmaydi.",
         },
         {
-          title: "Qarzdorlar alohida ko‘rinishda",
+          title: "Qarzdorlarni tez toping",
           body:
-            "Qarzdorlik umumiy ro‘yxatda yo‘qolib ketmaydi. Menejer va rahbar alohida ko‘rinishdan keyingi suhbat yoki tekshiruv uchun kerakli ma’lumotni oladi.",
+            "Qarzdorlar ro‘yxatidan kim bilan bog‘lanish yoki qaysi to‘lovni tekshirish kerakligini ko‘ring.",
         },
         {
-          title: "Demo ichida ish oqimini ko‘ring",
+          title: "Demoda sinab ko‘ring",
           body:
-            "Sintetik demo ma’lumotlari bilan to‘lovlar va rahbar paneli qanday ishlashini hech qanday kontakt qoldirmasdan sinab ko‘rishingiz mumkin.",
+            "Namuna ma’lumotlari bilan to‘lovlar va rahbar panelini tekshiring. Telefon raqamingizni qoldirish shart emas.",
         },
       ],
-      relatedLabel: "Boshqa boshqaruv imkoniyatlari",
+      relatedLabel: "Boshqa imkoniyatlar",
       cta: {
-        title: "To‘lovlar oqimini demo ichida ko‘ring.",
-        body: "Sintetik akkaunt darhol ochiladi va haqiqiy mijoz ma’lumotlaridan foydalanmaydi.",
-        label: "Demo’ni oching",
+        title: "To‘lovlar hisobini demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
       },
       updatedAt: "2026-09-19",
     },
@@ -97,33 +97,33 @@ export const SEO_PAGES: Record<
       segments: ["features", "payments-and-debt"],
       title: "Оплаты и задолженность автошколы | automaktab.uz",
       description:
-        "Оплаты автошколы привязаны к карточке ученика, а задолженность контролируется в отдельном представлении.",
+        "Смотрите оплаты и остаток долга в карточке курсанта. Находите должников по филиалу и группе.",
       keywords: ["оплаты автошколы", "задолженность автошколы", "CRM автошколы"],
       eyebrow: "Контроль оплат",
       heading: "Управляйте оплатами и задолженностью автошколы.",
       intro:
-        "Оплаты видны в карточке ученика, а не в разрозненных файлах. Отдельный список задолженности помогает руководителю быстрее проверять текущую ситуацию.",
+        "Проверяйте, сколько курсант оплатил и сколько осталось. Карточка курсанта и список задолженности находятся в одной системе.",
       sections: [
         {
-          title: "Оплата связана с карточкой ученика",
+          title: "Оплаты в карточке курсанта",
           body:
-            "Когда оплата находится рядом с данными ученика, команде проще понимать, какой статус изменился и какие записи требуют проверки.",
+            "Проверяйте историю оплат и остаток долга в карточке. Не нужно искать эти записи в другом файле.",
         },
         {
-          title: "Задолженность видна отдельно",
+          title: "Быстро находите должников",
           body:
-            "Долги не теряются в общем списке. Менеджер и руководитель видят отдельное представление для следующего контакта или проверки.",
+            "Список задолженности помогает понять, с кем связаться и какие оплаты проверить.",
         },
         {
-          title: "Проверьте процесс в демо",
+          title: "Попробуйте в демо",
           body:
-            "Откройте синтетическое демо без передачи контактов и посмотрите, как связаны оплаты и панель руководителя.",
+            "Проверьте оплаты и панель руководителя на вымышленных данных. Оставлять номер телефона не нужно.",
         },
       ],
-      relatedLabel: "Другие возможности управления",
+      relatedLabel: "Другие возможности",
       cta: {
-        title: "Посмотрите процесс оплат в демо.",
-        body: "Синтетическая учётная запись открывается сразу и не использует данные реальных клиентов.",
+        title: "Посмотрите учёт оплат в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
         label: "Открыть демо",
       },
       updatedAt: "2026-09-19",
@@ -132,34 +132,34 @@ export const SEO_PAGES: Record<
       segments: ["features", "payments-and-debt"],
       title: "Driving-school payments and debt | automaktab.uz",
       description:
-        "Keep driving-school payments on each student record and review outstanding debt in a separate, clear view.",
+        "See payments and outstanding debt on each student record. Find students with debt by branch and group.",
       keywords: ["driving school payments", "driving school debt", "driving school CRM"],
       eyebrow: "Payment control",
-      heading: "Manage driving-school payments and debt.",
+      heading: "Keep track of payments and student debt.",
       intro:
-        "Payments sit on the student record instead of scattered files. A separate debt view helps an owner check today’s situation quickly.",
+        "See how much each student has paid and what remains. Student records and the debt list are in one system.",
       sections: [
         {
-          title: "Keep each payment with the student",
+          title: "Payments stay with the student record",
           body:
-            "Putting the payment beside the student record helps the team see which status changed and which entries need attention.",
+            "Check payment history and outstanding debt on the student record. No need to find them in another file.",
         },
         {
-          title: "Review outstanding debt separately",
+          title: "Find students with outstanding payments",
           body:
-            "Debt does not disappear into a general list. Managers and owners have a separate view for a follow-up or review.",
+            "Use the debt list to see who needs a follow-up and which payments need checking.",
         },
         {
-          title: "See the workflow in the demo",
+          title: "Try it in the demo",
           body:
-            "Open a synthetic demo without sharing contact details to see how payments and the owner dashboard work together.",
+            "Check payments and the owner dashboard with sample data. You do not need to leave your phone number.",
         },
       ],
-      relatedLabel: "Other management capabilities",
+      relatedLabel: "Other features",
       cta: {
-        title: "See the payment workflow in the demo.",
-        body: "The synthetic account opens immediately and does not use real customer data.",
-        label: "Open the demo",
+        title: "See payment records in the demo.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
       },
       updatedAt: "2026-09-19",
     },
@@ -167,36 +167,36 @@ export const SEO_PAGES: Record<
   schedule: {
     uz: {
       segments: ["features", "schedules-and-groups"],
-      title: "Avtomaktab: Dars jadvali va guruhlar | automaktab.uz",
+      title: "Avtomaktab dars jadvali va guruhlar | automaktab.uz",
       description:
         "Nazariya va amaliy darslarni guruh hamda o‘qituvchi bilan haftalik jadvalda rejalashtiring.",
       keywords: ["avtomaktab dars jadvali", "avtomaktab guruhlari", "nazariya va amaliy darslar"],
       eyebrow: "Jadval va guruhlar",
       heading: "Dars jadvali va guruhlar bir tizimda.",
       intro:
-        "Nazariya va amaliy mashg‘ulotlar guruh, o‘qituvchi, vaqt va dars turi bilan bir haftalik ko‘rinishda rejalashtiriladi.",
+        "Nazariya va haydash mashg‘ulotlarini bir jadvalda rejalashtiring. Guruh, o‘qituvchi va dars vaqtini belgilang.",
       sections: [
         {
-          title: "Haftalik ko‘rinish bir xil tartib beradi",
+          title: "Bir haftalik darslar ko‘z oldingizda",
           body:
-            "Jadvalda darslar haftalik ko‘rinishda turadi. Bu jamoaga kunlik ishni turli daftar va xabarlardan yig‘masdan ko‘rishga yordam beradi.",
+            "Haftalik jadvaldan qaysi kuni qanday dars borligini ko‘ring. Turli daftar va xabarlardan yig‘ish shart emas.",
         },
         {
-          title: "Guruh va o‘qituvchi dars bilan bog‘langan",
+          title: "Guruh va o‘qituvchini belgilang",
           body:
-            "Har bir mashg‘ulotni kerakli guruh va o‘qituvchi bilan rejalashtirish jadvaldagi o‘zgarishlarni bir joydan kuzatishga yordam beradi.",
+            "Har bir darsga guruh va o‘qituvchini biriktiring. Jadvaldagi o‘zgarishlarni shu yerda kuzating.",
         },
         {
-          title: "Nazariya va amaliyot bir jarayonda",
+          title: "Nazariya va haydash bir jadvalda",
           body:
-            "Dars turi kalendarda ko‘rinadi, shuning uchun jamoa haftalik oqimda nazariya va amaliyotni ajratib ko‘ra oladi.",
+            "Dars turini kalendardan ko‘ring. Nazariya va amaliy haydash mashg‘ulotlarini alohida ajrating.",
         },
       ],
-      relatedLabel: "Boshqa boshqaruv imkoniyatlari",
+      relatedLabel: "Boshqa imkoniyatlar",
       cta: {
-        title: "Jadvalni mahsulot ichida tekshiring.",
-        body: "Sintetik demo ichida haftalik kalendar va asosiy ish oqimlarini ko‘ring.",
-        label: "Demo’ni oching",
+        title: "Dars jadvalini demoda ko‘ring.",
+        body: "Namuna maktabning haftalik jadvali, guruhlari va darslarini tekshiring.",
+        label: "Demoni ochish",
       },
       updatedAt: "2026-09-19",
     },
@@ -207,30 +207,30 @@ export const SEO_PAGES: Record<
         "Планируйте теорию и практику в недельном расписании с группой и преподавателем.",
       keywords: ["расписание автошколы", "группы автошколы", "теория и практика"],
       eyebrow: "Расписание и группы",
-      heading: "Расписание занятий и группы — в одной системе.",
+      heading: "Расписание и группы в одной системе.",
       intro:
-        "Теоретические и практические занятия планируются в недельном представлении вместе с группой, преподавателем, временем и типом урока.",
+        "Планируйте теорию и вождение в одном расписании. Для каждого занятия укажите группу, преподавателя и время.",
       sections: [
         {
-          title: "Недельное представление задаёт единый порядок",
+          title: "Вся неделя перед глазами",
           body:
-            "Занятия видны по неделям. Команда видит ежедневную работу без необходимости собирать её из разных журналов и сообщений.",
+            "Смотрите, какие занятия запланированы на каждый день. Не нужно собирать расписание из журналов и сообщений.",
         },
         {
-          title: "Группа и преподаватель связаны с занятием",
+          title: "Укажите группу и преподавателя",
           body:
-            "Планирование занятия вместе с группой и преподавателем помогает отслеживать изменения расписания в одном месте.",
+            "Назначьте группу и преподавателя для каждого занятия. Следите за изменениями в том же расписании.",
         },
         {
-          title: "Теория и практика в одном процессе",
+          title: "Теория и вождение в одном расписании",
           body:
-            "Тип занятия виден в календаре, поэтому команда различает теорию и практику в недельном потоке.",
+            "Тип занятия виден в календаре. Теорию и практическое вождение легко различить.",
         },
       ],
-      relatedLabel: "Другие возможности управления",
+      relatedLabel: "Другие возможности",
       cta: {
-        title: "Проверьте расписание внутри продукта.",
-        body: "В синтетическом демо доступны недельный календарь и ключевые рабочие процессы.",
+        title: "Посмотрите расписание в демо.",
+        body: "Проверьте недельное расписание, группы и занятия на примере автошколы.",
         label: "Открыть демо",
       },
       updatedAt: "2026-09-19",
@@ -239,34 +239,34 @@ export const SEO_PAGES: Record<
       segments: ["features", "schedules-and-groups"],
       title: "Driving-school schedules and groups | automaktab.uz",
       description:
-        "Plan theory and practical driving-school lessons in a weekly schedule with the right group and teacher.",
+        "Plan theory and driving lessons in a weekly schedule. Assign each lesson to a group and teacher.",
       keywords: ["driving school schedule", "driving school groups", "theory and practical lessons"],
       eyebrow: "Schedules and groups",
       heading: "Schedule groups and lessons in one place.",
       intro:
-        "Theory and practical lessons are planned in one weekly view with the group, teacher, time, and lesson type.",
+        "Plan theory and driving lessons in one schedule. Set the group, teacher and time for each lesson.",
       sections: [
         {
-          title: "A weekly view creates shared order",
+          title: "See the whole week at a glance",
           body:
-            "Lessons appear in a weekly view, helping the team see daily work without gathering it from separate notebooks and messages.",
+            "See which lessons are planned each day. No need to piece together a schedule from notebooks and messages.",
         },
         {
-          title: "Connect each lesson to a group and teacher",
+          title: "Assign the group and teacher",
           body:
-            "Planning a lesson with its group and teacher makes schedule changes easier to review from one place.",
+            "Assign a group and teacher to each lesson. Track changes in the same schedule.",
         },
         {
-          title: "Keep theory and practice in one flow",
+          title: "Theory and driving in one schedule",
           body:
-            "The lesson type is visible in the calendar, so the team can distinguish theory and practice throughout the week.",
+            "Lesson types are visible in the calendar, making theory and driving practice easy to tell apart.",
         },
       ],
-      relatedLabel: "Other management capabilities",
+      relatedLabel: "Other features",
       cta: {
-        title: "Review the schedule inside the product.",
-        body: "The synthetic demo includes the weekly calendar and key workflows.",
-        label: "Open the demo",
+        title: "See the schedule in the demo.",
+        body: "Explore the weekly schedule, groups and lessons in a sample school.",
+        label: "Open demo",
       },
       updatedAt: "2026-09-19",
     },
@@ -274,36 +274,36 @@ export const SEO_PAGES: Record<
   attendance: {
     uz: {
       segments: ["features", "digital-attendance"],
-      title: "Avtomaktab: Raqamli davomat | automaktab.uz",
+      title: "Avtomaktab davomat jurnali | automaktab.uz",
       description:
-        "Har bir avtomaktab darsi uchun kelgan, kechikkan, kelmagan va uzrli davomat statuslarini belgilang.",
+        "Har bir darsda kim kelganini, kechikkanini yoki kelmaganini belgilang. Davomatni guruh va dars bilan bir joyda yuriting.",
       keywords: ["avtomaktab davomat", "raqamli davomat", "davomat jurnali"],
       eyebrow: "Raqamli davomat",
-      heading: "Raqamli davomat bilan dars holatini ko‘ring.",
+      heading: "Har bir dars davomatini bir joyda yuriting.",
       intro:
-        "Har bir dars uchun tushunarli statuslar bir joyda saqlanadi. Jamoa bugungi holatni tez ko‘radi va keyingi ishini aniqroq rejalashtiradi.",
+        "Guruh ro‘yxatidan har bir talabaning davomatini belgilang. Qaysi darslarni qoldirganini shu tizimda tekshiring.",
       sections: [
         {
-          title: "Har bir dars uchun aniq status",
+          title: "To‘rtta tushunarli holat",
           body:
-            "Keldi, kechikdi, kelmadi va uzrli statuslari dars ro‘yxati bilan bir joyda turadi. Bu belgilashni sodda va izchil qiladi.",
+            "Keldi, kechikdi, kelmadi yoki uzrli. Har bir talabaning holatini dars ro‘yxatida belgilang.",
         },
         {
-          title: "Davomat dars oqimining ichida",
+          title: "Jadval va davomat yonma-yon",
           body:
-            "Davomat alohida qog‘ozda qolmaydi. Jadval va guruhlar bilan bir tizimda turishi kundalik tekshiruvni osonlashtiradi.",
+            "Dars, guruh va davomat bitta tizimda. Alohida qog‘oz jurnalni qidirishga hojat yo‘q.",
         },
         {
-          title: "Bugungi holatni tez tekshiring",
+          title: "Dars holatini tekshiring",
           body:
-            "Menejer yoki o‘qituvchi demo ichida dars ro‘yxati va statuslar qanday ko‘rinishini bevosita sinab ko‘rishi mumkin.",
+            "Menejer va o‘qituvchi dars ro‘yxatidan kim kelganini va kim dars qoldirganini ko‘radi.",
         },
       ],
-      relatedLabel: "Boshqa boshqaruv imkoniyatlari",
+      relatedLabel: "Boshqa imkoniyatlar",
       cta: {
-        title: "Davomat oqimini demo ichida ko‘ring.",
-        body: "Sintetik ma’lumotlar bilan statuslarni belgilash jarayonini xavfsiz tekshiring.",
-        label: "Demo’ni oching",
+        title: "Davomatni demoda belgilab ko‘ring.",
+        body: "Namuna ma’lumotlari bilan davomat belgilashni sinang.",
+        label: "Demoni ochish",
       },
       updatedAt: "2026-09-19",
     },
@@ -311,33 +311,33 @@ export const SEO_PAGES: Record<
       segments: ["features", "digital-attendance"],
       title: "Цифровая посещаемость автошколы | automaktab.uz",
       description:
-        "Отмечайте для каждого урока автошколы понятные статусы: был, опоздал, отсутствовал или отсутствовал по уважительной причине.",
+        "Отмечайте посещаемость каждого занятия: пришёл, опоздал, не пришёл или пропустил по уважительной причине.",
       keywords: ["посещаемость автошколы", "цифровая посещаемость", "журнал посещаемости"],
       eyebrow: "Цифровая посещаемость",
-      heading: "Ведите цифровую посещаемость по каждому уроку.",
+      heading: "Ведите посещаемость каждого занятия в одной системе.",
       intro:
-        "Понятные статусы для каждого занятия хранятся в одном месте. Команда быстрее видит текущую ситуацию и точнее планирует следующие действия.",
+        "Отмечайте посещаемость в списке группы. Здесь же проверяйте, какие занятия пропустил курсант.",
       sections: [
         {
-          title: "Понятный статус для каждого урока",
+          title: "Четыре понятных статуса",
           body:
-            "Статусы «был», «опоздал», «отсутствовал» и «уважительная причина» находятся рядом со списком занятия. Это делает отметку простой и последовательной.",
+            "Пришёл, опоздал, не пришёл или пропустил по уважительной причине. Отметьте каждого курсанта в списке занятия.",
         },
         {
-          title: "Посещаемость внутри учебного процесса",
+          title: "Расписание и посещаемость рядом",
           body:
-            "Посещаемость не остаётся в отдельной бумажной форме. Она находится в одной системе с расписанием и группами, что упрощает ежедневную проверку.",
+            "Занятие, группа и посещаемость находятся в одной системе. Не нужно искать отдельный бумажный журнал.",
         },
         {
-          title: "Быстро проверяйте сегодняшнюю ситуацию",
+          title: "Проверяйте посещаемость занятия",
           body:
-            "Менеджер или преподаватель может в демо увидеть, как выглядят список урока и статусы.",
+            "Менеджер и преподаватель видят, кто пришёл и кто пропустил занятие.",
         },
       ],
-      relatedLabel: "Другие возможности управления",
+      relatedLabel: "Другие возможности",
       cta: {
-        title: "Посмотрите поток посещаемости в демо.",
-        body: "Безопасно проверьте отметку статусов на синтетических данных.",
+        title: "Попробуйте отметить посещаемость в демо.",
+        body: "Попробуйте журнал посещаемости на вымышленных данных.",
         label: "Открыть демо",
       },
       updatedAt: "2026-09-19",
@@ -349,31 +349,31 @@ export const SEO_PAGES: Record<
         "Record clear attendance statuses for every driving-school lesson: present, late, absent, or excused.",
       keywords: ["driving school attendance", "digital attendance", "attendance record"],
       eyebrow: "Digital attendance",
-      heading: "Track attendance for every lesson digitally.",
+      heading: "Keep attendance for every lesson together.",
       intro:
-        "Clear statuses for each lesson stay in one place. The team can check today’s situation faster and plan the next step more reliably.",
+        "Mark attendance on the group list. Check which lessons each student has missed in the same system.",
       sections: [
         {
-          title: "Use a clear status for every lesson",
+          title: "Four clear attendance choices",
           body:
-            "Present, late, absent, and excused statuses sit beside the lesson roster, keeping the marking process simple and consistent.",
+            "Present, late, absent or excused. Mark each student on the lesson roster.",
         },
         {
-          title: "Keep attendance in the learning workflow",
+          title: "Schedules and attendance stay together",
           body:
-            "Attendance does not remain on a separate sheet. It lives with schedules and groups, making daily review easier.",
+            "Lessons, groups and attendance are in one system. No need to find a separate paper register.",
         },
         {
-          title: "Check today’s situation quickly",
+          title: "Check who attended the lesson",
           body:
-            "A manager or teacher can open the demo to see how lesson rosters and attendance statuses appear.",
+            "Managers and teachers can see who attended and who missed the lesson.",
         },
       ],
-      relatedLabel: "Other management capabilities",
+      relatedLabel: "Other features",
       cta: {
-        title: "See attendance in the demo.",
-        body: "Safely test status marking with synthetic data.",
-        label: "Open the demo",
+        title: "Try taking attendance in the demo.",
+        body: "Try the attendance register with sample data.",
+        label: "Open demo",
       },
       updatedAt: "2026-09-19",
     },
@@ -381,36 +381,36 @@ export const SEO_PAGES: Record<
   branches: {
     uz: {
       segments: ["features", "branch-management"],
-      title: "Avtomaktab: Filiallar boshqaruvi | automaktab.uz",
+      title: "Avtomaktab filiallari boshqaruvi | automaktab.uz",
       description:
-        "Avtomaktab filiallari natijalarini owner dashboardda bir ko‘rinishda taqqoslang va nazorat qiling.",
-      keywords: ["avtomaktab filiallari", "filiallar boshqaruvi", "owner dashboard"],
+        "Filiallar tushumi va qarzdorligini rahbar panelida solishtiring. Maktabning umumiy holatini bir joyda ko‘ring.",
+      keywords: ["avtomaktab filiallari", "filiallar boshqaruvi", "rahbar paneli"],
       eyebrow: "Filiallar boshqaruvi",
-      heading: "Avtomaktab filiallarini bir ko‘rinishda boshqaring.",
+      heading: "Barcha filiallar holati bir joyda.",
       intro:
-        "Bir nechta filiali bor maktab uchun umumiy holat bo‘linib ketmasligi kerak. Owner dashboard filiallar natijasini bir ko‘rinishda taqqoslashga yordam beradi.",
+        "Filiallar tushumi va qarzdorligini rahbar panelida solishtiring. Qaysi filialga e’tibor kerakligini ko‘ring.",
       sections: [
         {
-          title: "Filiallar kesimida umumiy ko‘rinish",
+          title: "Filiallarni alohida va birga ko‘ring",
           body:
-            "Rahbar bitta boshqaruv maydonida filiallar bo‘yicha holatni ko‘radi. Bu umumiy natijani bo‘lak-bo‘lak fayllardan yig‘ish ehtiyojini kamaytiradi.",
+            "Har bir filial natijasini va maktabning umumiy holatini bir paneldan tekshiring.",
         },
         {
-          title: "Taqqoslash uchun bir xil asos",
+          title: "Natijalarni bir xil davrda solishtiring",
           body:
-            "Filiallar bir tizimda ishlaganda rahbar ularning natijalarini bir xil kontekstda ko‘rib, qaysi jarayonni tekshirish kerakligini aniqlaydi.",
+            "Filiallar bir tizimda ishlaydi. Rahbar natijalarni solishtirib, qaysi ishni tekshirish kerakligini aniqlaydi.",
         },
         {
-          title: "Jamoaning ish maydoni rolga mos",
+          title: "Har bir xodimga kerakli kirish huquqi",
           body:
-            "Owner, menejer, operator, buxgalter va o‘qituvchi o‘ziga kerakli ish maydonini ko‘radi. Bu kundalik nazoratni aniqroq qiladi.",
+            "Rahbar, menejer, qabul xodimi, buxgalter va o‘qituvchi ishiga mos bo‘limlarni ko‘radi.",
         },
       ],
-      relatedLabel: "Boshqa boshqaruv imkoniyatlari",
+      relatedLabel: "Boshqa imkoniyatlar",
       cta: {
-        title: "Filiallar ko‘rinishini demo ichida ko‘ring.",
-        body: "Sintetik rahbar paneli asosiy jarayonlarni xavfsiz tekshirishga imkon beradi.",
-        label: "Demo’ni oching",
+        title: "Filiallar natijasini demoda ko‘ring.",
+        body: "Rahbar panelini namuna ma’lumotlari bilan tekshiring.",
+        label: "Demoni ochish",
       },
       updatedAt: "2026-09-19",
     },
@@ -418,33 +418,33 @@ export const SEO_PAGES: Record<
       segments: ["features", "branch-management"],
       title: "Управление филиалами автошколы | automaktab.uz",
       description:
-        "Сравнивайте результаты филиалов автошколы в единой панели владельца и контролируйте общую картину.",
+        "Сравнивайте поступления и задолженность филиалов на панели руководителя. Смотрите результаты всей автошколы в одном месте.",
       keywords: ["филиалы автошколы", "управление филиалами", "панель владельца"],
       eyebrow: "Управление филиалами",
-      heading: "Управляйте филиалами автошколы из одного места.",
+      heading: "Все филиалы на одном экране.",
       intro:
-        "Для школы с несколькими филиалами общая картина не должна распадаться. Панель владельца помогает сравнивать результаты филиалов в одном представлении.",
+        "Сравнивайте поступления и задолженность филиалов на панели руководителя. Видно, какому филиалу нужно внимание.",
       sections: [
         {
-          title: "Общий вид по филиалам",
+          title: "Смотрите филиалы отдельно и вместе",
           body:
-            "Руководитель видит состояние филиалов в одном рабочем пространстве, а не собирает общую картину из разрозненных файлов.",
+            "Проверяйте результаты каждого филиала и общую картину автошколы на одной панели.",
         },
         {
-          title: "Единая основа для сравнения",
+          title: "Сравнивайте результаты за один период",
           body:
-            "Когда филиалы работают в одной системе, владелец сравнивает результаты в одном контексте и понимает, какой процесс стоит проверить.",
+            "Филиалы работают в одной системе. Руководитель сравнивает результаты и решает, какие процессы проверить.",
         },
         {
-          title: "Рабочее пространство соответствует роли",
+          title: "Каждому сотруднику нужный доступ",
           body:
-            "Владелец, менеджер, оператор, бухгалтер и преподаватель видят своё рабочее поле. Это делает ежедневный контроль точнее.",
+            "Руководитель, менеджер, сотрудник приёмной, бухгалтер и преподаватель видят разделы для своей работы.",
         },
       ],
-      relatedLabel: "Другие возможности управления",
+      relatedLabel: "Другие возможности",
       cta: {
-        title: "Посмотрите представление филиалов в демо.",
-        body: "Синтетическая панель владельца помогает безопасно проверить ключевые процессы.",
+        title: "Сравните филиалы в демо.",
+        body: "Проверьте панель руководителя на вымышленных данных.",
         label: "Открыть демо",
       },
       updatedAt: "2026-09-19",
@@ -453,34 +453,34 @@ export const SEO_PAGES: Record<
       segments: ["features", "branch-management"],
       title: "Driving-school branch management | automaktab.uz",
       description:
-        "Compare driving-school branch results in one owner dashboard and keep a clear view of the wider operation.",
+        "Compare branch revenue and student debt on the owner dashboard. See how the whole school is doing in one place.",
       keywords: ["driving school branches", "branch management", "owner dashboard"],
       eyebrow: "Branch management",
-      heading: "Manage driving-school branches from one view.",
+      heading: "Keep every branch in view.",
       intro:
-        "A school with several branches needs a shared picture. The owner dashboard helps compare branch results in one view.",
+        "Compare branch revenue and student debt on the owner dashboard. See which branch needs attention.",
       sections: [
         {
-          title: "See the whole operation by branch",
+          title: "View branches separately and together",
           body:
-            "An owner sees branch status in one workspace instead of assembling the overall picture from scattered files.",
+            "Check each branch’s results and the whole school’s performance from one dashboard.",
         },
         {
-          title: "Compare results on the same basis",
+          title: "Compare results for the same period",
           body:
-            "When branches work in one system, the owner compares results in the same context and can decide which process needs review.",
+            "Branches work in one system. Owners compare results and decide which tasks need attention.",
         },
         {
-          title: "Match the workspace to the role",
+          title: "Give each employee the access they need",
           body:
-            "Owners, managers, operators, accountants, and teachers see the workspace they need, making daily control more precise.",
+            "Owners, managers, admissions staff, accountants and teachers see the sections they need for their work.",
         },
       ],
-      relatedLabel: "Other management capabilities",
+      relatedLabel: "Other features",
       cta: {
-        title: "See the branch view in the demo.",
-        body: "The synthetic owner dashboard lets you safely review key workflows.",
-        label: "Open the demo",
+        title: "Compare branches in the demo.",
+        body: "Explore the owner dashboard with sample data.",
+        label: "Open demo",
       },
       updatedAt: "2026-09-19",
     },
@@ -490,106 +490,106 @@ export const SEO_PAGES: Record<
       segments: ["pricing"],
       title: "Tariflar | automaktab.uz",
       description:
-        "automaktab.uz bilan 30 kun bepul sinovni boshlang. Keyingi shartlar maktabingiz ehtiyojiga qarab tanishuvda kelishiladi.",
+        "Namuna demoni oching. Maktabingiz uchun 30 kunlik sinov, narx va cheklovlarni boshlashdan oldin yozma kelishing.",
       keywords: ["avtomaktab CRM narxi", "avtomaktab tariflari", "boshqaruv tizimi narxi"],
       eyebrow: "Tariflar va sinov",
-      heading: "Tariflar: 30 kun bepul sinov bilan boshlang.",
+      heading: "Maktabingiz uchun narx va sinov shartlari.",
       intro:
-        "Bepul sinov davrida sintetik demo orqali asosiy ish oqimlarini ko‘rib chiqing. Keyingi shartlar maktabingiz hajmi va ehtiyojiga qarab tanishuvda muhokama qilinadi.",
+        "Demo namuna ma’lumotlari bilan ishlaydi. Maktabingiz ma’lumotlari bilan 30 kunlik sinov, narx va cheklovlarni oldindan yozma kelishamiz.",
       sections: [
         {
-          title: "30 kunlik tanishuv davri",
+          title: "Maktabingizda 30 kun sinang",
           body:
-            "Tasdiqlangan sinov davri 30 kun. U mahsulotning asosiy jarayonlari maktabingiz ishiga mos kelishini tekshirish uchun mo‘ljallangan.",
+            "Sinov muddati, narx, ma’lumot ko‘chirish va cheklovlarni boshlashdan oldin yozma kelishamiz.",
         },
         {
-          title: "Shartlar maktab ehtiyojiga bog‘liq",
+          title: "Narx maktabingizga qarab hisoblanadi",
           body:
-            "Filiallar, jamoa roli va kerakli ish oqimlari turlicha bo‘lishi mumkin. Shu sabab keyingi shartlar tanishuvda aniq ehtiyojga qarab kelishiladi.",
+            "Filiallar, talabalar soni va kerakli bo‘limlarni ayting. Sizga mos shartlarni yozma taklifda oling.",
         },
         {
           title: "Avval tizimni o‘zingiz ko‘ring",
           body:
-            "Demo kontakt qoldirishni talab qilmaydi. Sintetik akkaunt bilan dashboard, jadval, davomat va to‘lovlar oqimini o‘zingiz tekshiring.",
+            "Telefon raqamingizni qoldirmasdan demoni oching. Rahbar paneli, jadval, davomat va to‘lovlarni namuna ma’lumotlari bilan tekshiring.",
         },
       ],
-      relatedLabel: "Boshqa boshqaruv imkoniyatlari",
+      relatedLabel: "Boshqa imkoniyatlar",
       cta: {
-        title: "Bepul sinovni demo bilan boshlang.",
-        body: "Mahsulotni avval sintetik ma’lumotlar bilan tekshiring, keyin maktabingiz uchun keyingi qadamlarni muhokama qiling.",
-        label: "Demo’ni oching",
+        title: "Avval demoni ko‘ring, keyin sinov so‘rang.",
+        body: "Namuna ma’lumotlari bilan tanishing. Keyin maktabingiz uchun sinov shartlarini kelishamiz.",
+        label: "Demoni ochish",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-01",
     },
     ru: {
       segments: ["pricing"],
-      title: "Тарифы automaktab.uz | 30 дней бесплатно",
+      title: "Тарифы и пробный период | automaktab.uz",
       description:
-        "Начните с 30-дневного бесплатного периода automaktab.uz. Дальнейшие условия обсуждаются с учётом потребностей автошколы.",
+        "Откройте демо. Цену и ограничения 30-дневного пробного периода для вашей автошколы согласуем письменно до начала.",
       keywords: ["стоимость CRM для автошколы", "тарифы автошколы", "цена системы управления"],
       eyebrow: "Тарифы и пробный период",
-      heading: "Тарифы: начните с 30-дневного бесплатного периода.",
+      heading: "Цена и пробный период для вашей автошколы.",
       intro:
-        "Во время бесплатного периода проверьте ключевые рабочие процессы в синтетическом демо. Дальнейшие условия обсуждаются с учётом размера и задач вашей школы.",
+        "Демо использует вымышленные данные. 30-дневный пробный период работает на данных вашей школы. Цену и ограничения согласуем письменно до начала.",
       sections: [
         {
-          title: "30 дней для знакомства",
+          title: "30 дней в вашей автошколе",
           body:
-            "Подтверждённый пробный период длится 30 дней. Он помогает проверить, подходят ли основные процессы продукта для работы школы.",
+            "Срок, цену, перенос данных и ограничения согласуем письменно до начала пробного периода.",
         },
         {
-          title: "Условия зависят от задач школы",
+          title: "Цена зависит от вашей школы",
           body:
-            "Филиалы, роли команды и нужные рабочие процессы могут отличаться. Поэтому дальнейшие условия согласуются во время знакомства с учётом конкретной потребности.",
+            "Расскажите о филиалах, числе курсантов и нужных разделах. Получите подходящие условия в письменном предложении.",
         },
         {
           title: "Сначала посмотрите саму систему",
           body:
-            "Демо не требует контактов. Проверьте панель, расписание, посещаемость и оплаты на синтетической учётной записи.",
+            "Откройте демо без номера телефона. Проверьте панель руководителя, расписание, посещаемость и оплаты на вымышленных данных.",
         },
       ],
-      relatedLabel: "Другие возможности управления",
+      relatedLabel: "Другие возможности",
       cta: {
-        title: "Начните пробный период с демо.",
-        body: "Сначала проверьте продукт на синтетических данных, затем обсудите следующий шаг для вашей школы.",
+        title: "Посмотрите демо перед пробным периодом.",
+        body: "Познакомьтесь с системой на вымышленных данных. Затем согласуем пробный период для вашей школы.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-01",
     },
     en: {
       segments: ["pricing"],
-      title: "Pricing | automaktab.uz — 30-day free trial",
+      title: "Pricing and trial terms | automaktab.uz",
       description:
-        "Start automaktab.uz with a 30-day free trial. Further terms are discussed around your driving school’s needs.",
-      keywords: ["driving school CRM pricing", "driving school management pricing", "30-day free trial"],
+        "Explore the demo. Agree on pricing and limits for a 30-day trial with your school’s data in writing before starting.",
+      keywords: ["driving school CRM pricing", "driving school management pricing", "30-day school trial"],
       eyebrow: "Pricing and trial",
-      heading: "Pricing: start with a 30-day free trial.",
+      heading: "Pricing and trial terms for your school.",
       intro:
-        "Use the free trial to explore core workflows in a synthetic demo. Further terms are discussed around the size and needs of your school.",
+        "The demo uses sample data. The 30-day trial uses your school’s data. We agree on pricing and limits in writing beforehand.",
       sections: [
         {
-          title: "30 days to explore",
+          title: "30 days at your school",
           body:
-            "The confirmed trial period is 30 days. It is designed to help you check whether the core workflows fit your school’s operation.",
+            "Agree on trial duration, price, data migration and limits in writing before you start.",
         },
         {
-          title: "Terms reflect your school’s needs",
+          title: "Pricing depends on your school",
           body:
-            "Branches, team roles, and required workflows can differ. Further terms are therefore discussed during an introduction around the specific need.",
+            "Tell us your branch and student counts and the sections you need. Get suitable terms in a written offer.",
         },
         {
           title: "See the system before you decide",
           body:
-            "The demo does not require contact details. Review the dashboard, schedules, attendance, and payments with a synthetic account.",
+            "Open the demo without leaving your phone number. Check the owner dashboard, schedules, attendance and payments with sample data.",
         },
       ],
-      relatedLabel: "Other management capabilities",
+      relatedLabel: "Other features",
       cta: {
-        title: "Start your trial with the demo.",
-        body: "Review the product with synthetic data first, then discuss the next step for your school.",
-        label: "Open the demo",
+        title: "Explore the demo before the trial.",
+        body: "Get to know the system with sample data. Then we’ll agree on a trial for your school.",
+        label: "Open demo",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-01",
     },
   },
   privacy: {
@@ -607,17 +607,17 @@ export const SEO_PAGES: Record<
         {
           title: "Kim operator",
           body:
-            "Ushbu sahifalar va xizmatning operatori — automaktab.uz brendi ostida faoliyat yurituvchi jamoa. Aniq yuridik rekvizitlar (nom, manzil, STIR) shartnoma yoki hisob-faktura hujjatlarida ko‘rsatiladi; bu stubda ular ixtiro qilinmagan.",
+            "Sayt va xizmatni automaktab.uz brendi ostidagi jamoa yuritadi. Yuridik rekvizitlar (nom, manzil, STIR) shartnoma yoki hisob-fakturada ko‘rsatiladi.",
         },
         {
           title: "Qanday ma’lumotlar ishlatiladi",
           body:
-            "CRM maktabning kundalik ishi uchun kerakli ma’lumotlarni saqlaydi: talabalar, guruhlar, to‘lov va qarzdorlik yozuvlari, dars jadvali, davomat va xodim akkauntlari. Marketing saytidagi tanishuv formasi orqali yuborilgan ism, telefon va maktab haqidagi qisqa ma’lumot faqat bog‘lanish uchun ishlatiladi. Sintetik demo akkaunti haqiqiy mijoz ma’lumotlaridan foydalanmaydi.",
+            "CRM maktabning kundalik ishi uchun kerakli ma’lumotlarni saqlaydi: talabalar, guruhlar, to‘lov va qarzdorlik yozuvlari, dars jadvali, davomat va xodim akkauntlari. Saytdagi so‘rov formasidan yuborilgan ism, telefon va maktab haqidagi qisqa ma’lumot faqat bog‘lanish uchun ishlatiladi. Demoda haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
         },
         {
           title: "Saqlash, kirish va huquqlar",
           body:
-            "Ma’lumotlar xizmatni ko‘rsatish, xavfsizlik va qo‘llab-quvvatlash uchun ishlatiladi. Maktab jamoasi rolga mos kirish orqali o‘z ma’lumotlarini boshqaradi. So‘rov, tuzatish yoki o‘chirish bo‘yicha murojaatni mahsulot kanallari orqali yuboring — saytdagi tanishuv formasi yoki shartnomada ko‘rsatilgan aloqa.",
+            "Ma’lumotlar xizmatni ko‘rsatish, xavfsizlik va qo‘llab-quvvatlash uchun ishlatiladi. Maktab jamoasi rolga mos kirish orqali o‘z ma’lumotlarini boshqaradi. So‘rov, tuzatish yoki o‘chirish bo‘yicha murojaatni mahsulot kanallari orqali yuboring — saytdagi so‘rov formasi yoki shartnomada ko‘rsatilgan aloqa.",
         },
         {
           title: "Yangilanishlar",
@@ -627,9 +627,9 @@ export const SEO_PAGES: Record<
       ],
       relatedLabel: "Huquqiy sahifalar",
       cta: {
-        title: "Savol qoldimi?",
-        body: "Tanishuv formasi orqali bog‘laning yoki sintetik demoda mahsulotni ko‘ring — haqiqiy mijoz ma’lumotlari talab qilinmaydi.",
-        label: "Demo’ni oching",
+        title: "Demoda namuna ma’lumotlari ishlatiladi.",
+        body: "Savollar bo‘yicha saytdagi so‘rov formasi yoki shartnomadagi aloqa orqali bog‘laning. Demo haqiqiy mijoz ma’lumotlarini ishlatmaydi.",
+        label: "Demoni ochish",
       },
       updatedAt: "2026-09-24",
     },
@@ -651,17 +651,17 @@ export const SEO_PAGES: Record<
         {
           title: "Кто оператор",
           body:
-            "Оператор этих страниц и сервиса — команда под брендом automaktab.uz. Точные юридические реквизиты (наименование, адрес, ИНН) указываются в договоре или счёт-фактуре; в этой заглушке они не выдуманы.",
+            "Сайт и сервис обслуживает команда под брендом automaktab.uz. Юридические реквизиты (наименование, адрес, ИНН) указаны в договоре или счёте-фактуре.",
         },
         {
           title: "Какие данные используются",
           body:
-            "CRM хранит данные, нужные для повседневной работы школы: ученики, группы, оплаты и задолженность, расписание, посещаемость и учётные записи сотрудников. Данные из формы знакомства на сайте (имя, телефон, краткие сведения о школе) используются для связи. Синтетическое демо не использует данные реальных клиентов.",
+            "CRM хранит данные для повседневной работы школы: курсанты, группы, оплаты и задолженность, расписание, посещаемость и учётные записи сотрудников. Данные из формы заявки на сайте (имя, телефон, краткие сведения о школе) используются для связи. В демо используются вымышленные данные, а не данные реальных клиентов.",
         },
         {
           title: "Хранение, доступ и права",
           body:
-            "Данные используются для оказания услуги, безопасности и поддержки. Команда школы управляет своими данными через ролевой доступ. Запросы на доступ, исправление или удаление направляйте через продуктовые каналы — форму знакомства на сайте или контакт из договора.",
+            "Данные используются для оказания услуги, безопасности и поддержки. Команда школы управляет своими данными через ролевой доступ. Запросы на доступ, исправление или удаление направляйте через продуктовые каналы — форму заявки на сайте или контакт из договора.",
         },
         {
           title: "Обновления",
@@ -671,8 +671,8 @@ export const SEO_PAGES: Record<
       ],
       relatedLabel: "Правовые страницы",
       cta: {
-        title: "Остались вопросы?",
-        body: "Свяжитесь через форму знакомства или откройте синтетическое демо — данные реальных клиентов не нужны.",
+        title: "В демо используются вымышленные данные.",
+        body: "По вопросам свяжитесь через форму на сайте или контакты из договора. Демо не использует данные реальных клиентов.",
         label: "Открыть демо",
       },
       updatedAt: "2026-09-24",
@@ -691,17 +691,17 @@ export const SEO_PAGES: Record<
         {
           title: "Who operates the service",
           body:
-            "These pages and the service are operated by the team behind the automaktab.uz brand. Exact legal details (legal name, address, tax ID) appear on contracts or invoices; they are not invented in this stub.",
+            "The site and service are operated by the team behind automaktab.uz. Legal details (legal name, address, tax ID) appear in contracts or invoices.",
         },
         {
           title: "What data we use",
           body:
-            "The CRM stores data needed for day-to-day school operations: students, groups, payments and debt, schedules, attendance, and staff accounts. Introduction-form details on the marketing site (name, phone, brief school info) are used to get in touch. The synthetic demo does not use real customer data.",
+            "The CRM stores data needed for day-to-day school operations: students, groups, payments and debt, schedules, attendance and staff accounts. Request-form details on the site (name, phone, brief school information) are used to get in touch. The demo uses sample data, not real customer records.",
         },
         {
           title: "Storage, access, and requests",
           body:
-            "Data is used to provide the service, protect security, and offer support. School teams manage their own data through role-based access. For access, correction, or deletion requests, use product channels — the on-site introduction form or the contact listed in your agreement.",
+            "Data is used to provide the service, protect security, and offer support. School teams manage their own data through role-based access. For access, correction, or deletion requests, use product channels — the on-site request form or the contact listed in your agreement.",
         },
         {
           title: "Updates",
@@ -711,9 +711,9 @@ export const SEO_PAGES: Record<
       ],
       relatedLabel: "Legal pages",
       cta: {
-        title: "Still have questions?",
-        body: "Reach out via the introduction form or open the synthetic demo — no real customer data is required.",
-        label: "Open the demo",
+        title: "The demo uses sample data.",
+        body: "For questions, use the site’s request form or your contract contact. The demo does not use real customer data.",
+        label: "Open demo",
       },
       updatedAt: "2026-09-24",
     },
@@ -728,7 +728,7 @@ export const SEO_PAGES: Record<
       eyebrow: "Oferta",
       heading: "Foydalanish shartlari",
       intro:
-        "Ushbu qisqa shartlar automaktab.uz marketing sayti va avtomaktablar uchun boshqaruv tizimidan (CRM) foydalanishning asosiy qoidalarini bayon etadi. Bu stub to‘liq yuridik oferta o‘rnini bosmaydi; tijorat shartlari alohida kelishiladi.",
+        "Ushbu qisqa shartlar automaktab.uz marketing sayti va avtomaktablar uchun boshqaruv tizimidan (CRM) foydalanishning asosiy qoidalarini bayon etadi. Bu qisqa matn to‘liq yuridik oferta o‘rnini bosmaydi; tijorat shartlari alohida kelishiladi.",
       sections: [
         {
           title: "Xizmat nima",
@@ -738,7 +738,7 @@ export const SEO_PAGES: Record<
         {
           title: "Demo va sinov",
           body:
-            "“Demo’ni oching” sintetik ma’lumotli sessiyani ochadi va haqiqiy mijoz ma’lumotlarini talab qilmaydi. Tasdiqlangan bepul sinov muddati 30 kun; keyingi shartlar maktab ehtiyojiga qarab tanishuvda muhokama qilinadi.",
+            "“Demoni ochish” namuna ma’lumotlari bilan ishlaydigan demoni ochadi. Haqiqiy mijoz ma’lumotlari talab qilinmaydi. Demo va maktabingiz ma’lumotlari bilan sinov alohida. 30 kunlik sinov muddati, narxi va cheklovlari boshlashdan oldin yozma kelishiladi.",
         },
         {
           title: "Maktabning majburiyatlari",
@@ -748,16 +748,16 @@ export const SEO_PAGES: Record<
         {
           title: "Javobgarlik va aloqa",
           body:
-            "Xizmat “boricha” taqdim etiladi; kafolatlar shartnomada yoziladi. Nizolarni avval muzokara orqali hal etishga harakat qilinadi. Bog‘lanish: saytdagi tanishuv formasi yoki shartnomadagi aloqa kanallari. Operator — automaktab.uz brendi ostidagi jamoa; rekvizitlar hujjatlarda ko‘rsatiladi.",
+            "Xizmat “boricha” taqdim etiladi; kafolatlar shartnomada yoziladi. Nizolarni avval muzokara orqali hal etishga harakat qilinadi. Bog‘lanish: saytdagi so‘rov formasi yoki shartnomadagi aloqa kanallari. Operator — automaktab.uz brendi ostidagi jamoa; rekvizitlar hujjatlarda ko‘rsatiladi.",
         },
       ],
       relatedLabel: "Huquqiy sahifalar",
       cta: {
         title: "Avval mahsulotni ko‘ring.",
-        body: "Sintetik demo darhol ochiladi. Keyingi tijorat shartlari tanishuvda kelishiladi.",
-        label: "Demo’ni oching",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Tijorat shartlari alohida kelishiladi.",
+        label: "Demoni ochish",
       },
-      updatedAt: "2026-09-24",
+      updatedAt: "2026-10-01",
     },
     ru: {
       segments: ["terms"],
@@ -768,17 +768,17 @@ export const SEO_PAGES: Record<
       eyebrow: "Оферта",
       heading: "Условия использования",
       intro:
-        "Эти краткие условия описывают основные правила маркетингового сайта automaktab.uz и системы управления для автошкол (CRM). Заглушка не заменяет полную юридическую оферту; коммерческие условия согласуются отдельно.",
+        "Эти краткие условия описывают основные правила маркетингового сайта automaktab.uz и системы управления для автошкол (CRM). Этот краткий текст не заменяет полную юридическую оферту; коммерческие условия согласуются отдельно.",
       sections: [
         {
           title: "Что это за сервис",
           body:
-            "automaktab.uz помогает автошколам вести учеников, оплаты, расписание и посещаемость в одной системе. Материалы сайта носят информационный характер; возможности продукта предоставляются в рамках пробного периода и договора.",
+            "automaktab.uz помогает автошколам вести учёт курсантов и оплат, планировать занятия и отмечать посещаемость в одной системе. Материалы сайта носят информационный характер; возможности продукта предоставляются в рамках пробного периода и договора.",
         },
         {
           title: "Демо и пробный период",
           body:
-            "Кнопка «Открыть демо» запускает сессию с синтетическими данными и не требует данных реальных клиентов. Подтверждённый бесплатный период — 30 дней; дальнейшие условия обсуждаются с учётом задач школы.",
+            "Кнопка «Открыть демо» открывает систему с вымышленными данными и не требует данных реальных клиентов. Демо и пробный период с данными вашей школы различаются. Срок 30-дневного пробного периода, стоимость и ограничения согласуются письменно до начала.",
         },
         {
           title: "Обязанности школы",
@@ -788,16 +788,16 @@ export const SEO_PAGES: Record<
         {
           title: "Ответственность и связь",
           body:
-            "Сервис предоставляется «как есть»; гарантии фиксируются в договоре. Споры сначала стараются решить переговорами. Связь: форма знакомства на сайте или контакты из договора. Оператор — команда под брендом automaktab.uz; реквизиты указываются в документах.",
+            "Сервис предоставляется «как есть»; гарантии фиксируются в договоре. Споры сначала стараются решить переговорами. Связь: форма заявки на сайте или контакты из договора. Оператор — команда под брендом automaktab.uz; реквизиты указываются в документах.",
         },
       ],
       relatedLabel: "Правовые страницы",
       cta: {
         title: "Сначала посмотрите продукт.",
-        body: "Синтетическое демо открывается сразу. Коммерческие условия обсуждаются при знакомстве.",
+        body: "Демо открывается на вымышленных данных. Коммерческие условия согласуются отдельно.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-24",
+      updatedAt: "2026-10-01",
     },
     en: {
       segments: ["terms"],
@@ -808,7 +808,7 @@ export const SEO_PAGES: Record<
       eyebrow: "Terms",
       heading: "Terms of use",
       intro:
-        "These short terms outline the main rules for the automaktab.uz marketing site and the driving-school management system (CRM). This stub is not a full legal offer; commercial terms are agreed separately.",
+        "These short terms outline the main rules for the automaktab.uz marketing site and the driving-school management system (CRM). This short text is not a full legal offer; commercial terms are agreed separately.",
       sections: [
         {
           title: "What the service is",
@@ -818,7 +818,7 @@ export const SEO_PAGES: Record<
         {
           title: "Demo and trial",
           body:
-            "“Open the demo” starts a synthetic-data session and does not require real customer data. The confirmed free trial is 30 days; further terms are discussed around the school’s needs.",
+            "“Open demo” starts a session with sample data and does not require real customer data. The sample demo and a trial with your school’s data are separate. Agree on the 30-day trial duration, pricing and limits in writing before starting.",
         },
         {
           title: "School responsibilities",
@@ -828,16 +828,16 @@ export const SEO_PAGES: Record<
         {
           title: "Liability and contact",
           body:
-            "The service is provided as available; warranties are stated in the agreement. Disputes are first addressed through discussion. Contact: the on-site introduction form or channels listed in your agreement. The operator is the team behind automaktab.uz; formal details appear in documents.",
+            "The service is provided as is; warranties are stated in the agreement. Disputes are first addressed through discussion. Contact: the on-site request form or channels listed in your agreement. The operator is the team behind automaktab.uz; formal details appear in documents.",
         },
       ],
       relatedLabel: "Legal pages",
       cta: {
         title: "See the product first.",
-        body: "The synthetic demo opens immediately. Commercial terms are discussed during an introduction.",
-        label: "Open the demo",
+        body: "The demo opens with sample data. Commercial terms are agreed separately.",
+        label: "Open demo",
       },
-      updatedAt: "2026-09-24",
+      updatedAt: "2026-10-01",
     },
   },
 };

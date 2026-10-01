@@ -1,18 +1,18 @@
-import { Barlow_Condensed, Barlow, JetBrains_Mono } from "next/font/google";
+import { Nunito, Manrope, JetBrains_Mono } from "next/font/google";
 import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
 import type { Locale } from "@/i18n/config";
 
-const barlowCondensed = Barlow_Condensed({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-barlow-condensed",
+const nunito = Nunito({
+  subsets: ["latin", "cyrillic"],
+  weight: ["700", "800", "900"],
+  variable: "--font-nunito",
   display: "swap",
 });
 
-const barlow = Barlow({
-  subsets: ["latin"],
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-barlow",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -36,7 +36,7 @@ export function LocaleDocument({
   return (
     <html
       lang={locale}
-      className={`${barlowCondensed.variable} ${barlow.variable} ${jetbrainsMono.variable}`}
+      className={`${nunito.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -13,14 +13,14 @@ export default function GlobalNotFound() {
             Sahifa topilmadi
           </h1>
           <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
-            Siz izlagan sahifa mavjud emas yoki ko‘chirilgan.
+            Bu sahifa yo‘q yoki boshqa manzilga ko‘chirilgan.
           </p>
           <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row">
             <Link href="/" className="button button-primary">
               Bosh sahifaga qaytish
             </Link>
             <a href={DEMO_URL} className="button button-secondary">
-              Demo bilan sinab ko‘ring
+              Demoni ochish
             </a>
           </div>
         </main>
