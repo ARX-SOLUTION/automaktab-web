@@ -208,7 +208,6 @@ export interface LandingContent {
     banner: string;
     lessonTitle: string;
     lessonSubject: string;
-    markAllButton: string;
     ctaButton: string;
     unmarkedLabel: string;
     markedLabel: string;
@@ -224,6 +223,13 @@ export interface LandingContent {
     students: string[];
     unmarkedTemplate: string;
     allMarkedMsg: string;
+    card: {
+      title: string;
+      attendance: string;
+      today: string;
+      debt: string;
+      currency: string;
+    };
   };
   roles: {
     eyebrow: string;
@@ -634,12 +640,11 @@ export const contentUz: LandingContent = {
   },
   attendanceDemo: {
     eyebrow: "SINAB KO‘RING",
-    title: "Davomatni belgilab ko‘ring.",
-    description: "Holatni tanlang. Qayta bosib bekor qiling.",
-    banner: "Namuna. Belgilangan davomat saqlanmaydi.",
+    title: "Kim darsga kelmadi?",
+    description: "Belgilab ko‘ring.",
+    banner: "Namuna · saqlanmaydi",
     lessonTitle: "Nazariya · 14:00",
     lessonSubject: "T-25 · Yo‘l qoidalari",
-    markAllButton: "Hammasi keldi",
     ctaButton: "Demoni ochish",
     unmarkedLabel: "Belgilanmagan",
     markedLabel: "Belgilandi",
@@ -658,8 +663,15 @@ export const contentUz: LandingContent = {
       "Ergashev Javohir",
       "Abdullayeva Sevara",
     ],
-    unmarkedTemplate: "Belgilanmagan: {count} ta talaba.",
+    unmarkedTemplate: "Belgilanmagan: {count}",
     allMarkedMsg: "Hammasi belgilandi.",
+    card: {
+      title: "Talaba kartasi",
+      attendance: "Davomat",
+      today: "Bugun",
+      debt: "Qolgan to‘lov",
+      currency: "so‘m",
+    },
   },
   roles: {
     eyebrow: "KIMLAR UCHUN",

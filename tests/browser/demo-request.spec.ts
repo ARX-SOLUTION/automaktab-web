@@ -326,82 +326,144 @@ test(`live preference and desktop-to-phone changes restore the complete story at
 });
 }
 
-test("attendance journal keeps marking, feedback and scoped scroll controls usable", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  const attendance = page.locator("#sinab");
-  const worksheet = attendance.locator(".attendance-worksheet");
-  const toolbar = attendance.locator(".attendance-toolbar");
-  const progress = attendance.getByRole("progressbar");
-  const radios = attendance.getByRole("radiogroup").first().getByRole("radio");
-  const count = (key: string) => attendance.locator(`[data-attendance-count="${key}"] dd`);
-  const feedback = attendance.getByRole("status");
-  for (const reducedMotion of ["reduce", "no-preference"] as const) {
-    await page.goto("about:blank");
-    await page.emulateMedia({ reducedMotion });
+const SAMPLE_LABELS = ["Present", "Present", "Late", "Present", "Absent", "Excused"];
+
+async function attendanceMarks(page: Page) {
+  return page.locator("#sinab .attendance-row").evaluateAll((rows) => rows.map((row) => row.querySelector('[aria-checked="true"] .attendance-status-label')?.textContent ?? null));
+}
+
+async function scrollToRowLine(page: Page, rowIndex: number) {
+  // Rows are marked when their top crosses 70% of the viewport.
+  await page.locator("#sinab .attendance-row").nth(rowIndex).evaluate((row) => {
+    window.scrollTo({ top: scrollY + row.getBoundingClientRect().top - innerHeight * 0.7 + 4, behavior: "instant" });
+  });
+}
+
+for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+  test(`attendance demo marks rows while scrolling, then hands control to the visitor at ${viewport.width}px`, async ({ page }) => {
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/en");
+    const attendance = page.locator("#sinab");
+    const progress = attendance.getByRole("progressbar");
+    const count = (key: string) => attendance.locator(`[data-attendance-count="${key}"] dd`);
+    const today = attendance.locator("[data-attendance-history]").last();
+    const feedback = attendance.getByRole("status");
+    await attendance.evaluate((element) => window.scrollTo({ top: scrollY + element.getBoundingClientRect().top - innerHeight * 1.5, behavior: "instant" }));
+    await expect.poll(() => attendanceMarks(page)).toEqual(Array(6).fill(null));
+    await expect(progress).toHaveAttribute("aria-valuenow", "0");
+    await expect(today).toHaveAttribute("data-attendance-history", "unmarked");
+
+    await scrollToRowLine(page, 2);
+    await expect.poll(() => attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 3), null, null, null]);
+    await scrollToRowLine(page, 5);
+    await expect.poll(() => attendanceMarks(page)).toEqual(SAMPLE_LABELS);
+    await expect(progress).toHaveAttribute("aria-valuenow", "6");
+    for (const [key, value] of [["keldi", "3"], ["kechikdi", "1"], ["kelmadi", "1"], ["uzrli", "1"]]) await expect(count(key)).toHaveText(value);
+    await expect(today).toHaveAttribute("data-attendance-history", "kelmadi");
+    await expect(attendance.getByRole("article")).toContainText(contentEn.attendanceDemo.card.debt);
+    // Scroll-driven marks are not announced; only the visitor's own changes are.
+    await expect(feedback).toHaveText("");
+
+    await scrollToRowLine(page, 3);
+    await expect.poll(() => attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 4), null, null]);
+    const linkedRow = attendance.getByRole("radiogroup").nth(4).getByRole("radio");
+    await linkedRow.nth(0).click();
+    await expect(today).toHaveAttribute("data-attendance-history", "keldi");
+    await expect(feedback).toHaveText(contentEn.attendanceDemo.unmarkedTemplate.replace("{count}", "1"));
+    await scrollToRowLine(page, 0);
+    await page.waitForTimeout(300);
+    expect(await attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 4), "Present", null]);
+    await expect(attendance.getByRole("link", { name: contentEn.attendanceDemo.ctaButton })).toHaveAttribute("href", /app\.automaktab\.uz\/login\?demo=1.*utm_content=attendance_demo/);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect(pageErrors).toEqual([]);
+  });
+
+  test(`reduced motion shows the finished attendance state without movement at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/en#sinab");
-    await expect(worksheet).toHaveAttribute("data-attendance-ready", "true");
-    await expect.poll(() => attendance.locator("#attendance-heading").evaluate(async (heading) => {
-      await document.fonts.ready;
-      const top = heading.getBoundingClientRect().top;
-      let settled = true;
-      for (let frame = 0; frame < 12; frame++) {
-        await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-        const bounds = heading.getBoundingClientRect();
-        const navigation = document.querySelector(".site-header")!.getBoundingClientRect();
-        settled &&= bounds.top >= navigation.bottom + 8 && bounds.bottom <= innerHeight - 16 && Math.abs(bounds.top - top) <= 3;
-      }
-      return settled;
-    })).toBe(true);
-  }
-  await expect(progress).toHaveAttribute("value", "0");
-  await expect(count("unmarked")).toHaveText("6");
-  await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(0);
-  for (const [index, status] of contentEn.attendanceDemo.statuses.entries()) {
-    await expect(radios.nth(index).locator(".attendance-status-label")).toHaveText(status.label);
-    expect((await radios.nth(index).locator(".attendance-status-label").boundingBox())!.width).toBeGreaterThan(16);
-  }
-  await radios.nth(0).click();
-  await expect(count("keldi")).toHaveText("1");
-  await expect(count("unmarked")).toHaveText("5");
-  await expect(progress).toHaveAttribute("value", "1");
-  await expect(feedback).toHaveText(contentEn.attendanceDemo.unmarkedTemplate.replace("{count}", "5"));
-  await radios.nth(0).click();
-  await expect(progress).toHaveAttribute("value", "0");
-  await expect(count("unmarked")).toHaveText("6");
-  await radios.nth(0).focus();
-  await radios.nth(0).press("ArrowRight");
-  await expect(radios.nth(1)).toBeFocused();
-  await expect(count("kechikdi")).toHaveText("1");
-  await radios.nth(1).press("End");
-  await radios.nth(3).press("End");
-  await expect(radios.nth(3)).toHaveAttribute("aria-checked", "true");
-  await expect(count("uzrli")).toHaveText("1");
-  await radios.nth(3).press("Home");
-  await expect(radios.nth(0)).toHaveAttribute("aria-checked", "true");
-  await attendance.getByRole("button", { name: contentEn.attendanceDemo.markAllButton, exact: true }).click();
-  await expect(count("keldi")).toHaveText("6");
-  for (const key of ["kechikdi", "kelmadi", "uzrli", "unmarked"]) await expect(count(key)).toHaveText("0");
-  await expect(progress).toHaveAttribute("value", "6");
-  await expect(feedback).toHaveText(contentEn.attendanceDemo.allMarkedMsg);
-  const top = await worksheet.evaluate((element) => scrollY + element.getBoundingClientRect().top);
-  await page.evaluate((top) => window.scrollTo({ top: top - 180, behavior: "instant" }), top);
-  await expect(toolbar).not.toHaveClass(/is-scrolled/);
-  await page.evaluate((top) => window.scrollTo({ top: top + 80, behavior: "instant" }), top);
-  await expect(toolbar).toHaveClass(/is-scrolled/);
-  await expect(toolbar).toHaveCSS("position", "sticky");
-  await radios.nth(0).focus();
-  await expect(toolbar).toHaveCSS("position", "relative");
-  await expect.poll(() => radios.nth(0).evaluate((element) => {
-    const focused = element.getBoundingClientRect();
-    const header = element.closest(".attendance-worksheet")!.querySelector(".attendance-toolbar")!.getBoundingClientRect();
-    return focused.top >= 0 && focused.bottom <= innerHeight && (focused.top >= header.bottom || focused.bottom <= header.top);
-  })).toBe(true);
-  await page.evaluate((top) => window.scrollTo({ top: top - 180, behavior: "instant" }), top);
-  await expect(toolbar).not.toHaveClass(/is-scrolled/);
-  await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(6);
-  await expect(attendance).toContainText(contentEn.attendanceDemo.banner);
-  await expect(attendance.getByRole("link", { name: contentEn.attendanceDemo.ctaButton })).toHaveAttribute("href", /app\.automaktab\.uz\/login\?demo=1.*utm_content=attendance_demo/);
-});
+    const attendance = page.locator("#sinab");
+    const radios = attendance.getByRole("radiogroup").first().getByRole("radio");
+    const count = (key: string) => attendance.locator(`[data-attendance-count="${key}"] dd`);
+    const feedback = attendance.getByRole("status");
+    await page.waitForTimeout(500);
+    expect(await attendanceMarks(page)).toEqual(SAMPLE_LABELS);
+    await expect(attendance.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "6");
+    await expect(attendance.locator("[data-attendance-history]").last()).toHaveAttribute("data-attendance-history", "kelmadi");
+    for (const block of await attendance.locator("[data-attendance-reveal]").all()) {
+      await expect(block).toBeVisible();
+      await expect(block).toHaveCSS("opacity", "1");
+      await expect(block).toHaveCSS("transform", "none");
+    }
+    await expect(feedback).toHaveText("");
+
+    for (const [index, status] of contentEn.attendanceDemo.statuses.entries()) {
+      await expect(radios.nth(index).locator(".attendance-status-label")).toHaveText(status.label);
+    }
+    await radios.nth(0).click();
+    await expect(radios.nth(0)).toHaveAttribute("aria-checked", "false");
+    await expect(count("keldi")).toHaveText("2");
+    await expect(attendance.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "5");
+    await expect(feedback).toHaveText(contentEn.attendanceDemo.unmarkedTemplate.replace("{count}", "1"));
+    await radios.nth(0).focus();
+    await radios.nth(0).press("ArrowRight");
+    await expect(radios.nth(1)).toBeFocused();
+    await expect(count("kechikdi")).toHaveText("2");
+    await radios.nth(1).press("End");
+    await expect(radios.nth(3)).toHaveAttribute("aria-checked", "true");
+    await radios.nth(3).press("Home");
+    await expect(radios.nth(0)).toHaveAttribute("aria-checked", "true");
+    await expect(feedback).toHaveText(contentEn.attendanceDemo.allMarkedMsg);
+    await expect(attendance).toContainText(contentEn.attendanceDemo.banner);
+  });
+
+  test(`sticky header compacts once scrolled without shifting the page at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.addInitScript(() => {
+      (window as unknown as { layoutShift: number }).layoutShift = 0;
+      new PerformanceObserver((list) => {
+        for (const entry of list.getEntries() as unknown as Array<{ value: number; hadRecentInput: boolean }>) {
+          if (!entry.hadRecentInput) (window as unknown as { layoutShift: number }).layoutShift += entry.value;
+        }
+      }).observe({ type: "layout-shift", buffered: true });
+    });
+    await page.goto("/");
+    const header = page.locator(".site-header");
+    const geometry = () => header.evaluate((element) => ({
+      box: element.getBoundingClientRect().height,
+      visible: element.getBoundingClientRect().height + new DOMMatrix(getComputedStyle(element, "::before").transform).m42,
+      mainTop: document.getElementById("main-content")!.offsetTop,
+    }));
+    await expect(header).not.toHaveClass(/is-scrolled/);
+    const top = await geometry();
+    expect(top.visible).toBe(top.box);
+
+    await page.mouse.wheel(0, 900);
+    await expect(header).toHaveClass(/is-scrolled/);
+    await expect.poll(async () => (await geometry()).visible).toBeLessThan(viewport.width < 1280 ? 72 : top.box - 8);
+    const scrolled = await geometry();
+    expect(scrolled.box).toBe(top.box);
+    expect(scrolled.mainTop).toBe(top.mainTop);
+    const controls = header.locator(".site-header-controls");
+    if (viewport.width < 1280) {
+      await expect(controls).toHaveCSS("visibility", "hidden");
+      // Keyboard focus restores the full header so every control stays reachable.
+      await page.keyboard.press("Tab");
+      await page.keyboard.press("Tab");
+      await expect(header.locator(":focus-visible")).toHaveCount(1);
+      await expect(controls).toHaveCSS("visibility", "visible");
+    } else {
+      await expect(controls).toBeVisible();
+    }
+    expect(await page.evaluate(() => (window as unknown as { layoutShift: number }).layoutShift)).toBe(0);
+
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await expect(header).not.toHaveClass(/is-scrolled/);
+  });
+}
 
 test("role motion pauses outside the viewport or on hidden documents and cleans up for reduced motion", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -704,10 +766,8 @@ for (const viewport of [
       const label = radio.getByText(content.attendanceDemo.statuses[index].label, { exact: true });
       expect((await label.boundingBox())!.width).toBeGreaterThan(16);
     }
-    await attendance.getByRole("button").click();
-    await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(6);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     await page.reload();
-    await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(0);
+    await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(6);
   });
 }
