@@ -5,7 +5,7 @@ import {
   SEO_PAGE_IDS,
   SEO_PAGES,
 } from "@/config/seo-pages";
-import { getBlogPosts } from "@/lib/blog";
+import { getBlogPosts, availableBlogLocales, blogAlternates } from "@/lib/blog";
 import type { Locale } from "@/i18n/config";
 
 const BASE_URL = "https://automaktab.uz";
@@ -74,14 +74,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...seoPages,
     ...posts.flatMap((post) => {
       const path = `/blog/${encodeURIComponent(post.slug)}`;
-      return locales.map((locale) => ({
+      return availableBlogLocales(post).map((locale) => ({
         url: url(path, locale),
         lastModified: post.published_at
           ? new Date(post.published_at)
           : undefined,
         changeFrequency: "monthly" as const,
         priority: locale === "uz" ? 0.75 : 0.65,
-        alternates: alternates(path),
+        alternates: { languages: blogAlternates(post, locale).languages },
       }));
     }),
   ];

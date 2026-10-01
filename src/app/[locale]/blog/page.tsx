@@ -5,16 +5,16 @@ import { notFound } from "next/navigation";
 import { SiteFooter, SiteHeader } from "@/components/landing/LandingPage";
 import { GlassPanel } from "@/components/ui/GlassPanel";
 import { BLOG_COPY } from "@/config/blog";
-import { getBlogPosts, localizeBlogPost } from "@/lib/blog";
+import { getBlogPosts, localizeBlogPost, availableBlogLocales } from "@/lib/blog";
 import { isLocale, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
 
 export const revalidate = 3600;
 
 const ARTICLE_PATH: Record<Locale, (slug: string) => string> = {
-  uz: (slug) => `/blog/${slug}`,
-  ru: (slug) => `/ru/blog/${slug}`,
-  en: (slug) => `/en/blog/${slug}`,
+  uz: (slug) => `/blog/${encodeURIComponent(slug)}`,
+  ru: (slug) => `/ru/blog/${encodeURIComponent(slug)}`,
+  en: (slug) => `/en/blog/${encodeURIComponent(slug)}`,
 };
 
 const META: Record<Locale, { title: string; description: string }> = {
@@ -75,7 +75,7 @@ export default async function BlogIndex({
   if (!isLocale(locale)) notFound();
 
   const copy = BLOG_COPY[locale];
-  const posts = await getBlogPosts();
+  const posts = (await getBlogPosts()).filter((post) => availableBlogLocales(post).includes(locale));
 
   return (
     <>

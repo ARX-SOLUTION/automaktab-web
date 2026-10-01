@@ -42,6 +42,7 @@ export default function LeadForm({ content }: LeadFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [networkError, setNetworkError] = useState("");
+  const submittingRef = useRef(false);
   const hasTrackedStartRef = useRef(false);
 
   const demoUrl = buildDemoUrl("pricing_form_success");
@@ -100,6 +101,7 @@ export default function LeadForm({ content }: LeadFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittingRef.current || isSuccess) return;
     setHasTriedSubmit(true);
     setNetworkError("");
 
@@ -118,10 +120,12 @@ export default function LeadForm({ content }: LeadFormProps) {
       return;
     }
 
+    submittingRef.current = true;
     setIsSubmitting(true);
 
     try {
       const res = await fetch("/api/lead", {
+        signal: AbortSignal.timeout(12000),
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -131,22 +135,18 @@ export default function LeadForm({ content }: LeadFormProps) {
         }),
       });
 
-      if (!res.ok) {
+      const receipt = await res.json();
+      if (!res.ok || receipt.ok !== true) {
         throw new Error("Submission failed");
       }
 
-      track("form_submit_success", {
-        branches: formData.branches,
-        students: formData.students,
-        flows: formData.flows,
-        city: formData.city,
-      });
+      track("form_submit_success");
 
       setIsSuccess(true);
-    } catch (err) {
-      console.error("[Form Submit Error]", err);
+    } catch {
       setNetworkError(content.networkError);
     } finally {
+      submittingRef.current = false;
       setIsSubmitting(false);
     }
   };

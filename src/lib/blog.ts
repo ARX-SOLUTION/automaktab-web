@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { Locale } from "@/i18n/config";
+import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 
 const API_BASE_URL = (
   process.env.CRM_API_BASE_URL || "https://api.automaktab.uz"
@@ -38,7 +38,7 @@ type ListPayload = {
   limit: number;
 };
 
-export async function getBlogPosts(): Promise<BlogListItem[]> {
+export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/blog-posts?limit=100`, {
       next: { revalidate: 3600 },
@@ -46,7 +46,14 @@ export async function getBlogPosts(): Promise<BlogListItem[]> {
     if (!response.ok) return [];
 
     const envelope = (await response.json()) as Envelope<ListPayload>;
-    return Array.isArray(envelope.data?.items) ? envelope.data.items : [];
+    const items = Array.isArray(envelope.data?.items) ? envelope.data.items.slice(0, 100) : [];
+    const posts: BlogPost[] = [];
+    // Bound detail fan-out to five requests; retain the existing 100-post list ceiling.
+    for (let i = 0; i < items.length; i += 5) {
+      const details = await Promise.all(items.slice(i, i + 5).map((item) => getBlogPost(item.slug)));
+      posts.push(...details.filter((post): post is BlogPost => !!post && availableBlogLocales(post).length > 0));
+    }
+    return posts;
   } catch {
     return [];
   }
@@ -100,4 +107,20 @@ export function localizeBlogBody(post: BlogPost, locale: Locale) {
 export function estimateReadingMinutes(markdown: string): number {
   const words = markdown.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 190));
+}
+
+export function availableBlogLocales(post: BlogPost): Locale[] {
+  return post.status === "published" ? SUPPORTED_LOCALES.filter((locale) =>
+    !!localizeBlogPost(post, locale).title?.trim() && !!localizeBlogBody(post, locale)?.trim()
+  ) : [];
+}
+
+export function blogAlternates(post: BlogPost, locale: Locale) {
+  const locales = availableBlogLocales(post);
+  const path = `/blog/${encodeURIComponent(post.slug)}`;
+  const url = (language: Locale) => `https://automaktab.uz${language === "uz" ? "" : `/${language}`}${path}`;
+  return { canonical: url(locale), languages: {
+    ...Object.fromEntries(locales.map((language) => [language, url(language)])),
+    ...(locales.length ? { "x-default": url(locales[0]) } : {}),
+  } };
 }

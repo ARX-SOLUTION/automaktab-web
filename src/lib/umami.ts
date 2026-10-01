@@ -1,4 +1,6 @@
-export type UmamiEventName =
+import type { AnalyticsEvent } from "./analytics";
+
+export type UmamiEventName = AnalyticsEvent
   | "demo_open"
   | "demo_enter"
   | "intro_submit";
@@ -21,7 +23,7 @@ export function trackUmami(name: UmamiEventName, data?: UmamiData) {
   if (typeof window === "undefined") return;
 
   if (window.umami?.track) {
-    window.umami.track(name, data);
+    try { window.umami.track(name, data); } catch { /* Tracking must never block a user action. */ }
     return;
   }
 
@@ -33,6 +35,6 @@ export function flushUmamiQueue() {
   if (typeof window === "undefined" || !window.umami?.track) return;
 
   for (const event of pendingEvents.splice(0)) {
-    window.umami.track(event.name, event.data);
+    try { window.umami.track(event.name, event.data); } catch { /* Best-effort delivery. */ }
   }
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { switchLocalePath, preserveLocaleSuffix } from "@/lib/locale-metadata";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
@@ -12,24 +13,28 @@ import type { Locale } from "@/i18n/config";
 export interface SiteHeaderProps {
   content?: LandingContent["header"];
   locale?: Locale | string;
+  availableLocales?: readonly Locale[];
 }
 
 export default function SiteHeader({
   locale = "uz",
+  availableLocales,
   content = locale === "ru" ? contentRu.header : locale === "en" ? contentEn.header : contentUz.header,
 }: SiteHeaderProps) {
+  const pathname = usePathname() || (locale === "uz" ? "/" : `/${locale}`);
+  const home = locale === "uz" ? "/" : `/${locale}`;
   const demoUrl = buildDemoUrl("header");
   const navLinks = [
-    { href: "#yol", label: content.nav.capabilities },
-    { href: "#rollar", label: content.nav.roles },
-    { href: "#qanday", label: content.nav.howItWorks },
-    { href: "#tariflar", label: content.nav.pricing },
-    { href: "#savollar", label: content.nav.faq },
+    { href: `${home}#yol`, label: content.nav.capabilities },
+    { href: `${home}#rollar`, label: content.nav.roles },
+    { href: `${home}#qanday`, label: content.nav.howItWorks },
+    { href: `${home}#tariflar`, label: content.nav.pricing },
+    { href: `${home}#savollar`, label: content.nav.faq },
   ];
   const languages = [
-    { code: "uz", href: "/", label: "O‘zbekcha" },
-    { code: "ru", href: "/ru", label: "Русский" },
-    { code: "en", href: "/en", label: "English" },
+    { code: "uz", href: switchLocalePath(pathname, "uz", availableLocales), label: "O‘zbekcha" },
+    { code: "ru", href: switchLocalePath(pathname, "ru", availableLocales), label: "Русский" },
+    { code: "en", href: switchLocalePath(pathname, "en", availableLocales), label: "English" },
   ];
 
   return (
@@ -92,7 +97,9 @@ export default function SiteHeader({
           {/* Language Switcher */}
           <div className="flex shrink-0 items-center border-2 border-sand-300 rounded-[var(--r-s)] p-0.5 font-body text-xs font-bold">
             {languages.map((language) => (
-              <Link
+              <a
+                onClick={preserveLocaleSuffix}
+            onAuxClick={preserveLocaleSuffix}
                 key={language.code}
                 href={language.href}
                 aria-label={language.label}
@@ -104,7 +111,7 @@ export default function SiteHeader({
                 }`}
               >
                 {language.code.toUpperCase()}
-              </Link>
+              </a>
             ))}
           </div>
 

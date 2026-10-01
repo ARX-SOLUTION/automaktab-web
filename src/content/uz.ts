@@ -891,7 +891,7 @@ export const contentUz: LandingContent = {
         demoCta: "Demoni ochish",
         resetButton: "Yana so‘rov yuborish",
       },
-      networkError: "So‘rov yuborilmadi. Internet aloqasini tekshirib, qayta urinib ko‘ring.",
+      networkError: "So‘rov qabul qilinganini tasdiqlay olmadik. Ma’lumotlaringiz shu yerda qoladi. Qayta yuborsangiz, takroriy so‘rov kelishi mumkin.",
       disclaimer: "Raqamingiz faqat sinov bo‘yicha bog‘lanish uchun ishlatiladi.",
     },
   },

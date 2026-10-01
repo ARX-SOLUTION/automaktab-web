@@ -553,7 +553,7 @@ export const contentEn: LandingContent = {
         demoCta: "Open demo",
         resetButton: "Send another request",
       },
-      networkError: "Your request was not sent. Check your internet connection and try again.",
+      networkError: "We could not confirm receipt. Your details remain in the form. Sending again may create a duplicate request.",
       disclaimer: "Your number is used only to contact you about the trial.",
     },
   },
