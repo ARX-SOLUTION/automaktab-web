@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { POST, normalizePhone } from "./route";
+import { POST } from "./route";
+import { normalizePhone } from "@/lib/utils";
 import { NextRequest } from "next/server";
 
 describe("POST /api/lead", () => {

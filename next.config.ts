@@ -31,12 +31,12 @@ const nextConfig: NextConfig = {
       {
         source: "/uz",
         destination: "/",
-        permanent: false,
+        permanent: true,
       },
       {
         source: "/uz/:path*",
         destination: "/:path*",
-        permanent: false,
+        permanent: true,
       },
     ];
   },

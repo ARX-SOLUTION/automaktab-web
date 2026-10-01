@@ -102,7 +102,7 @@ export const PILLAR_ARTICLE_SLUG =
 
 export const LANDING_COPY: Record<Locale, LandingCopy> = {
   uz: {
-    skipLink: "Asosiy kontentga o‘tish",
+    skipLink: "Asosiy qismga o‘tish",
     pauseMotion: "Harakatni to‘xtatish",
     nav: {
       proof: "Tizim ichida",

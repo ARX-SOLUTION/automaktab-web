@@ -1,3 +1,4 @@
+import { buildHomeMetadata } from "../../../home-metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,13 +46,16 @@ export async function generateMetadata({
   const localized = localizeBlogPost(post, locale);
   const path = `/blog/${post.slug}`;
 
+  const sharedMetadata = buildHomeMetadata(locale);
+
   return {
     title: localized.title,
     description: localized.excerpt,
-    keywords: post.tags,
     alternates: buildLocaleAlternates(path, locale),
     openGraph: {
+      ...sharedMetadata.openGraph,
       type: "article",
+      url: buildLocaleAlternates(path, locale)?.canonical as string,
       title: localized.title,
       description: localized.excerpt,
       publishedTime: post.published_at ?? undefined,
@@ -67,6 +71,7 @@ export async function generateMetadata({
       ],
     },
     twitter: {
+      ...sharedMetadata.twitter,
       card: "summary_large_image",
       title: localized.title,
       description: localized.excerpt,

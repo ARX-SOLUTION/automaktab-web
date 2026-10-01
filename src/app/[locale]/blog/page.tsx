@@ -1,3 +1,4 @@
+import { buildHomeMetadata } from "../../home-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -28,7 +29,7 @@ const META: Record<Locale, { title: string; description: string }> = {
       "Практические статьи о CRM для автошколы, оплатах, долгах, расписании и цифровой посещаемости.",
   },
   en: {
-    title: "Driving School Operations Blog | automaktab.uz",
+    title: "Driving school management blog | automaktab.uz",
     description:
       "Practical guides to driving-school CRM, payments, debt, schedules, and digital attendance.",
   },
@@ -43,16 +44,21 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
 
   const meta = META[locale];
+  const sharedMetadata = buildHomeMetadata(locale);
+
   return {
     title: meta.title,
     description: meta.description,
     alternates: buildLocaleAlternates("/blog", locale),
     openGraph: {
+      ...sharedMetadata.openGraph,
       type: "website",
+      url: buildLocaleAlternates("/blog", locale)?.canonical as string,
       title: meta.title,
       description: meta.description,
     },
     twitter: {
+      ...sharedMetadata.twitter,
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,

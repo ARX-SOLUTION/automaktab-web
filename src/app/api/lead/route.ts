@@ -1,3 +1,4 @@
+import { normalizePhone } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -18,16 +19,6 @@ function checkRateLimit(ip: string): boolean {
   return true;
 }
 
-export function normalizePhone(raw: string): string {
-  const digits = raw.replace(/\D/g, "");
-  if (digits.startsWith("998") && digits.length === 12) {
-    return `+${digits}`;
-  }
-  if (digits.length === 9) {
-    return `+998${digits}`;
-  }
-  return `+${digits}`;
-}
 
 const leadSchema = z.object({
   name: z.string().trim().min(1, "Ismingizni yozing."),

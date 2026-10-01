@@ -5,18 +5,18 @@ const size = { width: 1200, height: 630 };
 
 const COPY: Record<Locale, { label: string; title: string; footer: string }> = {
   uz: {
-    label: "AVTOMAKTAB BOSHQARUV TIZIMI",
-    title: "Siz yo‘qligingizda ham avtomaktab nazoratda.",
+    label: "Avtomaktab boshqaruv tizimi",
+    title: "To‘lov, dars va davomat. Barchasi bir joyda.",
     footer: "To‘lov · Jadval · Davomat",
   },
   ru: {
-    label: "СИСТЕМА УПРАВЛЕНИЯ АВТОШКОЛОЙ",
-    title: "Автошкола под контролем, даже когда вас нет.",
+    label: "Система управления автошколой",
+    title: "Оплаты, занятия и посещаемость. В одной системе.",
     footer: "Оплаты · Расписание · Посещаемость",
   },
   en: {
-    label: "DRIVING SCHOOL MANAGEMENT SYSTEM",
-    title: "Your driving school stays under control when you are away.",
+    label: "Driving school management",
+    title: "Your driving school. Everything in one place.",
     footer: "Payments · Schedule · Attendance",
   },
 };

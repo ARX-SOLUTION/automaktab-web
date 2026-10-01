@@ -3,6 +3,9 @@ import { spawn, type ChildProcess } from "node:child_process";
 import path from "node:path";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
+import { contentUz } from "@/content/uz";
+import { contentRu } from "@/content/ru";
+import { contentEn } from "@/content/en";
 
 const PORT = 3847;
 const BASE_URL = `http://localhost:${PORT}`;
@@ -155,9 +158,9 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
     headings: {
       uz: "Avtomaktab to‘lovlari va qarzdorligini boshqaring.",
       ru: "Управляйте оплатами и задолженностью автошколы.",
-      en: "Manage driving-school payments and debt.",
+      en: "Keep track of payments and student debt.",
     },
-    titleSignals: { uz: "To‘lovlar", ru: "Оплаты", en: "payments" },
+    titleSignals: { uz: "to‘lovlari", ru: "Оплаты", en: "payments" },
   },
   {
     id: "schedule",
@@ -168,7 +171,7 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
     },
     headings: {
       uz: "Dars jadvali va guruhlar bir tizimda.",
-      ru: "Расписание занятий и группы — в одной системе.",
+      ru: "Расписание и группы в одной системе.",
       en: "Schedule groups and lessons in one place.",
     },
     titleSignals: { uz: "jadvali", ru: "Расписание", en: "schedules" },
@@ -181,9 +184,9 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
       en: "/en/features/digital-attendance",
     },
     headings: {
-      uz: "Raqamli davomat bilan dars holatini ko‘ring.",
-      ru: "Ведите цифровую посещаемость по каждому уроку.",
-      en: "Track attendance for every lesson digitally.",
+      uz: "Har bir dars davomatini bir joyda yuriting.",
+      ru: "Ведите посещаемость каждого занятия в одной системе.",
+      en: "Keep attendance for every lesson together.",
     },
     titleSignals: { uz: "davomat", ru: "посещаемость", en: "attendance" },
   },
@@ -195,11 +198,11 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
       en: "/en/features/branch-management",
     },
     headings: {
-      uz: "Avtomaktab filiallarini bir ko‘rinishda boshqaring.",
-      ru: "Управляйте филиалами автошколы из одного места.",
-      en: "Manage driving-school branches from one view.",
+      uz: "Barcha filiallar holati bir joyda.",
+      ru: "Все филиалы на одном экране.",
+      en: "Keep every branch in view.",
     },
-    titleSignals: { uz: "Filiallar", ru: "филиалами", en: "branch" },
+    titleSignals: { uz: "filiallari", ru: "филиалами", en: "branch" },
   },
   {
     id: "pricing",
@@ -209,9 +212,9 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
       en: "/en/pricing",
     },
     headings: {
-      uz: "Tariflar: 30 kun bepul sinov bilan boshlang.",
-      ru: "Тарифы: начните с 30-дневного бесплатного периода.",
-      en: "Pricing: start with a 30-day free trial.",
+      uz: "Maktabingiz uchun narx va sinov shartlari.",
+      ru: "Цена и пробный период для вашей автошколы.",
+      en: "Pricing and trial terms for your school.",
     },
     titleSignals: { uz: "Tariflar", ru: "Тарифы", en: "Pricing" },
   },
@@ -228,9 +231,9 @@ const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
 );
 
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "Avtomaktabingizdagi holat", accent: "bir qarashda aniq." },
-  ru: { prefix: "Вся автошкола", accent: "под вашим контролем." },
-  en: { prefix: "Your driving school,", accent: "clear at a glance." },
+  uz: { prefix: "To‘lov, dars va davomat.", accent: "Barchasi bir joyda." },
+  ru: { prefix: "Оплаты, занятия и посещаемость.", accent: "В одной системе." },
+  en: { prefix: "Your driving school.", accent: "Everything in one place." },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<
@@ -243,10 +246,10 @@ const METADATA_LANGUAGE_SIGNAL: Record<
   },
   ru: {
     title: "CRM для автошколы",
-    description: "долги",
+    description: "задолженности",
   },
   en: {
-    title: "Driving School CRM",
+    title: "Driving school CRM",
     description: "debt",
   },
 };
@@ -260,14 +263,14 @@ const normalizeUrl = (u: string) => u.replace(/\/$/, "");
 
 const CAPABILITIES_TITLE: Record<Locale, string> = {
   uz: "Har bir talabaning holati ko‘z oldingizda.",
-  ru: "От набора до экзамена: в одной системе.",
-  en: "From enrollment to exam: one system.",
+  ru: "Следите за обучением каждого курсанта.",
+  en: "Follow every student’s progress.",
 };
 
 const FAQ_TITLE: Record<Locale, string> = {
-  uz: "Tizimga o‘tishdan oldingi savollar.",
-  ru: "Прямые вопросы, понятные ответы.",
-  en: "Direct questions, straight answers.",
+  uz: "Ko‘p beriladigan savollar.",
+  ru: "Частые вопросы.",
+  en: "Common questions.",
 };
 
 const FAQ_ITEM_COUNT = 7;
@@ -293,6 +296,8 @@ describe.each(LOCALE_ROUTES)(
       expect(description).toContain(signal.description);
       expect(title.length).toBeLessThanOrEqual(60);
       expect(description.length).toBeLessThanOrEqual(155);
+      expect(html).not.toContain('name="keywords"');
+      expect(description).not.toMatch(/бесплатно|free for 30 days/);
       expect(html).toContain(
         `property="og:title" content="${title}"`,
       );
@@ -333,11 +338,18 @@ describe.each(LOCALE_ROUTES)(
     it(`serves ${locale} product proof, CTA, and localized supporting content`, async () => {
       const res = await fetch(`${BASE_URL}${route}`);
       const html = await res.text();
+      const content = { uz: contentUz, ru: contentRu, en: contentEn }[locale];
       expect(html).toContain(CAPABILITIES_TITLE[locale]);
       expect(html).toContain(FAQ_TITLE[locale]);
-      expect(html).toContain("/images/demo/dashboard.webp");
-      expect(html).toContain("/images/demo/davomat.webp");
-      expect(html).toContain("/images/demo/talabalar.webp");
+      const imageSources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].map((match) => decodeURIComponent(match[1]));
+      expect(imageSources.some((src) => /\/images\/(?:demo|product)\//.test(src))).toBe(false);
+      expect(html).toContain(content.scenes.sampleLabel);
+      expect(html).toContain(content.proof.caption);
+      expect(html).toContain(content.scenes.director.revenue);
+      expect(html).toContain(content.scenes.director.debt);
+      expect(html).toContain(content.scenes.accountant.expenses);
+      expect(html).toContain(content.hero.lane1.button);
+      expect(html).toContain(content.hero.lane2.button);
       expect(html).toContain("https://app.automaktab.uz/login?demo=1");
       expect(html).not.toContain("AutoDrive");
     });
@@ -392,8 +404,7 @@ describe.each(LOCALE_ROUTES)(
 describe("GET /uz (must not exist as a duplicate of the unprefixed root)", () => {
   it("redirects to / — uz's canonical URL is unprefixed", async () => {
     const res = await fetch(`${BASE_URL}/uz`, { redirect: "manual" });
-    expect(res.status).toBeGreaterThanOrEqual(300);
-    expect(res.status).toBeLessThan(400);
+    expect(res.status).toBe(308);
     expect(res.headers.get("location")).toBe("/");
   });
 
@@ -401,8 +412,7 @@ describe("GET /uz (must not exist as a duplicate of the unprefixed root)", () =>
     const res = await fetch(`${BASE_URL}/uz/opengraph-image`, {
       redirect: "manual",
     });
-    expect(res.status).toBeGreaterThanOrEqual(300);
-    expect(res.status).toBeLessThan(400);
+    expect(res.status).toBe(308);
     expect(res.headers.get("location")).toBe("/opengraph-image");
   });
 });
@@ -479,6 +489,9 @@ describe.each(SEO_ROUTES)(
       if (id === "pricing") {
         expect(html).not.toContain("priceCurrency");
       }
+      expect(html).toContain('property="og:image"');
+      expect(html).toContain('name="twitter:image"');
+      expect(html).not.toContain('name="keywords"');
     });
   },
 );
@@ -489,8 +502,24 @@ describe("blog and sitemap surfaces", () => {
     const html = await res.text();
 
     expect(res.status).toBe(200);
-    expect(html).toContain("Tartibli boshqaruv uchun sodda qo‘llanmalar.");
+    expect(html).toContain("Avtomaktab boshqaruvi uchun amaliy maslahatlar.");
     expect(html).toContain('rel="canonical" href="https://automaktab.uz/blog"');
+    expect(html).toContain('property="og:image"');
+    expect(html).toContain('name="twitter:image"');
+  });
+
+  it("shares changelog pages and describes released notes as schema.org text", async () => {
+    const res = await fetch(`${BASE_URL}/changelog`);
+    const html = await res.text();
+    const schema = JSON.parse([...html.matchAll(JSON_LD_SCRIPT_RE)][0][1]);
+
+    expect(res.status).toBe(200);
+    expect(html).toContain('property="og:image"');
+    expect(html).toContain('name="twitter:image"');
+    expect(schema.operatingSystem).toBe("Web");
+    expect(schema.releaseNotes.length).toBeGreaterThan(0);
+    expect(schema.releaseNotes.every((note: unknown) => typeof note === "string")).toBe(true);
+    expect(schema.releaseNotes.join(" ")).not.toContain("v3.0.0");
   });
 
   it("lists the localized blog indexes in sitemap.xml", async () => {

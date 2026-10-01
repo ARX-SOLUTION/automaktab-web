@@ -235,8 +235,8 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
           </div>
 
           {/* Search Input & Pillar Dropdown */}
-          <div className="flex items-center gap-2">
-            <div className="relative">
+          <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">
+            <div className="relative min-w-0 max-w-full">
               <input
                 type="text"
                 value={searchQuery}
@@ -250,7 +250,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
               value={selectedPillar}
               aria-label={copy.allPillars}
               onChange={(e) => setSelectedPillar(e.target.value as ProductPillar | 'all')}
-              className="h-8 rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-2.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-['Barlow']"
+              className="h-8 min-w-0 max-w-full rounded-[6px] border border-[rgba(0,0,0,0.12)] dark:border-[rgba(255,255,255,0.12)] bg-transparent px-2.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A317] text-[#14211A] dark:text-white font-['Barlow']"
             >
               <option value="all" className="bg-[#0B2B1F] text-white">
                 {copy.allPillars}
@@ -281,7 +281,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
       {/* Main Content Layout with Linear Right Table of Contents */}
       <div className="flex gap-10 xl:gap-14 items-start">
         {/* Left Timeline Section (Mobile: left-3 spine; Desktop: left-[13.5rem]) */}
-        <div className="flex-1 relative space-y-14 pl-6 md:pl-0 before:block before:absolute before:left-2 md:before:left-[13.5rem] before:top-4 before:bottom-4 before:w-[2px] before:bg-gradient-to-b before:from-[#E8A317] before:via-[rgba(0,0,0,0.1)] dark:before:via-[rgba(255,255,255,0.1)] before:to-transparent">
+        <div className="flex-1 min-w-0 relative space-y-14 pl-6 md:pl-0 before:block before:absolute before:left-2 md:before:left-[13.5rem] before:top-4 before:bottom-4 before:w-[2px] before:bg-gradient-to-b before:from-[#E8A317] before:via-[rgba(0,0,0,0.1)] dark:before:via-[rgba(255,255,255,0.1)] before:to-transparent">
           {filteredItems.map((item) => {
             const itemTitle = item.title[locale];
             const itemExcerpt = item.excerpt[locale];
@@ -369,10 +369,10 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                 </div>
 
                 {/* Right Column: Glass Content Body */}
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <GlassPanel className="p-5 sm:p-7 space-y-5 transition-all duration-200 group-hover:border-[#E8A317]/40 shadow-sm">
                     <div>
-                      <h2 className="text-2xl font-bold tracking-tight text-[#0B2B1F] dark:text-white font-['Barlow_Condensed'] uppercase">
+                      <h2 className="text-2xl font-bold tracking-tight text-[#0B2B1F] dark:text-white font-['Barlow_Condensed'] uppercase [overflow-wrap:anywhere]">
                         {itemTitle}
                       </h2>
                       <p className="mt-2 text-sm leading-relaxed text-[#2F3B35] dark:text-[#B9C9BF] font-['Barlow']">
@@ -383,22 +383,22 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                     {/* Authentic Application Route Slice Frame (No toy OS dots, clean route breadcrumb) */}
                     <div className="overflow-hidden rounded-[8px] border border-[rgba(0,0,0,0.1)] dark:border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.02)]">
                       {/* Application Route Bar */}
-                      <div className="flex items-center justify-between border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] px-3 py-2 bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.03)]">
-                        <div className="flex items-center gap-2">
+                      <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-[rgba(0,0,0,0.08)] dark:border-[rgba(255,255,255,0.08)] px-3 py-2 bg-[rgba(0,0,0,0.02)] dark:bg-[rgba(255,255,255,0.03)]">
+                        <div className="flex min-w-0 max-w-full items-center gap-2">
                           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#0E6B43] dark:bg-[#C6FF3D]" aria-hidden="true" />
-                          <span className="font-['JetBrains_Mono'] text-[11px] text-[#36453D] dark:text-[#9DB5A7]">
+                          <span className="min-w-0 [overflow-wrap:anywhere] font-['JetBrains_Mono'] text-[11px] text-[#36453D] dark:text-[#9DB5A7]">
                             {item.routeHint}
                           </span>
                         </div>
-                        <span className="font-['Barlow'] text-[11px] font-medium text-[#0E6B43] dark:text-[#C6FF3D]">
+                        <span className="min-w-0 [overflow-wrap:anywhere] font-['Barlow'] text-[11px] font-medium text-[#0E6B43] dark:text-[#C6FF3D]">
                           {copy.testedBadge}
                         </span>
                       </div>
 
                       {/* Component Slice Representation */}
-                      <div className="p-4 space-y-3 font-['Barlow']">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-[#0B2B1F] dark:text-white flex items-center gap-1.5">
+                      <div className="p-4 space-y-3 [overflow-wrap:anywhere] font-['Barlow']">
+                        <div className="flex min-w-0 flex-wrap items-center justify-between gap-2">
+                          <span className="min-w-0 text-xs font-semibold text-[#0B2B1F] dark:text-white flex items-center gap-1.5">
                             <span className="text-[#0E6B43] dark:text-[#C6FF3D]" aria-hidden="true">✓</span>
                             <span>{itemFeatures[0] || itemTitle}</span>
                           </span>
@@ -410,89 +410,87 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                         {/* Domain-Grounded UI Slices */}
                         {item.id === 'release-2-4-0' && (
                           <div className="grid grid-cols-2 gap-2 text-[11px] font-mono bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] p-2.5 rounded-[6px] border border-[rgba(0,0,0,0.06)]">
-                            <div>01 A 001 AA: Benzin 42L (483 000 so‘m)</div>
-                            <div>01 A 002 AA: Metan 18m³ (72 000 so‘m)</div>
-                            <div className="col-span-2 text-[#0E6B43] dark:text-[#C6FF3D]">
-                              Amaliyot: 1200 / 1200 daqiqa me’yori to‘liq
-                            </div>
+                            <div>{locale === 'ru' ? "01 A 001 AA: Бензин 42 л (483 000 сум)" : locale === 'en' ? "01 A 001 AA: Petrol 42 l (483 000 UZS)" : "01 A 001 AA: Benzin 42 l (483 000 so‘m)"}</div>
+                            <div>{locale === 'ru' ? "01 A 002 AA: Метан 18 м³ (72 000 сум)" : locale === 'en' ? "01 A 002 AA: Methane 18 m³ (72 000 UZS)" : "01 A 002 AA: Metan 18 m³ (72 000 so‘m)"}</div>
+                            <div className="col-span-2 text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Вождение: 1200 / 1200 минут" : locale === 'en' ? "Driving: 1200 / 1200 minutes" : "Haydash: 1200 / 1200 daqiqa"}</div>
                           </div>
                         )}
 
                         {item.id === 'release-2-3-1' && (
                           <div className="grid grid-cols-3 gap-2 text-[11px] font-mono bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] p-2.5 rounded-[6px] border border-[rgba(0,0,0,0.06)]">
-                            <div>Ijara: To‘langan</div>
-                            <div>Kommunal: Yaqinda</div>
-                            <div>Transport: Kutilayotgan</div>
+                            <div>{locale === 'ru' ? "Аренда: Оплачено" : locale === 'en' ? "Rent: Paid" : "Ijara: To‘langan"}</div>
+                            <div>{locale === 'ru' ? "Коммунальные: Скоро" : locale === 'en' ? "Utilities: Due soon" : "Kommunal: To‘lov yaqin"}</div>
+                            <div>{locale === 'ru' ? "Транспорт: Ожидается" : locale === 'en' ? "Transport: Pending" : "Transport: Kutilmoqda"}</div>
                           </div>
                         )}
 
                         {item.id === 'release-2-3-0' && (
                           <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono">
-                            <span className="bg-[#0E6B43]/20 text-[#0E6B43] dark:text-[#C6FF3D] px-2 py-0.5 rounded">Keldi (18)</span>
-                            <span className="bg-[#E8A317]/20 text-[#E8A317] px-2 py-0.5 rounded">Kech (2)</span>
-                            <span className="bg-[#C93B2B]/20 text-[#C93B2B] px-2 py-0.5 rounded">Kelmadi (2)</span>
-                            <span className="bg-[rgba(0,0,0,0.08)] dark:bg-[rgba(255,255,255,0.1)] px-2 py-0.5 rounded">Uzrli (1)</span>
+                            <span className="bg-[#0E6B43]/20 text-[#0E6B43] dark:text-[#C6FF3D] px-2 py-0.5 rounded">{locale === 'ru' ? "Пришёл (18)" : locale === 'en' ? "Present (18)" : "Keldi (18)"}</span>
+                            <span className="bg-[#E8A317]/20 text-[#E8A317] px-2 py-0.5 rounded">{locale === 'ru' ? "Опоздал (2)" : locale === 'en' ? "Late (2)" : "Kechikdi (2)"}</span>
+                            <span className="bg-[#C93B2B]/20 text-[#C93B2B] px-2 py-0.5 rounded">{locale === 'ru' ? "Не пришёл (2)" : locale === 'en' ? "Absent (2)" : "Kelmadi (2)"}</span>
+                            <span className="bg-[rgba(0,0,0,0.08)] dark:bg-[rgba(255,255,255,0.1)] px-2 py-0.5 rounded">{locale === 'ru' ? "Уваж. причина (1)" : locale === 'en' ? "Excused (1)" : "Uzrli (1)"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-2-2-0' && (
                           <div className="grid grid-cols-2 gap-2 text-[11px] font-mono bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] p-2.5 rounded-[6px] border border-[rgba(0,0,0,0.06)]">
-                            <div>09:00 Nazariya: 2-xona</div>
-                            <div>11:00 Amaliyot: Cobalt #01</div>
+                            <div>{locale === 'ru' ? "09:00 Теория: Аудитория 2" : locale === 'en' ? "09:00 Theory: Room 2" : "09:00 Nazariya: 2-xona"}</div>
+                            <div>{locale === 'ru' ? "11:00 Вождение: Cobalt #01" : locale === 'en' ? "11:00 Driving: Cobalt #01" : "11:00 Haydash: Cobalt #01"}</div>
                           </div>
                         )}
 
                         {item.id === 'release-2-1-2' && (
-                          <div className="flex items-center gap-2 text-[11px] font-mono border-t border-[rgba(0,0,0,0.06)] pt-2 text-[#5A6660] dark:text-[#9DB5A7]">
-                            <span>[To‘lovlar]</span>
-                            <span>[Davomat]</span>
-                            <span>[Imtihonlar]</span>
-                            <span>[Excel eksport]</span>
+                          <div className="flex min-w-0 flex-wrap items-center gap-2 text-[11px] font-mono border-t border-[rgba(0,0,0,0.06)] pt-2 text-[#5A6660] dark:text-[#9DB5A7]">
+                            <span>{locale === 'ru' ? "[Оплаты]" : locale === 'en' ? "[Payments]" : "[To‘lovlar]"}</span>
+                            <span>{locale === 'ru' ? "[Посещаемость]" : locale === 'en' ? "[Attendance]" : "[Davomat]"}</span>
+                            <span>{locale === 'ru' ? "[Экзамены]" : locale === 'en' ? "[Exams]" : "[Imtihonlar]"}</span>
+                            <span>{locale === 'ru' ? "[Скачать Excel]" : locale === 'en' ? "[Download Excel]" : "[Excelni yuklab olish]"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-2-1-0' && (
                           <div className="flex items-center justify-between text-[11px] font-mono bg-[rgba(0,0,0,0.03)] dark:bg-[rgba(255,255,255,0.03)] p-2 rounded-[6px]">
-                            <span>To‘lov: 3 500 000 so‘m</span>
-                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">Qarz: 0 so‘m (To‘liq)</span>
+                            <span>{locale === 'ru' ? "Оплата: 3 500 000 сум" : locale === 'en' ? "Payment: 3 500 000 UZS" : "To‘lov: 3 500 000 so‘m"}</span>
+                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Долг: 0 сум (Оплачено)" : locale === 'en' ? "Debt: 0 UZS (Paid in full)" : "Qarz: 0 so‘m (To‘langan)"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-2-0-0' && (
                           <div className="flex items-center gap-2 text-[11px] font-mono text-[#5A6660] dark:text-[#9DB5A7]">
-                            <span>3 Filial: Toshkent · Samarqand · Buxoro</span>
+                            <span>{locale === 'ru' ? "3 филиала: Ташкент · Самарканд · Бухара" : locale === 'en' ? "3 branches: Tashkent · Samarkand · Bukhara" : "3 filial: Toshkent · Samarqand · Buxoro"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-1-9-0' && (
                           <div className="flex items-center justify-between text-[11px] font-mono">
-                            <span>Sug‘urta nazorati: 36 ta mashina</span>
-                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">Muddati faol</span>
+                            <span>{locale === 'ru' ? "Страховка: 36 машин" : locale === 'en' ? "Insurance: 36 vehicles" : "Sug‘urta: 36 ta mashina"}</span>
+                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Действует" : locale === 'en' ? "Valid" : "Amal qiladi"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-1-8-0' && (
                           <div className="flex items-center gap-2 text-[11px] font-mono">
-                            <span>Yoqilg‘i shoxobchalari katalogi: Benzin va Gaz</span>
+                            <span>{locale === 'ru' ? "Заправочные станции: Бензин и газ" : locale === 'en' ? "Fuel stations: Petrol and gas" : "Yoqilg‘i shoxobchalari: Benzin va gaz"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-1-7-0' && (
                           <div className="flex items-center justify-between text-[11px] font-mono">
-                            <span>Ichki YHQ testlari: Savollar banki</span>
-                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">Natijalar bog‘langan</span>
+                            <span>{locale === 'ru' ? "Внутренние тесты ПДД: Вопросы" : locale === 'en' ? "Internal road rules tests: Questions" : "Ichki YHQ testlari: Savollar"}</span>
+                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Результаты в карточке" : locale === 'en' ? "Results in student record" : "Natijalar talaba kartasida"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-1-6-0' && (
                           <div className="flex items-center gap-2 text-[11px] font-mono">
-                            <span>O‘quv dasturlari: B, BC, C toifalari me’yorlari</span>
+                            <span>{locale === 'ru' ? "Учебные программы: Категории B, BC, C" : locale === 'en' ? "Training programmes: Categories B, BC, C" : "O‘quv dasturlari: B, BC, C toifalari"}</span>
                           </div>
                         )}
 
                         {item.id === 'release-1-5-0' && (
                           <div className="flex items-center gap-2 text-[11px] font-mono">
-                            <span>Xodimlar: O‘qituvchilar va Operatorlar ro‘yxati</span>
+                            <span>{locale === 'ru' ? "Сотрудники: Преподаватели и приёмная" : locale === 'en' ? "Staff: Teachers and admissions" : "Xodimlar: O‘qituvchilar va qabul jamoasi"}</span>
                           </div>
                         )}
                       </div>

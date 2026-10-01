@@ -75,7 +75,7 @@ describe("seo pages use English path segments in every locale", () => {
     for (const id of SEO_LEGAL_PAGE_IDS) {
       for (const locale of ["uz", "ru", "en"] as const) {
         expect(SEO_PAGES[id][locale].sections.length).toBeGreaterThan(0);
-        expect(SEO_PAGES[id][locale].updatedAt).toBe("2026-09-24");
+        expect(SEO_PAGES[id][locale].updatedAt).toBe(id === "terms" ? "2026-10-01" : "2026-09-24");
       }
     }
   });

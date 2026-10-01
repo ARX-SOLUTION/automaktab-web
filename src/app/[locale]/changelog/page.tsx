@@ -1,3 +1,4 @@
+import { buildHomeMetadata } from "../../home-metadata";
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SiteFooter, SiteHeader } from '@/components/landing/LandingPage';
@@ -14,19 +15,19 @@ export function generateStaticParams() {
 
 const META: Record<Locale, { title: string; description: string }> = {
   uz: {
-    title: 'AutoDrive Mahsulot Yangiliklari va Relizlar | automaktab.uz',
+    title: 'Tizim yangilanishlari | automaktab.uz',
     description:
-      'AutoDrive tizimidagi eng so‘nggi yangilanishlar, yangi imkoniyatlar, avtopark va to‘lovlar nazorati bo‘yicha yaxshilanishlar jurnali.',
+      'automaktab.uz yangilanishlari: yangi imkoniyatlar, to‘lovlar, davomat, dars jadvali va avtopark bo‘yicha yaxshilanishlar.',
   },
   ru: {
-    title: 'Новости продукта и релизы AutoDrive | automaktab.uz',
+    title: 'Обновления системы | automaktab.uz',
     description:
-      'Журнал последних обновлений AutoDrive: новые функции, улучшения учёта автопарка, оплат и расписания занятий.',
+      'Обновления automaktab.uz: новые возможности и улучшения учёта оплат, посещаемости, расписания и автопарка.',
   },
   en: {
-    title: 'AutoDrive Product Changelog & Release Notes | automaktab.uz',
+    title: 'Product updates | automaktab.uz',
     description:
-      'Weekly log of updates, new features, fleet fuel tracking improvements, and driving school operations in AutoDrive.',
+      'Updates to automaktab.uz: new features and improvements to payments, attendance, schedules and fleet records.',
   },
 };
 
@@ -39,16 +40,21 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
 
   const meta = META[locale];
+  const sharedMetadata = buildHomeMetadata(locale);
+
   return {
     title: meta.title,
     description: meta.description,
     alternates: buildLocaleAlternates('/changelog', locale),
     openGraph: {
+      ...sharedMetadata.openGraph,
       type: 'website',
+      url: buildLocaleAlternates("/changelog", locale)?.canonical as string,
       title: meta.title,
       description: meta.description,
     },
     twitter: {
+      ...sharedMetadata.twitter,
       card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
@@ -70,16 +76,12 @@ export default async function ChangelogPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'AutoDrive CRM',
+    name: 'automaktab.uz',
     applicationCategory: 'BusinessApplication',
-    operatingSystem: 'Web, Android, iOS',
-    releaseNotes: CHANGELOG_ITEMS.map((item) => ({
-      '@type': 'ReleaseNotes',
-      softwareVersion: item.version,
-      datePublished: item.releaseDate,
-      name: item.title[locale],
-      description: item.excerpt[locale],
-    })),
+    operatingSystem: 'Web',
+    releaseNotes: CHANGELOG_ITEMS.filter((item) => !item.isPlanned).map(
+      (item) => `${item.version}: ${item.title[locale]}. ${item.excerpt[locale]}`,
+    ),
   };
 
   return (

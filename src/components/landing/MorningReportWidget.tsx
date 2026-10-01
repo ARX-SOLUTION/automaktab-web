@@ -1,128 +1,78 @@
 "use client";
 
-import React from "react";
+import { useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { Send, Check, Clock3 } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 
-interface MorningReportWidgetProps {
-  content: LandingContent["morningReport"];
-}
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export default function MorningReportWidget({ content }: MorningReportWidgetProps) {
-  const handleTrialClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const target = document.getElementById("tariflar");
-    if (target) {
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 68;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-  };
+export default function MorningReportWidget({ content }: { content: LandingContent["morningReport"] }) {
+  const root = useRef<HTMLElement>(null);
+  const [state, setState] = useState<"static" | "playing" | "paused" | "complete">("static");
+  const format = new Intl.NumberFormat(content.numberLocale === "uz-UZ" ? "fr-FR" : content.numberLocale);
+  const formatNumber = (value: number) => format.format(value).replace(/[\u00A0\u202F]/g, " ");
+  const revenue = content.branches.reduce((total, branch) => total + branch.revenue, 0);
+  const students = content.branches.reduce((total, branch) => total + branch.students, 0);
+
+  useGSAP(() => {
+    const element = root.current;
+    if (!element) return;
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", (_context, childSafe) => {
+      if (!childSafe) return;
+      const safe = childSafe as ReturnType<typeof useGSAP>["contextSafe"];
+      let active = true;
+      let visible = false;
+      const paths = element.querySelectorAll<SVGPathElement>("[data-report-path]");
+      paths.forEach((path) => { const length = path.getTotalLength(); gsap.set(path, { strokeDasharray: length, strokeDashoffset: length }); });
+      const sequence = gsap.timeline({ paused: true, onStart: safe(() => { if (active) setState("playing"); }), onComplete: safe(() => { if (active) setState("complete"); }) });
+      sequence
+        .from(element.querySelectorAll("[data-report-branch]"), { clipPath: "inset(0 0 0 8%)", x: 6, duration: 0.35, stagger: 0.12, ease: "power3.out", clearProps: "clipPath,transform" })
+        .to(paths, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 0.35)
+        .from(element.querySelector("[data-report-total]"), { clipPath: "inset(0 0 12% 0 round 14px)", y: 4, duration: 0.4, ease: "power3.out", clearProps: "clipPath,transform" }, 0.75);
+      const sync = safe(() => {
+        if (!active || sequence.progress() === 1) return;
+        if (visible && !document.hidden) { sequence.play(); setState("playing"); }
+        else { sequence.pause(); setState("paused"); }
+      });
+      ScrollTrigger.create({ trigger: element, start: "top 80%", onEnter: sync });
+      const observer = new IntersectionObserver(safe(([entry]: IntersectionObserverEntry[]) => { visible = entry.isIntersecting; sync(); }), { threshold: 0.2 });
+      observer.observe(element);
+      document.addEventListener("visibilitychange", sync);
+      return () => { active = false; observer.disconnect(); document.removeEventListener("visibilitychange", sync); setState("static"); };
+    });
+    return () => media.revert();
+  }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   return (
-    <section
-      id="morning-report"
-      data-screen-label="02b Morning Report"
-      className="py-14 sm:py-20 px-4 sm:px-6 bg-[#0B2B1F] text-white relative overflow-hidden border-t border-[#184634]"
-      aria-labelledby="morning-report-heading"
-    >
-      {/* Background road line accent */}
-      <div
-        className="absolute inset-x-0 top-0 h-1 opacity-20 pointer-events-none select-none"
-        style={{
-          background:
-            "repeating-linear-gradient(90deg, #E8A317 0 48px, transparent 48px 80px)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
-        
-        {/* Report benefit and connection requirement */}
-        <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6">
-          <div className="flex items-center gap-2.5 font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#E8A317] uppercase">
-            <span className="w-5 h-0.5 bg-[#E8A317]" aria-hidden="true" />
-            <span>{content.eyebrow}</span>
-          </div>
-
-          <h2
-            id="morning-report-heading"
-            className="m-0 font-['Barlow_Condensed'] font-extrabold text-[clamp(36px,5vw,60px)] leading-[0.98] tracking-[-0.01em] [text-wrap:balance]"
-          >
-            {content.title}
-            <span className="text-[#E8A317]">{content.titleAccent}</span>
-          </h2>
-
-          <p className="m-0 text-[#C4D3CA] text-base sm:text-lg leading-[1.6] [text-wrap:pretty]">
-            {content.description}
-          </p>
-
-          <ul className="m-0 p-0 list-none flex flex-col gap-2.5 font-['Barlow'] text-[16px] text-[#D5E2DA]">
-            {content.bullets.map((bullet) => (
-              <li key={bullet} className="flex items-center gap-2.5">
-                <span className="text-[#E8A317] font-bold" aria-hidden="true">✓</span>
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="pt-1 flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <a
-              href="#tariflar"
-              onClick={handleTrialClick}
-              className="inline-flex items-center justify-between gap-3 bg-[#E8A317] hover:bg-[#F2B535] text-[#0B2B1F] font-['Barlow'] font-bold text-[15px] sm:text-[16px] px-5 py-3 rounded-lg no-underline transition-transform active:scale-95 shadow-md"
-            >
-              <span>{content.ctaButton}</span>
-              <span className="text-lg leading-none">→</span>
-            </a>
-            <span className="text-xs text-[#9BB4A7] font-['JetBrains_Mono']">
-              {content.trialNote}
-            </span>
-          </div>
+    <section ref={root} id="morning-report" data-report-state={state} className="report-section bg-paper" aria-labelledby="morning-report-heading">
+      <div className="landing-container report-layout">
+        <div className="report-intro">
+          <h2 id="morning-report-heading" className="m-0 font-display font-extrabold text-ink [text-wrap:balance]">{content.title}<span className="text-forest-600">{content.titleAccent}</span></h2>
+          <p>{content.description}</p>
+          <ul>{content.bullets.map((bullet) => <li key={bullet}><Check size={20} aria-hidden="true" />{bullet}</li>)}</ul>
+          <a href="#tariflar" className="action-secondary">{content.ctaButton}</a>
+          <span className="report-trial-note">{content.trialNote}</span>
         </div>
-
-        {/* Sample of the implemented daily Telegram report */}
-        <div className="lg:col-span-6 w-full max-w-[560px] mx-auto">
-          <div className="bg-[#0E1621] rounded-2xl p-4 sm:p-6 text-white shadow-2xl border border-[#232E3C] font-sans">
-            
-            {/* Telegram Header */}
-            <div className="flex items-center justify-between pb-3.5 border-b border-[#1E2C3A] mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#E8A317] text-[#0B2B1F] flex items-center justify-center font-bold text-lg font-['Barlow_Condensed'] shrink-0 shadow-sm">
-                  AD
-                </div>
-                <div>
-                  <div className="font-bold text-sm text-white flex items-center gap-1.5">
-                    <span>{content.botTitle}</span>
-                  </div>
-                  <div className="text-[11px] text-[#708499]">{content.botSub}</div>
-                </div>
-              </div>
-              <span className="text-xs font-['JetBrains_Mono'] text-[#708499]">{content.timeLabel}</span>
-            </div>
-
-            {/* Telegram Bubble */}
-            <div className="bg-[#182533] rounded-xl p-4 sm:p-5 border border-[#243447] text-sm leading-relaxed space-y-3.5">
-              
-              {/* Message Title */}
-              <div className="font-bold text-sm sm:text-base text-[#64B5F6] border-b border-[#243447] pb-2 flex items-center justify-between">
-                <span>{content.headerTitle}</span>
-                <span className="text-xs font-['JetBrains_Mono'] text-[#A8C7B7]">{content.dateLabel}</span>
-              </div>
-
-              {/* 1. Cash flow */}
-              <div>
-                <div className="text-xs text-[#829BB0] uppercase font-['JetBrains_Mono'] font-semibold">
-                  {content.revenueLabel}:
-                </div>
-                <div className="font-['JetBrains_Mono'] text-white text-xs sm:text-sm mt-1 space-y-0.5">
-                  <div>• {content.revenueCollectedLabel}: <span className="text-[#81C784] font-bold">{content.revenueCollected}</span></div>
-                  <div>• {content.newStudentsLabel}: <span className="text-[#FFD54F] font-bold">{content.newStudents}</span></div>
-                </div>
-              </div>
-
+        <div className="report-example">
+          <div className="report-bot"><span className="report-bot-icon"><Send size={24} aria-hidden="true" /></span><div><strong>{content.botTitle}</strong><span>{content.botSub}</span></div><span className="report-clock"><Clock3 size={15} aria-hidden="true" />{content.timeLabel}</span></div>
+          <div className="report-message">
+            <div className="report-message-heading"><strong>{content.headerTitle}</strong><span>{content.dateLabel}</span></div>
+            <table className="report-branches">
+              <thead><tr><th scope="col">{content.branchLabel}</th><th scope="col">{content.revenueCollectedLabel}</th><th scope="col">{content.newStudentsLabel}</th></tr></thead>
+              <tbody>{content.branches.map((branch, index) => <tr key={branch.name} data-report-branch={index} data-revenue={branch.revenue} data-students={branch.students}><th scope="row">{branch.name}</th><td>{formatNumber(branch.revenue)}<small>{content.currency}</small></td><td>{formatNumber(branch.students)}</td></tr>)}</tbody>
+            </table>
+            <svg className="report-routes" viewBox="0 0 360 44" fill="none" aria-hidden="true">{[60, 180, 300].map((x) => <g key={x}><path d={`M${x} 2 C${x} 24 180 20 180 40`} className="scene-route-base" /><path d={`M${x} 2 C${x} 24 180 20 180 40`} data-report-path className="scene-route" /></g>)}</svg>
+            <div data-report-total data-report-total-revenue={revenue} data-report-total-students={students} className="report-total">
+              <strong>{content.totalLabel}</strong>
+              <dl><div><dt>{content.revenueCollectedLabel}</dt><dd>{formatNumber(revenue)} <small>{content.currency}</small></dd></div><div><dt>{content.newStudentsLabel}</dt><dd>{formatNumber(students)}</dd></div></dl>
             </div>
           </div>
+          <p className="report-sample-caption">{content.sampleCaption}</p>
         </div>
-
       </div>
     </section>
   );

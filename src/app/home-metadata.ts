@@ -6,8 +6,8 @@ import {
 } from "@/lib/locale-metadata";
 
 export const viewport: Viewport = {
-  themeColor: "#0B2B1F",
-  colorScheme: "dark",
+  themeColor: "#FFFFFF",
+  colorScheme: "light",
 };
 
 const OG_LOCALE: Record<Locale, string> = {
@@ -18,29 +18,22 @@ const OG_LOCALE: Record<Locale, string> = {
 
 const SEO_METADATA: Record<
   Locale,
-  { title: string; description: string; keywords: string[] }
+  { title: string; description: string }
 > = {
   uz: {
     title: "Avtomaktab CRM va boshqaruv tizimi | automaktab.uz",
     description:
-      "Avtomaktabingizda kim qarzdor, qancha tushum bor va darslar qanday o‘tayotganini bir joyda ko‘ring. Rahbar panelini demoda sinab ko‘ring.",
-    keywords: [
-      "avtomaktab CRM",
-      "avtomaktab boshqaruv tizimi",
-      "avtomaktab dasturi",
-    ],
+      "Talabalar, to‘lovlar, qarzdorlik, dars jadvali va davomatni bir joyda boshqaring. Filiallar holatini ko‘ring va demoni ochib sinang.",
   },
   ru: {
     title: "CRM для автошколы и система управления | automaktab.uz",
     description:
-      "Контролируйте оплаты, долги, расписание и посещаемость автошколы в одной CRM-системе. Откройте демо и попробуйте 30 дней бесплатно.",
-    keywords: ["CRM для автошколы", "система управления автошколой"],
+      "Ведите учёт курсантов, оплат и задолженности. Планируйте занятия и отмечайте посещаемость в одной системе. Попробуйте демо.",
   },
   en: {
-    title: "Driving School CRM & Management | automaktab.uz",
+    title: "Driving school CRM and management | automaktab.uz",
     description:
-      "Manage driving-school payments, debt, lesson schedules, and attendance in one CRM. Open the product demo and try it free for 30 days.",
-    keywords: ["driving school CRM", "driving school management system"],
+      "Manage students, payments, debt, schedules and attendance in one system. Compare branch results and try the demo.",
   },
 };
 
@@ -56,7 +49,6 @@ export function buildHomeMetadata(locale: Locale): Metadata {
     metadataBase: new URL("https://automaktab.uz"),
     title: seo.title,
     description: seo.description,
-    keywords: seo.keywords,
     alternates,
     robots: { index: true, follow: true },
     authors: [{ name: "automaktab.uz" }],

@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
+import { contentRu } from "@/content/ru";
+import { contentEn } from "@/content/en";
 import { buildDemoUrl } from "@/lib/analytics";
 import type { Locale } from "@/i18n/config";
 
@@ -11,8 +15,8 @@ export interface SiteHeaderProps {
 }
 
 export default function SiteHeader({
-  content = contentUz.header,
   locale = "uz",
+  content = locale === "ru" ? contentRu.header : locale === "en" ? contentEn.header : contentUz.header,
 }: SiteHeaderProps) {
   const demoUrl = buildDemoUrl("header");
   const navLinks = [
@@ -29,33 +33,48 @@ export default function SiteHeader({
   ];
 
   return (
-    <header className="site-header z-50 bg-forest-800 border-b border-white/10">
+    <header className="site-header z-50 bg-paper border-b-2 border-sand-300">
       <div className="landing-container site-header-inner">
         {/* Brand logo */}
         <a
-          href="#"
-          className="site-header-brand min-w-0 min-h-11 flex items-center gap-2.5 text-white no-underline group"
-          aria-label="automaktab.uz bosh sahifa"
+          href={locale === "uz" ? "/" : `/${locale}`}
+          className="site-header-brand min-w-0 min-h-11 flex items-center text-ink no-underline"
+          aria-label={locale === "ru" ? "automaktab.uz: главная страница" : locale === "en" ? "automaktab.uz homepage" : "automaktab.uz bosh sahifa"}
         >
-          <span className="w-[30px] h-[30px] shrink-0 rounded-[var(--r-xs)] border border-white/20 text-amber-500 grid place-items-center font-display font-extrabold text-lg leading-none select-none group-hover:border-amber-500 transition-colors">
-            A
-          </span>
-          <span className="font-display font-bold text-[22px] tracking-[0.01em] leading-none text-white">
+          <span className="font-display font-black text-[25px] tracking-[-0.03em] leading-none text-ink">
             {content.logoText}
-            <span className="text-amber-500">{content.logoDomain}</span>
+            <span className="text-forest-600">{content.logoDomain}</span>
           </span>
         </a>
+
+        <details
+          className="site-header-menu"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.currentTarget.open = false;
+              event.currentTarget.querySelector("summary")?.focus();
+            }
+          }}
+          onClick={(event) => {
+            if ((event.target as HTMLElement).closest("a")) event.currentTarget.open = false;
+          }}
+        >
+          <summary>{locale === "ru" ? "Меню" : locale === "en" ? "Menu" : "Menyu"}</summary>
+          <nav aria-label={locale === "ru" ? "Навигация" : locale === "en" ? "Navigation" : "Navigatsiya"}>
+            {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+          </nav>
+        </details>
 
         {/* Navigation links */}
         <nav
           className="site-header-nav min-w-0"
-          aria-label="Asosiy navigatsiya"
+          aria-label={locale === "ru" ? "Основная навигация" : locale === "en" ? "Main navigation" : "Asosiy menyu"}
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="min-h-11 flex items-center text-on-dark-2 hover:text-white no-underline font-body font-medium text-sm transition-colors"
+              className="min-h-11 flex items-center text-muted hover:text-forest-600 no-underline font-body font-semibold text-sm transition-colors"
             >
               {link.label}
             </a>
@@ -64,14 +83,14 @@ export default function SiteHeader({
 
         <a
           href="https://app.automaktab.uz/login"
-          className="site-header-login min-h-11 px-3 flex items-center text-white hover:bg-white/10 no-underline font-body font-semibold text-sm rounded-[var(--r-s)] transition-colors"
+          className="site-header-login min-h-11 px-3 flex items-center text-ink hover:bg-sand-100 no-underline font-body font-semibold text-sm rounded-[var(--r-s)] transition-colors"
         >
           {content.login}
         </a>
 
         <div className="site-header-controls min-w-0">
           {/* Language Switcher */}
-          <div className="flex shrink-0 items-center border border-white/15 rounded-[var(--r-s)] p-0.5 font-mono text-xs font-semibold">
+          <div className="flex shrink-0 items-center border-2 border-sand-300 rounded-[var(--r-s)] p-0.5 font-body text-xs font-bold">
             {languages.map((language) => (
               <Link
                 key={language.code}
@@ -80,8 +99,8 @@ export default function SiteHeader({
                 aria-current={locale === language.code ? "page" : undefined}
                 className={`min-w-11 min-h-11 flex items-center justify-center rounded-[var(--r-xs)] no-underline transition-colors ${
                   locale === language.code
-                    ? "bg-white/10 text-white"
-                    : "text-on-dark-2 hover:text-white"
+                    ? "bg-sand-100 text-ink"
+                    : "text-muted hover:text-forest-600"
                 }`}
               >
                 {language.code.toUpperCase()}
@@ -91,7 +110,7 @@ export default function SiteHeader({
 
           <a
             href={demoUrl}
-            className="site-header-demo min-w-0 min-h-11 px-4 py-2 flex items-center justify-center text-center bg-amber-500 hover:bg-amber-400 text-forest-800 no-underline font-body font-bold text-sm rounded-[var(--r-s)] transition-colors [overflow-wrap:anywhere]"
+            className="action-primary site-header-demo min-w-0 min-h-11 px-4 py-2 flex items-center justify-center text-center bg-amber-500 hover:bg-amber-400 text-forest-800 no-underline font-body font-bold text-sm rounded-[var(--r-s)] transition-colors [overflow-wrap:anywhere]"
           >
             {content.demo}
           </a>

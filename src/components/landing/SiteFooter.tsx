@@ -2,7 +2,10 @@ import React from "react";
 import Link from "next/link";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
-import type { Locale } from "@/i18n/config";
+import { contentRu } from "@/content/ru";
+import { contentEn } from "@/content/en";
+import { isLocale, type Locale } from "@/i18n/config";
+import { SEO_RELATED_PAGE_IDS, SEO_LEGAL_PAGE_IDS, SEO_PAGES, getSeoPagePath } from "@/config/seo-pages";
 
 export interface SiteFooterProps {
   content?: LandingContent["footer"];
@@ -10,42 +13,58 @@ export interface SiteFooterProps {
 }
 
 export default function SiteFooter({
-  content = contentUz.footer,
   locale = "uz",
+  content = locale === "ru" ? contentRu.footer : locale === "en" ? contentEn.footer : contentUz.footer,
 }: SiteFooterProps) {
-  return (
-    <footer className="bg-[#07201A] text-[#B9C9BF] py-9 px-6 border-t border-[rgba(255,255,255,0.06)]">
-      <div className="max-w-[1240px] mx-auto flex flex-wrap justify-between items-center gap-5">
-        {/* Brand */}
-        <span className="font-['Barlow_Condensed'] font-bold text-[20px] text-white">
-          automaktab<span className="text-[#E8A317]">.uz</span>
-        </span>
+  const pageLocale = isLocale(locale) ? locale : "uz";
 
-        {/* Links */}
-        <nav
-          className="flex flex-wrap gap-x-5 gap-y-1.5 font-['Barlow'] font-medium text-[15px]"
-          aria-label="Pastki navigatsiya"
-        >
-          {content.links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-[#B9C9BF] hover:text-white no-underline transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+  return (
+    <footer className="site-footer">
+      <div className="landing-container">
+        <div className="footer-landmark">
+          <p>{content.tagline}</p>
+          <svg className="footer-roads" viewBox="0 0 720 190" fill="none" aria-hidden="true">
+            <path d="M10 24 H164 Q216 24 216 76 V104 Q216 144 264 144 H710" />
+            <path d="M10 42 H146 Q198 42 198 94 V122 Q198 162 264 162 H710" />
+            <path d="M10 112 H142 Q178 112 210 128 L258 152 H710" className="footer-road-center" />
+            <path d="M10 170 H146 Q198 170 228 156 L254 144" />
+            <path d="M10 188 H164 Q216 188 246 172 L272 162" />
+            <circle cx="10" cy="33" r="5" /><circle cx="10" cy="112" r="5" /><circle cx="10" cy="179" r="5" />
+          </svg>
+        </div>
+        <a href={pageLocale === "uz" ? "/" : `/${pageLocale}`} className="footer-wordmark">automaktab<span>.uz</span></a>
+      <div className="footer-grid">
+
+        <div className="footer-navigation">
+          <nav aria-label={content.tagline} className="footer-links">
+            <h3>automaktab.uz</h3>
+            {content.links.map((link) => (
+              <a key={link.label} href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+          <nav aria-label={pageLocale === "ru" ? "Возможности" : pageLocale === "en" ? "Features" : "Imkoniyatlar"} className="footer-links">
+            <h3>{pageLocale === "ru" ? "Возможности" : pageLocale === "en" ? "Features" : "Imkoniyatlar"}</h3>
+            {SEO_RELATED_PAGE_IDS.map((id) => (
+              <Link key={id} href={getSeoPagePath(id, pageLocale)}>{SEO_PAGES[id][pageLocale].eyebrow}</Link>
+            ))}
+          </nav>
+          <nav aria-label={pageLocale === "ru" ? "Условия" : pageLocale === "en" ? "Terms" : "Shartlar"} className="footer-links">
+            <h3>{pageLocale === "ru" ? "Условия" : pageLocale === "en" ? "Terms" : "Shartlar"}</h3>
+            {SEO_LEGAL_PAGE_IDS.map((id) => (
+              <Link key={id} href={getSeoPagePath(id, pageLocale)}>{SEO_PAGES[id][pageLocale].eyebrow}</Link>
+            ))}
+          </nav>
+        </div>
 
         {/* Languages */}
-        <div className="flex items-center gap-1.5 font-['JetBrains_Mono'] text-[13px] font-semibold">
+        <div className="flex items-center gap-1.5 font-mono text-[13px] font-semibold">
           <Link
             href="/"
             aria-label="O‘zbekcha"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "uz"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
-                : "text-[#7E8F86] hover:text-white"
+                : "text-on-dark-3 hover:text-white"
             }`}
           >
             UZ
@@ -56,7 +75,7 @@ export default function SiteFooter({
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "ru"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
-                : "text-[#7E8F86] hover:text-white"
+                : "text-on-dark-3 hover:text-white"
             }`}
           >
             RU
@@ -67,7 +86,7 @@ export default function SiteFooter({
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "en"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
-                : "text-[#7E8F86] hover:text-white"
+                : "text-on-dark-3 hover:text-white"
             }`}
           >
             EN
@@ -77,12 +96,13 @@ export default function SiteFooter({
 
       {/* Copyright */}
       {content.copyright && (
-        <div className="max-w-[1240px] mx-auto mt-6 pt-5 border-t border-[rgba(255,255,255,0.06)] text-center sm:text-left">
-          <p className="m-0 font-['Barlow'] text-[13px] text-[#7E8F86]">
+        <div className="footer-copyright">
+          <p>
             {content.copyright}
           </p>
         </div>
       )}
+      </div>
     </footer>
   );
 }

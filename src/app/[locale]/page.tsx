@@ -5,6 +5,7 @@ import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { isLocale, type Locale } from "@/i18n/config";
+import { LANDING_COPY } from "@/config/landing";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -71,7 +72,7 @@ export default async function Home({ params }: PageProps) {
   return (
     <>
       <a href="#main-content" className="skip-link">
-        Asosiy kontentga o‘tish
+        {LANDING_COPY[locale].skipLink}
       </a>
       <script
         type="application/ld+json"
