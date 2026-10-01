@@ -26,6 +26,20 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/uz",
+        destination: "/",
+        permanent: false,
+      },
+      {
+        source: "/uz/:path*",
+        destination: "/:path*",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

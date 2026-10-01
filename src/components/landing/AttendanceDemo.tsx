@@ -44,7 +44,8 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
     else counts[status]++;
   });
 
-  const handleToggle = (index: number, status: StatusKey) => {
+  const handleToggle = (index: number, status: StatusKey, allowReset = true) => {
+    if (!allowReset && attendance[index] === status) return;
     if (!hasInteractedRef.current) {
       hasInteractedRef.current = true;
       startTimeRef.current = getTimestamp();
@@ -52,7 +53,7 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
     }
 
     const next = [...attendance];
-    next[index] = next[index] === status ? null : status;
+    next[index] = allowReset && next[index] === status ? null : status;
     setAttendance(next);
 
     // If all are now marked
@@ -60,6 +61,28 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
       const duration = startTimeRef.current ? getTimestamp() - startTimeRef.current : 0;
       track("attendance_complete", { time_to_complete_ms: duration });
     }
+  };
+
+  const handleStatusKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+    studentIndex: number,
+    statusIndex: number,
+  ) => {
+    let nextIndex = statusIndex;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = (statusIndex + 1) % content.statuses.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex = (statusIndex + content.statuses.length - 1) % content.statuses.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = content.statuses.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    handleToggle(studentIndex, content.statuses[nextIndex].key, false);
+    (event.currentTarget.parentElement?.children[nextIndex] as HTMLButtonElement)?.focus();
   };
 
   const handleMarkAll = () => {
@@ -89,22 +112,22 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
     <section
       id="sinab"
       data-screen-label="05 Sinab ko‘ring"
-      className="py-24 sm:py-28 px-6 bg-[#0B2B1F] text-white scroll-mt-[68px]"
+      className="py-16 sm:py-28 bg-forest-800 text-white scroll-mt-[68px]"
       aria-labelledby="attendance-heading"
     >
-      <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 items-center">
+      <div className="landing-container min-w-0 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-14 items-center">
         {/* Left Explanatory Column */}
-        <div className="flex flex-col gap-5">
-          <span className="font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#E8A317] uppercase">
+        <div className="min-w-0 flex flex-col gap-5">
+          <span className="font-mono font-semibold text-[13px] tracking-[0.08em] text-amber-500 uppercase">
             {content.eyebrow}
           </span>
           <h2
             id="attendance-heading"
-            className="m-0 font-['Barlow_Condensed'] font-extrabold text-[clamp(40px,5vw,64px)] leading-[0.95] [text-wrap:balance]"
+            className="m-0 font-display font-extrabold text-[clamp(40px,5vw,64px)] leading-[0.95] [text-wrap:balance]"
           >
             {content.title}
           </h2>
-          <p className="m-0 font-['Barlow'] font-normal text-[19px] leading-[1.6] text-[#C4D3CA] [text-wrap:pretty]">
+          <p className="m-0 font-body font-normal text-[19px] leading-[1.6] text-on-dark-2 [text-wrap:pretty]">
             {content.description}
           </p>
 
@@ -113,7 +136,7 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
             {content.statuses.map((s) => (
               <div
                 key={s.key}
-                className="flex items-center gap-2.5 font-['Barlow'] font-medium text-[16px] text-white"
+                className="flex items-center gap-2.5 font-body font-medium text-[16px] text-white"
               >
                 <span
                   style={{ backgroundColor: s.color }}
@@ -129,9 +152,9 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
         </div>
 
         {/* Right Interactive Card */}
-        <div className="bg-[#F4EFE4] text-[#14211A] rounded-[20px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)]">
+        <div className="min-w-0 bg-sand-100 text-ink rounded-[var(--r-xl)] overflow-hidden shadow-[var(--shadow-demo)]">
           {/* Banner */}
-          <div className="bg-[#8B5A12] text-white text-center py-2 px-3 font-['Barlow'] font-medium text-[14px] select-none">
+          <div className="bg-[#8B5A12] text-white text-center py-2 px-3 font-body font-medium text-[14px] select-none">
             {content.banner}
           </div>
 
@@ -139,10 +162,10 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
             {/* Header info + bulk button */}
             <div className="flex justify-between items-start gap-3 flex-wrap">
               <div>
-                <div className="font-['JetBrains_Mono'] font-medium text-[13px] text-[#5A6660]">
+                <div className="font-mono font-medium text-[13px] text-muted">
                   {content.lessonTitle}
                 </div>
-                <div className="font-['Barlow_Condensed'] font-extrabold text-[26px] sm:text-[28px] leading-tight text-[#14211A]">
+                <div className="font-display font-extrabold text-[26px] sm:text-[28px] leading-tight text-ink">
                   {content.lessonSubject}
                 </div>
               </div>
@@ -150,24 +173,24 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
               <button
                 type="button"
                 onClick={handleMarkAll}
-                className="h-[44px] px-3.5 rounded-[10px] border border-[#CFC6B3] bg-white hover:border-[#14211A] font-['Barlow'] font-semibold text-[15px] text-[#14211A] cursor-pointer transition-colors"
+                className="min-h-11 px-3.5 py-2 rounded-[10px] border border-sand-400 bg-white hover:border-ink font-body font-semibold text-[15px] text-ink cursor-pointer transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 {content.markAllButton}
               </button>
             </div>
 
             {/* KPI Counters */}
-            <div className="grid grid-cols-5 gap-2 select-none">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 select-none">
               {kpis.map((k) => (
                 <div
                   key={k.label}
                   style={{ borderTopColor: k.color }}
-                  className="bg-white rounded-[10px] p-2 sm:p-2.5 border-t-[3px] shadow-xs"
+                  className="min-w-0 bg-white rounded-[10px] p-2 sm:p-2.5 border-t-[3px] shadow-xs"
                 >
-                  <div className="font-['Barlow_Condensed'] font-extrabold text-[24px] sm:text-[28px] leading-none text-[#14211A]">
+                  <div className="font-display font-extrabold text-[24px] sm:text-[28px] leading-none text-ink">
                     {k.count}
                   </div>
-                  <div className="font-['Barlow'] font-semibold text-[11px] sm:text-[12px] text-[#5A6660] mt-1 truncate">
+                  <div className="font-body font-semibold text-[12px] sm:text-[13px] leading-snug text-muted mt-1 break-words">
                     {k.label}
                   </div>
                 </div>
@@ -179,24 +202,26 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
               {content.students.map((name, idx) => (
                 <div
                   key={name}
-                  className="flex flex-wrap items-center justify-between gap-2 bg-white rounded-[12px] p-2 pl-3.5 border border-[#E2D9C6]"
+                  className="flex flex-wrap items-center justify-between gap-2 bg-white rounded-[12px] p-2 pl-3.5 border border-sand-300"
                 >
-                  <span className="font-['Barlow'] font-semibold text-[15px] sm:text-[16px] text-[#14211A] min-w-[130px]">
+                  <span className="min-w-0 font-body font-semibold text-[16px] text-ink">
                     {name}
                   </span>
 
                   <div
                     role="radiogroup"
                     aria-label={content.attendanceStatusTemplate.replace("{name}", name)}
-                    className="flex gap-1 shrink-0"
+                    className="flex gap-2"
                   >
-                    {content.statuses.map((s) => (
+                    {content.statuses.map((s, statusIndex) => (
                       <StatusButton
                         key={s.key}
                         label={s.label}
                         icon={s.icon}
                         color={s.color}
                         isSelected={attendance[idx] === s.key}
+                        tabIndex={attendance[idx] === s.key || (!attendance[idx] && statusIndex === 0) ? 0 : -1}
+                        onKeyDown={(event) => handleStatusKeyDown(event, idx, statusIndex)}
                         onToggle={() => handleToggle(idx, s.key)}
                         studentName={name}
                       />
@@ -210,7 +235,7 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
             <div className="flex items-center justify-between gap-3 flex-wrap pt-2">
               <span
                 aria-live="polite"
-                className="font-['Barlow'] font-medium text-[14px] text-[#5A6660]"
+                className="font-body font-medium text-[14px] text-muted"
               >
                 {liveMessage}
               </span>
@@ -218,7 +243,7 @@ export default function AttendanceDemo({ content }: AttendanceDemoProps) {
               <a
                 href={demoUrl}
                 onClick={() => track("cta_demo_click", { location: "attendance_demo" })}
-                className="h-[48px] px-4.5 flex items-center gap-1.5 bg-[#E8A317] hover:bg-[#F2B535] text-[#0B2B1F] font-['Barlow'] font-bold text-[16px] rounded-[10px] no-underline shadow-sm transition-colors"
+                className="min-h-12 px-4.5 py-2 flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-forest-800 font-body font-bold text-[16px] rounded-[10px] no-underline shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 <span>{content.ctaButton}</span>
                 <span className="text-[18px] leading-none">↗</span>

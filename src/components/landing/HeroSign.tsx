@@ -17,69 +17,46 @@ export default function HeroSign({ content }: HeroSignProps) {
       new CustomEvent("automaktab_goto_stop", { detail: { stop: stopIndex } })
     );
 
-    // Smooth scroll to #yol with 68px header clearance
     const yolEl = document.getElementById("yol");
     if (yolEl) {
-      const top = yolEl.getBoundingClientRect().top + window.scrollY - 68;
-      window.scrollTo({ top, behavior: "smooth" });
+      const header = document.querySelector(".site-header");
+      const clearance = header && getComputedStyle(header).position === "sticky"
+        ? header.getBoundingClientRect().height + 16
+        : 16;
+      const top = yolEl.getBoundingClientRect().top + window.scrollY - clearance;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
     }
   };
 
   return (
-    <div className="relative flex flex-col items-center w-full max-w-[560px] mx-auto select-none">
-      {/* Sign Board */}
-      <div
-        className="w-full bg-[#0E6B43] rounded-[20px] p-2.5 shadow-[0_40px_80px_rgba(0,0,0,0.45)] border border-[rgba(255,255,255,0.1)] relative z-10"
-      >
-        <div className="border-[3px] border-white rounded-[13px] p-4 sm:p-5 flex flex-col gap-3">
-          {/* Header of Road Sign */}
-          <div className="pb-3 border-b-2 border-[rgba(255,255,255,0.28)]">
-            <span className="font-['JetBrains_Mono'] font-bold text-[12px] tracking-[0.12em] text-[#CFE6D8] uppercase">
-              {content.signTitle}
+    <div className="w-full bg-forest-600 rounded-[var(--r-l)] border border-white/15 p-4 sm:p-5">
+      <p className="m-0 mb-3 font-mono font-semibold text-xs tracking-[0.08em] text-white/90 uppercase">
+        {content.signTitle}
+      </p>
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+        {content.signRows.map((row) => (
+          <button
+            key={row.title}
+            type="button"
+            onClick={() => handleRowClick(row.stopIndex)}
+            className="min-w-0 min-h-[72px] text-left p-3 flex items-start gap-2.5 border border-white/15 rounded-[var(--r-m)] hover:bg-white/10 transition-colors cursor-pointer"
+          >
+            <span className="font-display font-bold text-2xl leading-none text-white shrink-0" aria-hidden="true">
+              {row.arrow}
             </span>
-          </div>
 
-          {/* Rows */}
-          <div className="flex flex-col">
-            {content.signRows.map((row, idx) => (
-              <button
-                key={row.title}
-                type="button"
-                onClick={() => handleRowClick(row.stopIndex)}
-                className={`w-full text-left py-3.5 px-2 flex items-center gap-3 sm:gap-4 transition-colors group cursor-pointer ${
-                  idx > 0 ? "border-t-2 border-[rgba(255,255,255,0.28)]" : ""
-                }`}
-              >
-                {/* Arrow */}
-                <span className="w-10 sm:w-12 text-center font-['Barlow_Condensed'] font-extrabold text-[36px] sm:text-[44px] leading-none text-white group-hover:text-[#FFE3A3] transition-colors shrink-0">
-                  {row.arrow}
-                </span>
-
-                {/* Title + subtitle */}
-                <div className="flex-1 min-w-0 flex flex-col">
-                  <span className="font-['Barlow_Condensed'] font-bold text-[22px] sm:text-[clamp(24px,2.6vw,31px)] text-white group-hover:text-[#FFE3A3] leading-tight transition-colors">
-                    {row.title}
-                  </span>
-                  <span className="font-['Barlow'] font-medium text-[13px] sm:text-[14px] text-[#CFE6D8] leading-tight mt-0.5">
-                    {row.sub}
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 2 Metal Support Poles */}
-      <div className="w-full flex justify-between px-16 sm:px-24 -mt-2">
-        <div
-          className="w-3.5 sm:w-4 h-16 bg-gradient-to-r from-[#5A6660] via-[#8E9B94] to-[#404B46] shadow-md rounded-b-[2px]"
-          aria-hidden="true"
-        />
-        <div
-          className="w-3.5 sm:w-4 h-16 bg-gradient-to-r from-[#5A6660] via-[#8E9B94] to-[#404B46] shadow-md rounded-b-[2px]"
-          aria-hidden="true"
-        />
+            <span className="min-w-0 flex flex-col gap-1 [overflow-wrap:anywhere]">
+              <span className="font-body font-semibold text-sm sm:text-[15px] leading-snug text-white">
+                {row.title}
+              </span>
+              <span className="font-body text-xs sm:text-[13px] leading-relaxed text-white/90">
+                {row.sub}
+              </span>
+            </span>
+          </button>
+        ))}
       </div>
     </div>
   );

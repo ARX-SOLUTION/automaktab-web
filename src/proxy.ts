@@ -17,8 +17,8 @@ function resolveLocale(pathname: string): Locale {
 }
 
 // Explicit URL locales always win. Unprefixed paths (including /) are always
-// canonical Uzbek and are rewritten internally to the /uz route tree. Cookie
-// NEXT_LOCALE is updated from the URL but never redirects / away from Uzbek.
+// canonical Uzbek. Cookie NEXT_LOCALE is updated from the URL but never
+// redirects / away from Uzbek.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -29,30 +29,8 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
-  // Public Uzbek URLs are unprefixed. Send /uz and /uz/* to the canonical
-  // unprefixed path so metadata/crawlers never keep a soft-404 /uz URL.
-  if (
-    pathname === `/${DEFAULT_LOCALE}` ||
-    pathname.startsWith(`/${DEFAULT_LOCALE}/`)
-  ) {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname =
-      pathname === `/${DEFAULT_LOCALE}`
-        ? "/"
-        : pathname.slice(`/${DEFAULT_LOCALE}`.length) || "/";
-    return NextResponse.redirect(redirectUrl);
-  }
-
   const locale = resolveLocale(pathname);
-
-  let response: NextResponse;
-  if (locale === DEFAULT_LOCALE) {
-    const rewrittenUrl = request.nextUrl.clone();
-    rewrittenUrl.pathname = pathname === "/" ? "/uz" : `/uz${pathname}`;
-    response = NextResponse.rewrite(rewrittenUrl);
-  } else {
-    response = NextResponse.next();
-  }
+  const response = NextResponse.next();
 
   response.cookies.set(LOCALE_COOKIE, locale, { path: "/" });
   return response;

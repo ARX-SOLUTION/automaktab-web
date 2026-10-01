@@ -44,18 +44,18 @@ export default function RoleTabs({ content }: RoleTabsProps) {
     <section
       id="rollar"
       data-screen-label="06 Kimlar uchun"
-      className="py-24 sm:py-28 px-6 scroll-mt-[68px]"
+      className="py-16 sm:py-28 scroll-mt-[68px]"
       aria-labelledby="roles-heading"
     >
-      <div className="max-w-[1240px] mx-auto flex flex-col gap-9">
+      <div className="landing-container min-w-0 flex flex-col gap-8 sm:gap-9">
         {/* Section Header */}
         <div className="flex flex-col gap-3.5 max-w-[760px]">
-          <span className="font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#9A6400] uppercase">
+          <span className="font-mono font-semibold text-[13px] tracking-[0.08em] text-amber-700 uppercase">
             {content.eyebrow}
           </span>
           <h2
             id="roles-heading"
-            className="m-0 font-['Barlow_Condensed'] font-extrabold text-[clamp(40px,5vw,64px)] leading-[0.95] text-[#14211A] [text-wrap:balance]"
+            className="m-0 font-display font-extrabold text-[clamp(40px,5vw,64px)] leading-[0.95] text-ink [text-wrap:balance]"
           >
             {content.title}
           </h2>
@@ -64,7 +64,7 @@ export default function RoleTabs({ content }: RoleTabsProps) {
         {/* Tab List */}
         <div
           role="tablist"
-          aria-label="Foydalanuvchi rollari"
+          aria-labelledby="roles-heading"
           className="flex flex-wrap gap-2 select-none"
         >
           {content.tabs.map((tab, idx) => {
@@ -73,6 +73,7 @@ export default function RoleTabs({ content }: RoleTabsProps) {
               <button
                 key={tab.label}
                 id={`role-tab-${idx}`}
+                type="button"
                 role="tab"
                 aria-selected={isActive}
                 aria-controls={`role-panel-${idx}`}
@@ -80,10 +81,10 @@ export default function RoleTabs({ content }: RoleTabsProps) {
                 onClick={() => handleSelectTab(idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}
                 style={{
-                  backgroundColor: isActive ? "#14211A" : "transparent",
-                  color: isActive ? "#FFFFFF" : "#14211A",
+                  backgroundColor: isActive ? "var(--c-ink)" : "transparent",
+                  color: isActive ? "var(--c-on-dark-1)" : "var(--c-ink)",
                 }}
-                className="h-12 px-5 rounded-[24px] border-[1.5px] border-[#14211A] font-['Barlow'] font-semibold text-[16px] cursor-pointer transition-colors duration-200"
+                className="min-h-12 max-w-full px-4 sm:px-5 py-2 rounded-[var(--r-pill)] border-[1.5px] border-ink font-body font-semibold text-[16px] cursor-pointer transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
                 {tab.label}
               </button>
@@ -97,18 +98,19 @@ export default function RoleTabs({ content }: RoleTabsProps) {
             id={`role-panel-${activeTab}`}
             role="tabpanel"
             aria-labelledby={`role-tab-${activeTab}`}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-[#FFFCF6] border border-[#E2D9C6] rounded-[24px] p-6 sm:p-10 shadow-sm"
+            tabIndex={0}
+            className="grid min-w-0 grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-center bg-paper border border-sand-300 rounded-[var(--r-xl)] p-5 sm:p-10 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
           >
             {/* Left Content */}
-            <div className="flex flex-col gap-5">
-              <span className="font-['JetBrains_Mono'] font-semibold text-[13px] text-[#5A6660] tracking-wider uppercase">
+            <div className="min-w-0 flex flex-col gap-5">
+              <span className="font-mono font-semibold text-[13px] text-muted tracking-wider uppercase">
                 {content.questionEyebrow}
               </span>
-              <p className="m-0 font-['Barlow_Condensed'] font-bold text-[clamp(30px,3.4vw,42px)] leading-[1.05] text-[#14211A] [text-wrap:balance]">
+              <p className="m-0 font-display font-bold text-[clamp(30px,3.4vw,42px)] leading-[1.05] text-ink [text-wrap:balance]">
                 {currentRole.question}
               </p>
-              <div className="h-0.5 w-14 bg-[#E8A317]" aria-hidden="true" />
-              <p className="m-0 font-['Barlow'] font-normal text-[18px] leading-[1.6] text-[#2F3B35]">
+              <div className="h-0.5 w-14 bg-amber-500" aria-hidden="true" />
+              <p className="m-0 font-body font-normal text-[18px] leading-[1.6] text-body-2">
                 {currentRole.answer}
               </p>
               {/* Modules chips */}
@@ -116,7 +118,7 @@ export default function RoleTabs({ content }: RoleTabsProps) {
                 {currentRole.modules.map((mod) => (
                   <span
                     key={mod}
-                    className="px-3 py-1.5 rounded-[8px] bg-[#F4EFE4] border border-[#E2D9C6] font-['Barlow'] font-semibold text-[14px] text-[#14211A]"
+                    className="max-w-full px-3 py-1.5 rounded-[8px] bg-sand-100 border border-sand-300 font-body font-semibold text-[14px] text-ink break-words"
                   >
                     {mod}
                   </span>
@@ -125,7 +127,7 @@ export default function RoleTabs({ content }: RoleTabsProps) {
             </div>
 
             {/* Right Crop Screenshot */}
-            <div className="relative rounded-[16px] overflow-hidden border border-[#E2D9C6] aspect-[4/3] bg-[#F4EFE4] shadow-xs">
+            <div className="relative min-w-0 rounded-[16px] overflow-hidden border border-sand-300 aspect-[4/3] bg-sand-100 shadow-xs">
               <Image
                 src={currentRole.image}
                 alt={currentRole.imageAlt}

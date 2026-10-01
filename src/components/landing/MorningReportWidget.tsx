@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
+import React from "react";
 import type { LandingContent } from "@/content/uz";
 
 interface MorningReportWidgetProps {
@@ -10,32 +8,6 @@ interface MorningReportWidgetProps {
 }
 
 export default function MorningReportWidget({ content }: MorningReportWidgetProps) {
-  const [activeAction, setActiveAction] = useState<"none" | "debts" | "confirmed">("none");
-  const feedbackRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (!feedbackRef.current || activeAction === "none") return;
-      const mm = gsap.matchMedia();
-      mm.add(
-        {
-          reduceMotion: "(prefers-reduced-motion: reduce)",
-          animate: "(prefers-reduced-motion: no-preference)",
-        },
-        (context) => {
-          const { reduceMotion } = context.conditions!;
-          gsap.fromTo(
-            feedbackRef.current,
-            { autoAlpha: 0, y: reduceMotion ? 0 : -6, scale: reduceMotion ? 1 : 0.98 },
-            { autoAlpha: 1, y: 0, scale: 1, duration: reduceMotion ? 0 : 0.24, ease: "power2.out" }
-          );
-        }
-      );
-      return () => mm.revert();
-    },
-    { dependencies: [activeAction] }
-  );
-
   const handleTrialClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const target = document.getElementById("tariflar");
     if (target) {
@@ -64,7 +36,7 @@ export default function MorningReportWidget({ content }: MorningReportWidgetProp
 
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
         
-        {/* Left Explanation & Proof Ladder context */}
+        {/* Report benefit and connection requirement */}
         <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6">
           <div className="flex items-center gap-2.5 font-['JetBrains_Mono'] font-semibold text-[13px] tracking-[0.08em] text-[#E8A317] uppercase">
             <span className="w-5 h-0.5 bg-[#E8A317]" aria-hidden="true" />
@@ -107,7 +79,7 @@ export default function MorningReportWidget({ content }: MorningReportWidgetProp
           </div>
         </div>
 
-        {/* Right Telegram Simulation Card */}
+        {/* Sample of the implemented daily Telegram report */}
         <div className="lg:col-span-6 w-full max-w-[560px] mx-auto">
           <div className="bg-[#0E1621] rounded-2xl p-4 sm:p-6 text-white shadow-2xl border border-[#232E3C] font-sans">
             
@@ -120,9 +92,6 @@ export default function MorningReportWidget({ content }: MorningReportWidgetProp
                 <div>
                   <div className="font-bold text-sm text-white flex items-center gap-1.5">
                     <span>{content.botTitle}</span>
-                    <svg className="w-4 h-4 text-[#5288C1]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
                   </div>
                   <div className="text-[11px] text-[#708499]">{content.botSub}</div>
                 </div>
@@ -142,97 +111,13 @@ export default function MorningReportWidget({ content }: MorningReportWidgetProp
               {/* 1. Cash flow */}
               <div>
                 <div className="text-xs text-[#829BB0] uppercase font-['JetBrains_Mono'] font-semibold">
-                  1. {content.revenueLabel}:
+                  {content.revenueLabel}:
                 </div>
                 <div className="font-['JetBrains_Mono'] text-white text-xs sm:text-sm mt-1 space-y-0.5">
                   <div>• {content.revenueCollectedLabel}: <span className="text-[#81C784] font-bold">{content.revenueCollected}</span></div>
-                  <div>• {content.revenueExpectedLabel}: <span className="text-[#FFD54F] font-bold">{content.revenueExpected}</span></div>
+                  <div>• {content.newStudentsLabel}: <span className="text-[#FFD54F] font-bold">{content.newStudents}</span></div>
                 </div>
               </div>
-
-              {/* 2. Urgent Debt Alert */}
-              <div className="p-3 rounded-lg bg-[#2E1E24] border border-[#522933]">
-                <div className="text-xs text-[#E57373] uppercase font-['JetBrains_Mono'] font-bold flex items-center gap-1.5">
-                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                  </svg>
-                  <span>2. {content.debtLabel}:</span>
-                </div>
-                
-                <div className="font-['JetBrains_Mono'] text-xs text-[#FFCDD2] mt-2 space-y-1">
-                  {content.debtStudents.map((st, idx) => (
-                    <div key={idx} className="flex justify-between items-baseline gap-2">
-                      <span>• {st.name} ({st.group}):</span>
-                      <span className="font-bold text-[#FF8A80]">{st.amount}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="text-[11px] text-[#E0A8AE] mt-2 italic font-['Barlow']">
-                  {content.debtNote}
-                </div>
-              </div>
-
-              {/* 3. Driving Schedule & Fuel */}
-              <div>
-                <div className="text-xs text-[#829BB0] uppercase font-['JetBrains_Mono'] font-semibold">
-                  3. {content.scheduleLabel}:
-                </div>
-                <div className="font-['JetBrains_Mono'] text-white text-xs mt-1 space-y-0.5">
-                  <div>• {content.scheduleSessionsLabel}: <span className="font-bold">{content.scheduleSessions}</span> ({content.scheduleInstructors})</div>
-                  <div>• {content.scheduleOpenSlotsLabel}: <span className="text-[#81C784] font-semibold">{content.scheduleOpenSlots}</span></div>
-                  <div>• {content.scheduleFuelLabel}: <span>{content.scheduleFuel}</span></div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-2 grid grid-cols-2 gap-2 text-xs font-medium">
-                <button
-                  type="button"
-                  onClick={() => setActiveAction(activeAction === "debts" ? "none" : "debts")}
-                  className={`py-2.5 px-3 rounded text-center transition-all min-h-[44px] flex items-center justify-center font-['Barlow'] ${
-                    activeAction === "debts"
-                      ? "bg-[#5288C1] text-white"
-                      : "bg-[#243447] hover:bg-[#2F445C] text-[#64B5F6]"
-                  }`}
-                >
-                  {content.btnDebts}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveAction(activeAction === "confirmed" ? "none" : "confirmed")}
-                  className={`py-2.5 px-3 rounded text-center transition-all min-h-[44px] flex items-center justify-center font-['Barlow'] ${
-                    activeAction === "confirmed"
-                      ? "bg-[#1F7A4A] text-white"
-                      : "bg-[#243447] hover:bg-[#2F445C] text-[#64B5F6]"
-                  }`}
-                >
-                  {content.btnConfirm}
-                </button>
-              </div>
-
-              {/* Dynamic Feedback Area */}
-              {activeAction !== "none" && (
-                <div ref={feedbackRef}>
-                  {activeAction === "debts" && (
-                    <div className="p-3 bg-[#13202E] border border-[#2B3E54] rounded-lg text-xs font-['JetBrains_Mono'] text-[#A8C7B7] space-y-1">
-                      <div className="font-semibold text-white">✓ {content.feedbackDebts}:</div>
-                      {content.debtStudents.map((st, idx) => (
-                        <div key={idx}>
-                          {st.name}: {st.time} {st.car} ({st.amount})
-                        </div>
-                      ))}
-                      <div className="text-[11px] text-[#708499] pt-1">{content.debtNote}</div>
-                    </div>
-                  )}
-
-                  {activeAction === "confirmed" && (
-                    <div className="p-3 bg-[#142C20] border border-[#25523A] rounded-lg text-xs font-['JetBrains_Mono'] text-[#81C784]">
-                      ✓ {content.revenueCollected}: {content.feedbackConfirm}.
-                    </div>
-                  )}
-                </div>
-              )}
 
             </div>
           </div>
