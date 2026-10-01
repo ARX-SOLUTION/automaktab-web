@@ -2,7 +2,7 @@
 
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import type { Locale } from "@/i18n/config";
-import { trackUmami } from "@/lib/umami";
+import { track } from "@/lib/analytics";
 
 const DEMO_URL = "https://app.automaktab.uz/login?demo=1";
 
@@ -20,7 +20,7 @@ export default function DemoLink({
       href={DEMO_URL}
       onClick={(event) => {
         props.onClick?.(event);
-        if (!event.defaultPrevented) trackUmami("demo_open", { locale });
+        if (!event.defaultPrevented) track("cta_demo_click", { locale, location: "supporting_page" });
       }}
     >
       {children}

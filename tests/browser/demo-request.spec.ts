@@ -72,6 +72,8 @@ test("consolidation flow automatically repeats, pauses for reading and respects 
   await expect(stage).toBeFocused();
   await expect(flow).toHaveAttribute("data-flow-state", "paused");
   await page.setViewportSize({ width: 1280, height: 900 });
+  // Responsive GSAP rebuilding restores the reading position over animation frames.
+  await expect(page.locator("#main-content")).not.toHaveAttribute("data-motion-changing", "true");
   await expect(flow).toHaveAttribute("data-flow-state", "paused");
   await expectReadable();
   await expect(flow.locator(".flow-lines-desktop")).toBeVisible();
@@ -133,7 +135,7 @@ test("mobile hero keeps actions before product proof and navigation accessible",
   expect((await page.locator('.site-header').boundingBox())!.height).toBeLessThan(140);
   await page.locator('.site-header-menu summary').click();
   await expect(page.locator('.site-header-menu nav')).toBeVisible();
-  await page.locator('.site-header-menu a[href="#savollar"]').click();
+  await page.locator('.site-header-menu a[href="/#savollar"]').click();
   await expect(page.locator('.site-header-menu')).not.toHaveAttribute("open");
   await expect(page.locator('#savollar')).toBeInViewport();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -547,7 +549,7 @@ test("shows required-field errors without sending a lead", async ({ page }) => {
 
 test("keeps trial details available after a failed submission", async ({ page }) => {
   await page.route("**/api/lead", (route) => route.fulfill({
-    status: 500, contentType: "application/json", body: '{"error":"test failure"}',
+    status: 200, contentType: "application/json", body: '{"error":"test failure"}',
   }));
   const form = await openForm(page);
   await form.getByLabel("Full name *", { exact: true }).fill("Demo Director");
@@ -558,6 +560,68 @@ test("keeps trial details available after a failed submission", async ({ page })
   await expect(form.getByRole("alert")).toHaveText(contentEn.pricing.form.networkError);
   await expect(form.getByLabel("Full name *", { exact: true })).toHaveValue("Demo Director");
   await expect(form.locator('button[type="submit"]')).toBeEnabled();
+});
+
+test("guards duplicate submit, preserves rejected details and counts only a confirmed retry", async ({ page }) => {
+  const form = await openForm(page);
+  await form.getByLabel("Full name *", { exact: true }).fill("Synthetic Director");
+  await form.getByLabel("Phone number *", { exact: true }).fill("+998 90 000 00 00");
+  await form.getByLabel("Driving school name *", { exact: true }).fill("Synthetic School");
+  await form.getByRole("checkbox").check();
+  await page.evaluate(() => {
+    const events: unknown[] = [];
+    (window as unknown as Window & { acceptedEvents: unknown[] }).acceptedEvents = events;
+    window.umami = { track: (name, data) => { events.push({ name, data }); } };
+  });
+  let attempts = 0;
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => { release = resolve; });
+  await page.route("**/api/lead", async (route) => {
+    attempts += 1;
+    if (attempts === 1) {
+      await held;
+      await route.fulfill({ status: 503, json: { ok: false, code: "delivery_unavailable" } });
+    } else {
+      await route.fulfill({ status: 200, json: { ok: true } });
+    }
+  });
+  await form.locator("form").evaluate((element) => {
+    element.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    element.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+  });
+  await expect(form.locator('button[type="submit"]')).toBeDisabled();
+  await expect.poll(() => attempts).toBe(1);
+  release();
+  await expect(form.getByRole("alert")).toHaveText(contentEn.pricing.form.networkError);
+  await expect(form.getByLabel("Full name *", { exact: true })).toHaveValue("Synthetic Director");
+  await expect(form.getByLabel("Phone number *", { exact: true })).toHaveValue("+998 90 000 00 00");
+  expect(await page.evaluate(() => (window as unknown as Window & { acceptedEvents: unknown[] }).acceptedEvents)).toEqual([]);
+  await form.locator('button[type="submit"]').click();
+  await expect(form.getByRole("status")).toContainText(contentEn.pricing.form.success.title);
+  expect(attempts).toBe(2);
+  expect(await page.evaluate(() => (window as unknown as Window & { acceptedEvents: unknown[] }).acceptedEvents)).toEqual([{ name: "intro_submit", data: { locale: "en" } }]);
+});
+
+test("a stalled lead request times out without clearing the form or recording success", async ({ page }) => {
+  test.setTimeout(25_000);
+  const form = await openForm(page);
+  await form.getByLabel("Full name *", { exact: true }).fill("Synthetic Director");
+  await form.getByLabel("Phone number *", { exact: true }).fill("+998 90 000 00 00");
+  await form.getByLabel("Driving school name *", { exact: true }).fill("Synthetic School");
+  await form.getByRole("checkbox").check();
+  await page.evaluate(() => {
+    const events: unknown[] = [];
+    (window as unknown as Window & { acceptedEvents: unknown[] }).acceptedEvents = events;
+    window.umami = { track: (name, data) => { events.push({ name, data }); } };
+  });
+  await page.route("**/api/lead", () => { /* Deliberately leave the synthetic transport unresolved. */ });
+  await form.locator('button[type="submit"]').click();
+  await expect(form.getByRole("alert")).toHaveText(contentEn.pricing.form.networkError, { timeout: 15_000 });
+  await expect(form.getByLabel("Full name *", { exact: true })).toHaveValue("Synthetic Director");
+  await expect(form.getByLabel("Phone number *", { exact: true })).toHaveValue("+998 90 000 00 00");
+  await expect(form.locator('button[type="submit"]')).toBeEnabled();
+  await expect(form.getByRole("status")).toHaveCount(0);
+  expect(await page.evaluate(() => (window as unknown as Window & { acceptedEvents: unknown[] }).acceptedEvents)).toEqual([]);
 });
 
 test("opens the self-service demo from the tracked primary link", async ({ page }) => {
@@ -571,7 +635,7 @@ test("opens the self-service demo from the tracked primary link", async ({ page 
     window.addEventListener("automaktab_analytics", (event) => resolve((event as CustomEvent).detail), { once: true });
   }));
   await demo.click();
-  expect(await analytics).toMatchObject({ event: "cta_demo_click", params: { location: "hero_lane" } });
+  expect(await analytics).toMatchObject({ event: "cta_demo_click", params: { locale: "en" } });
   await expect(page).toHaveURL("https://app.automaktab.uz/login?demo=1&utm_source=site&utm_content=hero_lane");
   expect(requests).toHaveLength(0);
 });

@@ -10,6 +10,8 @@ import { GlassPanel } from "@/components/ui/GlassPanel";
 import DemoLink from "@/components/landing/DemoLink";
 import { BLOG_COPY } from "@/config/blog";
 import {
+  availableBlogLocales,
+  blogAlternates,
   estimateReadingMinutes,
   getBlogPost,
   getBlogPosts,
@@ -17,7 +19,6 @@ import {
   localizeBlogPost,
 } from "@/lib/blog";
 import { isLocale, type Locale } from "@/i18n/config";
-import { buildLocaleAlternates } from "@/lib/locale-metadata";
 
 export const revalidate = 3600;
 
@@ -41,21 +42,21 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
 
   const post = await getBlogPost(slug);
-  if (!post) notFound();
+  if (!post || !availableBlogLocales(post).includes(locale)) notFound();
 
   const localized = localizeBlogPost(post, locale);
-  const path = `/blog/${post.slug}`;
+
 
   const sharedMetadata = buildHomeMetadata(locale);
 
   return {
     title: localized.title,
     description: localized.excerpt,
-    alternates: buildLocaleAlternates(path, locale),
+    alternates: blogAlternates(post, locale),
     openGraph: {
       ...sharedMetadata.openGraph,
       type: "article",
-      url: buildLocaleAlternates(path, locale)?.canonical as string,
+      url: blogAlternates(post, locale)?.canonical as string,
       title: localized.title,
       description: localized.excerpt,
       publishedTime: post.published_at ?? undefined,
@@ -89,7 +90,7 @@ export default async function BlogArticle({
   if (!isLocale(locale)) notFound();
 
   const post = await getBlogPost(slug);
-  if (!post) notFound();
+  if (!post || !availableBlogLocales(post).includes(locale)) notFound();
 
   const copy = BLOG_COPY[locale];
   const localized = localizeBlogPost(post, locale);
@@ -97,7 +98,7 @@ export default async function BlogArticle({
   if (!body) notFound();
 
   const readingMinutes = estimateReadingMinutes(body);
-  const articleUrl = buildLocaleAlternates(`/blog/${post.slug}`, locale)
+  const articleUrl = blogAlternates(post, locale)
     ?.canonical as string;
   const structuredData = {
     "@context": "https://schema.org",
@@ -138,7 +139,7 @@ export default async function BlogArticle({
           __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
         }}
       />
-      <SiteHeader locale={locale} />
+      <SiteHeader locale={locale} availableLocales={availableBlogLocales(post)} />
       <main id="main-content" className="article-page section-shell">
         <Link href={BLOG_PATH[locale]} className="article-back">
           <ArrowLeft />
@@ -211,7 +212,7 @@ export default async function BlogArticle({
           </DemoLink>
         </GlassPanel>
       </main>
-      <SiteFooter locale={locale} />
+      <SiteFooter locale={locale} availableLocales={availableBlogLocales(post)} />
     </>
   );
 }

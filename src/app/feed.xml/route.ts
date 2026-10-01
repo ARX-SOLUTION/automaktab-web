@@ -1,4 +1,4 @@
-import { getBlogPosts, localizeBlogPost } from "@/lib/blog";
+import { getBlogPosts, localizeBlogPost, availableBlogLocales } from "@/lib/blog";
 
 const SITE_URL = "https://automaktab.uz";
 
@@ -16,7 +16,7 @@ function escapeXml(value: string): string {
 export async function GET() {
   const posts = await getBlogPosts();
   const items = posts
-    .filter((post) => post.status === "published")
+    .filter((post) => availableBlogLocales(post).includes("uz"))
     .map((post) => {
       const localized = localizeBlogPost(post, "uz");
       const articleUrl = `${SITE_URL}/blog/${encodeURIComponent(post.slug)}`;

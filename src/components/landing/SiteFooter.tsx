@@ -1,5 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { switchLocalePath, preserveLocaleSuffix } from "@/lib/locale-metadata";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
@@ -10,12 +14,16 @@ import { SEO_RELATED_PAGE_IDS, SEO_LEGAL_PAGE_IDS, SEO_PAGES, getSeoPagePath } f
 export interface SiteFooterProps {
   content?: LandingContent["footer"];
   locale?: Locale | string;
+  availableLocales?: readonly Locale[];
 }
 
 export default function SiteFooter({
   locale = "uz",
+  availableLocales,
   content = locale === "ru" ? contentRu.footer : locale === "en" ? contentEn.footer : contentUz.footer,
 }: SiteFooterProps) {
+  const pathname = usePathname() || (locale === "uz" ? "/" : `/${locale}`);
+  const home = locale === "uz" ? "/" : `/${locale}`;
   const pageLocale = isLocale(locale) ? locale : "uz";
 
   return (
@@ -38,8 +46,9 @@ export default function SiteFooter({
         <div className="footer-navigation">
           <nav aria-label={content.tagline} className="footer-links">
             <h3>automaktab.uz</h3>
+            <Link href={`${home === "/" ? "" : home}/blog`}>{pageLocale === "ru" ? "Блог" : "Blog"}</Link>
             {content.links.map((link) => (
-              <a key={link.label} href={link.href}>{link.label}</a>
+              <a key={link.label} href={link.href.startsWith("#") ? `${home}${link.href}` : link.href}>{link.label}</a>
             ))}
           </nav>
           <nav aria-label={pageLocale === "ru" ? "Возможности" : pageLocale === "en" ? "Features" : "Imkoniyatlar"} className="footer-links">
@@ -58,8 +67,10 @@ export default function SiteFooter({
 
         {/* Languages */}
         <div className="flex items-center gap-1.5 font-mono text-[13px] font-semibold">
-          <Link
-            href="/"
+          <a
+            onClick={preserveLocaleSuffix}
+            onAuxClick={preserveLocaleSuffix}
+            href={switchLocalePath(pathname, "uz", availableLocales)}
             aria-label="O‘zbekcha"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "uz"
@@ -68,9 +79,11 @@ export default function SiteFooter({
             }`}
           >
             UZ
-          </Link>
-          <Link
-            href="/ru"
+          </a>
+          <a
+            onClick={preserveLocaleSuffix}
+            onAuxClick={preserveLocaleSuffix}
+            href={switchLocalePath(pathname, "ru", availableLocales)}
             aria-label="Русский"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "ru"
@@ -79,9 +92,11 @@ export default function SiteFooter({
             }`}
           >
             RU
-          </Link>
-          <Link
-            href="/en"
+          </a>
+          <a
+            onClick={preserveLocaleSuffix}
+            onAuxClick={preserveLocaleSuffix}
+            href={switchLocalePath(pathname, "en", availableLocales)}
             aria-label="English"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "en"
@@ -90,7 +105,7 @@ export default function SiteFooter({
             }`}
           >
             EN
-          </Link>
+          </a>
         </div>
       </div>
 

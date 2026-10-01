@@ -58,8 +58,7 @@ async function sendTelegramNotification(payload: {
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
   if (!token || !chatId) {
-    console.log("[Lead Form] Telegram credentials not set. Console log:", payload);
-    return;
+    return "delivery_unavailable" as const;
   }
 
   const message = [
@@ -76,17 +75,20 @@ async function sendTelegramNotification(payload: {
   ].join("\n");
 
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      signal: AbortSignal.timeout(8000),
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: chatId,
         text: message,
-        parse_mode: "Markdown",
       }),
     });
-  } catch (err) {
-    console.error("[Lead Form] Telegram sending error:", err);
+    if (!response.ok) return "delivery_rejected" as const;
+    const receipt = await response.json();
+    return receipt?.ok === true && Number.isInteger(receipt.result?.message_id) ? null : "delivery_unknown" as const;
+  } catch {
+    return "delivery_unknown" as const;
   }
 }
 
@@ -124,12 +126,15 @@ export async function POST(req: NextRequest) {
       submitted_at: data.submitted_at || new Date().toISOString(),
     };
 
-    // Forward to configured delivery adapters (Telegram / CRM / Console)
-    await sendTelegramNotification(leadData);
+    const failure = await sendTelegramNotification(leadData);
+    if (failure) {
+      console.warn("[Lead Form]", failure);
+      return NextResponse.json({ ok: false, code: failure }, { status: failure === "delivery_unavailable" ? 503 : 502 });
+    }
 
     return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("[Lead Form Error]", err);
+  } catch {
+    console.error("[Lead Form]", "request_failed");
     return NextResponse.json(
       { error: "Serverda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring." },
       { status: 500 }

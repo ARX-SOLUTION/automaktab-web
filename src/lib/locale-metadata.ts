@@ -6,7 +6,7 @@ const SITE_URL = "https://automaktab.uz";
 // uz is unprefixed ("/", "/foo"); ru/en get a "/ru" or "/en" prefix, with no
 // trailing slash on their bare homepage ("/ru", not "/ru/") -- matches
 // CONTEXT.md's localization section exactly.
-function localePath(path: string, locale: Locale): string {
+export function localePath(path: string, locale: Locale): string {
   if (locale === DEFAULT_LOCALE) return path;
   return path === "/" ? `/${locale}` : `/${locale}${path}`;
 }
@@ -64,4 +64,17 @@ export function buildLocalizedAlternates(
 // /opengraph-image for uz (and /ru|/en/... for the others).
 export function buildOpenGraphImageUrl(locale: Locale): string {
   return localeUrl("/opengraph-image", locale);
+}
+
+export function switchLocalePath(pathname: string, locale: Locale, availableLocales?: readonly Locale[]): string {
+  const path = pathname.replace(/^\/(uz|ru|en)(?=\/|$)/, "") || "/";
+  // An unavailable article translation returns to that language's blog index.
+  return localePath(availableLocales && !availableLocales.includes(locale) ? "/blog" : path, locale);
+}
+
+export function preserveLocaleSuffix(event: { currentTarget: HTMLAnchorElement }) {
+  const target = new URL(event.currentTarget.href);
+  target.search = window.location.search;
+  target.hash = window.location.hash;
+  event.currentTarget.href = target.href;
 }

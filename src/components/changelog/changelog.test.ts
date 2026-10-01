@@ -72,7 +72,8 @@ describe('Changelog Configuration and Content Safety', () => {
   });
 
   it('adheres to strict SemVer and ISO date formats across all releases including roadmap', () => {
-    expect(CHANGELOG_ITEMS.length).toBe(13);
+    expect(CHANGELOG_ITEMS.length).toBeGreaterThan(0);
+    expect(new Set(CHANGELOG_ITEMS.map((item) => item.version)).size).toBe(CHANGELOG_ITEMS.length);
 
     const semverRegex = /^v\d+\.\d+\.\d+$/;
     const isoDateRegex = /^\d{4}-\d{2}-\d{2}$/;

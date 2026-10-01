@@ -1,3 +1,5 @@
+import { trackUmami } from "./umami";
+
 /**
  * Unified analytics tracker for automaktab.uz marketing page.
  * Implements events defined in design.md §12.
@@ -17,32 +19,11 @@ export type AnalyticsEvent =
 
 export function track(event: AnalyticsEvent, params?: Record<string, unknown>): void {
   if (typeof window === "undefined") return;
-
-  try {
-    // Umami support
-    const win = window as unknown as {
-      umami?: { track: (e: string, p?: Record<string, unknown>) => void };
-      gtag?: (...args: unknown[]) => void;
-      ym?: (...args: unknown[]) => void;
-    };
-
-    if (typeof win.umami?.track === "function") {
-      win.umami.track(event, params);
-    }
-
-    if (typeof win.gtag === "function") {
-      win.gtag("event", event, params);
-    }
-
-    // Standard DOM CustomEvent for integrations or testing
-    window.dispatchEvent(
-      new CustomEvent("automaktab_analytics", {
-        detail: { event, params, timestamp: Date.now() },
-      })
-    );
-  } catch (err) {
-    console.debug("[Analytics Error]", event, params, err);
-  }
+  const locale = params?.locale ?? document.documentElement.lang;
+  const safe = locale === "uz" || locale === "ru" || locale === "en" ? { locale } : undefined;
+  const canonical = event === "cta_demo_click" ? "demo_open" : event === "form_submit_success" ? "intro_submit" : null;
+  if (canonical) trackUmami(canonical, safe);
+  window.dispatchEvent(new CustomEvent("automaktab_analytics", { detail: { event, params: safe, timestamp: Date.now() } }));
 }
 
 /**
