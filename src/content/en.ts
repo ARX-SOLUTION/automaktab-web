@@ -18,6 +18,7 @@ export const contentEn: LandingContent = {
     },
     login: "Log in",
     demo: "Open demo",
+    demoShort: "Demo",
   },
   hero: {
     eyebrow: "For driving school owners",

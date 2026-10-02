@@ -15,6 +15,8 @@ export interface LandingContent {
     };
     login: string;
     demo: string;
+    /** Visible label for the header CTA on very narrow screens; the full label stays its accessible name. */
+    demoShort: string;
   };
   hero: {
     eyebrow: string;
@@ -362,6 +364,7 @@ export const contentUz: LandingContent = {
     },
     login: "Kirish",
     demo: "Demoni ochish",
+    demoShort: "Demo",
   },
   hero: {
     eyebrow: "Avtomaktab rahbarlari uchun",

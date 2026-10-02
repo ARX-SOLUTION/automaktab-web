@@ -18,6 +18,7 @@ export const contentRu: LandingContent = {
     },
     login: "Войти",
     demo: "Открыть демо",
+    demoShort: "Демо",
   },
   hero: {
     eyebrow: "Для руководителей автошкол",

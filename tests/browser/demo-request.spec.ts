@@ -449,12 +449,13 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     expect(scrolled.mainTop).toBe(top.mainTop);
     const controls = header.locator(".site-header-controls");
     if (viewport.width < 1280) {
-      await expect(controls).toHaveCSS("visibility", "hidden");
+      await expect(controls).toHaveCSS("opacity", "0");
+      await expect(controls).toHaveCSS("pointer-events", "none");
       // Keyboard focus restores the full header so every control stays reachable.
       await page.keyboard.press("Tab");
       await page.keyboard.press("Tab");
       await expect(header.locator(":focus-visible")).toHaveCount(1);
-      await expect(controls).toHaveCSS("visibility", "visible");
+      await expect(controls).toHaveCSS("opacity", "1");
     } else {
       await expect(controls).toBeVisible();
     }
