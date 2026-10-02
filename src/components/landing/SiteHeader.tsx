@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { switchLocalePath, preserveLocaleSuffix } from "@/lib/locale-metadata";
 import type { LandingContent } from "@/content/uz";
@@ -25,6 +26,7 @@ export default function SiteHeader({
   const pathname = usePathname() || (locale === "uz" ? "/" : `/${locale}`);
   const home = locale === "uz" ? "/" : `/${locale}`;
   const demoUrl = buildDemoUrl("header");
+  const menuDemoUrl = buildDemoUrl("header_menu");
   const navLinks = [
     { href: `${home}#yol`, label: content.nav.capabilities },
     { href: `${home}#rollar`, label: content.nav.roles },
@@ -80,24 +82,6 @@ export default function SiteHeader({
           </span>
         </a>
 
-        <details
-          className="site-header-menu"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              event.currentTarget.open = false;
-              event.currentTarget.querySelector("summary")?.focus();
-            }
-          }}
-          onClick={(event) => {
-            if ((event.target as HTMLElement).closest("a")) event.currentTarget.open = false;
-          }}
-        >
-          <summary>{locale === "ru" ? "Меню" : locale === "en" ? "Menu" : "Menyu"}</summary>
-          <nav aria-label={locale === "ru" ? "Навигация" : locale === "en" ? "Navigation" : "Navigatsiya"}>
-            {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
-          </nav>
-        </details>
-
         {/* Navigation links */}
         <nav
           className="site-header-nav min-w-0"
@@ -114,20 +98,20 @@ export default function SiteHeader({
           ))}
         </nav>
 
-        <a
-          href="https://app.automaktab.uz/login"
-          className="site-header-login min-h-11 px-3 flex items-center text-ink hover:bg-sand-100 no-underline font-body font-semibold text-sm rounded-[var(--r-s)] transition-colors"
-        >
-          {content.login}
-        </a>
-
+        {/* Login and language stay together; on narrow screens they form the second row that hides once scrolled. */}
         <div className="site-header-controls min-w-0">
+          <a
+            href="https://app.automaktab.uz/login"
+            className="site-header-login min-h-11 px-3 flex items-center text-ink hover:bg-sand-100 no-underline font-body font-semibold text-sm rounded-[var(--r-s)] transition-colors"
+          >
+            {content.login}
+          </a>
           {/* Language Switcher */}
           <div className="flex shrink-0 items-center border-2 border-sand-300 rounded-[var(--r-s)] p-0.5 font-body text-xs font-bold">
             {languages.map((language) => (
               <a
                 onClick={preserveLocaleSuffix}
-            onAuxClick={preserveLocaleSuffix}
+                onAuxClick={preserveLocaleSuffix}
                 key={language.code}
                 href={language.href}
                 aria-label={language.label}
@@ -142,14 +126,47 @@ export default function SiteHeader({
               </a>
             ))}
           </div>
-
-          <a
-            href={demoUrl}
-            className="action-primary site-header-demo min-w-0 min-h-11 px-4 py-2 flex items-center justify-center text-center bg-amber-500 hover:bg-amber-400 text-forest-800 no-underline font-body font-bold text-sm rounded-[var(--r-s)] transition-colors [overflow-wrap:anywhere]"
-          >
-            {content.demo}
-          </a>
         </div>
+
+        <a
+          href={demoUrl}
+          aria-label={content.demo}
+          className="action-primary site-header-demo min-w-0 min-h-11 px-4 py-2 flex items-center justify-center text-center bg-amber-500 hover:bg-amber-400 text-forest-800 no-underline font-body font-bold text-sm rounded-[var(--r-s)] transition-colors [overflow-wrap:anywhere]"
+        >
+          <span className="site-header-demo-full">{content.demo}</span>
+          <span className="site-header-demo-short" aria-hidden="true">{content.demoShort}</span>
+        </a>
+
+        <details
+          className="site-header-menu"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.currentTarget.open = false;
+              event.currentTarget.querySelector("summary")?.focus();
+            }
+          }}
+          onClick={(event) => {
+            if ((event.target as HTMLElement).closest("a")) event.currentTarget.open = false;
+          }}
+        >
+          <summary>
+            <Menu className="site-header-menu-open" size={22} aria-hidden="true" />
+            <X className="site-header-menu-close" size={22} aria-hidden="true" />
+            <span className="sr-only">{locale === "ru" ? "Меню" : locale === "en" ? "Menu" : "Menyu"}</span>
+          </summary>
+          <nav aria-label={locale === "ru" ? "Навигация" : locale === "en" ? "Navigation" : "Navigatsiya"}>
+            {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+            <div className="site-header-menu-actions">
+              <a href="https://app.automaktab.uz/login">{content.login}</a>
+              <a href={menuDemoUrl} className="action-primary">{content.demo}</a>
+            </div>
+            <div className="site-header-menu-languages" aria-label={locale === "ru" ? "Язык" : locale === "en" ? "Language" : "Til"} role="group">
+              {languages.map((language) => (
+                <a key={language.code} href={language.href} onClick={preserveLocaleSuffix} onAuxClick={preserveLocaleSuffix} aria-label={language.label} aria-current={locale === language.code ? "page" : undefined}>{language.code.toUpperCase()}</a>
+              ))}
+            </div>
+          </nav>
+        </details>
       </div>
     </header>
   );

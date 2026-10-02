@@ -530,44 +530,53 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 .site-header.is-scrolled { pointer-events: none; }
 .site-header.is-scrolled .site-header-inner > * { pointer-events: auto; }
 .site-header.is-scrolled:not(:has(:focus-visible))::before { transform: translateY(calc(-1 * var(--site-header-compact, 0px))); }
-.site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 0; transform: translateY(-12px); visibility: hidden; transition-delay: 0s, 0s, var(--dur-base); }
+/* Compact row keeps brand, demo CTA and menu. The login/language row fades out but stays in the tab order,
+   so Tab and Shift+Tab both reach it and focusing it brings the full header back. */
+.site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 0; transform: translateY(-12px); pointer-events: none; }
 
-.site-header-menu { grid-column: 2; grid-row: 1; }
+.site-header-menu { grid-column: 3; grid-row: 1; }
 .site-header-menu summary {
   cursor: pointer;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-s);
   color: var(--c-ink);
-  font-size: 14px;
-  font-weight: 600;
   list-style: none;
 }
 .site-header-menu summary::-webkit-details-marker { display: none; }
-.site-header-menu summary::after { content: "+"; font-size: 22px; }
-.site-header-menu[open] summary::after { content: "−"; }
+.site-header-menu-close, .site-header-menu[open] .site-header-menu-open { display: none; }
+.site-header-menu[open] .site-header-menu-close { display: block; }
 .site-header-menu nav {
   position: absolute;
   top: 58px;
   right: var(--gutter);
   left: var(--gutter);
   display: grid;
+  max-height: calc(100svh - 72px);
+  overflow-y: auto;
   background: var(--c-paper);
   border: 2px solid var(--c-sand-300);
   border-radius: var(--r-m);
   padding: 12px;
   box-shadow: 0 16px 32px rgba(3,20,13,.2);
 }
-.site-header-menu nav a { color: var(--c-ink); padding: 12px; text-decoration: none; }
+.site-header-menu nav a { display: flex; align-items: center; min-height: 44px; color: var(--c-ink); padding: 0 12px; border-radius: var(--r-xs); text-decoration: none; }
 .site-header-menu nav a:hover { background: var(--c-sand-100); }
+.site-header-menu-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--c-sand-300); }
+.site-header-menu nav .site-header-menu-actions a { justify-content: center; border: 2px solid var(--c-sand-300); border-radius: var(--r-s); font-weight: 700; }
+.site-header-menu nav .site-header-menu-actions a.action-primary { border-color: var(--c-amber-500); background: var(--c-amber-500); color: var(--c-forest-800); }
+.site-header-menu-languages { display: flex; gap: 4px; margin-top: 8px; }
+.site-header-menu nav .site-header-menu-languages a { justify-content: center; min-width: 44px; padding: 0; color: var(--c-muted); font-size: 13px; font-weight: 700; }
+.site-header-menu nav .site-header-menu-languages a[aria-current="page"] { background: var(--c-sand-100); color: var(--c-ink); }
 
 
 .site-header-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 8px 12px;
+  gap: 8px;
   padding-block: 10px;
 }
 
@@ -576,7 +585,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   grid-row: 1;
 }
 
-.site-header-login { display: none; }
+.site-header-brand > span { font-size: 22px; }
 
 .site-header-controls {
   grid-column: 1 / -1;
@@ -589,7 +598,17 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 }
 
 .site-header-demo {
-  flex: 1 1 9rem;
+  grid-column: 2;
+  grid-row: 1;
+  padding-inline: 12px;
+  white-space: nowrap;
+}
+.site-header-demo-short { display: none; }
+
+/* Below 375px the full label does not fit next to the brand and menu; the short one keeps the CTA on screen. */
+@media (max-width: 374.98px) {
+  .site-header-demo-full { display: none; }
+  .site-header-demo-short { display: inline; }
 }
 
 .site-header-nav { display: none; }
@@ -625,7 +644,10 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 
   .site-header-inner {
     grid-template-columns: auto minmax(0, 1fr) auto auto;
+    gap: 8px 12px;
   }
+
+  .site-header-brand > span { font-size: 25px; }
 
   .site-header-menu { display: none; }
 
@@ -640,25 +662,20 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
     grid-row: 1;
   }
 
-  .site-header-login {
-    display: flex;
-    grid-column: 3;
-    grid-row: 1;
-  }
-
   .site-header-controls {
-    grid-column: 4;
+    grid-column: 3;
     grid-row: 1;
     flex-wrap: nowrap;
   }
 
   .site-header-demo {
-    flex: none;
+    grid-column: 4;
+    padding-inline: 16px;
   }
 
   .site-header.is-scrolled:not(:has(:focus-visible))::before { transform: translateY(-12px); }
   .site-header.is-scrolled:not(:has(:focus-visible)) .site-header-inner { transform: translateY(-6px); }
-  .site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 1; transform: none; visibility: visible; }
+  .site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 1; transform: none; pointer-events: auto; }
 }
 
 .site-footer { padding-block: clamp(40px, 6vw, 72px) 32px; background: var(--c-forest-900); color: var(--c-on-dark-3); overflow: clip; }
