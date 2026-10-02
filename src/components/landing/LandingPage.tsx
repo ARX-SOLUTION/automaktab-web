@@ -10,6 +10,8 @@ import PageMotion from "./PageMotion";
 import HeroSign from "./HeroSign";
 import LaneCTA from "./LaneCTA";
 import ProofFrame from "./ProofFrame";
+import DebtStory from "./DebtStory";
+import { debtStory } from "@/content/stories/debt";
 import MorningReportWidget from "./MorningReportWidget";
 import ProblemChips from "./ProblemChips";
 import RoadStepper from "./RoadStepper";
@@ -84,6 +86,9 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
             <div className="mt-8"><HeroSign content={content.hero} /></div>
           </div>
         </section>
+
+        {/* 03a Debt story (Kim qancha qarz?) */}
+        <DebtStory content={debtStory[locale] ?? debtStory.uz} />
 
         {/* 03b Morning Telegram Report (08:00 Nazorat Hisoboti) */}
         <MorningReportWidget content={content.morningReport} />
