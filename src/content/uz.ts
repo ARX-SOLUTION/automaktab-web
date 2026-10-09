@@ -359,7 +359,7 @@ export const contentUz: LandingContent = {
       capabilities: "Imkoniyatlar",
       roles: "Kimlar uchun",
       howItWorks: "Qanday ishlaydi",
-      pricing: "Tariflar",
+      pricing: "Narx va sinov",
       faq: "Savollar",
     },
     login: "Kirish",
@@ -368,10 +368,10 @@ export const contentUz: LandingContent = {
   },
   hero: {
     eyebrow: "Avtomaktab rahbarlari uchun",
-    title: "To‘lov, dars va davomat. ",
-    titleAccent: "Barchasi bir joyda.",
+    title: "Avtomaktabingiz holati. ",
+    titleAccent: "Bir qarashda.",
     description:
-      "Talabalar, to‘lovlar, dars jadvali va davomatni bitta tizimda yuriting. Filiallaringiz holatini ham shu yerda ko‘ring.",
+      "Tushum, qarzdorlik va filiallar holatini bir joyda ko‘ring. Talabalar, to‘lovlar va darslarni jamoangiz bilan bir tizimda yuriting.",
     lane1: {
       button: "Demoni ochish",
       helperLogin: "Namuna maktabni demo email va parol bilan oching.",

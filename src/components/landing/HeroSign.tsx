@@ -18,8 +18,11 @@ export default function HeroSign({ content }: HeroSignProps) {
       new CustomEvent("automaktab_goto_stop", { detail: { stop: stopIndex } })
     );
 
-    const yolEl = document.getElementById("yol");
+    const yolEl = document.querySelector<HTMLElement>(`#yol [data-journey-chapter="${stopIndex}"]`)
+      ?? document.getElementById("yol");
     if (yolEl) {
+      if (yolEl instanceof HTMLDetailsElement) yolEl.open = true;
+      yolEl.querySelector<HTMLElement>("summary")?.focus({ preventScroll: true });
       const header = document.querySelector(".site-header");
       const clearance = header && getComputedStyle(header).position === "sticky"
         ? header.getBoundingClientRect().height + 16

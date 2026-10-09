@@ -5,11 +5,12 @@ import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { getLandingConfig } from "@/config/landing-config";
+import { financePreviewContent } from "@/content/finance-preview";
 import SiteHeader from "./SiteHeader";
 import PageMotion from "./PageMotion";
 import HeroSign from "./HeroSign";
 import LaneCTA from "./LaneCTA";
-import ProofFrame from "./ProofFrame";
+import FinancePreview from "./FinancePreview";
 import DebtStory from "./DebtStory";
 import { debtStory } from "@/content/stories/debt";
 import MorningReportWidget from "./MorningReportWidget";
@@ -39,6 +40,7 @@ const contentByLocale: Record<Locale, LandingContent> = {
 export default function LandingPage({ locale = "uz" }: LandingPageProps) {
   const content = contentByLocale[locale] || contentUz;
   const config = getLandingConfig();
+  const preview = financePreviewContent[locale];
 
   return (
     <div className="landing-site min-h-screen bg-paper text-ink flex flex-col font-body selection:bg-amber-500 selection:text-ink">
@@ -58,7 +60,7 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
                 <h1
                   id="hero-heading"
                   data-hero-item
-                  className="m-0 font-display font-black text-[clamp(36px,3.8vw,54px)] leading-[1.08] tracking-[-0.03em] [text-wrap:balance]"
+                  className="landing-hero-title m-0 font-display font-black leading-[1.08] tracking-[-0.03em] [text-wrap:balance]"
                 >
                   {content.hero.title}
                   <span className="hero-accent">{content.hero.titleAccent}</span>
@@ -69,21 +71,27 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
                 </p>
               </div>
 
-              <ProblemChips content={content.problem} />
-
               <div data-hero-item className="landing-hero-actions min-w-0">
                 <LaneCTA content={content.hero} demoAccess={config.demoAccess} />
               </div>
+
+              <FinancePreview content={preview} locale={locale} />
             </div>
 
           </div>
         </section>
 
-        <section className="product-proof bg-sand-100" aria-labelledby="proof-heading">
+        <section className="product-proof workflow-overview bg-sand-100" aria-labelledby="proof-heading">
           <div className="landing-container">
-            <h2 id="proof-heading" className="font-display font-black text-ink m-0 mb-8">{content.proof.title}</h2>
-            <ProofFrame content={content.proof} scenes={content.scenes} />
-            <div className="mt-8"><HeroSign content={content.hero} /></div>
+            <div className="workflow-overview-grid">
+              <div className="workflow-overview-copy">
+                <h2 id="proof-heading" className="font-display font-black text-ink m-0">{preview.workflowTitle}</h2>
+                <p>{preview.workflowDescription}</p>
+                <HeroSign content={content.hero} />
+              </div>
+              <div className="workflow-overview-diagram"><ProblemChips content={content.problem} /></div>
+            </div>
+            <p className="workflow-sample-note">{content.proof.caption}</p>
           </div>
         </section>
 

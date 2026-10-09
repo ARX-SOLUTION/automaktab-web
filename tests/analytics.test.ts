@@ -19,3 +19,12 @@ it("isolates provider errors from user actions", () => {
   vi.stubGlobal("CustomEvent", class {});
   expect(() => track("cta_demo_click")).not.toThrow();
 });
+
+it("records playground interaction with locale only", () => {
+  const provider = vi.fn();
+  vi.stubGlobal("window", { umami: { track: provider }, dispatchEvent: vi.fn() });
+  vi.stubGlobal("document", { documentElement: { lang: "uz" } });
+  vi.stubGlobal("CustomEvent", class {});
+  track("finance_preview_interact", { student: "Example name", amount: 600000 });
+  expect(provider).toHaveBeenCalledExactlyOnceWith("preview_interact", { locale: "uz" });
+});

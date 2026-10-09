@@ -1,5 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { spawn, type ChildProcess } from "node:child_process";
+import { once } from "node:events";
+import { createServer, type Server } from "node:http";
 import path from "node:path";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n/config";
 import { buildLocaleAlternates } from "@/lib/locale-metadata";
@@ -11,95 +13,139 @@ const PORT = 3847;
 const BASE_URL = `http://localhost:${PORT}`;
 
 let server: ChildProcess;
+let crmStub: Server | undefined;
 
 // Assumes `next build` already ran (true for the mandated verify chain:
 // typecheck && lint && build && test) — this test serves that build, it
 // doesn't create one.
 beforeAll(async () => {
-  server = spawn(
-    path.join(process.cwd(), "node_modules/.bin/next"),
-    ["start", "-p", String(PORT)],
-    // detached => server.pid is the leader of its own process group, so
-    // cleanup can signal next start plus any children it spawns, not just
-    // the one pid.
-    { stdio: "pipe", detached: true },
-  );
-
-  const pid = server.pid;
-  if (!pid) {
-    throw new Error("failed to spawn next start: no pid");
-  }
-
-  // Reaps the server if this process disappears without running afterAll
-  // (SIGKILL, a cancelled CI job, an OOM kill). No in-process handler can
-  // run after a SIGKILL of *this* process, so only a separate watching
-  // process can still clean up. It's detached too, so a signal aimed at
-  // our pid/group doesn't take the watchdog out before it can act.
-  const watchdog = spawn(
-    "sh",
-    [
-      "-c",
-      `while kill -0 ${process.pid} 2>/dev/null; do sleep 1; done; ` +
-        `kill -TERM -${pid} 2>/dev/null; sleep 5; kill -KILL -${pid} 2>/dev/null`,
-    ],
-    { detached: true, stdio: "ignore" },
-  );
-  watchdog.unref();
-
-  let stdout = "";
-  let stderr = "";
-  server.stdout?.on("data", (chunk: Buffer) => {
-    stdout += chunk.toString();
-  });
-  server.stderr?.on("data", (chunk: Buffer) => {
-    stderr += chunk.toString();
-  });
-
-  // Identity check: wait for the child's own readiness line on the pipe we
-  // exclusively own. A process already squatting on PORT can't write to
-  // it, so this can only pass against the server we actually spawned.
-  const deadline = Date.now() + 30_000;
-  while (!stdout.includes("Ready in")) {
-    if (server.exitCode !== null || server.signalCode !== null) {
-      throw new Error(
-        `next start exited early (code ${server.exitCode}, signal ${server.signalCode}) before becoming ready:\n${stderr}`,
-      );
+  try {
+    // Routing checks need a predictable missing article, not the live CRM's
+    // availability or response time. Own an ephemeral loopback port.
+    crmStub = createServer((request, response) => {
+      response.setHeader("Content-Type", "application/json");
+      if (request.method === "GET" && request.url?.split("?")[0] === "/blog-posts") {
+        response.end(JSON.stringify({
+          success: true,
+          data: { items: [], total: 0, page: 1, limit: 100 },
+        }));
+        return;
+      }
+      response.statusCode = 404;
+      response.end(JSON.stringify({ success: false, error: { message: "Not found" } }));
+    });
+    crmStub.listen(0, "127.0.0.1");
+    await once(crmStub, "listening");
+    const address = crmStub.address();
+    if (!address || typeof address === "string") {
+      throw new Error("CRM test stub did not bind a TCP port");
     }
-    if (Date.now() >= deadline) {
-      throw new Error(`server did not signal readiness within 30s:\n${stderr}`);
-    }
-    await new Promise((resolve) => setTimeout(resolve, 50));
-  }
 
-  // Bounded sanity check that it actually accepts connections, now that we
-  // know it's our own process reporting ready. Timed so a peer that opens
-  // the connection but never responds can't stall past the deadline.
-  const res = await fetch(BASE_URL, { signal: AbortSignal.timeout(5_000) });
-  if (!res.ok) {
-    throw new Error(`server responded with status ${res.status}:\n${stderr}`);
+    server = spawn(
+      path.join(process.cwd(), "node_modules/.bin/next"),
+      ["start", "--hostname", "127.0.0.1", "-p", String(PORT)],
+      // detached => server.pid is the leader of its own process group, so
+      // cleanup can signal next start plus any children it spawns, not just
+      // the one pid.
+      {
+        stdio: "pipe",
+        detached: true,
+        env: { ...process.env, CRM_API_BASE_URL: `http://127.0.0.1:${address.port}` },
+      },
+    );
+
+    const pid = server.pid;
+    if (!pid) {
+      throw new Error("failed to spawn next start: no pid");
+    }
+
+    // Reaps the server if this process disappears without running afterAll
+    // (SIGKILL, a cancelled CI job, an OOM kill). No in-process handler can
+    // run after a SIGKILL of *this* process, so only a separate watching
+    // process can still clean up. It's detached too, so a signal aimed at
+    // our pid/group doesn't take the watchdog out before it can act.
+    const watchdog = spawn(
+      "sh",
+      [
+        "-c",
+        `while kill -0 ${process.pid} 2>/dev/null; do sleep 1; done; ` +
+          `kill -TERM -${pid} 2>/dev/null; sleep 5; kill -KILL -${pid} 2>/dev/null`,
+      ],
+      { detached: true, stdio: "ignore" },
+    );
+    watchdog.unref();
+
+    let stdout = "";
+    let stderr = "";
+    server.stdout?.on("data", (chunk: Buffer) => {
+      stdout += chunk.toString();
+    });
+    server.stderr?.on("data", (chunk: Buffer) => {
+      stderr += chunk.toString();
+    });
+
+    // Identity check: wait for the child's own readiness line on the pipe we
+    // exclusively own. A process already squatting on PORT can't write to
+    // it, so this can only pass against the server we actually spawned.
+    const deadline = Date.now() + 30_000;
+    while (!stdout.includes("Ready in")) {
+      if (server.exitCode !== null || server.signalCode !== null) {
+        throw new Error(
+          `next start exited early (code ${server.exitCode}, signal ${server.signalCode}) before becoming ready:\n${stderr}`,
+        );
+      }
+      if (Date.now() >= deadline) {
+        throw new Error(`server did not signal readiness within 30s:\n${stderr}`);
+      }
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+
+    // Bounded sanity check that it actually accepts connections, now that we
+    // know it's our own process reporting ready. Timed so a peer that opens
+    // the connection but never responds can't stall past the deadline.
+    const res = await fetch(BASE_URL, { signal: AbortSignal.timeout(5_000) });
+    if (!res.ok) {
+      throw new Error(`server responded with status ${res.status}:\n${stderr}`);
+    }
+  } catch (error) {
+    await stopTestServers();
+    throw error;
   }
 }, 35_000);
 
-afterAll(async () => {
-  const pid = server?.pid;
-  if (!pid || server.exitCode !== null || server.signalCode !== null) {
-    return;
-  }
-  await new Promise<void>((resolve) => {
-    const escalate = setTimeout(() => {
-      try {
-        process.kill(-pid, "SIGKILL");
-      } catch {
-        // already gone
-      }
-    }, 5_000);
-    server.once("exit", () => {
-      clearTimeout(escalate);
-      resolve();
+async function stopTestServers() {
+  try {
+    const pid = server?.pid;
+    if (!pid || server.exitCode !== null || server.signalCode !== null) {
+      return;
+    }
+    await new Promise<void>((resolve) => {
+      const escalate = setTimeout(() => {
+        try {
+          process.kill(-pid, "SIGKILL");
+        } catch {
+          // already gone
+        }
+      }, 5_000);
+      server.once("exit", () => {
+        clearTimeout(escalate);
+        resolve();
+      });
+      process.kill(-pid, "SIGTERM");
     });
-    process.kill(-pid, "SIGTERM");
-  });
-});
+  } finally {
+    const stub = crmStub;
+    crmStub = undefined;
+    if (stub?.listening) {
+      await new Promise<void>((resolve, reject) => {
+        stub.close((error) => error ? reject(error) : resolve());
+        stub.closeAllConnections();
+      });
+    }
+  }
+}
+
+afterAll(stopTestServers);
 
 describe("security headers", () => {
   it("protects public pages with baseline browser-security headers", async () => {
@@ -245,9 +291,9 @@ const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
 );
 
 const HERO_HEADING: Record<Locale, { prefix: string; accent: string }> = {
-  uz: { prefix: "To‘lov, dars va davomat.", accent: "Barchasi bir joyda." },
-  ru: { prefix: "Оплаты, занятия и посещаемость.", accent: "В одной системе." },
-  en: { prefix: "Your driving school.", accent: "Everything in one place." },
+  uz: { prefix: "Avtomaktabingiz holati.", accent: "Bir qarashda." },
+  ru: { prefix: "Ваша автошкола.", accent: "Всё перед глазами." },
+  en: { prefix: "Your driving school.", accent: "At a glance." },
 };
 
 const METADATA_LANGUAGE_SIGNAL: Record<

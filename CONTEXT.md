@@ -20,6 +20,8 @@ The current user-directed public system is recorded in `DESIGN.md`: Duolingo-ins
 
 Public product examples are authored HTML/SVG GSAP scenes with localized synthetic labels. The landing renders no CRM screenshots. Finite scene timelines pause offscreen or when the document is hidden, respect live reduced-motion changes, and clean up on unmount or role changes. Student and role chapters advance their GSAP preview during natural scrolling on tall desktop screens. Phones, short screens, reduced motion and no JavaScript retain complete native sequential examples. Sticky enhancement activates only after its scoped controller is ready; focused optional controls keep their selection.
 
+The landing opens with an owner-focused finance preview (`FinancePreview.tsx`). Its typed locale copy lives in `src/content/finance-preview.ts`; its immutable sample ledger lives in `finance-preview-model.ts`. Filters and sample payments affect local component state only. Keep the demo and school trial CTAs before the preview on narrow screens and in the DOM. The existing consolidation scene sits in the following workflow section; owner shortcuts scroll to the requested student-journey chapter. The pricing navigation label describes price and trial without promising a free trial or inventing a fixed price. Preview analytics records the existing privacy-safe event envelope, never sample names or amounts.
+
 Shared primitives remain in `@autodrive/design-tokens/tokens.css`; local public tokens and `next/font` variables implement this approved visual direction. Do not import the package's Tailwind v3 preset into this Tailwind v4 site.
 
 ## Localization

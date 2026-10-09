@@ -12,6 +12,7 @@ export type AnalyticsEvent =
   | "attendance_interact"
   | "attendance_complete"
   | "role_tab_select"
+  | "finance_preview_interact"
   | "faq_open"
   | "form_start"
   | "form_error"
@@ -21,7 +22,7 @@ export function track(event: AnalyticsEvent, params?: Record<string, unknown>): 
   if (typeof window === "undefined") return;
   const locale = params?.locale ?? document.documentElement.lang;
   const safe = locale === "uz" || locale === "ru" || locale === "en" ? { locale } : undefined;
-  const canonical = event === "cta_demo_click" ? "demo_open" : event === "form_submit_success" ? "intro_submit" : null;
+  const canonical = event === "cta_demo_click" ? "demo_open" : event === "form_submit_success" ? "intro_submit" : event === "finance_preview_interact" ? "preview_interact" : null;
   if (canonical) trackUmami(canonical, safe);
   window.dispatchEvent(new CustomEvent("automaktab_analytics", { detail: { event, params: safe, timestamp: Date.now() } }));
 }

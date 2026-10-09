@@ -99,10 +99,13 @@ describe("automaktab.uz marketing page verification", () => {
   ] as const)("keeps the %s sample workflow visible without JavaScript and renders no CRM screenshots", (locale, content) => {
     const html = renderToStaticMarkup(createElement(LandingPage, { locale }));
     const hero = html.match(/<section[^>]*data-screen-label="01 Hero"[\s\S]*?<\/section>/)?.[0];
-    const platforms = hero?.match(/<div[^>]*data-flow-platform[^>]*>[\s\S]*?<\/div>/g) ?? [];
+    const platforms = html.match(/<div[^>]*data-flow-platform[^>]*>[\s\S]*?<\/div>/g) ?? [];
 
-    expect(hero).toContain('id="platform-flow"');
-    for (const source of content.problem.sources) expect(hero).toContain(source.title);
+    expect(hero).toContain('id="finance-preview"');
+    expect(hero).toContain('data-finance-total="revenue" data-value="18400000"');
+    expect(hero).toContain('data-finance-total="debt" data-value="6200000"');
+    expect(html).toContain('id="platform-flow"');
+    for (const source of content.problem.sources) expect(html).toContain(source.title);
     expect(platforms).toHaveLength(1);
     expect(platforms[0]?.match(/data-flow-output/g)).toHaveLength(3);
     for (const outcome of content.problem.outcomes) {

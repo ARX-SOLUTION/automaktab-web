@@ -3,7 +3,8 @@ import type { AnalyticsEvent } from "./analytics";
 export type UmamiEventName = AnalyticsEvent
   | "demo_open"
   | "demo_enter"
-  | "intro_submit";
+  | "intro_submit"
+  | "preview_interact";
 
 type UmamiData = Record<string, string | number | boolean>;
 type PendingEvent = { name: UmamiEventName; data?: UmamiData };
