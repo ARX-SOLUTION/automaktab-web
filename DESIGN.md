@@ -15,7 +15,7 @@ colors:
 typography:
   display:
     fontFamily: "Nunito, sans-serif"
-    fontSize: "clamp(36px, 3.8vw, 54px)"
+    fontSize: "clamp(40px, 4.6vw, 64px)"
     fontWeight: 900
     lineHeight: 1.08
     letterSpacing: "-0.03em"
@@ -105,9 +105,11 @@ Signal Lime identifies primary actions and selected roles. Ink carries hierarchy
 
 Nunito carries display and section headings; Manrope carries body copy and controls. Both include Latin and Cyrillic through `next/font`. JetBrains Mono is reserved for data and identifiers. Body copy varies from 16–19px with 1.55–1.7 line height. Headings wrap at words and use balanced lines.
 
+Below 360px, the hero uses a 36px heading so the Uzbek word “Avtomaktabingiz” fits without a forced word break. The compact finance example uses 11–12px supporting copy, 14px payment amounts, 17–19px panel headings and 22–29px primary totals; sample and unsaved-state labels remain at least 11px.
+
 ## Layout
 
-Content is bounded to 1240px with 16–24px gutters. Sections use the documented fluid spacing. The hero stacks below 1280px, with actions before the diagram; at wider sizes it shares a two-column grid with the diagram. Other content uses its existing 640/768/1024px responsive steps. Let text and native controls determine height.
+Content is bounded to 1240px with 16–24px gutters. Sections use the documented fluid spacing. The hero stacks below 1280px, with demo and trial actions before the interactive finance example in both visual and DOM order. At wider sizes, copy and actions share a two-column grid with that example. The consolidation diagram follows in the workflow section beside owner-question shortcuts. Other content uses its existing 640/768/1024px responsive steps. Let text and native controls determine height.
 
 ## Elevation & Depth
 
@@ -120,6 +122,8 @@ Controls have gently rounded corners. Fields use the smaller field radius, scene
 ## Components
 
 Primary controls have Lime fill and Ink text; secondary controls keep the light surface. Both provide visible focus and at least 44px targets. Fields retain labels, linked errors and native input behavior.
+
+The hero finance example makes one owner question concrete: how much came in, and how much remains owed? Native radio filters select all branches or one branch. A local sample payment updates the matching revenue and debt together, once per branch; reset restores the baseline. The branch comparison stays visible, while a native details disclosure holds debtor rows. Use explicit sample and unsaved-state labels in Uzbek, Russian and English. Inactive completed actions use `aria-disabled` with guarded handlers so keyboard focus remains stable. Before hydration, finance controls are natively disabled and the complete example is readable. Finite GSAP feedback connects changed totals and bars, pauses offscreen or in a hidden document, and reverts on state changes or live reduced-motion changes. No real payment or CRM request occurs.
 
 Student and role narratives pair readable chapters with one sticky preview at 1024px or wider and 800px or taller. GSAP ScrollTrigger advances every stage in both directions and traces the reading rail; optional tabs have roving keyboard focus and retain their selection while focused. Controller readiness gates this enhancement. Phones, short screens, reduced motion and no JavaScript show complete native sequential examples. Sample scenes use finite scoped GSAP sequences, pause outside the viewport or on hidden documents, and revert fully when reduced motion changes. Their complete text and data render statically. Keep these scene decisions scoped to the public landing brief.
 

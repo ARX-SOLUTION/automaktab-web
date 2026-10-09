@@ -13,7 +13,7 @@ export const contentEn: LandingContent = {
       capabilities: "Features",
       roles: "Roles",
       howItWorks: "How it works",
-      pricing: "Pricing",
+      pricing: "Pricing & trial",
       faq: "FAQ",
     },
     login: "Log in",
@@ -23,9 +23,9 @@ export const contentEn: LandingContent = {
   hero: {
     eyebrow: "For driving school owners",
     title: "Your driving school. ",
-    titleAccent: "Everything in one place.",
+    titleAccent: "At a glance.",
     description:
-      "Manage students, payments, schedules and attendance in one system. See how each branch is doing.",
+      "See revenue, outstanding debt and branch results together. Manage students, payments and lessons with your team in one place.",
     lane1: {
       button: "Open demo",
       helperLogin: "Explore a sample school with a demo email and password.",

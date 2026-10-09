@@ -165,7 +165,7 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
   }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   return (
-    <section id="platform-flow" ref={root} data-flow-state="static" data-flow-phase="static" data-flow-cycle="0" data-hero-proof className="platform-flow landing-hero-proof" aria-labelledby="problem-heading">
+    <section id="platform-flow" ref={root} data-flow-state="static" data-flow-phase="static" data-flow-cycle="0" className="platform-flow" aria-labelledby="problem-heading">
       <h2 id="problem-heading" className="flow-heading">{content.title}</h2>
       <div className="flow-labels"><span>{content.sourceLabel}</span><span>{content.resultLabel}</span></div>
       <div ref={stage} className="flow-stage" tabIndex={0} role="group" aria-labelledby="problem-heading">

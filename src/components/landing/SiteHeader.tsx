@@ -8,7 +8,7 @@ import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
 import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
-import { buildDemoUrl } from "@/lib/analytics";
+import { buildDemoUrl, track } from "@/lib/analytics";
 import type { Locale } from "@/i18n/config";
 
 export interface SiteHeaderProps {
@@ -130,6 +130,7 @@ export default function SiteHeader({
 
         <a
           href={demoUrl}
+          onClick={() => track("cta_demo_click", { locale })}
           aria-label={content.demo}
           className="action-primary site-header-demo min-w-0 min-h-11 px-4 py-2 flex items-center justify-center text-center bg-amber-500 hover:bg-amber-400 text-forest-800 no-underline font-body font-bold text-sm rounded-[var(--r-s)] transition-colors [overflow-wrap:anywhere]"
         >
@@ -158,7 +159,7 @@ export default function SiteHeader({
             {navLinks.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
             <div className="site-header-menu-actions">
               <a href="https://app.automaktab.uz/login">{content.login}</a>
-              <a href={menuDemoUrl} className="action-primary">{content.demo}</a>
+              <a href={menuDemoUrl} onClick={() => track("cta_demo_click", { locale })} className="action-primary">{content.demo}</a>
             </div>
             <div className="site-header-menu-languages" aria-label={locale === "ru" ? "Язык" : locale === "en" ? "Language" : "Til"} role="group">
               {languages.map((language) => (
