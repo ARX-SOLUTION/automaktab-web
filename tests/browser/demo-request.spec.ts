@@ -420,7 +420,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     await expect(attendance).toContainText(contentEn.attendanceDemo.banner);
   });
 
-  test(`sticky header compacts once scrolled without shifting the page at ${viewport.width}px`, async ({ page }) => {
+  test(`sticky header keeps login and language once scrolled without shifting the page at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.addInitScript(() => {
       (window as unknown as { layoutShift: number }).layoutShift = 0;
@@ -443,22 +443,16 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
 
     await page.mouse.wheel(0, 900);
     await expect(header).toHaveClass(/is-scrolled/);
-    await expect.poll(async () => (await geometry()).visible).toBeLessThan(viewport.width < 1280 ? 72 : top.box - 8);
+    // Below 1280px nothing is hidden any more; from 1280px the single row tucks up slightly.
+    if (viewport.width >= 1280) await expect.poll(async () => (await geometry()).visible).toBeLessThan(top.box - 8);
     const scrolled = await geometry();
+    if (viewport.width < 1280) expect(scrolled.visible).toBe(top.box);
     expect(scrolled.box).toBe(top.box);
     expect(scrolled.mainTop).toBe(top.mainTop);
     const controls = header.locator(".site-header-controls");
-    if (viewport.width < 1280) {
-      await expect(controls).toHaveCSS("opacity", "0");
-      await expect(controls).toHaveCSS("pointer-events", "none");
-      // Keyboard focus restores the full header so every control stays reachable.
-      await page.keyboard.press("Tab");
-      await page.keyboard.press("Tab");
-      await expect(header.locator(":focus-visible")).toHaveCount(1);
-      await expect(controls).toHaveCSS("opacity", "1");
-    } else {
-      await expect(controls).toBeVisible();
-    }
+    await expect(controls).toBeVisible();
+    await expect(controls).toHaveCSS("opacity", "1");
+    await expect(controls).not.toHaveCSS("pointer-events", "none");
     expect(await page.evaluate(() => (window as unknown as { layoutShift: number }).layoutShift)).toBe(0);
 
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));

@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 // Mezon QA on #37: the compact header must keep the demo CTA on screen below 1280px,
-// the mobile menu must offer demo and login, and Shift+Tab must reach the hidden row.
+// the mobile menu must offer demo and login, login and language stay visible, and Shift+Tab reaches them.
 
 async function scrollPastHero(page: Page) {
   await page.mouse.wheel(0, 3000);
@@ -38,6 +38,12 @@ for (const width of [320, 390, 768, 1024]) {
       expect(menu).toMatchObject({ inViewport: true, hit: true });
       expect(Math.min(menu.width, menu.height)).toBeGreaterThanOrEqual(44);
       await expect(page.locator(".site-header-demo")).toHaveAccessibleName(/demo/i);
+      // Login and the language switcher stay on screen without opening the menu.
+      for (const selector of [".site-header-login", '.site-header-controls a[aria-current="page"]', '.site-header-controls a[aria-label="English"]']) {
+        const control = await isOnTop(page, selector);
+        expect(control).toMatchObject({ inViewport: true, hit: true, opacity: "1" });
+        expect(Math.min(control.width, control.height)).toBeGreaterThanOrEqual(44);
+      }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     });
   }
