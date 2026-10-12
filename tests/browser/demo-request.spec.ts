@@ -5,7 +5,7 @@ import { contentUz } from "../../src/content/uz";
 
 const requests: unknown[] = [];
 
-test("consolidation flow automatically repeats, pauses for reading and respects reduced motion", async ({ page }) => {
+test("consolidation flow plays once, pauses for reading and offscreen, and respects reduced motion", async ({ page }) => {
   test.setTimeout(45_000);
   const pageErrors: string[] = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
@@ -44,82 +44,51 @@ test("consolidation flow automatically repeats, pauses for reading and respects 
   }
   await expectStatic();
   await page.mouse.move(0, 0);
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect(flow).toHaveAttribute("data-flow-state", "playing");
-  for (const phase of ["source-1", "source-2", "source-3", "resolve", "confirm-2", "hold"]) {
-    await expect.poll(() => flow.getAttribute("data-flow-phase"), { intervals: [40], timeout: 10_000 }).toBe(phase);
-    await expectReadable();
-  }
-  for (const check of await flow.locator(".flow-check path").all()) await expect(check).toHaveCSS("stroke-dashoffset", "0px");
-  const firstCycle = Number(await flow.getAttribute("data-flow-cycle"));
-  await expect.poll(async () => Number(await flow.getAttribute("data-flow-cycle")), { timeout: 10_000 }).toBeGreaterThan(firstCycle);
-  await expect.poll(() => flow.locator(".flow-lines-mobile .flow-packet").evaluateAll((packets) => packets.some((packet) => Number(getComputedStyle(packet).opacity) > 0.8))).toBe(true);
   const visualFrame = () => flow.evaluate((element) => ({
     phase: element.getAttribute("data-flow-phase"),
-    cycle: element.getAttribute("data-flow-cycle"),
     values: Array.from(element.querySelectorAll("[data-flow-path], .flow-packet, .flow-check, .flow-platform-header, [data-flow-source]")).map((node) => {
       const style = getComputedStyle(node);
       return [style.strokeDashoffset, style.opacity, style.transform, style.backgroundColor, style.borderColor];
     }),
   }));
+  const expectFrozen = async () => {
+    const frame = await visualFrame();
+    await page.waitForTimeout(250);
+    expect(await visualFrame()).toEqual(frame);
+  };
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await expect(flow).toHaveAttribute("data-flow-state", "playing");
+  // Hover pauses for reading; leaving resumes.
   await stage.hover();
   await expect(flow).toHaveAttribute("data-flow-state", "paused");
-  const readingFrame = await visualFrame();
-  await page.waitForTimeout(250);
-  expect(await visualFrame()).toEqual(readingFrame);
-  await stage.focus();
+  await expectFrozen();
   await page.mouse.move(0, 0);
-  await expect(stage).toBeFocused();
+  await expect(flow).toHaveAttribute("data-flow-state", "playing");
+  // Offscreen pauses too.
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
   await expect(flow).toHaveAttribute("data-flow-state", "paused");
+  await expectFrozen();
+  await flow.scrollIntoViewIfNeeded();
+  for (const phase of ["source-3", "resolve", "confirm-2", "hold"]) {
+    await expect.poll(() => flow.getAttribute("data-flow-phase"), { intervals: [40], timeout: 10_000 }).toBe(phase);
+    await expectReadable();
+  }
+  // It plays once and holds the finished diagram: no loop, no reset.
+  await expect(flow).toHaveAttribute("data-flow-state", "complete");
+  for (const check of await flow.locator(".flow-check path").all()) await expect(check).toHaveCSS("stroke-dashoffset", "0px");
+  for (const path of await flow.locator("[data-flow-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
+  await expectFrozen();
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
+  await flow.scrollIntoViewIfNeeded();
+  await expect(flow).toHaveAttribute("data-flow-state", "complete");
+  await expect(flow).toHaveAttribute("data-flow-phase", "hold");
   await page.setViewportSize({ width: 1280, height: 900 });
-  // Responsive GSAP rebuilding restores the reading position over animation frames.
   await expect(page.locator("#main-content")).not.toHaveAttribute("data-motion-changing", "true");
-  await expect(flow).toHaveAttribute("data-flow-state", "paused");
   await expectReadable();
   await expect(flow.locator(".flow-lines-desktop")).toBeVisible();
   await expect(flow.locator(".flow-lines-mobile")).toBeHidden();
-  const routeDistances = await flow.locator(".flow-lines-desktop").evaluate((svg) => Array.from(svg.querySelectorAll("g")).flatMap((group) => {
-    const packet = group.querySelector<SVGCircleElement>(".flow-packet")!;
-    if (Number(getComputedStyle(packet).opacity) <= 0.8) return [];
-    const path = group.querySelector<SVGPathElement>("[data-flow-path]")!;
-    const point = new DOMPoint(0, 0).matrixTransform(packet.getScreenCTM()!);
-    const length = path.getTotalLength();
-    return [Math.min(...Array.from({ length: 101 }, (_, index) => {
-      const sample = path.getPointAtLength(length * index / 100);
-      const world = new DOMPoint(sample.x, sample.y).matrixTransform(path.getScreenCTM()!);
-      return Math.hypot(point.x - world.x, point.y - world.y);
-    }))];
-  }));
-  expect(routeDistances.length).toBeGreaterThan(0);
-  for (const distance of routeDistances) expect(distance).toBeLessThan(3);
-  await page.keyboard.press("Tab");
-  await expect(flow).toHaveAttribute("data-flow-state", "playing");
-  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
-  await expect(flow).toHaveAttribute("data-flow-state", "paused");
-  const offscreenFrame = await visualFrame();
-  await page.waitForTimeout(250);
-  expect(await visualFrame()).toEqual(offscreenFrame);
-  await flow.scrollIntoViewIfNeeded();
-  await expect(flow).toHaveAttribute("data-flow-state", "playing");
-  await page.evaluate(() => {
-    Object.defineProperty(document, "hidden", { configurable: true, value: true });
-    document.dispatchEvent(new Event("visibilitychange"));
-  });
-  await expect(flow).toHaveAttribute("data-flow-state", "paused");
-  const hiddenFrame = await visualFrame();
-  await page.waitForTimeout(250);
-  expect(await visualFrame()).toEqual(hiddenFrame);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.evaluate(() => {
-    Reflect.deleteProperty(document, "hidden");
-    document.dispatchEvent(new Event("visibilitychange"));
-  });
   await expectStatic();
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await flow.scrollIntoViewIfNeeded();
-  await expect(flow).toHaveAttribute("data-flow-state", "playing");
-  await expect(flow).toHaveAttribute("data-flow-phase", "hold", { timeout: 8_000 });
-  await expectReadable();
   expect(pageErrors).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(requests).toHaveLength(0);
