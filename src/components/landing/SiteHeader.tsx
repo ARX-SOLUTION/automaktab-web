@@ -42,12 +42,8 @@ export default function SiteHeader({
 
   useEffect(() => {
     const element = header.current;
-    const brand = element?.querySelector<HTMLElement>(".site-header-brand");
-    const controls = element?.querySelector<HTMLElement>(".site-header-controls");
-    if (!element || !brand || !controls) return;
+    if (!element) return;
     let frame = 0;
-    // Layout offsets ignore transforms, so the compact distance stays correct while scrolled.
-    const measure = () => element.style.setProperty("--site-header-compact", `${Math.max(0, controls.offsetTop + controls.offsetHeight - brand.offsetTop - brand.offsetHeight)}px`);
     const update = () => {
       frame = 0;
       element.classList.toggle("is-scrolled", window.scrollY > 8);
@@ -55,14 +51,10 @@ export default function SiteHeader({
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
-    const resize = new ResizeObserver(measure);
-    resize.observe(element);
-    measure();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
-      resize.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
@@ -98,7 +90,7 @@ export default function SiteHeader({
           ))}
         </nav>
 
-        {/* Login and language stay together; on narrow screens they form the second row that hides once scrolled. */}
+        {/* Login and language stay together and visible; on phones they form a second row. */}
         <div className="site-header-controls min-w-0">
           <a
             href="https://app.automaktab.uz/login"

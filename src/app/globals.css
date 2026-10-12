@@ -657,10 +657,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 .site-header-inner, .site-header-controls { transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility 0s; }
 .site-header.is-scrolled { pointer-events: none; }
 .site-header.is-scrolled .site-header-inner > * { pointer-events: auto; }
-.site-header.is-scrolled:not(:has(:focus-visible))::before { transform: translateY(calc(-1 * var(--site-header-compact, 0px))); }
-/* Compact row keeps brand, demo CTA and menu. The login/language row fades out but stays in the tab order,
-   so Tab and Shift+Tab both reach it and focusing it brings the full header back. */
-.site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+/* Login and language stay visible while scrolling: on phones as a second row, from 768px in the main row. */
 
 .site-header-menu { grid-column: 3; grid-row: 1; }
 .site-header-menu summary {
@@ -740,6 +737,17 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 }
 
 .site-header-nav { display: none; }
+
+/* Sticky header height for anchors and the debt stage: two rows on phones, one row from 768px. */
+@media (max-width: 767.98px) { :root { --header-compact-h: 124px; } }
+@media (min-width: 768px) and (max-width: 1279.98px) { :root { --header-compact-h: 72px; } }
+
+@media (min-width: 768px) and (max-width: 1279.98px) {
+  .site-header-inner { grid-template-columns: minmax(0, 1fr) auto auto auto; }
+  .site-header-controls { grid-column: 2; grid-row: 1; flex-wrap: nowrap; }
+  .site-header-demo { grid-column: 3; }
+  .site-header-menu { grid-column: 4; }
+}
 
 @media (min-width: 1280px) {
   .landing-hero-grid {
