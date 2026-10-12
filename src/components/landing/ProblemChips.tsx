@@ -33,7 +33,6 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
     media.add({ animate: "(prefers-reduced-motion: no-preference)", reduce: "(prefers-reduced-motion: reduce)" }, (context, childSafe) => {
       element.dataset.flowState = "static";
       element.dataset.flowPhase = "static";
-      element.dataset.flowCycle = "0";
       if (!context.conditions?.animate || !childSafe) return;
       const safe = childSafe as ReturnType<typeof useGSAP>["contextSafe"];
       const sources = select("[data-flow-source]") as HTMLLIElement[];
@@ -51,14 +50,12 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
       const lime = colors.getPropertyValue("--c-amber-500").trim();
       const paper = colors.getPropertyValue("--c-paper").trim();
       const quiet = colors.getPropertyValue("--c-sand-100").trim();
-      const border = colors.getPropertyValue("--c-sand-300").trim();
       const startAt = gsap.utils.distribute({ base: 0.2, each: 0.82 });
       const sourceIndex = gsap.utils.wrap(0, sources.length);
       let visible = false;
       let active = true;
       let hovered = window.matchMedia("(hover: hover)").matches && diagram.matches(":hover");
       let focused = diagram.contains(document.activeElement);
-      let cycle = 0;
       const phase = (name: string) => safe(() => { if (active) element.dataset.flowPhase = name; });
 
       gsap.set(routes, {
@@ -73,10 +70,10 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
         strokeDashoffset: (_index, path: SVGPathElement) => path.getTotalLength(),
       });
       gsap.set([mark, inlet, one], { transformOrigin: "50% 50%" });
+      // Plays once when first seen, then holds the finished diagram.
       const sequence = gsap.timeline({
         paused: true,
-        repeat: -1,
-        onRepeat: safe(() => { if (active) element.dataset.flowCycle = String(++cycle); }),
+        onComplete: safe(() => { if (active) element.dataset.flowState = "complete"; }),
       });
 
       sources.forEach((source, index) => {
@@ -116,18 +113,10 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
           .fromTo(checks[index], { scale: 0.86 }, { scale: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, at)
           .to(checkPaths[index], { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, at + 0.08);
       });
-      sequence.call(phase("hold"), undefined, 4.54)
-        .call(phase("reset"), undefined, 7.8)
-        .to(routes, { opacity: 0, duration: 0.4, ease: "power2.inOut" }, 7.8)
-        .to(sources, { borderColor: border, backgroundColor: paper, duration: 0.5, ease: "power2.inOut" }, 7.8)
-        .to(header, { backgroundColor: quiet, boxShadow: `inset 0 -1px 0 ${border}`, duration: 0.5, ease: "power2.inOut" }, 7.8)
-        .to(checks, { backgroundColor: paper, duration: 0.5, ease: "power2.inOut" }, 7.8)
-        .to(checkPaths, { strokeDashoffset: (_index, path: SVGPathElement) => path.getTotalLength(), duration: 0.4, ease: "power2.inOut" }, 7.8)
-        .set(routes, { strokeDashoffset: (_index, path: SVGPathElement) => path.getTotalLength() }, 8.3)
-        .set(packets, { opacity: 0 }, 8.5);
+      sequence.call(phase("hold"), undefined, 4.54);
 
       const syncPlayback = safe(() => {
-        if (!active) return;
+        if (!active || sequence.progress() === 1) return;
         const playing = visible && !document.hidden && !hovered && !focused;
         sequence.paused(!playing);
         element.dataset.flowState = playing ? "playing" : "paused";
@@ -158,14 +147,13 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
         diagram.removeEventListener("focusout", onBlur);
         element.dataset.flowState = "static";
         element.dataset.flowPhase = "static";
-        element.dataset.flowCycle = "0";
       };
     });
     return () => media.revert();
   }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   return (
-    <section id="platform-flow" ref={root} data-flow-state="static" data-flow-phase="static" data-flow-cycle="0" className="platform-flow" aria-labelledby="problem-heading">
+    <section id="platform-flow" ref={root} data-flow-state="static" data-flow-phase="static" className="platform-flow" aria-labelledby="problem-heading">
       <h2 id="problem-heading" className="flow-heading">{content.title}</h2>
       <div className="flow-labels"><span>{content.sourceLabel}</span><span>{content.resultLabel}</span></div>
       <div ref={stage} className="flow-stage" tabIndex={0} role="group" aria-labelledby="problem-heading">

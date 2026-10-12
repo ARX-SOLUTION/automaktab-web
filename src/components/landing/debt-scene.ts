@@ -4,8 +4,11 @@ import { DEBTORS } from "@/content/stories/debt";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Same media query as the tall scroll track in globals.css.
-const MOTION_QUERY = "(prefers-reduced-motion: no-preference) and (min-height: 640px)";
+const MOTION_QUERY = "(prefers-reduced-motion: no-preference)";
+// Same media query as the tall scroll track in globals.css; elsewhere the scene plays once on enter.
+const SCRUB_QUERY = "(min-width: 1024px) and (min-height: 640px)";
+// The scrubbed timeline is about 10 units long; on enter it plays in roughly 2.5 seconds.
+const ENTER_SPEED = 4;
 // Where each notebook slip lies before the list takes shape: [x, y, rotation].
 const SCATTER: [number, number, number][] = [[-56, 28, -7], [64, -18, 5], [-28, 46, 4], [44, 10, -6]];
 
@@ -21,15 +24,16 @@ export function mountDebtScene(element: HTMLElement, numberLocale: string): () =
   const payer = DEBTORS.findIndex((d) => d.payment);
   const payment = DEBTORS[payer]?.payment ?? 0;
   const media = gsap.matchMedia();
-  media.add({ motion: MOTION_QUERY, wide: "(min-width: 1024px)" }, (ctx) => {
+  media.add({ motion: MOTION_QUERY, scrub: SCRUB_QUERY }, (ctx) => {
     if (!ctx.conditions?.motion) return;
+    const scrub = Boolean(ctx.conditions?.scrub);
     const q = gsap.utils.selector(element);
     const rows = q<HTMLElement>("[data-debt-row]");
     const slips = q<HTMLElement>("[data-debt-slip]");
     const fills = q<HTMLElement>("[data-debt-fill]");
     const amounts = q<HTMLElement>("[data-debt-amount]");
     const total = element.querySelector<HTMLElement>("[data-debt-total]");
-    const reach = ctx.conditions.wide ? 1 : 0.35;
+    const reach = scrub ? 1 : 0.35;
     const values: Record<string, number> = { total: 0 };
     DEBTORS.forEach((_d, i) => { values[`a${i}`] = 0; });
     const render = () => {
@@ -40,7 +44,8 @@ export function mountDebtScene(element: HTMLElement, numberLocale: string): () =
     const story = gsap.timeline({
       defaults: { ease: "power2.inOut" },
       onUpdate: render,
-      scrollTrigger: { trigger: element.querySelector("[data-debt-track]"), start: "top 15%", end: "bottom bottom", scrub: 0.6 },
+      paused: !scrub,
+      scrollTrigger: scrub ? { trigger: element.querySelector("[data-debt-track]"), start: "top 15%", end: "bottom bottom", scrub: 0.6 } : undefined,
     });
     // 1. Scattered notebook slips straighten into one list.
     story.fromTo(rows, {
@@ -60,7 +65,12 @@ export function mountDebtScene(element: HTMLElement, numberLocale: string): () =
       .fromTo(q("[data-debt-export]"), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, 8.6)
       .to({}, { duration: 0.6 });
     render();
-    element.dataset.debtState = "scroll";
+    if (!scrub) {
+      story.timeScale(ENTER_SPEED);
+      // end: "max" also starts the scene when the page opens below it.
+      ScrollTrigger.create({ trigger: element.querySelector(".debt-sheet"), start: "top 75%", end: "max", once: true, onEnter: () => { story.play(); } });
+    }
+    element.dataset.debtState = scrub ? "scroll" : "enter";
 
     return () => {
       element.dataset.debtState = "static";

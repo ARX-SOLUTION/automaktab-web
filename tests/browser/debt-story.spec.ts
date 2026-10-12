@@ -33,6 +33,43 @@ for (const viewport of VIEWPORTS) {
     await expect(page.locator("#qarzdorlik .debt-row").nth(1)).toContainText("1 200 000");
   });
 
+}
+
+test("debt story plays once on enter on a phone, without a scroll track", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(String(error)));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  await page.evaluate(() => {
+    (window as unknown as { __cls: number }).__cls = 0;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as (PerformanceEntry & { value: number; hadRecentInput: boolean })[]) {
+        if (!entry.hadRecentInput) (window as unknown as { __cls: number }).__cls += entry.value;
+      }
+    }).observe({ type: "layout-shift", buffered: true });
+  });
+  const section = page.locator("#qarzdorlik");
+  const top = await section.evaluate((el) => el.getBoundingClientRect().top + window.scrollY);
+  await page.evaluate((y) => window.scrollTo(0, y - window.innerHeight), top);
+  await expect(section).toHaveAttribute("data-debt-state", "enter");
+  let state = await finalState(page);
+  expect(state.trackTaller).toBe(false);
+  expect(state.total).toBe("?");
+  await page.locator("#qarzdorlik .debt-sheet").evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.5));
+  // A short timeline, not scrubbed: it finishes without further scrolling.
+  await page.waitForTimeout(3500);
+  state = await finalState(page);
+  expect(state.total).toBe("4 950 000");
+  expect(Math.max(...state.slips)).toBeLessThan(0.05);
+  expect(state.exportOpacity).toBeGreaterThan(0.95);
+  expect(state.transforms.every((value) => value === "none" || value === "matrix(1, 0, 0, 1, 0, 0)")).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  expect(await page.evaluate(() => (window as unknown as { __cls: number }).__cls)).toBe(0);
+  expect(errors).toEqual([]);
+});
+
+for (const viewport of VIEWPORTS.filter((size) => size.width >= 1024)) {
   test(`debt story turns scattered notes into the list while scrolling at ${viewport.width}`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(String(error)));

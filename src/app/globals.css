@@ -918,8 +918,9 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   .debt-name, .debt-amount { font-size: 16px; }
 }
 
-/* With JS and motion, the section becomes a scroll track and the stage sticks under the header. */
-@media (prefers-reduced-motion: no-preference) and (min-height: 640px) {
+/* With JS and motion on wide screens, the section becomes a scroll track and the stage sticks under the header.
+   Narrower screens play a short timeline on enter instead (debt-scene.ts). */
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 640px) {
   .js .debt-track { height: 210svh; }
   .js .debt-stage { position: sticky; top: var(--header-compact-h); min-height: calc(100svh - var(--header-compact-h)); align-content: center; padding-block: 24px; }
 }
