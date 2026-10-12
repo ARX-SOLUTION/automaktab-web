@@ -92,8 +92,12 @@
   /* Layout */
   --container: 1240px;
   --gutter: 24px;
-  --header-h: 72px;
-  --section-y: 104px;
+  --header-compact-h: 64px;
+  /* Anchor jumps land just below the compact sticky header. */
+  --anchor-offset: calc(var(--header-compact-h) + 8px);
+  --space-cluster: 8px;
+  --space-control-inline: 20px;
+  --space-section: clamp(56px, 7vw, 104px);
 
   /* Harakat */
   --ease-out: cubic-bezier(.2, .8, .2, 1);
@@ -128,8 +132,7 @@
 
 .landing-hero {
   position: relative;
-  padding-block: clamp(40px, 6vw, 80px);
-
+  padding-block: var(--space-section) calc(var(--space-section) / 2);
 }
 
 .landing-hero-intro { grid-row: 1; }
@@ -292,7 +295,7 @@
 .story-points li { display: flex; align-items: baseline; gap: 10px; color: var(--c-body-2); font-size: 16px; line-height: 1.6; }
 .story-points svg { flex-shrink: 0; align-self: center; color: var(--c-forest-600); }
 .story-attendance-link { display: inline-flex; min-height: 44px; align-items: center; margin-bottom: 20px; color: var(--c-forest-600); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
-.story-modules { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 24px 0; list-style: none; }
+.story-modules { display: flex; flex-wrap: wrap; gap: var(--space-cluster); padding: 0; margin: 24px 0; list-style: none; }
 .story-modules li { padding: 7px 10px; border-radius: 8px; background: var(--c-sand-100); color: var(--c-body-2); font-size: 13px; font-weight: 600; }
 .story-inline-preview { margin-top: 28px; min-width: 0; }
 .story-preview { display: none; min-width: 0; }
@@ -338,7 +341,7 @@
 .attendance-row[data-attendance-linked] .attendance-student > span, .attendance-card header > span { border-radius: 6px; color: var(--c-ink); outline: 1px solid var(--c-ink); outline-offset: 2px; }
 .attendance-student strong { min-width: 0; font-size: 16px; line-height: 1.5; font-weight: 600; overflow-wrap: anywhere; }
 .attendance-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; min-width: 0; }
-.attendance-status { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 44px; padding: 8px; border: 1px solid var(--c-sand-300); border-radius: 8px; background: var(--c-paper); color: var(--c-body-2); font: 600 14px/1.3 var(--f-body); cursor: pointer; scroll-margin-top: 144px; transition: transform 150ms; }
+.attendance-status { display: flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 44px; padding: 8px; border: 1px solid var(--c-sand-300); border-radius: 8px; background: var(--c-paper); color: var(--c-body-2); font: 600 14px/1.3 var(--f-body); cursor: pointer; transition: transform 150ms; }
 .attendance-status:hover { background: var(--c-sand-100); border-color: var(--c-sand-400); }
 .attendance-status[aria-checked="true"] { background: var(--attendance-status-bg); border-color: var(--attendance-status-color); color: var(--attendance-status-text); font-weight: 700; animation: attendance-stamp 220ms var(--ease-out); }
 .attendance-status:active { transform: translateY(1px); }
@@ -448,7 +451,7 @@
 .report-intro > ul { display: grid; gap: 12px; padding: 0; margin: 8px 0; list-style: none; color: var(--c-body-2); }
 .report-intro li { display: flex; align-items: center; gap: 12px; line-height: 1.6; }
 .report-intro li svg { flex-shrink: 0; color: var(--c-forest-600); }
-.report-intro .action-secondary { display: inline-flex; align-items: center; min-height: 48px; padding: 12px 20px; border: 2px solid var(--c-sand-300); border-bottom-width: 5px; border-radius: 14px; font-weight: 700; }
+.report-intro .action-secondary { display: inline-flex; align-items: center; min-height: 48px; padding: 12px var(--space-control-inline); border: 2px solid var(--c-sand-300); border-bottom-width: 5px; border-radius: 14px; font-weight: 700; }
 .report-trial-note { color: var(--c-muted); font-size: 13px; line-height: 1.6; }
 .report-example { min-width: 0; max-width: 600px; width: 100%; margin-inline: auto; padding: clamp(16px, 3vw, 28px); border-radius: 24px; background: #EEF3FA; }
 .report-bot { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding-bottom: 20px; }
@@ -604,9 +607,9 @@
   #main-content .flow-heading { font-size: 20px; margin-bottom: 24px; }
 }
 
+/* Each section owns half of the gap, so two neighbours add up to one section step. */
 #main-content > section:not(.landing-hero) {
-  padding-block: clamp(56px, 7vw, 104px);
-  scroll-margin-top: 144px;
+  padding-block: calc(var(--space-section) / 2);
 }
 
 #main-content h2 { font-size: clamp(30px, 3.5vw, 46px); line-height: 1.15; letter-spacing: -.02em; }
@@ -716,7 +719,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--space-cluster);
 }
 
 .site-header-demo {
@@ -773,8 +776,6 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 
   .site-header-menu { display: none; }
 
-  #main-content > section:not(.landing-hero) { scroll-margin-top: 92px; }
-
   .site-header-nav {
     display: flex;
     justify-content: center;
@@ -800,7 +801,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   .site-header.is-scrolled:not(:has(:focus-visible)) .site-header-controls { opacity: 1; transform: none; pointer-events: auto; }
 }
 
-.site-footer { padding-block: clamp(40px, 6vw, 72px) 32px; background: var(--c-forest-900); color: var(--c-on-dark-3); overflow: clip; }
+.site-footer { padding-block: 48px 32px; background: var(--c-forest-900); color: var(--c-on-dark-3); overflow: clip; }
 .footer-landmark { display: grid; gap: 24px; align-items: center; margin-bottom: 24px; }
 .footer-landmark p { margin: 0; max-width: 16ch; font: 800 clamp(22px, 3vw, 34px)/1.25 var(--f-display); color: var(--c-on-dark-1); text-wrap: balance; }
 .footer-roads { display: block; width: 100%; height: 128px; overflow: visible; }
@@ -812,12 +813,13 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 .footer-grid { display: grid; gap: 32px; align-items: start; padding-top: 32px; border-top: 1px solid #32424D; }
 .footer-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .footer-links { display: flex; flex-direction: column; gap: 8px; }
-.footer-links h3 { margin: 0 0 10px; color: var(--c-on-dark-1); font: 800 16px/1.3 var(--f-display); }
+.footer-links h3 { margin: 0 0 8px; color: var(--c-on-dark-1); font: 800 16px/1.3 var(--f-display); }
 .footer-links a { color: var(--c-on-dark-3); text-decoration: none; font-size: 13px; min-height: 32px; display: flex; align-items: center; line-height: 1.5; }
 .footer-links a:hover { color: var(--c-on-dark-1); text-decoration: underline; text-underline-offset: 4px; }
 .footer-copyright { margin-top: 32px; }
 .footer-copyright p { margin: 0; color: var(--c-on-dark-4); font-size: 12px; line-height: 1.5; }
-@media (min-width: 768px) { .footer-landmark { grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: 40px; } .footer-roads { height: 160px; } .footer-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 768px) { .site-footer { padding-top: 64px; } .footer-landmark { grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); gap: 40px; } .footer-roads { height: 160px; } .footer-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .site-footer { padding-top: 80px; } }
 @media (min-width: 1024px) { .footer-grid { grid-template-columns: minmax(0, 1fr) auto; gap: 80px; } }
 
 @layer base {
@@ -827,7 +829,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-h);
+    scroll-padding-top: var(--anchor-offset);
     background: var(--c-sand-100);
   }
 
@@ -879,7 +881,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 
 /* Debt story: notebook slips become one running-balance list. Static view is the finished list. */
 .debt-story { overflow-x: clip; background: var(--c-paper); color: var(--c-ink); font-family: var(--f-body); border-bottom: 1px solid var(--c-sand-300); }
-.debt-stage { display: grid; gap: 24px; padding-block: 72px; }
+.debt-stage { display: grid; gap: 24px; }
 .debt-intro h2 { margin: 0; font-family: var(--f-display); font-weight: 800; text-wrap: balance; }
 .debt-intro > p:first-of-type { margin: 10px 0 0; color: var(--c-body-2); font-size: 16px; line-height: 1.5; }
 .debt-total { display: grid; gap: 2px; margin: 20px 0 0; font-variant-numeric: tabular-nums; }
@@ -908,7 +910,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 .debt-row:nth-child(odd) .debt-slip { text-decoration: line-through 1px; }
 
 @media (min-width: 1024px) {
-  .debt-stage { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: center; padding-block: 96px; }
+  .debt-stage { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: center; }
   .debt-sheet { padding: 28px; }
   .debt-name, .debt-amount { font-size: 16px; }
 }
@@ -916,7 +918,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 /* With JS and motion, the section becomes a scroll track and the stage sticks under the header. */
 @media (prefers-reduced-motion: no-preference) and (min-height: 640px) {
   .js .debt-track { height: 210svh; }
-  .js .debt-stage { position: sticky; top: 64px; min-height: calc(100svh - 64px); align-content: center; padding-block: 24px; }
+  .js .debt-stage { position: sticky; top: var(--header-compact-h); min-height: calc(100svh - var(--header-compact-h)); align-content: center; padding-block: 24px; }
 }
 
 /* Reduced motion preference */

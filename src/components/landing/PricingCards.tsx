@@ -15,10 +15,9 @@ export default function PricingCards({ content, demoAccess }: PricingCardsProps)
     <section
       id="tariflar"
       data-screen-label="09 Tariflar"
-      className="py-24 sm:py-28 px-6 scroll-mt-[68px]"
       aria-labelledby="pricing-heading"
     >
-      <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 items-start">
+      <div className="landing-container grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-14 items-start">
         {/* Left Column: Context, Cards, Table */}
         <div className="flex flex-col gap-6">
           <h2

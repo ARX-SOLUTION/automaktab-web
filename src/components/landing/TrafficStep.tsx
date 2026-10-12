@@ -10,10 +10,10 @@ export default function TrafficStep({ content }: TrafficStepProps) {
     <section
       id="qanday"
       data-screen-label="08 Qanday ishlaydi"
-      className="py-24 sm:py-28 px-6 bg-[var(--c-paper)] border-y border-[var(--c-sand-300)] scroll-mt-[68px]"
+      className="bg-[var(--c-paper)] border-y border-[var(--c-sand-300)]"
       aria-labelledby="how-it-works-heading"
     >
-      <div className="max-w-[1240px] mx-auto grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-20 items-start">
+      <div className="landing-container grid lg:grid-cols-[.8fr_1.2fr] gap-10 lg:gap-20 items-start">
         {/* Header */}
         <div className="flex flex-col gap-3.5 max-w-[820px]">
           <h2
