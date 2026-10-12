@@ -313,12 +313,15 @@ test(`live preference and desktop-to-phone changes restore the complete story at
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(1000);
   await page.setViewportSize({ width: 844, height: 390 });
   await expect(roles.locator(".story-preview")).toBeHidden();
-  for (const example of await page.locator("#yol .story-inline-preview, #rollar .story-inline-preview").all()) await expect(example).toBeVisible();
+  // Stacked stories keep only the current chapter open; the role chosen on desktop stays current.
+  await expect(roles.locator("details[open]")).toHaveCount(1);
+  await expect(chapter.locator(".story-inline-preview")).toBeVisible();
+  await expect(page.locator("#yol details[open] .story-inline-preview")).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(roles).not.toHaveAttribute("data-story-ready", "true");
-  for (const path of await page.locator("[data-report-path], #rollar [data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
-  for (const example of await page.locator("#yol .story-inline-preview, #rollar .story-inline-preview").all()) {
+  for (const path of await page.locator("[data-report-path], #rollar details[open] [data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
+  for (const example of await page.locator("#yol details[open] .story-inline-preview, #rollar details[open] .story-inline-preview").all()) {
     await expect(example).toBeVisible();
     await expect(example).toHaveCSS("transform", "none");
   }
@@ -718,9 +721,12 @@ for (const viewport of [
     const content = viewport.path === "/ru" ? contentRu : viewport.path === "/en" ? contentEn : contentUz;
     const previewTitles = [content.journey.previews.student.title, content.journey.previews.payments.title, content.scenes.teacher.title, content.journey.previews.driving.title, content.journey.previews.exam.title];
     await expect(journey.getByRole("tab")).toHaveCount(0);
+    // Stacked chapters work as an accordion: opening one closes the others.
     for (let index = 0; index < 5; index++) {
       const chapter = journey.locator("[data-journey-chapter]").nth(index);
+      if (index > 0) await chapter.locator("summary").click();
       await expect(chapter).toHaveAttribute("open", "");
+      await expect(journey.locator("details[open]")).toHaveCount(1);
       const example = chapter.locator(".story-inline-preview");
       await expect(example).toBeVisible();
       await expect(example).toContainText(previewTitles[index]);
@@ -730,9 +736,12 @@ for (const viewport of [
     const roles = page.locator("#rollar");
     for (const [index, role] of content.roles.tabs.entries()) {
       const chapter = roles.locator("[data-role-chapter]").nth(index);
+      if (index > 0) await chapter.locator("summary").click();
       await expect(chapter).toContainText(role.answer);
       await expect(chapter.locator("[data-product-scene]")).toBeVisible();
+      await expect(roles.locator("details[open]")).toHaveCount(1);
     }
+    await roles.locator("summary").first().click();
     const disclosure = roles.locator("summary").first();
     await disclosure.focus();
     await disclosure.press("Enter");
@@ -742,8 +751,15 @@ for (const viewport of [
     await expect(page.locator("[data-report-branch]")).toHaveCount(3);
     await expect(page.locator("[data-report-total]")).toHaveAttribute("data-report-total-revenue", "14800000");
     await expect(page.locator("#morning-report")).toContainText(content.morningReport.sampleCaption);
-    for (const feature of content.resources.modules) {
+    const moduleTabs = page.locator(".resources-section").getByRole("tab");
+    await expect(moduleTabs).toHaveCount(viewport.width < 768 ? 3 : 0);
+    for (const [index, feature] of content.resources.modules.entries()) {
       const proof = page.locator(`[data-module-proof="${feature.kind}"]`);
+      if (viewport.width < 768) {
+        await moduleTabs.nth(index).click();
+        await expect(moduleTabs.nth(index)).toHaveAttribute("aria-selected", "true");
+        await expect(page.locator("[data-module-proof]:visible")).toHaveCount(1);
+      }
       await expect(proof).toContainText(feature.title);
       await expect(proof.locator("[data-product-scene]")).toBeVisible();
       expect(await proof.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);

@@ -132,7 +132,7 @@ test("owner shortcuts reach the requested chapter on a phone", async ({ page }) 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/en");
   const chapter = page.locator('[data-journey-chapter="1"]');
-  await chapter.locator("summary").click();
+  // Phones keep only the current chapter open, so the payments chapter starts closed.
   await expect(chapter).not.toHaveAttribute("open");
   await page.getByRole("button", { name: "Who has overdue payments? Payments and debt" }).press("Enter");
   await expect(chapter).toHaveAttribute("open");

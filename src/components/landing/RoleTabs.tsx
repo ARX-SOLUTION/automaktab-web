@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import type { LandingContent } from "@/content/uz";
 import { track } from "@/lib/analytics";
 import ProductScene from "./ProductScene";
+import { STORY_QUERY, useCompactStory, useKeepInView, useRefreshOnResize } from "./story-mode";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -19,12 +20,15 @@ export default function RoleTabs({ content, scenes }: RoleTabsProps) {
   const root = useRef<HTMLElement>(null);
   const preview = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const compact = useCompactStory();
+  useRefreshOnResize(root, compact);
+  const keepInView = useKeepInView(activeTab);
 
   useGSAP(() => {
     const element = root.current;
     if (!element) return;
     const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", (_context, childSafe) => {
+    media.add(STORY_QUERY, (_context, childSafe) => {
       if (!childSafe) return;
       const safe = childSafe as ReturnType<typeof useGSAP>["contextSafe"];
       let active = true;
@@ -87,7 +91,7 @@ export default function RoleTabs({ content, scenes }: RoleTabsProps) {
           <div className="role-static-examples story-chapters">
             <span className="story-rail" aria-hidden="true"><i data-story-progress /></span>
             {content.tabs.map((role, index) => (
-              <details key={role.label} open data-role-chapter={index} data-current={index === activeTab} className="story-chapter">
+              <details key={role.label} open={!compact || index === activeTab} onToggle={(event) => { if (!compact || !event.currentTarget.open || index === activeTab) return; keepInView(event.currentTarget); setActiveTab(index); }} data-role-chapter={index} data-current={index === activeTab} className="story-chapter">
                 <summary>{role.label}</summary>
                 <h3>{role.question}</h3>
                 <p>{role.answer}</p>

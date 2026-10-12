@@ -9,6 +9,7 @@ import type { LandingContent } from "@/content/uz";
 import { track } from "@/lib/analytics";
 import DemoBadge from "./DemoBadge";
 import ProductScene from "./ProductScene";
+import { STORY_QUERY, useCompactStory, useKeepInView, useRefreshOnResize } from "./story-mode";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -21,13 +22,16 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
   const root = useRef<HTMLElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const [activeStop, setActiveStop] = useState(0);
+  const compact = useCompactStory();
+  useRefreshOnResize(root, compact);
+  const keepInView = useKeepInView(activeStop);
   const preview = content.previews;
 
   useGSAP(() => {
     const element = root.current;
     if (!element) return;
     const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", (_context, childSafe) => {
+    media.add(STORY_QUERY, (_context, childSafe) => {
       if (!childSafe) return;
       const safe = childSafe as ReturnType<typeof useGSAP>["contextSafe"];
       let active = true;
@@ -312,7 +316,7 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
           <div className="story-chapters">
             <span className="story-rail" aria-hidden="true"><i data-story-progress /></span>
             {content.stops.map((stop, index) => (
-              <details key={stop.number} open data-journey-chapter={index} data-current={index === activeStop} className="story-chapter">
+              <details key={stop.number} open={!compact || index === activeStop} onToggle={(event) => { if (!compact || !event.currentTarget.open || index === activeStop) return; keepInView(event.currentTarget); setActiveStop(index); }} data-journey-chapter={index} data-current={index === activeStop} className="story-chapter">
                 <summary><span className="story-marker" aria-hidden="true">{stop.number}</span>{stop.name}</summary>
                 <h3>{stop.title}</h3>
                 <ul className="story-points">{stop.points.map((point) => <li key={point}><Check size={18} aria-hidden="true" />{point}</li>)}</ul>

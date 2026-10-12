@@ -20,9 +20,11 @@ export default function HeroSign({ content }: HeroSignProps) {
 
     const yolEl = document.querySelector<HTMLElement>(`#yol [data-journey-chapter="${stopIndex}"]`)
       ?? document.getElementById("yol");
-    if (yolEl) {
-      if (yolEl instanceof HTMLDetailsElement) yolEl.open = true;
-      yolEl.querySelector<HTMLElement>("summary")?.focus({ preventScroll: true });
+    if (!yolEl) return;
+    if (yolEl instanceof HTMLDetailsElement) yolEl.open = true;
+    yolEl.querySelector<HTMLElement>("summary")?.focus({ preventScroll: true });
+    // On phones the other chapters collapse first; measure once that layout is committed.
+    requestAnimationFrame(() => {
       const header = document.querySelector(".site-header");
       const clearance = header && getComputedStyle(header).position === "sticky"
         ? header.getBoundingClientRect().height + 16
@@ -30,7 +32,7 @@ export default function HeroSign({ content }: HeroSignProps) {
       const top = yolEl.getBoundingClientRect().top + window.scrollY - clearance;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       window.scrollTo({ top, behavior: reducedMotion ? "auto" : "smooth" });
-    }
+    });
   };
 
   return (
