@@ -25,10 +25,10 @@ export default function FaqAccordion({ content, demoAccess }: FaqAccordionProps)
     <section
       id="savollar"
       data-screen-label="10 Savollar"
-      className="py-24 sm:py-28 px-6 bg-[var(--c-paper)] border-t border-[var(--c-sand-300)] scroll-mt-[68px]"
+      className="bg-[var(--c-paper)] border-t border-[var(--c-sand-300)]"
       aria-labelledby="faq-heading"
     >
-      <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 sm:gap-14 items-start">
+      <div className="landing-container grid grid-cols-1 lg:grid-cols-3 gap-12 sm:gap-14 items-start">
         {/* Section Heading */}
         <div className="flex flex-col gap-3.5">
           <h2
