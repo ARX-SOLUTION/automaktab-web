@@ -485,6 +485,9 @@
 @media (min-width: 1024px) { .report-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: clamp(40px, 5vw, 72px); } .report-branches th, .report-branches td { font-size: 13px; } }
 
 .module-proofs { display: grid; gap: 48px; }
+.module-proof[hidden] { display: none; }
+.module-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+.module-tabs .role-tab { min-height: 44px; padding: 8px 6px; font-size: 13px; line-height: 1.35; cursor: pointer; overflow-wrap: anywhere; }
 .module-proof { display: grid; gap: 28px; min-width: 0; padding: clamp(20px, 4vw, 40px); border-radius: 24px; background: var(--c-sand-100); }
 .module-copy h3 { margin: 0; font: 900 clamp(27px, 3vw, 38px)/1.2 var(--f-display); letter-spacing: -.02em; }
 .module-copy > p { margin: 16px 0 24px; color: var(--c-body-2); font-size: 16px; line-height: 1.7; max-width: 52ch; }
