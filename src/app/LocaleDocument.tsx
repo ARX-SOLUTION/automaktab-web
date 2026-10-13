@@ -1,5 +1,6 @@
 import { Nunito, Manrope, JetBrains_Mono } from "next/font/google";
 import UmamiAnalytics from "@/components/analytics/UmamiAnalytics";
+import PlatformAnalyticsConsent from "@/components/analytics/PlatformAnalyticsConsent";
 import type { Locale } from "@/i18n/config";
 
 const nunito = Nunito({
@@ -48,6 +49,7 @@ export function LocaleDocument({
       <body>
         {children}
         <UmamiAnalytics />
+        <PlatformAnalyticsConsent locale={locale} />
       </body>
     </html>
   );

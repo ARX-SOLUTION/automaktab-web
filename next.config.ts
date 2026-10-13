@@ -1,13 +1,27 @@
 import type { NextConfig } from "next";
 
+function collectorCspOrigin(): string {
+  try {
+    const raw = process.env.NEXT_PUBLIC_ANALYTICS_ORIGIN;
+    const environment = process.env.NEXT_PUBLIC_ANALYTICS_ENVIRONMENT;
+    if (!raw || !["synthetic", "development", "production"].includes(environment ?? "")) return "";
+    const url = new URL(raw);
+    const local = ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname);
+    if (url.username || url.password || url.search || url.hash || url.pathname !== "/" || local && environment !== "synthetic" ||
+      !(url.protocol === "https:" || environment === "synthetic" && url.protocol === "http:" && local)) return "";
+    return " " + url.origin;
+  } catch { return ""; }
+}
+const collectorOrigin = collectorCspOrigin();
+
 const contentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://cloud.umami.is",
+  "script-src 'self' 'unsafe-inline' https://cloud.umami.is" + collectorOrigin,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' blob: data:",
   "font-src 'self' data:",
   // cloud.umami.is/script.js sends pageviews to gateway.umami.is/api/send.
-  "connect-src 'self' https://cloud.umami.is https://gateway.umami.is",
+  "connect-src 'self' https://cloud.umami.is https://gateway.umami.is" + collectorOrigin,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
