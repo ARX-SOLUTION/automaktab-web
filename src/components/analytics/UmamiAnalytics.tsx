@@ -2,10 +2,12 @@
 
 import Script from "next/script";
 import { flushUmamiQueue } from "@/lib/umami";
+import { hostedAnalyticsConfig, marketingTelemetrySettings } from "@/lib/platformAnalytics";
 
 const WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID?.trim();
 
 export default function UmamiAnalytics() {
+  if (hostedAnalyticsConfig(marketingTelemetrySettings)) return null;
   if (!WEBSITE_ID) return null;
 
   return (
