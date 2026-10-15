@@ -45,10 +45,16 @@ export async function generateMetadata({
 
   const meta = META[locale];
   const sharedMetadata = buildHomeMetadata(locale);
+  // An empty index is thin content: keep it out of search results until the
+  // first article in this language is published, then index it again.
+  const hasPosts = (await getBlogPosts()).some((post) =>
+    availableBlogLocales(post).includes(locale),
+  );
 
   return {
     title: meta.title,
     description: meta.description,
+    ...(hasPosts ? {} : { robots: { index: false, follow: true } }),
     alternates: buildLocaleAlternates("/blog", locale),
     openGraph: {
       ...sharedMetadata.openGraph,
