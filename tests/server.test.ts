@@ -220,7 +220,7 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
       ru: "Управляйте оплатами и задолженностью автошколы.",
       en: "Keep track of payments and student debt.",
     },
-    titleSignals: { uz: "to‘lovlari", ru: "Оплаты", en: "payments" },
+    titleSignals: { uz: "to‘lov", ru: "оплат", en: "payment" },
   },
   {
     id: "schedule",
