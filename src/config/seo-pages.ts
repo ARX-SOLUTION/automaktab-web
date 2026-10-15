@@ -12,6 +12,7 @@ export const SEO_PAGE_IDS = [
   "driving",
   "compare",
   "telegram",
+  "fleet",
 ] as const;
 
 export type SeoPageId = (typeof SEO_PAGE_IDS)[number];
@@ -34,6 +35,7 @@ export const SEO_DETAIL_PAGE_IDS = [
   "driving",
   "compare",
   "telegram",
+  "fleet",
 ] as const satisfies readonly SeoPageId[];
 
 export const SEO_LEGAL_PAGE_IDS = [
@@ -1907,7 +1909,7 @@ export const SEO_PAGES: Record<
             "Yo‘q. Mashg‘ulot bo‘yicha masofa yozilmaydi. Mashinaning odometri avtopark bo‘limida yuritiladi.",
         },
       ],
-      related: ["schedule", "attendance", "compare"],
+      related: ["schedule", "fleet", "compare"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Haydash hisobini demoda ko‘ring.",
@@ -1962,7 +1964,7 @@ export const SEO_PAGES: Record<
             "Нет. Пробег по занятию не записывается. Одометр машины ведётся в разделе автопарка.",
         },
       ],
-      related: ["schedule", "attendance", "compare"],
+      related: ["schedule", "fleet", "compare"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите учёт вождения в демо.",
@@ -2017,7 +2019,7 @@ export const SEO_PAGES: Record<
             "No. Distance is not recorded per lesson. The vehicle odometer is kept in the fleet section.",
         },
       ],
-      related: ["schedule", "attendance", "compare"],
+      related: ["schedule", "fleet", "compare"],
       relatedLabel: "Other features",
       cta: {
         title: "See driving lesson tracking in the demo.",
@@ -2529,6 +2531,221 @@ export const SEO_PAGES: Record<
       relatedLabel: "Other features",
       cta: {
         title: "See the Telegram report in the demo.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
+      },
+      updatedAt: "2026-10-16",
+    },
+  },
+  fleet: {
+    uz: {
+      segments: ["features", "fleet"],
+      title: "Avtomaktab avtoparki hisobi: hujjatlar va yoqilg‘i | automaktab.uz",
+      description:
+        "Har bir o‘quv mashinasining hujjat muddatlari, texnik xizmati, qabul-topshirish dalolatnomalari va yoqilg‘i cheklari bir kartada.",
+      keywords: ["avtomaktab mashinalar hisobi", "avtomaktab yoqilg‘i hisobi", "avtomaktab CRM"],
+      eyebrow: "Avtopark",
+      heading: "Avtomaktab avtoparki: hujjatlar, texnik xizmat va yoqilg‘i",
+      definition:
+        "automaktab.uz har bir o‘quv mashinasining holati, hujjat muddatlari, texnik xizmati va yoqilg‘i qaydlarini bir kartada saqlaydi.",
+      intro:
+        "Mashina raqami, toifasi, odometri va holati kartada turadi. Hujjati muddati o‘tgan yoki texnik xizmati kechikkan mashina haydash mashg‘ulotiga biriktirilmaydi.",
+      visual: "scene:fleet",
+      sections: [
+        {
+          title: "Hujjatlar",
+          body:
+            "Ro‘yxatdan o‘tkazish guvohnomasi, sug‘urta va texnik ko‘rik hujjatlari amal qilish muddati bilan mashina kartasida saqlanadi.",
+        },
+        {
+          title: "Qaysi mashina darsga chiqadi",
+          body:
+            "Mashg‘ulotga mashina tanlanganda tizim tekshiradi: mashina faolmi, uchala hujjat bormi va muddati o‘tmaganmi, ochiq ta’mir yoki kechikkan texnik xizmat yo‘qmi, toifa mos keladimi. B toifa uchun 10 yildan, boshqa toifalar uchun 20 yildan eski mashina biriktirilmaydi.",
+        },
+        {
+          title: "Texnik xizmat va nuqsonlar",
+          body:
+            "Har bir ta’mir boshlanish va tugash sanasi bilan yoziladi. Keyingi xizmat sana yoki odometr bo‘yicha belgilanadi. Topilgan nuqson izoh va rasm bilan yoziladi va bartaraf etilguncha ochiq turadi.",
+        },
+        {
+          title: "Qabul qilish va topshirish",
+          body:
+            "Mashina topshirilganda odometr ko‘rsatkichi va beshta rasm bilan dalolatnoma tuziladi: old, orqa, ikki yon va odometr. Qabul qiluvchi xodim tasdiqlaydi, rahbar yoki menejer sababini yozib rad etishi mumkin.",
+        },
+        {
+          title: "Yoqilg‘i va OFD cheki",
+          body:
+            "Yoqilg‘i qaydi chek va odometr rasmi bilan yuboriladi. Chekdagi QR kod orqali fiskal chek ma’lumoti olinadi. Sotuvchi STIR zapravkaga mos kelmasa ogohlantirish chiqadi, summa tasdiqlangan chekdan oshmaydi. QR bo‘lmasa, qayd qo‘lda tekshiriladi.",
+        },
+        {
+          title: "Filiallar va mas’ul xodim",
+          body:
+            "Rahbar mashinani sabab ko‘rsatib boshqa filialga o‘tkazadi, tarixda kim va qachon o‘tkazgani qoladi. Har bir mashinaga mas’ul xodim biriktiriladi.",
+        },
+      ],
+      faq: [
+        {
+          question: "Sug‘urta va texko‘rik muddati qayerda ko‘rinadi?",
+          answer:
+            "Mashina kartasidagi hujjatlar bo‘limida. Muddati o‘tgan mashina haydash mashg‘ulotiga biriktirilmaydi.",
+        },
+        {
+          question: "Yoqilg‘i qanday tekshiriladi?",
+          answer:
+            "Chek va odometr rasmi majburiy. Chekdagi QR kod orqali fiskal chek ma’lumoti olinadi va zapravka STIR hamda summa bilan solishtiriladi.",
+        },
+        {
+          question: "Mashinani boshqa filialga o‘tkazsa bo‘ladimi?",
+          answer:
+            "Ha, rahbar o‘tkazadi. Sabab yoziladi, tarixda kim va qachon o‘tkazgani saqlanadi.",
+        },
+      ],
+      related: ["driving", "branches", "compare"],
+      relatedLabel: "Boshqa imkoniyatlar",
+      cta: {
+        title: "Avtoparkni demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
+      },
+      updatedAt: "2026-10-16",
+    },
+    ru: {
+      segments: ["features", "fleet"],
+      title: "Учёт автомобилей автошколы: документы и топливо | automaktab.uz",
+      description:
+        "Сроки документов, техобслуживание, акты приёма-передачи и топливные чеки каждой учебной машины в одной карточке.",
+      keywords: ["учет автомобилей автошколы", "учет топлива автошколы", "CRM автошколы"],
+      eyebrow: "Автопарк",
+      heading: "Автопарк автошколы: документы, техобслуживание и топливо",
+      definition:
+        "automaktab.uz хранит в одной карточке состояние каждой учебной машины, сроки документов, техобслуживание и записи о топливе.",
+      intro:
+        "Номер, категория, пробег и статус машины видны в карточке. Машину с просроченным документом или техобслуживанием нельзя назначить на занятие вождения.",
+      visual: "scene:fleet",
+      sections: [
+        {
+          title: "Документы",
+          body:
+            "Свидетельство о регистрации, страховка и техосмотр хранятся в карточке машины вместе со сроком действия.",
+        },
+        {
+          title: "Какая машина может выйти на занятие",
+          body:
+            "При выборе машины система проверяет: активна ли машина, есть ли все три документа и не истекли ли они, нет ли открытого ремонта или просроченного техобслуживания, подходит ли категория. Для категории B не назначается машина старше 10 лет, для других категорий старше 20 лет.",
+        },
+        {
+          title: "Техобслуживание и неисправности",
+          body:
+            "Каждый ремонт записывается с датой начала и окончания. Следующее обслуживание назначается по дате или по пробегу. Найденная неисправность записывается с комментарием и фото и остаётся открытой до устранения.",
+        },
+        {
+          title: "Приём и передача",
+          body:
+            "При передаче машины составляется акт с пробегом и пятью фото: спереди, сзади, с двух сторон и одометр. Принимающий сотрудник подтверждает акт, руководитель или менеджер может отклонить его с указанием причины.",
+        },
+        {
+          title: "Топливо и чек ОФД",
+          body:
+            "Заправка отправляется с фото чека и одометра. По QR-коду чека загружаются данные фискального чека. Если ИНН продавца не совпадает с АЗС, появляется предупреждение, а сумма не может превышать подтверждённый чек. Без QR-кода запись проверяется вручную.",
+        },
+        {
+          title: "Филиалы и ответственный",
+          body:
+            "Руководитель переводит машину в другой филиал с указанием причины, в истории остаётся, кто и когда её перевёл. За каждой машиной закрепляется ответственный сотрудник.",
+        },
+      ],
+      faq: [
+        {
+          question: "Где видны сроки страховки и техосмотра?",
+          answer:
+            "В разделе документов в карточке машины. Машину с истёкшим сроком нельзя назначить на занятие вождения.",
+        },
+        {
+          question: "Как проверяется топливо?",
+          answer:
+            "Фото чека и одометра обязательны. По QR-коду загружаются данные фискального чека и сверяются с ИНН АЗС и суммой.",
+        },
+        {
+          question: "Можно ли перевести машину в другой филиал?",
+          answer:
+            "Да, это делает руководитель. Указывается причина, в истории сохраняется, кто и когда перевёл.",
+        },
+      ],
+      related: ["driving", "branches", "compare"],
+      relatedLabel: "Другие возможности",
+      cta: {
+        title: "Посмотрите автопарк в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-10-16",
+    },
+    en: {
+      segments: ["features", "fleet"],
+      title: "Driving-school fleet tracking: documents and fuel | automaktab.uz",
+      description:
+        "Document expiry dates, maintenance, handover records and fuel receipts for every training car, kept on one vehicle record.",
+      keywords: ["driving school fleet management", "driving school fuel tracking", "driving school CRM"],
+      eyebrow: "Fleet",
+      heading: "Driving-school fleet: documents, maintenance and fuel",
+      definition:
+        "automaktab.uz keeps each training car’s status, document expiry dates, maintenance and fuel records on one vehicle record.",
+      intro:
+        "Plate, category, odometer and status sit on the vehicle record. A car with an expired document or overdue service cannot be assigned to a driving lesson.",
+      visual: "scene:fleet",
+      sections: [
+        {
+          title: "Documents",
+          body:
+            "Registration certificate, insurance and technical inspection are stored on the vehicle record with their expiry dates.",
+        },
+        {
+          title: "Which car can go out",
+          body:
+            "When a car is chosen for a lesson, the system checks that it is active, that all three documents exist and have not expired, that there is no open repair or overdue service, and that the category matches. Category B cars older than 10 years, and other categories older than 20 years, are not assigned.",
+        },
+        {
+          title: "Maintenance and defects",
+          body:
+            "Each repair is recorded with start and end dates. The next service is set by date or odometer. A defect is logged with a note and photo and stays open until it is resolved.",
+        },
+        {
+          title: "Handover",
+          body:
+            "When a car changes hands, a handover record is made with the odometer reading and five photos: front, back, both sides and odometer. The receiving employee confirms it; the owner or a manager can reject it with a reason.",
+        },
+        {
+          title: "Fuel and OFD receipts",
+          body:
+            "A fuel entry is submitted with photos of the receipt and the odometer. The receipt’s QR code is used to fetch the fiscal receipt data. If the seller’s TIN does not match the station, a warning is shown, and the amount cannot exceed the verified receipt. Without a QR code, the entry is reviewed manually.",
+        },
+        {
+          title: "Branches and custodian",
+          body:
+            "The owner moves a car to another branch with a reason, and the history keeps who moved it and when. Each car has a responsible employee.",
+        },
+      ],
+      faq: [
+        {
+          question: "Where can I see insurance and inspection expiry dates?",
+          answer:
+            "In the documents section of the vehicle record. A car with an expired document cannot be assigned to a driving lesson.",
+        },
+        {
+          question: "How is fuel checked?",
+          answer:
+            "Receipt and odometer photos are required. The receipt’s QR code is used to fetch the fiscal receipt, which is matched against the station’s TIN and the amount.",
+        },
+        {
+          question: "Can a car be moved to another branch?",
+          answer:
+            "Yes, by the owner. A reason is recorded, and the history keeps who moved it and when.",
+        },
+      ],
+      related: ["driving", "branches", "compare"],
+      relatedLabel: "Other features",
+      cta: {
+        title: "See the fleet in the demo.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
