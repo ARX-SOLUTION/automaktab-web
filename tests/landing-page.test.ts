@@ -174,7 +174,7 @@ describe("automaktab.uz marketing page verification", () => {
     expect(contentUz.resources.roadmapCard.items).toHaveLength(2);
     expect(contentUz.howItWorks.steps).toHaveLength(3);
     expect(contentUz.pricing.comparisonRows).toHaveLength(3);
-    expect(contentUz.faq.items).toHaveLength(9);
+    expect(contentUz.faq.items).toHaveLength(10);
     expect(contentUz.finalCta).toBeDefined();
   });
 
@@ -231,7 +231,7 @@ describe("automaktab.uz marketing page verification", () => {
       expect(content.pricing.comparisonRows).toHaveLength(3);
       expect(content.pricing.form.fields.city.options).toHaveLength(14);
       expect(content.pricing.form.disclaimer).toBeTruthy();
-      expect(content.faq.items).toHaveLength(9);
+      expect(content.faq.items).toHaveLength(10);
       expect(content.finalCta).toBeDefined();
 
       // Antislop rule R-02: Zero em dashes in newly authored content across all languages

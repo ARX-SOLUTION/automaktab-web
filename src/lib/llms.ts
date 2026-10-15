@@ -32,7 +32,7 @@ const LANGUAGE_NAME: Record<Locale, string> = {
 // Curated from claims the site already makes (landing journey, modules,
 // morning report, pricing and FAQ copy); see the SEO/GEO research report.
 const SUMMARY =
-  "automaktab.uz is a CRM and management system for driving schools (avtomaktab) in Uzbekistan. One system for branches, students, payments and debt, groups and lesson schedules, attendance, practical driving lessons, internal theory tests, fleet, leads and owner reports. Interface in Uzbek, Russian and English.";
+  "automaktab.uz is a CRM and management system for driving schools (avtomaktab) in Uzbekistan. One system for branches, students, payments and debt, groups and lesson schedules, attendance, practical driving lessons, internal theory tests, fleet, leads and owner reports. Interface in Uzbek, Russian and English. Not affiliated with avtomaktab.com, a separate exam-prep site.";
 
 const FEATURE_PAGES: ReadonlyArray<readonly [SeoPageId, string, string]> = [
   ["payments", "Payments and debt", "payment history on the student card; debtors filtered by branch and group."],

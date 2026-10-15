@@ -347,7 +347,7 @@ const FAQ_TITLE: Record<Locale, string> = {
   en: "Common questions.",
 };
 
-const FAQ_ITEM_COUNT = 9;
+const FAQ_ITEM_COUNT = 10;
 
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
@@ -442,7 +442,8 @@ describe.each(LOCALE_ROUTES)(
       );
       expect(organization).toBeTruthy();
       expect(organization.name).toBe("automaktab.uz");
-      expect(organization.alternateName).toEqual(["Automaktab", "Автомактаб"]);
+      expect(organization.alternateName).toEqual(["Automaktab", "Автомактаб", "automaktab CRM"]);
+      expect(organization.disambiguatingDescription).toContain("avtomaktab.com");
       expect(organization.sameAs).toBeUndefined();
       expect(organization.contactPoint).toBeUndefined();
       expect(organization.logo).toEqual({
