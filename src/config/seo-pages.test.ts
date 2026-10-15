@@ -4,6 +4,7 @@ import {
   getSeoPagePath,
   getSeoPagePaths,
   getSeoPageStaticParams,
+  SEO_DETAIL_PAGE_IDS,
   SEO_LEGAL_PAGE_IDS,
   SEO_LEGACY_PATH_REDIRECTS,
   SEO_PAGE_IDS,
@@ -93,5 +94,21 @@ describe("seo pages use English path segments in every locale", () => {
     expect(
       SEO_LEGACY_PATH_REDIRECTS["/ru/vozmozhnosti/platezhi-i-zadolzhennost"],
     ).toBe("/ru/features/payments-and-debt");
+  });
+
+  it("serves answer-first detail pages with a definition and FAQ", () => {
+    expect(getSeoPagePath("driving", "uz")).toBe("/features/practical-driving");
+    expect(getSeoPagePath("driving", "ru")).toBe("/ru/features/practical-driving");
+    expect(getSeoPagePath("driving", "en")).toBe("/en/features/practical-driving");
+    const params = getSeoPageStaticParams();
+    for (const id of SEO_DETAIL_PAGE_IDS) {
+      for (const locale of ["uz", "ru", "en"] as const) {
+        const copy = SEO_PAGES[id][locale];
+        expect(params).toContainEqual({ locale, seoPath: [...copy.segments] });
+        expect(copy.definition).toBeTruthy();
+        expect(copy.faq?.length).toBeGreaterThanOrEqual(2);
+        expect(JSON.stringify(copy)).not.toMatch(/talaba|—/i);
+      }
+    }
   });
 });
