@@ -6,6 +6,7 @@ export const SEO_PAGE_IDS = [
   "attendance",
   "branches",
   "pricing",
+  "leads",
   "privacy",
   "terms",
 ] as const;
@@ -19,6 +20,7 @@ export const SEO_RELATED_PAGE_IDS = [
   "attendance",
   "branches",
   "pricing",
+  "leads",
 ] as const satisfies readonly SeoPageId[];
 
 export const SEO_LEGAL_PAGE_IDS = [
@@ -590,6 +592,117 @@ export const SEO_PAGES: Record<
         label: "Open demo",
       },
       updatedAt: "2026-10-01",
+    },
+  },
+  leads: {
+    uz: {
+      segments: ["features", "leads-and-enrollment"],
+      title: "Murojaatlar va o‘quvchilarni qabul qilish | automaktab.uz",
+      description:
+        "Yangi murojaatlarni yo‘qotmang. Har bir nomzodni guruhga biriktirib, qabul holatini bir joyda ko‘ring.",
+      keywords: [
+        "avtomaktab murojaatlari",
+        "o‘quvchi qabul qilish",
+        "avtomaktab CRM",
+      ],
+      eyebrow: "Murojaatlar va qabul",
+      heading: "Har bir murojaat guruhga aylanadi.",
+      intro:
+        "Telefon, Telegram va tashrifdan kelgan murojaatlarni bir ro‘yxatda to‘plang. Qaysi nomzod qaysi guruhga yozilganini shu yerda ko‘ring.",
+      sections: [
+        {
+          title: "Murojaatlar bir ro‘yxatda",
+          body:
+            "Qayerdan kelganidan qat’i nazar, har bir murojaat bitta ro‘yxatda. Javob berilmagani ko‘rinib turadi.",
+        },
+        {
+          title: "Nomzoddan guruhga",
+          body:
+            "Qabul qilingan o‘quvchini guruhga biriktiring. To‘lov va davomat shu kartadan davom etadi.",
+        },
+        {
+          title: "Demoda sinab ko‘ring",
+          body:
+            "Namuna murojaatlar bilan qabul jarayonini tekshiring. Telefon raqamingizni qoldirish shart emas.",
+        },
+      ],
+      relatedLabel: "Boshqa imkoniyatlar",
+      cta: {
+        title: "Qabul jarayonini demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
+      },
+      updatedAt: "2026-10-15",
+    },
+    ru: {
+      segments: ["features", "leads-and-enrollment"],
+      title: "Заявки и приём курсантов | automaktab.uz",
+      description:
+        "Не теряйте заявки. Ведите каждого кандидата до группы и смотрите статус приёма в одном месте.",
+      keywords: ["заявки автошколы", "приём курсантов", "CRM автошколы"],
+      eyebrow: "Заявки и приём",
+      heading: "Каждая заявка становится группой.",
+      intro:
+        "Собирайте заявки из звонков, Telegram и визитов в одном списке. Видно, какой кандидат в какую группу зачислен.",
+      sections: [
+        {
+          title: "Заявки в одном списке",
+          body:
+            "Неважно, откуда пришла заявка, — каждая попадает в общий список. Видно, на какие заявки ещё не ответили.",
+        },
+        {
+          title: "От кандидата к группе",
+          body:
+            "Зачислите принятого курсанта в группу. Оплаты и посещаемость продолжаются с его карточки.",
+        },
+        {
+          title: "Попробуйте в демо",
+          body:
+            "Проверьте процесс приёма на вымышленных заявках. Оставлять номер телефона не нужно.",
+        },
+      ],
+      relatedLabel: "Другие возможности",
+      cta: {
+        title: "Посмотрите процесс приёма в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-10-15",
+    },
+    en: {
+      segments: ["features", "leads-and-enrollment"],
+      title: "Inquiries and student enrollment | automaktab.uz",
+      description:
+        "Stop losing inquiries. Track every candidate through to group placement in one place.",
+      keywords: ["driving school inquiries", "student enrollment", "driving school CRM"],
+      eyebrow: "Inquiries and enrollment",
+      heading: "Every inquiry becomes a placement.",
+      intro:
+        "Collect inquiries from calls, Telegram and walk-ins in one list. See which candidate joined which group.",
+      sections: [
+        {
+          title: "Inquiries in one list",
+          body:
+            "Whatever the source, every inquiry lands in one list. Unanswered ones stay visible.",
+        },
+        {
+          title: "From candidate to group",
+          body:
+            "Place an admitted student into a group. Payments and attendance continue from their record.",
+        },
+        {
+          title: "Try it in the demo",
+          body:
+            "Check the enrollment flow with sample inquiries. You do not need to leave your phone number.",
+        },
+      ],
+      relatedLabel: "Other features",
+      cta: {
+        title: "See enrollment in the demo.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
+      },
+      updatedAt: "2026-10-15",
     },
   },
   privacy: {

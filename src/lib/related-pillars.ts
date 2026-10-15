@@ -30,6 +30,7 @@ const PILLAR_CRITERIA: Record<PillarId, string> = {
   attendance: "Lesson attendance records: present, late, absent or excused.",
   branches: "Branch performance and the owner dashboard: revenue compared across branches.",
   pricing: "Pricing, tariffs and trial terms for the school.",
+  leads: "Inquiries and enrollment: collecting candidate requests and placing students into groups.",
 };
 
 const KEYWORDS: Record<PillarId, readonly string[]> = {
@@ -115,6 +116,23 @@ const KEYWORDS: Record<PillarId, readonly string[]> = {
     "цена",
     "пробный",
     "тариф",
+  ],
+  leads: [
+    "lead",
+    "inquiry",
+    "inquiries",
+    "enrollment",
+    "candidate",
+    "murojaat",
+    "qabul",
+    "nomzod",
+    "abiturient",
+    "заявка",
+    "заявки",
+    "прием",
+    "приём",
+    "кандидат",
+    "зачисление",
   ],
 };
 
