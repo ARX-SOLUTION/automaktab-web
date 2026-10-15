@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildHomePageMetadata } from "../home-metadata";
 import LandingPage from "@/components/landing/LandingPage";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";
@@ -16,6 +18,14 @@ const contentByLocale: Record<Locale, LandingContent> = {
   ru: contentRu,
   en: contentEn,
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  return buildHomePageMetadata(locale);
+}
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
