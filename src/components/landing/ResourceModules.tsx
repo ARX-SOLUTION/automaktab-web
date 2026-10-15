@@ -35,10 +35,10 @@ export default function ResourceModules({ label, modules, scenes }: ResourceModu
         </div>
       )}
       <div ref={panels} className="module-proofs">
-        {modules.map((module, index) => <article key={module.kind} id={`module-panel-${index}`} role={tabs ? "tabpanel" : undefined} aria-labelledby={tabs ? `module-tab-${index}` : undefined} hidden={tabs && index !== active} data-module-proof={module.kind} className={`module-proof module-proof-${module.kind}`}>
+        {modules.map((module, index) => <div key={module.kind} id={`module-panel-${index}`} role={tabs ? "tabpanel" : undefined} aria-labelledby={tabs ? `module-tab-${index}` : undefined} hidden={tabs && index !== active} data-module-proof={module.kind} className={`module-proof module-proof-${module.kind}`}>
           <div className="module-copy"><h3>{module.title}</h3><p>{module.description}</p><ul>{module.points.map((point) => <li key={point}><Check size={18} aria-hidden="true" />{point}</li>)}</ul></div>
           <ProductScene kind={module.kind} content={scenes} />
-        </article>)}
+        </div>)}
       </div>
     </>
   );
