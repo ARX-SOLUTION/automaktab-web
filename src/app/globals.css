@@ -1096,6 +1096,90 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   color: var(--c-muted);
 }
 
+/* SEO feature pages: answer-first definition, reused visual, FAQ, comparison table */
+.article-header > p.seo-definition {
+  margin-bottom: 1rem;
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+.seo-visual {
+  max-width: 40rem;
+  margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+}
+
+.seo-faq details {
+  border-bottom: 1px solid var(--c-sand-300);
+}
+
+.seo-faq summary {
+  min-height: 48px;
+  padding-block: 0.8rem;
+  color: var(--c-ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.seo-faq details > p {
+  margin-top: 0;
+}
+
+.seo-compare {
+  max-width: 64rem;
+  margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+  overflow-x: auto;
+  border: 1px solid var(--c-sand-300);
+  border-radius: var(--r-l);
+  background: var(--c-paper);
+}
+
+.seo-compare table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.seo-compare caption {
+  padding: 1rem 1rem 0.5rem;
+  color: var(--c-ink);
+  font-weight: 700;
+  text-align: left;
+}
+
+.seo-compare th,
+.seo-compare td {
+  padding: 0.65rem 0.8rem;
+  border-top: 1px solid var(--c-sand-300);
+  text-align: left;
+  vertical-align: top;
+}
+
+.seo-compare td {
+  text-align: center;
+}
+
+.seo-compare tbody th {
+  position: sticky;
+  left: 0;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+.seo-compare thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--c-paper);
+}
+
+.seo-compare-legend {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  color: var(--c-muted);
+  font-size: 0.85rem;
+}
+
 /* ──────────────────────────────────────────────────────────── */
 /* Shared supporting-page components (pricing, features, legal, */
 /* blog, changelog, not-found). Removed with the liquid-glass   */
