@@ -947,9 +947,19 @@ export const contentUz: LandingContent = {
           "Ro‘yxatlaringizni birga ko‘rib chiqamiz. Qaysi ma’lumotlarni ko‘chirish va xodimlarni qanday o‘rgatishni sinovdan oldin kelishamiz.",
       },
       {
+        question: "Excel’dan import qilsa bo‘ladimi?",
+        answerLogin:
+          "Tugma orqali emas. O‘quvchilar ro‘yxatini CSV fayl bilan birga ko‘chiramiz: ism, familiya, telefon va kurs turi, bitta faylda 10 000 tagacha. Guruh, narx va qarz qoldig‘i keyin o‘quvchi kartasida kiritiladi. To‘lovlar tarixi va xodimlar fayl orqali ko‘chirilmaydi.",
+      },
+      {
         question: "Kirish huquqlari qanday boshqariladi?",
         answerLogin:
           "Har bir xodim ishiga mos bo‘limlarni ko‘radi. Kimga qaysi kirish huquqi kerakligini ulashdan oldin birga tekshiramiz.",
+      },
+      {
+        question: "E-AVTOMAKTAB’dan farqi nima?",
+        answerLogin:
+          "E-AVTOMAKTAB o‘quv platformasi: elektron darsliklar, onlayn YHQ testlari, e-test.uz va e-license.uz bilan bog‘lanish. automaktab.uz maktabni boshqarish uchun: filiallar va ruxsatlar, lidlar, to‘lov va qarzdorlik, xarajatlar, amaliy haydashni tasdiqlash, avtopark va har kuni 08:00 da Telegram hisobot. Davlat tizimlari bilan integratsiya va o‘quv videolari bizda yo‘q.",
       },
     ],
   },

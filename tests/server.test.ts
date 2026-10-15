@@ -347,7 +347,7 @@ const FAQ_TITLE: Record<Locale, string> = {
   en: "Common questions.",
 };
 
-const FAQ_ITEM_COUNT = 7;
+const FAQ_ITEM_COUNT = 9;
 
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
