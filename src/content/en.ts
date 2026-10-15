@@ -614,6 +614,11 @@ export const contentEn: LandingContent = {
         answerLogin:
           "E-AVTOMAKTAB is a learning platform: e-textbooks, online road rules tests, and links to e-test.uz and e-license.uz. automaktab.uz is built to run a driving school: branches and access rights, leads, payments and debt, expenses, approved driving lessons, fleet, and a daily 08:00 owner report in Telegram. We do not integrate with government systems or provide training videos.",
       },
+      {
+        question: "Are automaktab.uz and avtomaktab.com the same?",
+        answerLogin:
+          "No. avtomaktab.com is a separate test-prep site for the road rules exam. automaktab.uz is a management system for driving schools and is not affiliated with it.",
+      },
     ],
   },
   finalCta: {

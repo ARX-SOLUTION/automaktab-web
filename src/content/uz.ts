@@ -960,6 +960,11 @@ export const contentUz: LandingContent = {
         answerLogin:
           "E-AVTOMAKTAB o‘quv platformasi: elektron darsliklar, onlayn YHQ testlari, e-test.uz va e-license.uz bilan bog‘lanish. automaktab.uz maktabni boshqarish uchun: filiallar va ruxsatlar, lidlar, to‘lov va qarzdorlik, xarajatlar, amaliy haydashni tasdiqlash, avtopark va har kuni 08:00 da Telegram hisobot. Davlat tizimlari bilan integratsiya va o‘quv videolari bizda yo‘q.",
       },
+      {
+        question: "automaktab.uz va avtomaktab.com bir xilmi?",
+        answerLogin:
+          "Yo‘q. avtomaktab.com YHQ imtihoniga tayyorlanish uchun alohida test sayti. automaktab.uz avtomaktablar uchun boshqaruv tizimi va u bilan aloqasi yo‘q.",
+      },
     ],
   },
   finalCta: {
