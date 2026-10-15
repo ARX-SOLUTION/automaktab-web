@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useNearViewport } from "./story-mode";
 import { Check, Clock3, UserX, Users, CalendarDays, ArrowDown, ArrowRight, UserRound, CarFront, Wrench, ShieldCheck, Fuel, BookOpen } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 
@@ -15,10 +16,11 @@ const attendanceIcons = [Check, Check, Clock3, UserX];
 export default function ProductScene({ kind, content }: { kind: SceneKind; content: LandingContent["scenes"] }) {
   const root = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<"static" | "playing" | "paused" | "complete">("static");
+  const near = useNearViewport(root);
 
   useGSAP(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || !near) return;
     const media = gsap.matchMedia();
     media.add({ animate: "(prefers-reduced-motion: no-preference)", reduce: "(prefers-reduced-motion: reduce)" }, (context, childSafe) => {
       if (!context.conditions?.animate || !childSafe) { setState("static"); return; }
@@ -64,7 +66,7 @@ export default function ProductScene({ kind, content }: { kind: SceneKind; conte
       };
     });
     return () => media.revert();
-  }, { scope: root, dependencies: [kind, content], revertOnUpdate: true });
+  }, { scope: root, dependencies: [kind, content, near], revertOnUpdate: true });
 
   const data = content[kind];
   return (

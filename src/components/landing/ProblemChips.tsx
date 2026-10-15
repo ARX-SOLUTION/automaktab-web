@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGSAP } from "@gsap/react";
+import { useNearViewport } from "./story-mode";
 import { Send, Table2, FileText, Wallet, ClipboardCheck, CalendarDays, Layers, Check } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 
@@ -24,10 +25,12 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
 
+  const near = useNearViewport(root);
+
   useGSAP(() => {
     const element = root.current;
     const diagram = stage.current;
-    if (!element || !diagram) return;
+    if (!element || !diagram || !near) return;
     const select = gsap.utils.selector(element);
     const media = gsap.matchMedia();
     media.add({ animate: "(prefers-reduced-motion: no-preference)", reduce: "(prefers-reduced-motion: reduce)" }, (context, childSafe) => {
@@ -150,7 +153,7 @@ export default function ProblemChips({ content }: { content: LandingContent["pro
       };
     });
     return () => media.revert();
-  }, { scope: root, dependencies: [content], revertOnUpdate: true });
+  }, { scope: root, dependencies: [content, near], revertOnUpdate: true });
 
   return (
     <section id="platform-flow" ref={root} data-flow-state="static" data-flow-phase="static" className="platform-flow" aria-labelledby="problem-heading">

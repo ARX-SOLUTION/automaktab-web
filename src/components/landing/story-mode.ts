@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useSyncExternalStore, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /** Sticky scroll stories run only where globals.css lays them out side by side. */
@@ -20,6 +20,26 @@ export function useMediaQuery(query: string, serverValue = false) {
 /** True while a story is a stack of chapters, where only the current chapter stays open. Server markup keeps every chapter open. */
 export function useCompactStory() {
   return !useMediaQuery(STORY_QUERY, true);
+}
+
+/**
+ * True once `target` comes within a viewport of the screen, and stays true.
+ * Below-the-fold motion builds its timelines (and the layout reads they need)
+ * only then, instead of all at once during hydration; the animations still
+ * start at the same scroll positions as before.
+ */
+export function useNearViewport(target: RefObject<Element | null>) {
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const element = target.current;
+    if (near || !element) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) setNear(true);
+    }, { rootMargin: "100% 0px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [target, near]);
+  return near;
 }
 
 /** Opening or closing a disclosure moves everything below it; keep later scroll triggers in place. */

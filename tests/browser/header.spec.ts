@@ -39,7 +39,7 @@ for (const width of [320, 390, 768, 1024]) {
       expect(Math.min(menu.width, menu.height)).toBeGreaterThanOrEqual(44);
       await expect(page.locator(".site-header-demo")).toHaveAccessibleName(/demo/i);
       // Login and the language switcher stay on screen without opening the menu.
-      for (const selector of [".site-header-login", '.site-header-controls a[aria-current="page"]', '.site-header-controls a[aria-label="English"]']) {
+      for (const selector of [".site-header-login", '.site-header-controls a[aria-current="page"]', '.site-header-controls a[aria-label="EN (English)"]']) {
         const control = await isOnTop(page, selector);
         expect(control).toMatchObject({ inViewport: true, hit: true, opacity: "1" });
         expect(Math.min(control.width, control.height)).toBeGreaterThanOrEqual(44);
@@ -115,7 +115,7 @@ for (const width of [390, 1024]) {
       })).toBe(1);
       if (step.includes("bosh sahifa")) break;
     }
-    expect(reached).toEqual(["Menyu", "Demoni ochish", "English", "Русский", "O‘zbekcha", "Kirish", "automaktab.uz bosh sahifa"]);
+    expect(reached).toEqual(["Menyu", "Demoni ochish", "EN (English)", "RU (Русский)", "UZ (O‘zbekcha)", "Kirish", "automaktab.uz bosh sahifa"]);
     expect(await page.evaluate(() => (window as unknown as { shift: number }).shift)).toBe(0);
   });
 }

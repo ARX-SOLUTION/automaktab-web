@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import type { LandingContent } from "@/content/uz";
 import { track } from "@/lib/analytics";
 import ProductScene from "./ProductScene";
-import { STORY_QUERY, useCompactStory, useKeepInView, useRefreshOnResize } from "./story-mode";
+import { STORY_QUERY, useCompactStory, useKeepInView, useNearViewport, useRefreshOnResize } from "./story-mode";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -23,6 +23,8 @@ export default function RoleTabs({ content, scenes }: RoleTabsProps) {
   const compact = useCompactStory();
   useRefreshOnResize(root, compact);
   const keepInView = useKeepInView(activeTab);
+
+  const near = useNearViewport(root);
 
   useGSAP(() => {
     const element = root.current;
@@ -60,7 +62,7 @@ export default function RoleTabs({ content, scenes }: RoleTabsProps) {
   }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   useGSAP(() => {
-    if (!preview.current) return;
+    if (!preview.current || !near) return;
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(preview.current, { clipPath: "inset(0 0 8% 0 round 16px)", y: 8 }, {
@@ -68,7 +70,7 @@ export default function RoleTabs({ content, scenes }: RoleTabsProps) {
       });
     });
     return () => media.revert();
-  }, { scope: preview, dependencies: [activeTab], revertOnUpdate: true });
+  }, { scope: preview, dependencies: [activeTab, near], revertOnUpdate: true });
 
   const handleSelectTab = (index: number) => {
     setActiveTab(index);

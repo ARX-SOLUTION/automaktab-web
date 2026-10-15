@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useNearViewport } from "./story-mode";
 import { Send, Check, Clock3 } from "lucide-react";
 import type { LandingContent } from "@/content/uz";
 
@@ -17,9 +18,11 @@ export default function MorningReportWidget({ content }: { content: LandingConte
   const revenue = content.branches.reduce((total, branch) => total + branch.revenue, 0);
   const students = content.branches.reduce((total, branch) => total + branch.students, 0);
 
+  const near = useNearViewport(root);
+
   useGSAP(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || !near) return;
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", (_context, childSafe) => {
       if (!childSafe) return;
@@ -46,7 +49,7 @@ export default function MorningReportWidget({ content }: { content: LandingConte
       return () => { active = false; observer.disconnect(); document.removeEventListener("visibilitychange", sync); setState("static"); };
     });
     return () => media.revert();
-  }, { scope: root, dependencies: [content], revertOnUpdate: true });
+  }, { scope: root, dependencies: [content, near], revertOnUpdate: true });
 
   return (
     <section ref={root} id="morning-report" data-report-state={state} className="report-section bg-paper" aria-labelledby="morning-report-heading">

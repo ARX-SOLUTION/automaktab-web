@@ -106,7 +106,7 @@ export default function SiteHeader({
                 onAuxClick={preserveLocaleSuffix}
                 key={language.code}
                 href={language.href}
-                aria-label={language.label}
+                aria-label={`${language.code.toUpperCase()} (${language.label})`}
                 aria-current={locale === language.code ? "page" : undefined}
                 className={`min-w-11 min-h-11 flex items-center justify-center rounded-[var(--r-xs)] no-underline transition-colors ${
                   locale === language.code
@@ -155,7 +155,7 @@ export default function SiteHeader({
             </div>
             <div className="site-header-menu-languages" aria-label={locale === "ru" ? "Язык" : locale === "en" ? "Language" : "Til"} role="group">
               {languages.map((language) => (
-                <a key={language.code} href={language.href} onClick={preserveLocaleSuffix} onAuxClick={preserveLocaleSuffix} aria-label={language.label} aria-current={locale === language.code ? "page" : undefined}>{language.code.toUpperCase()}</a>
+                <a key={language.code} href={language.href} onClick={preserveLocaleSuffix} onAuxClick={preserveLocaleSuffix} aria-label={`${language.code.toUpperCase()} (${language.label})`} aria-current={locale === language.code ? "page" : undefined}>{language.code.toUpperCase()}</a>
               ))}
             </div>
           </nav>
