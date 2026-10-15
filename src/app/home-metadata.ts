@@ -37,6 +37,20 @@ const SEO_METADATA: Record<
   },
 };
 
+// Search-console ownership tokens are deployment config, not code: each tag
+// is rendered only when its env var is set at build time.
+function buildVerification(): Metadata["verification"] {
+  const google = process.env.GOOGLE_SITE_VERIFICATION;
+  const yandex = process.env.YANDEX_VERIFICATION;
+  const bing = process.env.BING_SITE_VERIFICATION;
+  if (!google && !yandex && !bing) return undefined;
+  return {
+    ...(google ? { google } : {}),
+    ...(yandex ? { yandex } : {}),
+    ...(bing ? { other: { "msvalidate.01": bing } } : {}),
+  };
+}
+
 export function buildHomeMetadata(locale: Locale): Metadata {
   const seo = SEO_METADATA[locale];
   const alternates = buildLocaleAlternates("/", locale);
@@ -53,6 +67,7 @@ export function buildHomeMetadata(locale: Locale): Metadata {
     robots: { index: true, follow: true },
     authors: [{ name: "automaktab.uz" }],
     creator: "automaktab.uz",
+    verification: buildVerification(),
     openGraph: {
       type: "website",
       siteName: "automaktab.uz",

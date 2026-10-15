@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { contentUz } from "@/content/uz";
@@ -18,6 +18,7 @@ import { buildDemoUrl } from "@/lib/analytics";
 import { buildHomeMetadata } from "@/app/home-metadata";
 import { generateMetadata as seoMetadata } from "@/app/[locale]/[...seoPath]/page";
 import ChangelogPage from "@/app/[locale]/changelog/page";
+import { GET as indexNowKey } from "@/app/indexnow.txt/route";
 import { SEO_PAGES, SEO_PAGE_IDS, getSeoPagePath } from "@/config/seo-pages";
 
 describe("automaktab.uz marketing page verification", () => {
@@ -266,6 +267,27 @@ describe("automaktab.uz marketing page verification", () => {
       for (const phrase of ["RBAC", "settlements", "Leaflet", ...banned]) {
         expect(json).not.toContain(phrase);
       }
+    }
+  });
+});
+
+describe("search engine verification", () => {
+  it("renders verification tags and the IndexNow key only when configured", async () => {
+    vi.stubEnv("GOOGLE_SITE_VERIFICATION", "");
+    vi.stubEnv("YANDEX_VERIFICATION", "");
+    vi.stubEnv("BING_SITE_VERIFICATION", "");
+    vi.stubEnv("INDEXNOW_KEY", "");
+    try {
+      expect(buildHomeMetadata("uz").verification).toBeUndefined();
+      expect(indexNowKey().status).toBe(404);
+
+      vi.stubEnv("GOOGLE_SITE_VERIFICATION", "g-token");
+      vi.stubEnv("BING_SITE_VERIFICATION", "b-token");
+      vi.stubEnv("INDEXNOW_KEY", "abc123");
+      expect(buildHomeMetadata("ru").verification).toEqual({ google: "g-token", other: { "msvalidate.01": "b-token" } });
+      expect(await indexNowKey().text()).toBe("abc123");
+    } finally {
+      vi.unstubAllEnvs();
     }
   });
 });
