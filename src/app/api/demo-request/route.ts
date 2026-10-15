@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { safeDefault, shouldTriage } from "@/lib/demo-triage";
 
 const CRM_API_BASE_URL = (
   process.env.CRM_API_BASE_URL || "https://api.automaktab.uz"
@@ -127,6 +128,12 @@ export async function POST(req: NextRequest) {
       { ok: false, error: "validation_failed" },
       { status: 400 },
     );
+  }
+
+  // Flag-gated Drex triage: default path below is unchanged.
+  // No secrets, no key reads, no network to drex.nace.ai here.
+  if (shouldTriage()) {
+    console.warn(safeDefault("triage-enabled-forward-as-is").log);
   }
 
   try {
