@@ -1349,7 +1349,7 @@ export const SEO_PAGES: Record<
   leads: {
     uz: {
       segments: ["features", "leads-and-enrollment"],
-      title: "Murojaatlar va o‘quvchilarni qabul qilish | automaktab.uz",
+      title: "Avtomaktab CRM: murojaatlar va o‘quvchilarni qabul qilish | automaktab.uz",
       description:
         "Yangi murojaatlarni yo‘qotmang. Har bir nomzodni guruhga biriktirib, qabul holatini bir joyda ko‘ring.",
       keywords: [
@@ -1358,9 +1358,12 @@ export const SEO_PAGES: Record<
         "avtomaktab CRM",
       ],
       eyebrow: "Murojaatlar va qabul",
-      heading: "Har bir murojaat guruhga aylanadi.",
+      heading: "Avtomaktab murojaatlari: birinchi qo‘ng‘iroqdan qabulgacha.",
       intro:
         "Telefon, Telegram va tashrifdan kelgan murojaatlarni bir ro‘yxatda to‘plang. Qaysi nomzod qaysi guruhga yozilganini shu yerda ko‘ring.",
+      definition:
+        "automaktab.uz har bir murojaatni manbasi, bosqichi va mas’ul xodimi bilan yozadi va uni o‘quvchi kartasiga aylantiradi.",
+      visual: "scene:leads",
       sections: [
         {
           title: "Murojaatlar bir ro‘yxatda",
@@ -1377,25 +1380,76 @@ export const SEO_PAGES: Record<
           body:
             "Namuna murojaatlar bilan qabul jarayonini tekshiring. Telefon raqamingizni qoldirish shart emas.",
         },
+        {
+          title: "Manbalar",
+          body:
+            "Har bir murojaat manbasi bilan yoziladi: tavsiya, Instagram, xarita katalogi, Telegram, o‘zi kelgan, OLX yoki boshqa. Maktab o‘z manbalarini ham qo‘sha oladi.",
+        },
+        {
+          title: "Bosqichlarni maktab nomlaydi",
+          body:
+            "Rahbar yoki menejer bosqichlar nomi, rangi va tartibini sozlaydi. Har bir bosqich «ishda», «qabul qilindi» yoki «yo‘qotildi» turida bo‘ladi. Yo‘qotilganda sababi yoziladi: qimmat, boshqa maktab, vaqt to‘g‘ri kelmadi, fikridan qaytdi, javob bermadi yoki boshqa.",
+        },
+        {
+          title: "Mas’ul xodim va keyingi qadam",
+          body:
+            "Har bir murojaatga mas’ul xodim biriktiriladi va keyingi aloqa vaqti belgilanadi. Murojaatlarni ro‘yxat yoki bosqichlar doskasi ko‘rinishida kuzating.",
+        },
+        {
+          title: "Faoliyat tarixi va dublikatlar",
+          body:
+            "Har bir murojaatda qo‘ng‘iroq, xabar, uchrashuv, vazifa va izohlar tarixi saqlanadi. Yangi murojaat qo‘shilganda telefon raqami bo‘yicha dublikat tekshiriladi.",
+        },
+        {
+          title: "Ko‘rsatkichlar va Excel",
+          body:
+            "Ko‘rsatkichlar bo‘limida har bir bosqichdagi murojaatlar, muddati o‘tgan keyingi qadamlar, 3 kundan beri tegilmaganlar, qabulga aylanish va yo‘qotish sabablari ko‘rinadi. Ro‘yxatni Excel’ga eksport qilish mumkin.",
+        },
+        {
+          title: "Yangi murojaat haqida Telegram xabari",
+          body:
+            "Telegram’ni ulagan rahbar barcha yangi murojaatlar, menejer esa o‘z filiali murojaatlari haqida xabar oladi.",
+        },
       ],
+      faq: [
+        {
+          question: "Qaysi manbalarni belgilash mumkin?",
+          answer:
+            "Tavsiya, Instagram, xarita katalogi, Telegram, o‘zi kelgan, OLX va boshqa. Maktab qo‘shimcha manbalar ham qo‘sha oladi.",
+        },
+        {
+          question: "Murojaat o‘quvchiga qanday aylanadi?",
+          answer:
+            "Rahbar, menejer yoki qabul xodimi murojaatni o‘quvchiga aylantiradi. Shundan keyin o‘quvchi kartasida guruh, to‘lov va davomat yuritiladi.",
+        },
+        {
+          question: "SMS yuboriladimi?",
+          answer:
+            "Yo‘q, SMS yuborilmaydi. Har bir murojaatga keyingi aloqa vaqti belgilanadi va muddati o‘tganlari ko‘rsatkichlarda ko‘rinadi.",
+        },
+      ],
+      related: ["payments", "branches", "compare"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Qabul jarayonini demoda ko‘ring.",
         body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
         label: "Demoni ochish",
       },
-      updatedAt: "2026-10-15",
+      updatedAt: "2026-10-16",
     },
     ru: {
       segments: ["features", "leads-and-enrollment"],
-      title: "Заявки и приём курсантов | automaktab.uz",
+      title: "Заявки и приём курсантов в CRM автошколы | automaktab.uz",
       description:
         "Не теряйте заявки. Ведите каждого кандидата до группы и смотрите статус приёма в одном месте.",
       keywords: ["заявки автошколы", "приём курсантов", "CRM автошколы"],
       eyebrow: "Заявки и приём",
-      heading: "Каждая заявка становится группой.",
+      heading: "Заявки автошколы: от первого звонка до зачисления.",
       intro:
         "Собирайте заявки из звонков, Telegram и визитов в одном списке. Видно, какой кандидат в какую группу зачислен.",
+      definition:
+        "automaktab.uz записывает каждую заявку с источником, этапом и ответственным сотрудником и превращает её в карточку курсанта.",
+      visual: "scene:leads",
       sections: [
         {
           title: "Заявки в одном списке",
@@ -1412,25 +1466,76 @@ export const SEO_PAGES: Record<
           body:
             "Проверьте процесс приёма на вымышленных заявках. Оставлять номер телефона не нужно.",
         },
+        {
+          title: "Источники",
+          body:
+            "Каждая заявка сохраняется с источником: рекомендация, Instagram, каталог на карте, Telegram, пришёл сам, OLX или другое. Автошкола может добавить свои источники.",
+        },
+        {
+          title: "Этапы называет автошкола",
+          body:
+            "Руководитель или менеджер настраивает названия, цвета и порядок этапов. Каждый этап относится к типу «в работе», «зачислен» или «потерян». При потере указывается причина: дорого, выбрал другую школу, неудобное время, передумал, не отвечает или другое.",
+        },
+        {
+          title: "Ответственный и следующий шаг",
+          body:
+            "За каждой заявкой закрепляется ответственный сотрудник и время следующего контакта. Заявки можно вести списком или на доске этапов.",
+        },
+        {
+          title: "История действий и дубликаты",
+          body:
+            "В каждой заявке хранится история звонков, сообщений, встреч, задач и заметок. При добавлении новой заявки дубликат проверяется по номеру телефона.",
+        },
+        {
+          title: "Показатели и Excel",
+          body:
+            "В разделе показателей видно число заявок на каждом этапе, просроченные следующие шаги, заявки без касания более 3 дней, конверсию в зачисление и причины потерь. Список можно выгрузить в Excel.",
+        },
+        {
+          title: "Уведомление о новой заявке в Telegram",
+          body:
+            "Руководитель, подключивший Telegram, получает уведомления обо всех новых заявках, менеджер — о заявках своего филиала.",
+        },
       ],
+      faq: [
+        {
+          question: "Какие источники можно указать?",
+          answer:
+            "Рекомендация, Instagram, каталог на карте, Telegram, пришёл сам, OLX и другое. Автошкола может добавить свои источники.",
+        },
+        {
+          question: "Как заявка становится курсантом?",
+          answer:
+            "Руководитель, менеджер или сотрудник приёмной превращает заявку в курсанта. Дальше группа, оплаты и посещаемость ведутся в карточке курсанта.",
+        },
+        {
+          question: "Отправляются ли SMS?",
+          answer:
+            "Нет, SMS не отправляются. Для каждой заявки задаётся время следующего контакта, а просроченные видны в показателях.",
+        },
+      ],
+      related: ["payments", "branches", "compare"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите процесс приёма в демо.",
         body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-10-15",
+      updatedAt: "2026-10-16",
     },
     en: {
       segments: ["features", "leads-and-enrollment"],
-      title: "Inquiries and student enrollment | automaktab.uz",
+      title: "Driving-school CRM for inquiries and student enrollment | automaktab.uz",
       description:
         "Stop losing inquiries. Track every candidate through to group placement in one place.",
       keywords: ["driving school inquiries", "student enrollment", "driving school CRM"],
       eyebrow: "Inquiries and enrollment",
-      heading: "Every inquiry becomes a placement.",
+      heading: "Driving-school inquiries: from first call to enrollment.",
       intro:
         "Collect inquiries from calls, Telegram and walk-ins in one list. See which candidate joined which group.",
+      definition:
+        "automaktab.uz records every inquiry with its source, stage and responsible employee, and turns it into a student record.",
+      visual: "scene:leads",
       sections: [
         {
           title: "Inquiries in one list",
@@ -1447,14 +1552,62 @@ export const SEO_PAGES: Record<
           body:
             "Check the enrollment flow with sample inquiries. You do not need to leave your phone number.",
         },
+        {
+          title: "Sources",
+          body:
+            "Every inquiry is saved with its source: referral, Instagram, map directory, Telegram, walk-in, OLX or other. Schools can add their own sources too.",
+        },
+        {
+          title: "Your school names the stages",
+          body:
+            "The owner or a manager sets stage names, colours and order. Each stage is of type in progress, enrolled or lost. When an inquiry is lost, a reason is recorded: too expensive, chose another school, inconvenient time, changed their mind, no answer or other.",
+        },
+        {
+          title: "Owner and next step",
+          body:
+            "Each inquiry gets a responsible employee and a next-contact time. Work with inquiries as a list or on a stage board.",
+        },
+        {
+          title: "Activity history and duplicates",
+          body:
+            "Each inquiry keeps a history of calls, messages, meetings, tasks and notes. When a new inquiry is added, duplicates are checked by phone number.",
+        },
+        {
+          title: "Metrics and Excel",
+          body:
+            "The metrics view shows inquiries per stage, overdue next steps, inquiries untouched for 3 days, conversion to enrollment and lost reasons. The list can be exported to Excel.",
+        },
+        {
+          title: "Telegram alerts for new inquiries",
+          body:
+            "An owner who has linked Telegram is notified of every new inquiry; a manager is notified of inquiries for their branch.",
+        },
       ],
+      faq: [
+        {
+          question: "Which sources can I record?",
+          answer:
+            "Referral, Instagram, map directory, Telegram, walk-in, OLX and other. Schools can add their own sources.",
+        },
+        {
+          question: "How does an inquiry become a student?",
+          answer:
+            "The owner, a manager or admissions staff converts the inquiry into a student. Group, payments and attendance then continue on the student record.",
+        },
+        {
+          question: "Are SMS messages sent?",
+          answer:
+            "No, SMS is not sent. Each inquiry gets a next-contact time, and overdue ones show up in the metrics.",
+        },
+      ],
+      related: ["payments", "branches", "compare"],
       relatedLabel: "Other features",
       cta: {
         title: "See enrollment in the demo.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
-      updatedAt: "2026-10-15",
+      updatedAt: "2026-10-16",
     },
   },
   privacy: {
