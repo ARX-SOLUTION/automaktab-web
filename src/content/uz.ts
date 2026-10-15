@@ -623,7 +623,6 @@ export const contentUz: LandingContent = {
         points: [
           "O‘tilgan va qolgan daqiqalarni ko‘ring",
           "Instruktor tasdig‘ini tekshiring",
-          "Yurgan masofani qayd eting",
         ],
         previewType: "drivingCard",
       },

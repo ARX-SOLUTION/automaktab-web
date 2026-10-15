@@ -277,7 +277,6 @@ export const contentEn: LandingContent = {
         points: [
           "Completed and remaining minutes",
           "Instructor sign-off",
-          "Odometer readings",
         ],
         previewType: "drivingCard",
       },
