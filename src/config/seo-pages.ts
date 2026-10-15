@@ -967,7 +967,7 @@ export const SEO_PAGES: Record<
   branches: {
     uz: {
       segments: ["features", "branch-management"],
-      title: "Avtomaktab filiallari boshqaruvi | automaktab.uz",
+      title: "Avtomaktab filiallari va kirish huquqlari CRM'da | automaktab.uz",
       description:
         "Filiallar tushumi va qarzdorligini rahbar panelida solishtiring. Maktabning umumiy holatini bir joyda ko‘ring.",
       keywords: ["avtomaktab filiallari", "filiallar boshqaruvi", "rahbar paneli"],
@@ -975,6 +975,9 @@ export const SEO_PAGES: Record<
       heading: "Barcha filiallar holati bir joyda.",
       intro:
         "Filiallar tushumi va qarzdorligini rahbar panelida solishtiring. Qaysi filialga e’tibor kerakligini ko‘ring.",
+      definition:
+        "automaktab.uz bir nechta filialni bitta tizimda yuritadi: rahbar barcha filiallarni ko‘radi, menejer va boshqa xodimlar esa faqat o‘zlariga biriktirilgan filialni.",
+      visual: "scene:director",
       sections: [
         {
           title: "Filiallarni alohida va birga ko‘ring",
@@ -991,18 +994,71 @@ export const SEO_PAGES: Record<
           body:
             "Rahbar, menejer, qabul xodimi, buxgalter va o‘qituvchi ishiga mos bo‘limlarni ko‘radi.",
         },
+        {
+          title: "Rahbar panelida filiallar",
+          body:
+            "Bir nechta filial bo‘lsa, rahbar panelida filiallarni taqqoslash grafigi va tushum bo‘yicha eng yaxshi filiallar ro‘yxati chiqadi. Maktab bo‘yicha jami tushum va qarz ham shu yerda.",
+        },
+        {
+          title: "Kirish huquqlari",
+          body:
+            "Har bir ruxsat alohida beriladi va uchta doiradan biriga ega: butun maktab, bitta filial yoki faqat o‘z ma’lumotlari. Xodim bir nechta filialga biriktirilishi mumkin. Masalan, buxgalterga ikki filial bo‘yicha faqat xarajatlarni ko‘rish ruxsatini bering.",
+        },
+        {
+          title: "Rollar va ruxsat shablonlari",
+          body:
+            "Rollar: rahbar, menejer, buxgalter, qabul xodimi va o‘qituvchi. Takrorlanadigan ruxsatlar to‘plamini nomli shablon sifatida saqlab, yangi xodimga qo‘llang.",
+        },
+        {
+          title: "Menejerga nima ochiq",
+          body:
+            "Menejer sukut bo‘yicha deyarli barcha bo‘limlarni ko‘radi. Xodim ruxsatlarini boshqarish, audit jurnali va sozlamalar unga yopiq.",
+        },
+        {
+          title: "Kim nimani o‘zgartirgani",
+          body:
+            "Muhim o‘zgarishlar audit jurnaliga yoziladi: kim, qachon va qaysi yozuvni o‘zgartirgani. Jurnal rahbarga ochiq.",
+        },
+        {
+          title: "Har kuni 08:00 da hisobot",
+          body:
+            "Hisobotni yoqqan rahbar har kuni 08:00 da Telegram'da maktab bo‘yicha, menejer esa o‘z filiali bo‘yicha kechagi tushum va yangi o‘quvchilar sonini oladi.",
+        },
       ],
+      faq: [
+        {
+          question: "Menejer boshqa filial ma’lumotlarini ko‘radimi?",
+          answer:
+            "Yo‘q, faqat o‘ziga biriktirilgan filialni. Rahbar kerak bo‘lsa ruxsatni boshqa filial yoki butun maktab doirasida berishi mumkin.",
+        },
+        {
+          question: "Xodimlarga ruxsatni kim beradi?",
+          answer:
+            "Rahbar. Ruxsatlarni boshqarish menejerga sukut bo‘yicha berilmaydi.",
+        },
+        {
+          question: "Filiallar tushumini qanday solishtiraman?",
+          answer:
+            "Rahbar panelidagi taqqoslash grafigida har bir filial bo‘yicha o‘quvchilar, tushum va qarzdorlik ko‘rinadi. Filiallar tushum bo‘yicha saralanadi.",
+        },
+        {
+          question: "Bitta xodim ikki filialda ishlay oladimi?",
+          answer:
+            "Ha. Xodimni bir nechta filialga biriktirib, har bir filial uchun alohida ruxsat berish mumkin.",
+        },
+      ],
+      related: ["payments", "schedule", "attendance"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Filiallar natijasini demoda ko‘ring.",
         body: "Rahbar panelini namuna ma’lumotlari bilan tekshiring.",
         label: "Demoni ochish",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     ru: {
       segments: ["features", "branch-management"],
-      title: "Управление филиалами автошколы | automaktab.uz",
+      title: "Управление филиалами автошколы и доступы в CRM | automaktab.uz",
       description:
         "Сравнивайте поступления и задолженность филиалов на панели руководителя. Смотрите результаты всей автошколы в одном месте.",
       keywords: ["филиалы автошколы", "управление филиалами", "панель владельца"],
@@ -1010,6 +1066,9 @@ export const SEO_PAGES: Record<
       heading: "Все филиалы на одном экране.",
       intro:
         "Сравнивайте поступления и задолженность филиалов на панели руководителя. Видно, какому филиалу нужно внимание.",
+      definition:
+        "automaktab.uz ведёт несколько филиалов в одной системе: руководитель видит все филиалы, а менеджер и другие сотрудники — только закреплённые за ними.",
+      visual: "scene:director",
       sections: [
         {
           title: "Смотрите филиалы отдельно и вместе",
@@ -1026,18 +1085,71 @@ export const SEO_PAGES: Record<
           body:
             "Руководитель, менеджер, сотрудник приёмной, бухгалтер и преподаватель видят разделы для своей работы.",
         },
+        {
+          title: "Филиалы на панели руководителя",
+          body:
+            "Если филиалов несколько, на панели руководителя есть график сравнения филиалов и список лучших филиалов по поступлениям. Здесь же итоги по всей автошколе.",
+        },
+        {
+          title: "Права доступа",
+          body:
+            "Каждое право выдаётся отдельно и имеет одну из трёх областей: вся автошкола, один филиал или только свои данные. Сотрудника можно закрепить за несколькими филиалами. Например, бухгалтеру можно дать право видеть только расходы двух филиалов.",
+        },
+        {
+          title: "Роли и шаблоны прав",
+          body:
+            "Роли: руководитель, менеджер, бухгалтер, сотрудник приёмной и преподаватель. Повторяющийся набор прав можно сохранить как именованный шаблон и применить к новому сотруднику.",
+        },
+        {
+          title: "Что доступно менеджеру",
+          body:
+            "По умолчанию менеджер видит почти все разделы. Управление правами сотрудников, журнал аудита и настройки ему закрыты.",
+        },
+        {
+          title: "Кто что изменил",
+          body:
+            "Важные изменения пишутся в журнал аудита: кто, когда и какую запись изменил. Журнал доступен руководителю.",
+        },
+        {
+          title: "Отчёт каждый день в 08:00",
+          body:
+            "Руководитель, включивший отчёт, каждый день в 08:00 получает в Telegram вчерашние поступления и число новых курсантов по всей автошколе, менеджер — по своему филиалу.",
+        },
       ],
+      faq: [
+        {
+          question: "Видит ли менеджер данные другого филиала?",
+          answer:
+            "Нет, только закреплённого за ним. При необходимости руководитель может выдать право на другой филиал или на всю автошколу.",
+        },
+        {
+          question: "Кто выдаёт права сотрудникам?",
+          answer:
+            "Руководитель. Управление правами по умолчанию менеджеру не выдаётся.",
+        },
+        {
+          question: "Как сравнить поступления филиалов?",
+          answer:
+            "На графике сравнения на панели руководителя видны курсанты, поступления и задолженность каждого филиала. Филиалы сортируются по поступлениям.",
+        },
+        {
+          question: "Может ли сотрудник работать в двух филиалах?",
+          answer:
+            "Да. Сотрудника можно закрепить за несколькими филиалами и выдать права отдельно для каждого.",
+        },
+      ],
+      related: ["payments", "schedule", "attendance"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Сравните филиалы в демо.",
         body: "Проверьте панель руководителя на вымышленных данных.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     en: {
       segments: ["features", "branch-management"],
-      title: "Driving-school branch management | automaktab.uz",
+      title: "Driving-school CRM: branch management and access | automaktab.uz",
       description:
         "Compare branch revenue and student debt on the owner dashboard. See how the whole school is doing in one place.",
       keywords: ["driving school branches", "branch management", "owner dashboard"],
@@ -1045,6 +1157,9 @@ export const SEO_PAGES: Record<
       heading: "Keep every branch in view.",
       intro:
         "Compare branch revenue and student debt on the owner dashboard. See which branch needs attention.",
+      definition:
+        "automaktab.uz runs several branches in one system: the owner sees every branch, while managers and other staff see only the branches assigned to them.",
+      visual: "scene:director",
       sections: [
         {
           title: "View branches separately and together",
@@ -1061,14 +1176,67 @@ export const SEO_PAGES: Record<
           body:
             "Owners, managers, admissions staff, accountants and teachers see the sections they need for their work.",
         },
+        {
+          title: "Branches on the owner dashboard",
+          body:
+            "With more than one branch, the owner dashboard shows a branch comparison chart and the top branches by revenue, along with totals for the whole school.",
+        },
+        {
+          title: "Access rights",
+          body:
+            "Each permission is granted separately with one of three scopes: the whole school, one branch, or the employee’s own records. An employee can be assigned to several branches. For example, give an accountant view-only access to expenses for two branches.",
+        },
+        {
+          title: "Roles and permission templates",
+          body:
+            "Roles: owner, manager, accountant, admissions staff and teacher. Save a recurring set of permissions as a named template and apply it to new staff.",
+        },
+        {
+          title: "What managers can open",
+          body:
+            "By default a manager sees almost every section. Managing staff permissions, the audit log and settings stay closed to them.",
+        },
+        {
+          title: "Who changed what",
+          body:
+            "Important changes go to the audit log: who changed which record and when. The log is available to the owner.",
+        },
+        {
+          title: "A report every day at 08:00",
+          body:
+            "An owner who turns the report on gets yesterday’s revenue and new-student count for the whole school in Telegram at 08:00 every day; a manager gets the same for their branch.",
+        },
       ],
+      faq: [
+        {
+          question: "Can a manager see another branch’s data?",
+          answer:
+            "No, only the branch assigned to them. If needed, the owner can grant access to another branch or the whole school.",
+        },
+        {
+          question: "Who grants permissions to staff?",
+          answer:
+            "The owner. Permission management is not part of a manager’s default access.",
+        },
+        {
+          question: "How do I compare branch revenue?",
+          answer:
+            "The comparison chart on the owner dashboard shows students, revenue and debt for each branch, and branches are ranked by revenue.",
+        },
+        {
+          question: "Can one employee work in two branches?",
+          answer:
+            "Yes. Assign the employee to several branches and grant permissions separately for each one.",
+        },
+      ],
+      related: ["payments", "schedule", "attendance"],
       relatedLabel: "Other features",
       cta: {
         title: "Compare branches in the demo.",
         body: "Explore the owner dashboard with sample data.",
         label: "Open demo",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
   },
   pricing: {
