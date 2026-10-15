@@ -278,6 +278,20 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
     },
     titleSignals: { uz: "Tariflar", ru: "Тарифы", en: "Pricing" },
   },
+  {
+    id: "leads",
+    paths: {
+      uz: "/features/leads-and-enrollment",
+      ru: "/ru/features/leads-and-enrollment",
+      en: "/en/features/leads-and-enrollment",
+    },
+    headings: {
+      uz: "Har bir murojaat guruhga aylanadi.",
+      ru: "Каждая заявка становится группой.",
+      en: "Every inquiry becomes a placement.",
+    },
+    titleSignals: { uz: "Murojaatlar", ru: "Заявки", en: "Inquiries" },
+  },
 ];
 
 const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
@@ -428,6 +442,9 @@ describe.each(LOCALE_ROUTES)(
       );
       expect(organization).toBeTruthy();
       expect(organization.name).toBe("automaktab.uz");
+      expect(organization.alternateName).toEqual(["Automaktab", "Автомактаб"]);
+      expect(organization.sameAs).toBeUndefined();
+      expect(organization.contactPoint).toBeUndefined();
       expect(organization.logo).toEqual({
         "@type": "ImageObject",
         url: "https://automaktab.uz/icon.png",
@@ -451,6 +468,10 @@ describe.each(LOCALE_ROUTES)(
       expect(softwareApp).toBeTruthy();
       expect(softwareApp.name).toBe("automaktab.uz");
       expect(softwareApp.offers).toBeUndefined();
+      expect(softwareApp["@id"]).toBe("https://automaktab.uz/#software");
+      expect(softwareApp.featureList).toContain("Digital attendance journal");
+      expect(softwareApp.featureList.join(" ")).not.toMatch(/price|UZS/i);
+      expect(softwareApp.screenshot).toMatch(/\/opengraph-image$/);
 
       const faqPage = organizationGraph["@graph"].find(
         (entry: { "@type"?: string }) => entry["@type"] === "FAQPage",
@@ -581,6 +602,7 @@ describe("blog and sitemap surfaces", () => {
     expect(html).toContain('property="og:image"');
     expect(html).toContain('name="twitter:image"');
     expect(schema.operatingSystem).toBe("Web");
+    expect(schema["@id"]).toBe("https://automaktab.uz/#software");
     expect(schema.releaseNotes.length).toBeGreaterThan(0);
     expect(schema.releaseNotes.every((note: unknown) => typeof note === "string")).toBe(true);
     expect(schema.releaseNotes.join(" ")).not.toContain("v3.0.0");
