@@ -53,18 +53,11 @@ function buildVerification(): Metadata["verification"] {
 
 export function buildHomeMetadata(locale: Locale): Metadata {
   const seo = SEO_METADATA[locale];
-  const alternates = buildLocaleAlternates("/", locale);
-  const canonical =
-    typeof alternates?.canonical === "string"
-      ? alternates.canonical
-      : undefined;
 
   return {
     metadataBase: new URL("https://automaktab.uz"),
     title: seo.title,
     description: seo.description,
-    alternates,
-    robots: { index: true, follow: true },
     authors: [{ name: "automaktab.uz" }],
     creator: "automaktab.uz",
     verification: buildVerification(),
@@ -77,7 +70,6 @@ export function buildHomeMetadata(locale: Locale): Metadata {
       alternateLocale: SUPPORTED_LOCALES.flatMap((item) =>
         item === locale ? [] : [OG_LOCALE[item]],
       ),
-      url: canonical,
       images: [
         {
           url: buildOpenGraphImageUrl(locale),
@@ -92,6 +84,19 @@ export function buildHomeMetadata(locale: Locale): Metadata {
       title: seo.title,
       description: seo.description,
       images: [buildOpenGraphImageUrl(locale)],
+    },
+  };
+}
+
+export function buildHomePageMetadata(locale: Locale): Metadata {
+  const shared = buildHomeMetadata(locale);
+  const alternates = buildLocaleAlternates("/", locale);
+
+  return {
+    alternates,
+    openGraph: {
+      ...shared.openGraph,
+      url: alternates?.canonical as string,
     },
   };
 }

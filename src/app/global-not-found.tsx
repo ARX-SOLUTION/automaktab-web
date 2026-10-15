@@ -1,5 +1,8 @@
 import "./globals.css";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = { title: "Sahifa topilmadi | automaktab.uz" };
 
 const DEMO_URL = "https://app.automaktab.uz/login?demo=1";
 
