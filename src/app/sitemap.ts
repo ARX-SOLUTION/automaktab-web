@@ -5,6 +5,7 @@ import {
   SEO_PAGE_IDS,
   SEO_PAGES,
 } from "@/config/seo-pages";
+import { CHANGELOG_ITEMS } from "@/config/changelog";
 import { getBlogPosts, availableBlogLocales, blogAlternates } from "@/lib/blog";
 import type { Locale } from "@/i18n/config";
 
@@ -47,10 +48,31 @@ function seoAlternates(id: (typeof SEO_PAGE_IDS)[number]) {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getBlogPosts();
   const locales: Locale[] = ["uz", "ru", "en"];
+  const latestRelease = new Date(
+    CHANGELOG_ITEMS.filter((item) => !item.isPlanned)
+      .map((item) => item.releaseDate)
+      .sort()
+      .at(-1)!,
+  );
+  const latestPost = posts
+    .map((post) => post.published_at)
+    .filter((date): date is string => !!date)
+    .sort()
+    .at(-1);
   const staticPages = [
-    { path: "/", priority: 1, changeFrequency: "weekly" as const },
-    { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
-    { path: "/changelog", priority: 0.85, changeFrequency: "weekly" as const },
+    { path: "/", priority: 1, changeFrequency: "weekly" as const, lastModified: latestRelease, locales },
+    {
+      path: "/blog",
+      priority: 0.8,
+      changeFrequency: "weekly" as const,
+      lastModified: latestPost ? new Date(latestPost) : undefined,
+      // The blog index is noindex while it has no articles in a language
+      // (see blog/page.tsx), so it is only listed for languages with posts.
+      locales: locales.filter((locale) =>
+        posts.some((post) => availableBlogLocales(post).includes(locale)),
+      ),
+    },
+    { path: "/changelog", priority: 0.85, changeFrequency: "weekly" as const, lastModified: latestRelease, locales },
   ];
   const seoPages = SEO_PAGE_IDS.flatMap((id) =>
     locales.map((locale) => ({
@@ -64,8 +86,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticPages.flatMap((page) =>
-      locales.map((locale) => ({
+      page.locales.map((locale) => ({
         url: url(page.path, locale),
+        lastModified: page.lastModified,
         changeFrequency: page.changeFrequency,
         priority: locale === "uz" ? page.priority : page.priority - 0.1,
         alternates: alternates(page.path),

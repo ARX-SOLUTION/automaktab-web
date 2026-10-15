@@ -608,14 +608,12 @@ describe("blog and sitemap surfaces", () => {
     expect(schema.releaseNotes.join(" ")).not.toContain("v3.0.0");
   });
 
-  it("lists the localized blog indexes in sitemap.xml", async () => {
+  it("lists the SEO pages in sitemap.xml and dates static pages", async () => {
     const res = await fetch(`${BASE_URL}/sitemap.xml`);
     const xml = await res.text();
 
     expect(res.status).toBe(200);
-    expect(xml).toContain("https://automaktab.uz/blog");
-    expect(xml).toContain("https://automaktab.uz/ru/blog");
-    expect(xml).toContain("https://automaktab.uz/en/blog");
+    expect(xml).toMatch(/<loc>https:\/\/automaktab\.uz\/changelog<\/loc>(?:(?!<\/url>)[\s\S])*<lastmod>/);
     for (const group of SEO_ROUTE_GROUPS) {
       for (const path of Object.values(group.paths)) {
         expect(xml).toContain(`https://automaktab.uz${path}`);
