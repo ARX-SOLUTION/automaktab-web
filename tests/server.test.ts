@@ -278,6 +278,20 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
     },
     titleSignals: { uz: "Tariflar", ru: "Тарифы", en: "Pricing" },
   },
+  {
+    id: "leads",
+    paths: {
+      uz: "/features/leads-and-enrollment",
+      ru: "/ru/features/leads-and-enrollment",
+      en: "/en/features/leads-and-enrollment",
+    },
+    headings: {
+      uz: "Har bir murojaat guruhga aylanadi.",
+      ru: "Каждая заявка становится группой.",
+      en: "Every inquiry becomes a placement.",
+    },
+    titleSignals: { uz: "Murojaatlar", ru: "Заявки", en: "Inquiries" },
+  },
 ];
 
 const SEO_ROUTES = SEO_ROUTE_GROUPS.flatMap((group) =>
