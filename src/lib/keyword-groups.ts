@@ -9,9 +9,10 @@
  * Live-call preconditions (enforce before any network call):
  * - `isKeywordGroupsEnabled(flags)` must be strictly `=== true`;
  *   `assertKeywordGroupsEnabled` throws otherwise.
- * - `assertRealTopics(criteria)` must pass: TOPIC_IDS ship with generic
- *   "Placeholder ..." descriptions until the real 10-topic taxonomy lands;
- *   keep the length at 10 so criteria stay in sync.
+ * - `assertRealTopics(criteria)` must pass: criteria hold the real
+ *   B2B taxonomy below (10 topics, avtomaktab rahbari ko'zi bilan);
+ *   any "Placeholder ..." description still blocks live use.
+ *   Keep the length at 10 so criteria stay in sync.
  *
  * Parsing:
  * - `groupByAnswers` is strict positional: answers.length must equal
@@ -28,16 +29,16 @@ export const KEYWORD_GROUPS_FLAG = "keyword-groups";
 export const KEYWORD_GROUPING_MODEL = "drex-v2.0" as const;
 
 export const TOPIC_IDS = [
-  "topic-01",
-  "topic-02",
-  "topic-03",
-  "topic-04",
-  "topic-05",
-  "topic-06",
-  "topic-07",
-  "topic-08",
-  "topic-09",
-  "topic-10",
+  "payments-debt",
+  "expenses-finance",
+  "schedule-groups",
+  "attendance",
+  "branches-roles",
+  "leads-enrollment",
+  "fleet-vehicles",
+  "instructors-work",
+  "reports-owner",
+  "pricing-trial",
 ] as const;
 
 export type TopicId = (typeof TOPIC_IDS)[number];
@@ -108,12 +109,31 @@ function assertValidKeyword(keyword: unknown, index: number): asserts keyword is
   }
 }
 
+const TOPIC_CRITERIA: Record<TopicId, string> = {
+  "payments-debt":
+    "O'quvchilar to'lovlari va qarzdorlik: rahbar kim qancha to'laganini va kim qarzdorligini kuzatadi.",
+  "expenses-finance":
+    "Maktab xarajatlari: yoqilg'i, oylik va boshqa chiqimlar hisobi.",
+  "schedule-groups":
+    "Guruhlar va dars jadvali: nazariya va amaliy mashg'ulotlarni rejalashtirish.",
+  "attendance":
+    "Davomat hisobi: har bir darsda kim kelganini belgilash.",
+  "branches-roles":
+    "Filiallar va xodimlar: filial natijalari hamda kirish huquqlarini boshqarish.",
+  "leads-enrollment":
+    "Murojaatlar va qabul: yangi o'quvchilarni ro'yxatga olish va guruhlarga taqsimlash.",
+  "fleet-vehicles":
+    "O'quv avtomobillari: mashinalar hisobi, texnik holat va biriktirish.",
+  "instructors-work":
+    "Instruktor va o'qituvchilar: amaliy darslarni taqsimlash va ish yukini kuzatish.",
+  "reports-owner":
+    "Rahbar hisobotlari: tushum, qarz va davomat ko'rsatkichlarini bir joyda ko'rish.",
+  "pricing-trial":
+    "Boshqaruv tizimi narxi va sinov shartlari: tariflar va 30 kunlik sinov.",
+};
+
 export function buildCriteria(): Record<TopicId, string> {
-  const criteria = {} as Record<TopicId, string>;
-  for (const id of TOPIC_IDS) {
-    criteria[id] = `Placeholder description for ${id}.`;
-  }
-  return criteria;
+  return { ...TOPIC_CRITERIA };
 }
 
 export function assertRealTopics(

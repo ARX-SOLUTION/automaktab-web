@@ -100,13 +100,18 @@ describe("criteria", () => {
     expect(new Set(values).size).toBe(values.length);
   });
 
-  it("blocks live use while descriptions are placeholders", () => {
-    expect(() => assertRealTopics()).toThrow(KeywordGroupsError);
-    expect(() => assertRealTopics(buildCriteria())).toThrow(/topic-01/);
+  it("blocks live use while any description is a placeholder", () => {
+    expect(() => assertRealTopics()).not.toThrow();
+    expect(() => assertRealTopics(buildCriteria())).not.toThrow();
     expect(() =>
       assertRealTopics({
-        "topic-01": "Custom description one",
-        "topic-02": "Custom description two",
+        "payments-debt": "Placeholder description for payments-debt.",
+      }),
+    ).toThrow(/payments-debt/);
+    expect(() =>
+      assertRealTopics({
+        "payments-debt": "O'quvchilar to'lovlari va qarzdorlik.",
+        "attendance": "Davomat hisobi.",
       }),
     ).not.toThrow();
   });
