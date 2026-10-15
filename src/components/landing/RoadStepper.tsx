@@ -9,7 +9,7 @@ import type { LandingContent } from "@/content/uz";
 import { track } from "@/lib/analytics";
 import DemoBadge from "./DemoBadge";
 import ProductScene from "./ProductScene";
-import { STORY_QUERY, useCompactStory, useKeepInView, useRefreshOnResize } from "./story-mode";
+import { STORY_QUERY, useCompactStory, useKeepInView, useNearViewport, useRefreshOnResize } from "./story-mode";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -26,6 +26,8 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
   useRefreshOnResize(root, compact);
   const keepInView = useKeepInView(activeStop);
   const preview = content.previews;
+
+  const near = useNearViewport(root);
 
   useGSAP(() => {
     const element = root.current;
@@ -64,7 +66,7 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
   }, { scope: root, dependencies: [content], revertOnUpdate: true });
 
   useGSAP(() => {
-    if (!previewRef.current) return;
+    if (!previewRef.current || !near) return;
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(previewRef.current, { clipPath: "inset(0 0 7% 0 round 16px)", x: 8 }, {
@@ -72,7 +74,7 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
       });
     });
     return () => media.revert();
-  }, { dependencies: [activeStop], scope: previewRef, revertOnUpdate: true });
+  }, { dependencies: [activeStop, near], scope: previewRef, revertOnUpdate: true });
 
   useEffect(() => {
     const handleGoto = (event: Event) => {

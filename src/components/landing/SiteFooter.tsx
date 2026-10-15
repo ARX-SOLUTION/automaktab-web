@@ -71,7 +71,7 @@ export default function SiteFooter({
             onClick={preserveLocaleSuffix}
             onAuxClick={preserveLocaleSuffix}
             href={switchLocalePath(pathname, "uz", availableLocales)}
-            aria-label="O‘zbekcha"
+            aria-label="UZ (O‘zbekcha)"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "uz"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
@@ -84,7 +84,7 @@ export default function SiteFooter({
             onClick={preserveLocaleSuffix}
             onAuxClick={preserveLocaleSuffix}
             href={switchLocalePath(pathname, "ru", availableLocales)}
-            aria-label="Русский"
+            aria-label="RU (Русский)"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "ru"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
@@ -97,7 +97,7 @@ export default function SiteFooter({
             onClick={preserveLocaleSuffix}
             onAuxClick={preserveLocaleSuffix}
             href={switchLocalePath(pathname, "en", availableLocales)}
-            aria-label="English"
+            aria-label="EN (English)"
             className={`px-2.5 py-1 rounded-[6px] transition-colors no-underline ${
               locale === "en"
                 ? "bg-[rgba(255,255,255,0.15)] text-white font-bold"
