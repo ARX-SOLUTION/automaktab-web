@@ -662,7 +662,7 @@ export const SEO_PAGES: Record<
   attendance: {
     uz: {
       segments: ["features", "digital-attendance"],
-      title: "Avtomaktab davomat jurnali | automaktab.uz",
+      title: "Avtomaktab CRM: davomat jurnali | automaktab.uz",
       description:
         "Har bir darsda kim kelganini, kechikkanini yoki kelmaganini belgilang. Davomatni guruh va dars bilan bir joyda yuriting.",
       keywords: ["avtomaktab davomat", "raqamli davomat", "davomat jurnali"],
@@ -670,6 +670,9 @@ export const SEO_PAGES: Record<
       heading: "Har bir dars davomatini bir joyda yuriting.",
       intro:
         "Guruh ro‘yxatidan har bir o‘quvchining davomatini belgilang. Qaysi darslarni qoldirganini shu tizimda tekshiring.",
+      definition:
+        "automaktab.uz har bir dars uchun o‘quvchini keldi, kechikdi, kelmadi yoki uzrli deb belgilaydi. Davomat dars, guruh va o‘quvchi kartasiga bog‘lanadi.",
+      visual: "scene:teacher",
       sections: [
         {
           title: "To‘rtta tushunarli holat",
@@ -686,18 +689,81 @@ export const SEO_PAGES: Record<
           body:
             "Menejer va o‘qituvchi dars ro‘yxatidan kim kelganini va kim dars qoldirganini ko‘radi.",
         },
+        {
+          title: "Butun guruh bir martada",
+          body:
+            "Dars ro‘yxatida guruhdagi barcha o‘quvchilar holatini belgilab, bir martada saqlang. Har bir yozuvga izoh qo‘shish mumkin, kim belgilagani ham saqlanadi.",
+        },
+        {
+          title: "O‘quvchi kartasida tarix",
+          body:
+            "O‘quvchi kartasidagi davomat bo‘limida u qatnashgan, kechikkan va qoldirgan darslar tarixi turadi. Menejer bu tarixni to‘lov va guruh ma’lumotlari yonida ko‘radi.",
+        },
+        {
+          title: "Kim nimani ko‘radi",
+          body:
+            "O‘qituvchi faqat o‘z guruhlari davomatini ko‘radi va belgilaydi. Filial xodimlari o‘z filiali, rahbar esa barcha filiallar davomatini ko‘radi.",
+        },
+        {
+          title: "Uzrli sabab va izoh",
+          body:
+            "Kasallik yoki boshqa sabab bilan kelmagan o‘quvchini uzrli deb belgilang va izohga sababini yozing. Shunda uzrsiz va uzrli qoldirilgan darslar alohida ko‘rinadi.",
+        },
+        {
+          title: "Kalendarda davomat holati",
+          body:
+            "Jadval kalendarida har bir dars yonida belgilangan davomat ko‘rinadi. Davomati hali belgilanmagan darsni shu yerdan topasiz.",
+        },
+        {
+          title: "Telegram'da davomat tarixi",
+          body:
+            "O‘qituvchi Telegram botida o‘z o‘quvchisining davomat tarixini ochadi. Boshqa o‘qituvchi o‘quvchilarining tarixi unga ko‘rinmaydi.",
+        },
+        {
+          title: "O‘quvchi o‘z davomatini ko‘radi",
+          body:
+            "O‘quvchi kabinetida o‘z davomatini ko‘radi: qaysi darsga kelgani va qaysi birini qoldirgani.",
+        },
       ],
+      faq: [
+        {
+          question: "Face ID yoki QR kod bilan davomat bormi?",
+          answer:
+            "Yo‘q. Davomatni o‘qituvchi yoki xodim dars ro‘yxatida belgilaydi.",
+        },
+        {
+          question: "O‘quvchi o‘z davomatini ko‘radimi?",
+          answer:
+            "Ha. O‘quvchi kabinetida (student.automaktab.uz) o‘z darslari va davomatini ko‘radi.",
+        },
+        {
+          question: "Davomatni kim belgilaydi?",
+          answer:
+            "Rahbar, menejer, qabul xodimi yoki guruh o‘qituvchisi. O‘qituvchi faqat o‘ziga biriktirilgan guruhlar darslarini belgilaydi.",
+        },
+        {
+          question: "Davomatni keyin tuzatish mumkinmi?",
+          answer:
+            "Ha. Dars ro‘yxatini qayta saqlash mumkin. Har bir saqlash audit jurnaliga yoziladi.",
+        },
+        {
+          question: "Kelmagan o‘quvchi haqida SMS boradimi?",
+          answer:
+            "Yo‘q. automaktab.uz SMS yubormaydi.",
+        },
+      ],
+      related: ["schedule", "payments", "branches"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Davomatni demoda belgilab ko‘ring.",
         body: "Namuna ma’lumotlari bilan davomat belgilashni sinang.",
         label: "Demoni ochish",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     ru: {
       segments: ["features", "digital-attendance"],
-      title: "Цифровая посещаемость автошколы | automaktab.uz",
+      title: "Электронный журнал: посещаемость в CRM автошколы | automaktab.uz",
       description:
         "Отмечайте посещаемость каждого занятия: пришёл, опоздал, не пришёл или пропустил по уважительной причине.",
       keywords: ["посещаемость автошколы", "цифровая посещаемость", "журнал посещаемости"],
@@ -705,6 +771,9 @@ export const SEO_PAGES: Record<
       heading: "Ведите посещаемость каждого занятия в одной системе.",
       intro:
         "Отмечайте посещаемость в списке группы. Здесь же проверяйте, какие занятия пропустил курсант.",
+      definition:
+        "automaktab.uz отмечает курсанта на каждом занятии: пришёл, опоздал, не пришёл или уважительная причина. Посещаемость связана с занятием, группой и карточкой курсанта.",
+      visual: "scene:teacher",
       sections: [
         {
           title: "Четыре понятных статуса",
@@ -721,18 +790,81 @@ export const SEO_PAGES: Record<
           body:
             "Менеджер и преподаватель видят, кто пришёл и кто пропустил занятие.",
         },
+        {
+          title: "Вся группа за один раз",
+          body:
+            "Отметьте статусы всех курсантов группы в списке занятия и сохраните одним действием. К каждой записи можно добавить комментарий, а кто отметил — сохраняется.",
+        },
+        {
+          title: "История в карточке курсанта",
+          body:
+            "Во вкладке посещаемости в карточке курсанта видна история посещённых, пропущенных занятий и опозданий. Менеджер видит её рядом с оплатами и группой.",
+        },
+        {
+          title: "Кто что видит",
+          body:
+            "Преподаватель видит и отмечает только свои группы. Сотрудники филиала видят посещаемость своего филиала, руководитель — всех филиалов.",
+        },
+        {
+          title: "Уважительная причина и комментарий",
+          body:
+            "Если курсант пропустил занятие по болезни или другой причине, отметьте «уважительная» и укажите причину в комментарии. Так пропуски без причины и по уважительной причине видны отдельно.",
+        },
+        {
+          title: "Посещаемость в календаре",
+          body:
+            "В календаре расписания рядом с каждым занятием видна отмеченная посещаемость. Занятие, где посещаемость ещё не отмечена, легко найти.",
+        },
+        {
+          title: "История посещаемости в Telegram",
+          body:
+            "Преподаватель открывает в Telegram-боте историю посещаемости своего курсанта. Курсанты других преподавателей ему недоступны.",
+        },
+        {
+          title: "Курсант видит свою посещаемость",
+          body:
+            "В личном кабинете курсант видит свою посещаемость: на какие занятия пришёл и какие пропустил.",
+        },
       ],
+      faq: [
+        {
+          question: "Есть ли отметка по Face ID или QR-коду?",
+          answer:
+            "Нет. Посещаемость отмечает преподаватель или сотрудник в списке занятия.",
+        },
+        {
+          question: "Видит ли курсант свою посещаемость?",
+          answer:
+            "Да. В личном кабинете (student.automaktab.uz) курсант видит свои занятия и посещаемость.",
+        },
+        {
+          question: "Кто отмечает посещаемость?",
+          answer:
+            "Руководитель, менеджер, сотрудник приёмной или преподаватель группы. Преподаватель отмечает только свои группы.",
+        },
+        {
+          question: "Можно ли исправить посещаемость позже?",
+          answer:
+            "Да. Список занятия можно сохранить повторно. Каждое сохранение записывается в журнал аудита.",
+        },
+        {
+          question: "Уходит ли SMS о пропуске?",
+          answer:
+            "Нет. automaktab.uz не отправляет SMS.",
+        },
+      ],
+      related: ["schedule", "payments", "branches"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Попробуйте отметить посещаемость в демо.",
         body: "Попробуйте журнал посещаемости на вымышленных данных.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     en: {
       segments: ["features", "digital-attendance"],
-      title: "Digital attendance for driving schools | automaktab.uz",
+      title: "Driving-school CRM attendance register | automaktab.uz",
       description:
         "Record clear attendance statuses for every driving-school lesson: present, late, absent, or excused.",
       keywords: ["driving school attendance", "digital attendance", "attendance record"],
@@ -740,6 +872,9 @@ export const SEO_PAGES: Record<
       heading: "Keep attendance for every lesson together.",
       intro:
         "Mark attendance on the group list. Check which lessons each student has missed in the same system.",
+      definition:
+        "automaktab.uz marks each student present, late, absent or excused for every lesson. Attendance is linked to the lesson, the group and the student’s record.",
+      visual: "scene:teacher",
       sections: [
         {
           title: "Four clear attendance choices",
@@ -756,14 +891,77 @@ export const SEO_PAGES: Record<
           body:
             "Managers and teachers can see who attended and who missed the lesson.",
         },
+        {
+          title: "The whole group at once",
+          body:
+            "Set the status of every student in the group on the lesson roster and save in one step. Each record can carry a note, and the system keeps who marked it.",
+        },
+        {
+          title: "History on the student record",
+          body:
+            "The attendance tab on a student’s record lists the lessons they attended, missed or were late for. Managers see it next to payments and group details.",
+        },
+        {
+          title: "Who sees what",
+          body:
+            "Teachers see and mark only their own groups. Branch staff see attendance for their branch; the owner sees every branch.",
+        },
+        {
+          title: "Excused absences and notes",
+          body:
+            "If a student misses a lesson because of illness or another reason, mark them excused and add the reason as a note. Excused and unexcused absences then show separately.",
+        },
+        {
+          title: "Attendance in the calendar",
+          body:
+            "The schedule calendar shows recorded attendance next to each lesson, so lessons without attendance are easy to find.",
+        },
+        {
+          title: "Attendance history in Telegram",
+          body:
+            "Teachers can open their own student’s attendance history in the Telegram bot. Other teachers’ students are not available to them.",
+        },
+        {
+          title: "Students see their own attendance",
+          body:
+            "In their student account, each student sees their attendance: which lessons they attended and which they missed.",
+        },
       ],
+      faq: [
+        {
+          question: "Is there Face ID or QR-code check-in?",
+          answer:
+            "No. A teacher or staff member marks attendance on the lesson roster.",
+        },
+        {
+          question: "Can students see their own attendance?",
+          answer:
+            "Yes. In their student account (student.automaktab.uz) they see their lessons and attendance.",
+        },
+        {
+          question: "Who marks attendance?",
+          answer:
+            "The owner, a manager, admissions staff or the group’s teacher. Teachers can mark only their own groups.",
+        },
+        {
+          question: "Can attendance be corrected later?",
+          answer:
+            "Yes. The lesson roster can be saved again, and every save is written to the audit log.",
+        },
+        {
+          question: "Is an SMS sent when a student misses a lesson?",
+          answer:
+            "No. automaktab.uz does not send SMS.",
+        },
+      ],
+      related: ["schedule", "payments", "branches"],
       relatedLabel: "Other features",
       cta: {
         title: "Try taking attendance in the demo.",
         body: "Try the attendance register with sample data.",
         label: "Open demo",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
   },
   branches: {
