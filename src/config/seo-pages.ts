@@ -11,6 +11,7 @@ export const SEO_PAGE_IDS = [
   "terms",
   "driving",
   "compare",
+  "telegram",
 ] as const;
 
 export type SeoPageId = (typeof SEO_PAGE_IDS)[number];
@@ -32,6 +33,7 @@ export const SEO_RELATED_PAGE_IDS = [
 export const SEO_DETAIL_PAGE_IDS = [
   "driving",
   "compare",
+  "telegram",
 ] as const satisfies readonly SeoPageId[];
 
 export const SEO_LEGAL_PAGE_IDS = [
@@ -182,7 +184,7 @@ export const SEO_PAGES: Record<
             "Hozir yo‘q. O‘quvchi kabinetida jadval va davomat bor, to‘lovlar esa faqat maktab xodimlariga ko‘rinadi.",
         },
         {
-          question: "Qarzdorlar haqida Telegram'da xabar keladimi?",
+          question: "Qarzdorlar haqida Telegram’da xabar keladimi?",
           answer:
             "Yo‘q. 08:00 dagi Telegram hisobotida kechagi tushum va yangi o‘quvchilar soni bor. Qarzdorlarni tizimdagi ro‘yxatdan ko‘rasiz.",
         },
@@ -715,7 +717,7 @@ export const SEO_PAGES: Record<
             "Jadval kalendarida har bir dars yonida belgilangan davomat ko‘rinadi. Davomati hali belgilanmagan darsni shu yerdan topasiz.",
         },
         {
-          title: "Telegram'da davomat tarixi",
+          title: "Telegram’da davomat tarixi",
           body:
             "O‘qituvchi Telegram botida o‘z o‘quvchisining davomat tarixini ochadi. Boshqa o‘qituvchi o‘quvchilarining tarixi unga ko‘rinmaydi.",
         },
@@ -1022,7 +1024,7 @@ export const SEO_PAGES: Record<
         {
           title: "Har kuni 08:00 da hisobot",
           body:
-            "Hisobotni yoqqan rahbar har kuni 08:00 da Telegram'da maktab bo‘yicha, menejer esa o‘z filiali bo‘yicha kechagi tushum va yangi o‘quvchilar sonini oladi.",
+            "Hisobotni yoqqan rahbar har kuni 08:00 da Telegram’da maktab bo‘yicha, menejer esa o‘z filiali bo‘yicha kechagi tushum va yangi o‘quvchilar sonini oladi.",
         },
       ],
       faq: [
@@ -1047,7 +1049,7 @@ export const SEO_PAGES: Record<
             "Ha. Xodimni bir nechta filialga biriktirib, har bir filial uchun alohida ruxsat berish mumkin.",
         },
       ],
-      related: ["payments", "schedule", "attendance"],
+      related: ["telegram", "payments", "attendance"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Filiallar natijasini demoda ko‘ring.",
@@ -1138,7 +1140,7 @@ export const SEO_PAGES: Record<
             "Да. Сотрудника можно закрепить за несколькими филиалами и выдать права отдельно для каждого.",
         },
       ],
-      related: ["payments", "schedule", "attendance"],
+      related: ["telegram", "payments", "attendance"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Сравните филиалы в демо.",
@@ -1229,7 +1231,7 @@ export const SEO_PAGES: Record<
             "Yes. Assign the employee to several branches and grant permissions separately for each one.",
         },
       ],
-      related: ["payments", "schedule", "attendance"],
+      related: ["telegram", "payments", "attendance"],
       relatedLabel: "Other features",
       cta: {
         title: "Compare branches in the demo.",
@@ -1428,7 +1430,7 @@ export const SEO_PAGES: Record<
             "Yo‘q, SMS yuborilmaydi. Har bir murojaatga keyingi aloqa vaqti belgilanadi va muddati o‘tganlari ko‘rsatkichlarda ko‘rinadi.",
         },
       ],
-      related: ["payments", "branches", "compare"],
+      related: ["payments", "telegram", "compare"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Qabul jarayonini demoda ko‘ring.",
@@ -1514,7 +1516,7 @@ export const SEO_PAGES: Record<
             "Нет, SMS не отправляются. Для каждой заявки задаётся время следующего контакта, а просроченные видны в показателях.",
         },
       ],
-      related: ["payments", "branches", "compare"],
+      related: ["payments", "telegram", "compare"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите процесс приёма в демо.",
@@ -1600,7 +1602,7 @@ export const SEO_PAGES: Record<
             "No, SMS is not sent. Each inquiry gets a next-contact time, and overdue ones show up in the metrics.",
         },
       ],
-      related: ["payments", "branches", "compare"],
+      related: ["payments", "telegram", "compare"],
       relatedLabel: "Other features",
       cta: {
         title: "See enrollment in the demo.",
@@ -2070,7 +2072,7 @@ export const SEO_PAGES: Record<
         {
           title: "Bizda nima bor",
           body:
-            "automaktab.uz avtomaktabning kundalik boshqaruvi uchun qilingan. Amaliy haydash mashg‘ulotlari instruktor va mashina bilan yoziladi, o‘qish rejasiga faqat tasdiqlangan daqiqalar qo‘shiladi. Avtoparkda hujjat muddatlari, texnik xizmat va yoqilg‘i qaydlari yuritiladi. Murojaatlar, xarajatlar va filial bo‘yicha ruxsatlar bir tizimda. Rahbar har kuni 08:00 da Telegram'da kechagi tushum va yangi o‘quvchilar sonini oladi.",
+            "automaktab.uz avtomaktabning kundalik boshqaruvi uchun qilingan. Amaliy haydash mashg‘ulotlari instruktor va mashina bilan yoziladi, o‘qish rejasiga faqat tasdiqlangan daqiqalar qo‘shiladi. Avtoparkda hujjat muddatlari, texnik xizmat va yoqilg‘i qaydlari yuritiladi. Murojaatlar, xarajatlar va filial bo‘yicha ruxsatlar bir tizimda. Rahbar har kuni 08:00 da Telegram’da kechagi tushum va yangi o‘quvchilar sonini oladi.",
         },
         {
           title: "Qachon boshqa yechim mos keladi",
@@ -2297,6 +2299,236 @@ export const SEO_PAGES: Record<
       relatedLabel: "Other features",
       cta: {
         title: "Compare it yourself.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
+      },
+      updatedAt: "2026-10-16",
+    },
+  },
+  telegram: {
+    uz: {
+      segments: ["features", "telegram-report"],
+      title: "Avtomaktab hisoboti Telegram’da har kuni 08:00 da | automaktab.uz",
+      description:
+        "Har kuni 08:00 da kechagi tushum va yangi o‘quvchilar soni Telegram’ga keladi: rahbarga maktab bo‘yicha, menejerga o‘z filiali bo‘yicha.",
+      keywords: ["avtomaktab hisobot", "avtomaktab telegram bot", "avtomaktab CRM"],
+      eyebrow: "Telegram hisoboti",
+      heading: "Har kuni 08:00 da Telegram’da avtomaktab hisoboti",
+      definition:
+        "Hisobot yoqilgan bo‘lsa, automaktab.uz har kuni 08:00 da (Toshkent) kechagi tushum va yangi o‘quvchilar sonini Telegram’ga yuboradi: rahbarga maktab bo‘yicha jami, menejerga o‘z filiali bo‘yicha.",
+      intro:
+        "Kecha qancha tushum bo‘lgani va nechta yangi o‘quvchi qo‘shilganini ertalab Telegram’da ko‘ring. Buning uchun tizimga kirish shart emas.",
+      visual: "morning-report",
+      sections: [
+        {
+          title: "Hisobotda nima bor",
+          body:
+            "Kechagi tushum va kecha qo‘shilgan yangi o‘quvchilar soni. Hisobot har kuni 08:00 da Toshkent vaqti bilan keladi.",
+        },
+        {
+          title: "Kim oladi",
+          body:
+            "Faqat rahbar va menejer, faqat hisobotni yoqqanlar. Rahbar maktab bo‘yicha jami raqamlarni, menejer o‘z filiali raqamlarini oladi. Qabul xodimi va o‘qituvchiga hisobot yuborilmaydi.",
+        },
+        {
+          title: "Ruxsat qayta tekshiriladi",
+          body:
+            "Yuborishdan oldin xodimning holati va ruxsatlari qayta tekshiriladi. O‘chirilgan yoki faol bo‘lmagan xodimga, faoliyati to‘xtatilgan maktabga hisobot bormaydi.",
+        },
+        {
+          title: "Qanday yoqiladi",
+          body:
+            "Profil sahifasida Telegram’ni ulang: tizim havola beradi, bot ulanishni tasdiqlaydi. Shu sahifada kunlik hisobotni yoqing yoki o‘chiring.",
+        },
+        {
+          title: "Xarajat xabarlari va xulosalari",
+          body:
+            "Yangi xarajat yaratilganda va xarajat birinchi marta qisman to‘langanda xabar keladi. Ish kunlari 09:00 da kutilayotgan, yaqin kunlarda muddati keladigan va kechikkan xarajatlar soni, dushanba 10:00 da esa haftalik kechikkan xarajatlar xulosasi keladi.",
+        },
+        {
+          title: "Yangi murojaatlar",
+          body:
+            "Yangi murojaat qo‘shilganda rahbar va shu filial menejeri Telegram’da xabar oladi.",
+        },
+        {
+          title: "Xodimlar menyusi",
+          body:
+            "Botda har bir xodim o‘z ruxsatiga mos menyuni ko‘radi: hisobot, filiallar, o‘quvchilar, to‘lovlar, guruhlar, jadval va davomat, xodimlar, audit jurnali. O‘qituvchi o‘z hisobotini va o‘quvchilarining davomat tarixini ochadi.",
+        },
+      ],
+      faq: [
+        {
+          question: "Hisobotda nima bo‘ladi?",
+          answer:
+            "Kechagi tushum va kecha qo‘shilgan yangi o‘quvchilar soni.",
+        },
+        {
+          question: "Filiallar bo‘yicha alohida keladimi?",
+          answer:
+            "Hozir rahbarga maktab bo‘yicha jami, menejerga o‘z filiali keladi. Filiallarni taqqoslash rahbar panelida.",
+        },
+        {
+          question: "Qanday yoqiladi?",
+          answer:
+            "Profil sahifasida Telegram’ni ulang va kunlik hisobotni yoqing. Bu sozlama rahbar va menejerga ochiq.",
+        },
+      ],
+      related: ["branches", "leads", "payments"],
+      relatedLabel: "Boshqa imkoniyatlar",
+      cta: {
+        title: "Telegram hisobotini demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
+      },
+      updatedAt: "2026-10-16",
+    },
+    ru: {
+      segments: ["features", "telegram-report"],
+      title: "Отчёт автошколы в Telegram каждый день в 08:00 | automaktab.uz",
+      description:
+        "Каждый день в 08:00 вчерашние поступления и число новых курсантов приходят в Telegram: руководителю по всей автошколе, менеджеру по его филиалу.",
+      keywords: ["отчёты автошколы", "телеграм бот автошколы", "CRM автошколы"],
+      eyebrow: "Отчёт в Telegram",
+      heading: "Отчёт автошколы в Telegram каждый день в 08:00",
+      definition:
+        "Если отчёт включён, automaktab.uz каждый день в 08:00 (Ташкент) отправляет в Telegram вчерашние поступления и число новых курсантов: руководителю итог по автошколе, менеджеру по своему филиалу.",
+      intro:
+        "Смотрите утром в Telegram, сколько поступило вчера и сколько новых курсантов добавилось. Входить в систему для этого не нужно.",
+      visual: "morning-report",
+      sections: [
+        {
+          title: "Что в отчёте",
+          body:
+            "Вчерашние поступления и число курсантов, добавленных вчера. Отчёт приходит каждый день в 08:00 по Ташкенту.",
+        },
+        {
+          title: "Кто получает",
+          body:
+            "Только руководитель и менеджер, и только те, кто включил отчёт. Руководитель получает итоги по автошколе, менеджер по своему филиалу. Сотрудникам приёмной и преподавателям отчёт не отправляется.",
+        },
+        {
+          title: "Права проверяются заново",
+          body:
+            "Перед отправкой статус и права сотрудника проверяются заново. Удалённым и неактивным сотрудникам, а также приостановленным автошколам отчёт не уходит.",
+        },
+        {
+          title: "Как включить",
+          body:
+            "В профиле подключите Telegram: система выдаёт ссылку, бот подтверждает подключение. Там же включите или выключите ежедневный отчёт.",
+        },
+        {
+          title: "Уведомления и сводки по расходам",
+          body:
+            "Уведомление приходит при создании расхода и при первой частичной оплате. По будним дням в 09:00 приходит число ожидающих, скоро наступающих и просроченных расходов, а по понедельникам в 10:00 недельная сводка просроченных расходов.",
+        },
+        {
+          title: "Новые заявки",
+          body:
+            "При новой заявке руководитель и менеджер этого филиала получают уведомление в Telegram.",
+        },
+        {
+          title: "Меню сотрудников",
+          body:
+            "В боте каждый сотрудник видит меню по своим правам: отчёт, филиалы, курсанты, оплаты, группы, расписание и посещаемость, сотрудники, журнал аудита. Преподаватель открывает свой отчёт и историю посещаемости своих курсантов.",
+        },
+      ],
+      faq: [
+        {
+          question: "Что будет в отчёте?",
+          answer:
+            "Вчерашние поступления и число курсантов, добавленных вчера.",
+        },
+        {
+          question: "Приходит ли отчёт по каждому филиалу отдельно?",
+          answer:
+            "Сейчас руководитель получает итог по автошколе, менеджер по своему филиалу. Сравнение филиалов есть на панели руководителя.",
+        },
+        {
+          question: "Как включить отчёт?",
+          answer:
+            "Подключите Telegram в профиле и включите ежедневный отчёт. Настройка доступна руководителю и менеджеру.",
+        },
+      ],
+      related: ["branches", "leads", "payments"],
+      relatedLabel: "Другие возможности",
+      cta: {
+        title: "Посмотрите отчёт в Telegram в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-10-16",
+    },
+    en: {
+      segments: ["features", "telegram-report"],
+      title: "Driving-school report in Telegram every day at 08:00 | automaktab.uz",
+      description:
+        "Every day at 08:00, yesterday’s revenue and new-student count arrive in Telegram: school-wide for the owner, branch-level for a manager.",
+      keywords: ["driving school reports", "driving school telegram bot", "driving school CRM"],
+      eyebrow: "Telegram report",
+      heading: "A driving-school report in Telegram every day at 08:00",
+      definition:
+        "When the report is on, automaktab.uz sends yesterday’s revenue and new-student count to Telegram every day at 08:00 (Tashkent): school-wide totals to the owner, branch totals to a manager.",
+      intro:
+        "See yesterday’s revenue and how many new students joined in Telegram each morning, without signing in.",
+      visual: "morning-report",
+      sections: [
+        {
+          title: "What the report contains",
+          body:
+            "Yesterday’s revenue and the number of students added yesterday. It arrives every day at 08:00 Tashkent time.",
+        },
+        {
+          title: "Who gets it",
+          body:
+            "Only owners and managers who have turned the report on. The owner gets school-wide totals, a manager gets their branch. Admissions staff and teachers do not receive it.",
+        },
+        {
+          title: "Access is checked again",
+          body:
+            "Before sending, the employee’s status and permissions are checked again. Deleted or inactive staff and suspended schools do not receive the report.",
+        },
+        {
+          title: "How to turn it on",
+          body:
+            "Link Telegram on your profile page: the system gives you a link and the bot confirms the connection. Turn the daily report on or off on the same page.",
+        },
+        {
+          title: "Expense alerts and digests",
+          body:
+            "An alert arrives when an expense is created and when it is first partly paid. On weekdays at 09:00 you get counts of pending, soon-due and overdue expenses; on Mondays at 10:00, a weekly overdue-expense digest.",
+        },
+        {
+          title: "New inquiries",
+          body:
+            "When a new inquiry is added, the owner and that branch’s manager are notified in Telegram.",
+        },
+        {
+          title: "Staff menu",
+          body:
+            "In the bot, each employee sees a menu that matches their permissions: report, branches, students, payments, groups, schedule and attendance, staff, audit log. Teachers open their own report and their students’ attendance history.",
+        },
+      ],
+      faq: [
+        {
+          question: "What is in the report?",
+          answer:
+            "Yesterday’s revenue and the number of students added yesterday.",
+        },
+        {
+          question: "Does each branch get a separate report?",
+          answer:
+            "Today the owner gets school-wide totals and a manager gets their own branch. Branch comparison is on the owner dashboard.",
+        },
+        {
+          question: "How do I turn it on?",
+          answer:
+            "Link Telegram on your profile and turn on the daily report. The setting is available to owners and managers.",
+        },
+      ],
+      related: ["branches", "leads", "payments"],
+      relatedLabel: "Other features",
+      cta: {
+        title: "See the Telegram report in the demo.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
