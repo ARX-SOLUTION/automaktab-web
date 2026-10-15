@@ -609,7 +609,7 @@ export const contentUz: LandingContent = {
         sub: "Jadval va davomat",
         title: "Darsga kim kelmayotganini biling.",
         points: [
-          "Xona va guruh jadvalini ko‘ring",
+          "Guruhlar bo‘yicha haftalik jadvalni ko‘ring",
           "Har bir o‘quvchining davomatini belgilang",
           "Davomatni guruhlar bo‘yicha kuzating",
         ],
