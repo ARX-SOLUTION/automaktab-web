@@ -42,7 +42,7 @@ const FEATURE_PAGES: ReadonlyArray<readonly [SeoPageId, string, string]> = [
 ];
 
 const OTHER_FEATURES = [
-  "Practical driving: minutes completed and remaining, instructor confirmation, distance driven.",
+  "Practical driving: minutes completed and remaining, instructor confirmation.",
   "Internal theory test: road-rules (YHQ) questions by topic (11 topics), time limit, pass mark. Internal school test, not the state exam.",
   "Leads: source, stage, responsible staff member, next follow-up.",
   "Fleet: vehicle status, instructor, maintenance, insurance, fuel records; expenses paid / unpaid.",
@@ -54,7 +54,7 @@ const FAQ_UZ: ReadonlyArray<readonly [string, string]> = [
   ["automaktab.uz nima?", "O‘zbekistondagi avtomaktablar uchun CRM. Filiallar, o‘quvchilar, to‘lov va qarzdorlik, guruh va jadval, davomat, amaliy haydash va hisobotlar bitta tizimda yuritiladi."],
   ["Avtomaktab CRM narxi qancha?", "Narx filiallar va o‘quvchilar soniga qarab yozma taklifda beriladi. Maktabingiz ma’lumotlari bilan 30 kunlik sinov bor. Demoni telefon raqamisiz ochish mumkin."],
   ["O‘quvchilarning qarzdorligini qanday ko‘raman?", "Har bir o‘quvchi kartasida to‘lov tarixi va qolgan qarz turadi. Qarzdorlarni filial va guruh bo‘yicha topish mumkin."],
-  ["Amaliy haydash soatlari hisoblanadimi?", "Ha. O‘tilgan va qolgan daqiqalar, instruktor tasdig‘i va yurilgan masofa qayd etiladi."],
+  ["Amaliy haydash soatlari hisoblanadimi?", "Ha. O‘tilgan va qolgan daqiqalar hamda instruktor tasdig‘i qayd etiladi."],
   ["Bir nechta filialni boshqarsa bo‘ladimi?", "Ha. Rahbar barcha filiallar tushumi va qarzdorligini bir panelda solishtiradi."],
   ["Kunlik hisobot keladimi?", "Ha. Har kuni soat 08:00 da (Toshkent vaqti) kechagi tushum va yangi o‘quvchilar soni Telegram’ga yuboriladi."],
   ["Ichki test bormi?", "Ha. YHQ savollari 11 mavzu bo‘yicha, vaqt chegarasi va o‘tish bali bilan. Bu maktabning ichki testi, davlat imtihoni emas."],

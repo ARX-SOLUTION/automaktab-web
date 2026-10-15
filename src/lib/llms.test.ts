@@ -42,4 +42,8 @@ describe("llms-full.txt", () => {
     expect(buildLlmsFullTxt()).not.toMatch(/talaba/i);
     expect(buildLlmsTxt()).not.toMatch(/talaba/i);
   });
+
+  it("does not claim per-lesson driving distance", () => {
+    expect(buildLlmsFullTxt()).not.toMatch(/yurilgan masofa|distance driven/i);
+  });
 });
