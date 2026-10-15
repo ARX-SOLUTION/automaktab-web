@@ -428,6 +428,9 @@ describe.each(LOCALE_ROUTES)(
       );
       expect(organization).toBeTruthy();
       expect(organization.name).toBe("automaktab.uz");
+      expect(organization.alternateName).toEqual(["Automaktab", "Автомактаб"]);
+      expect(organization.sameAs).toBeUndefined();
+      expect(organization.contactPoint).toBeUndefined();
       expect(organization.logo).toEqual({
         "@type": "ImageObject",
         url: "https://automaktab.uz/icon.png",
@@ -451,6 +454,9 @@ describe.each(LOCALE_ROUTES)(
       expect(softwareApp).toBeTruthy();
       expect(softwareApp.name).toBe("automaktab.uz");
       expect(softwareApp.offers).toBeUndefined();
+      expect(softwareApp["@id"]).toBe("https://automaktab.uz/#software");
+      expect(softwareApp.featureList.length).toBeGreaterThanOrEqual(4);
+      expect(softwareApp.screenshot).toMatch(/\/opengraph-image$/);
 
       const faqPage = organizationGraph["@graph"].find(
         (entry: { "@type"?: string }) => entry["@type"] === "FAQPage",
@@ -577,6 +583,7 @@ describe("blog and sitemap surfaces", () => {
     expect(html).toContain('property="og:image"');
     expect(html).toContain('name="twitter:image"');
     expect(schema.operatingSystem).toBe("Web");
+    expect(schema["@id"]).toBe("https://automaktab.uz/#software");
     expect(schema.releaseNotes.length).toBeGreaterThan(0);
     expect(schema.releaseNotes.every((note: unknown) => typeof note === "string")).toBe(true);
     expect(schema.releaseNotes.join(" ")).not.toContain("v3.0.0");

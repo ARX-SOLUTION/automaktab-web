@@ -6,6 +6,8 @@ import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { isLocale, type Locale } from "@/i18n/config";
 import { LANDING_COPY } from "@/config/landing";
+import { SEO_PAGES, SEO_RELATED_PAGE_IDS } from "@/config/seo-pages";
+import { buildOpenGraphImageUrl } from "@/lib/locale-metadata";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -30,6 +32,7 @@ export default async function Home({ params }: PageProps) {
         "@type": "Organization",
         "@id": "https://automaktab.uz/#organization",
         name: "automaktab.uz",
+        alternateName: ["Automaktab", "Автомактаб"],
         url: "https://automaktab.uz/",
         logo: {
           "@type": "ImageObject",
@@ -56,6 +59,10 @@ export default async function Home({ params }: PageProps) {
         url: "https://automaktab.uz/",
         inLanguage: ["uz", "ru", "en"],
         description: content.hero.description,
+        featureList: SEO_RELATED_PAGE_IDS.filter((id) => id !== "pricing").map(
+          (id) => SEO_PAGES[id][locale].eyebrow,
+        ),
+        screenshot: buildOpenGraphImageUrl(locale),
         publisher: { "@id": "https://automaktab.uz/#organization" },
       },
       {

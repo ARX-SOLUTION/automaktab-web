@@ -76,6 +76,7 @@ export default async function ChangelogPage({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
+    '@id': 'https://automaktab.uz/#software',
     name: 'automaktab.uz',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web',
