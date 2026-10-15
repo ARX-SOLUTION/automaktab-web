@@ -60,7 +60,7 @@ export const SEO_PAGES: Record<
       segments: ["features", "payments-and-debt"],
       title: "Avtomaktab to‘lovlari va qarzdorlik | automaktab.uz",
       description:
-        "Talabalar to‘lovlari va qolgan qarzni bir joyda ko‘ring. Qarzdorlarni filial va guruh bo‘yicha toping.",
+        "O‘quvchilar to‘lovlari va qolgan qarzni bir joyda ko‘ring. Qarzdorlarni filial va guruh bo‘yicha toping.",
       keywords: [
         "avtomaktab to‘lovlari",
         "qarzdorlik nazorati",
@@ -69,12 +69,12 @@ export const SEO_PAGES: Record<
       eyebrow: "To‘lovlar nazorati",
       heading: "Avtomaktab to‘lovlari va qarzdorligini boshqaring.",
       intro:
-        "Kim qancha to‘laganini va qancha qarzi qolganini ko‘ring. Talaba kartasi va qarzdorlar ro‘yxati bir tizimda.",
+        "Kim qancha to‘laganini va qancha qarzi qolganini ko‘ring. O‘quvchi kartasi va qarzdorlar ro‘yxati bir tizimda.",
       sections: [
         {
-          title: "To‘lovlar talaba kartasida",
+          title: "To‘lovlar o‘quvchi kartasida",
           body:
-            "Talabaning to‘lov tarixi va qolgan qarzini kartasidan tekshiring. Kerakli ma’lumot boshqa faylda qolib ketmaydi.",
+            "O‘quvchining to‘lov tarixi va qolgan qarzini kartasidan tekshiring. Kerakli ma’lumot boshqa faylda qolib ketmaydi.",
         },
         {
           title: "Qarzdorlarni tez toping",
@@ -283,12 +283,12 @@ export const SEO_PAGES: Record<
       eyebrow: "Raqamli davomat",
       heading: "Har bir dars davomatini bir joyda yuriting.",
       intro:
-        "Guruh ro‘yxatidan har bir talabaning davomatini belgilang. Qaysi darslarni qoldirganini shu tizimda tekshiring.",
+        "Guruh ro‘yxatidan har bir o‘quvchining davomatini belgilang. Qaysi darslarni qoldirganini shu tizimda tekshiring.",
       sections: [
         {
           title: "To‘rtta tushunarli holat",
           body:
-            "Keldi, kechikdi, kelmadi yoki uzrli. Har bir talabaning holatini dars ro‘yxatida belgilang.",
+            "Keldi, kechikdi, kelmadi yoki uzrli. Har bir o‘quvchining holatini dars ro‘yxatida belgilang.",
         },
         {
           title: "Jadval va davomat yonma-yon",
@@ -507,7 +507,7 @@ export const SEO_PAGES: Record<
         {
           title: "Narx maktabingizga qarab hisoblanadi",
           body:
-            "Filiallar, talabalar soni va kerakli bo‘limlarni ayting. Sizga mos shartlarni yozma taklifda oling.",
+            "Filiallar, o‘quvchilar soni va kerakli bo‘limlarni ayting. Sizga mos shartlarni yozma taklifda oling.",
         },
         {
           title: "Avval tizimni o‘zingiz ko‘ring",
@@ -725,7 +725,7 @@ export const SEO_PAGES: Record<
         {
           title: "Qanday ma’lumotlar ishlatiladi",
           body:
-            "CRM maktabning kundalik ishi uchun kerakli ma’lumotlarni saqlaydi: talabalar, guruhlar, to‘lov va qarzdorlik yozuvlari, dars jadvali, davomat va xodim akkauntlari. Saytdagi so‘rov formasidan yuborilgan ism, telefon va maktab haqidagi qisqa ma’lumot faqat bog‘lanish uchun ishlatiladi. Demoda haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+            "CRM maktabning kundalik ishi uchun kerakli ma’lumotlarni saqlaydi: o‘quvchilar, guruhlar, to‘lov va qarzdorlik yozuvlari, dars jadvali, davomat va xodim akkauntlari. Saytdagi so‘rov formasidan yuborilgan ism, telefon va maktab haqidagi qisqa ma’lumot faqat bog‘lanish uchun ishlatiladi. Demoda haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
         },
         {
           title: "Saqlash, kirish va huquqlar",
@@ -846,7 +846,7 @@ export const SEO_PAGES: Record<
         {
           title: "Xizmat nima",
           body:
-            "automaktab.uz avtomaktablarga talabalar, to‘lovlar, jadval va davomatni bitta tizimda boshqarishga yordam beradi. Saytdagi materiallar axborot xarakterida; mahsulot imkoniyatlari sinov va shartnomada tasdiqlangan doirada beriladi.",
+            "automaktab.uz avtomaktablarga o‘quvchilar, to‘lovlar, jadval va davomatni bitta tizimda boshqarishga yordam beradi. Saytdagi materiallar axborot xarakterida; mahsulot imkoniyatlari sinov va shartnomada tasdiqlangan doirada beriladi.",
         },
         {
           title: "Demo va sinov",

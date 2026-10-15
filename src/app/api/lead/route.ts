@@ -68,7 +68,7 @@ async function sendTelegramNotification(payload: {
     `🏫 *Maktab:* ${payload.school}`,
     `📍 *Shahar/viloyat:* ${payload.city || "Ko‘rsatilmadi"}`,
     `🏢 *Filiallar:* ${payload.branches || "—"}`,
-    `👥 *Talabalar:* ${payload.students || "—"}`,
+    `👥 *O‘quvchilar:* ${payload.students || "—"}`,
     `⚡ *Qiziqqan jarayonlar:* ${payload.flows.length ? payload.flows.join(", ") : "—"}`,
     `🔗 *Sahifa:* ${payload.page_url || "—"}`,
     `🕒 *Vaqt:* ${payload.submitted_at || new Date().toISOString()}`,

@@ -96,7 +96,7 @@ export const CHANGELOG_COPY: Record<Locale, ChangelogCopy> = {
     testedBadge: 'Namuna ma’lumotlari',
     copyLink: 'Havolani nusxalash',
     linkCopied: 'Nusxalandi',
-    demoNotice: 'Ko‘rinishlardagi summalar va talabalar soni namuna uchun berilgan.',
+    demoNotice: 'Ko‘rinishlardagi summalar va o‘quvchilar soni namuna uchun berilgan.',
     tableOfContents: 'Yangilanishlar',
   },
   ru: {
@@ -194,9 +194,9 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
           'Avtomatik eslatmalar: uzoq vaqt bog‘lanilmagan murojaatlarga Telegram va SMS xabarlari.',
           'Sayt va Telegram’dan arizalar qabul qilish, reklama manbasini UTM belgilari orqali kuzatish.',
           'DOCX shablonlardan shartnoma yaratish, 1–3 bosqichli to‘lov jadvali va SMS kod bilan imzolash.',
-          'Talaba, instruktor va mashina kartalarida qo‘shimcha maydonlar. Excel/CSV’dan ma’lumot ko‘chirish.',
+          'O‘quvchi, instruktor va mashina kartalarida qo‘shimcha maydonlar. Excel/CSV’dan ma’lumot ko‘chirish.',
           'Instruktor jadvali: bir vaqtga ikki dars yoki bir mashinani ikki darsga belgilashdan oldin ogohlantirish.',
-          'Talaba kabineti: ichki YHQ testlari, qolgan darslar va maktab bilan yozishmalar. Davlat imtihoni emas.',
+          'O‘quvchi kabineti: ichki YHQ testlari, qolgan darslar va maktab bilan yozishmalar. Davlat imtihoni emas.',
           'Naqd, karta va bank hisobidagi mablag‘lar, instruktor maoshi hisobi va Payme/Click orqali to‘lov.',
           'Xodimlar uchun alohida kirish huquqlari va ikki bosqichli himoya (2FA).',
         ],
@@ -242,7 +242,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       },
       fixes: {
         uz: [
-          'Takroriy telefon raqamlarini aniqlash va murojaatni mavjud talaba tarixiga qo‘shish.',
+          'Takroriy telefon raqamlarini aniqlash va murojaatni mavjud o‘quvchi tarixiga qo‘shish.',
           'Bir mashinaga bir vaqtda ikkita haydash darsi belgilashni cheklash.',
         ],
         ru: [
@@ -414,16 +414,16 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       en: 'Attendance register with 4 status choices',
     },
     excerpt: {
-      uz: 'Dars ro‘yxatidan davomat oynasini ochish qo‘shildi. Namuna guruhda 23 talaba: keldi, kechikdi, kelmadi yoki uzrli.',
+      uz: 'Dars ro‘yxatidan davomat oynasini ochish qo‘shildi. Namuna guruhda 23 o‘quvchi: keldi, kechikdi, kelmadi yoki uzrli.',
       ru: 'Добавлена отметка посещаемости из списка занятий: пришёл, опоздал, не пришёл или пропустил по уважительной причине.',
       en: 'Added attendance marking from lesson cards. The sample group has 23 students, with present, late, absent and excused choices.',
     },
     highlights: {
       features: {
         uz: [
-          'Guruh ro‘yxatini darsdan ochib, har bir talabaning davomatini belgilash.',
+          'Guruh ro‘yxatini darsdan ochib, har bir o‘quvchining davomatini belgilash.',
           'Keldi, kechikdi, kelmadi va uzrli holatlarini alohida ranglar bilan ko‘rsatish.',
-          'Talaba kartasida qatnashgan va qoldirgan darslar tarixini ko‘rish.',
+          'O‘quvchi kartasida qatnashgan va qoldirgan darslar tarixini ko‘rish.',
         ],
         ru: [
           'Открывайте список группы из занятия и отмечайте каждого курсанта.',
@@ -541,12 +541,12 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
     pillar: 'attendance',
     routeHint: 'app.automaktab.uz/students',
     title: {
-      uz: 'Talaba kartasi va Excelga yuklab olish',
+      uz: 'O‘quvchi kartasi va Excelga yuklab olish',
       ru: 'Карточка курсанта и выгрузка в Excel',
       en: 'Student records and Excel downloads',
     },
     excerpt: {
-      uz: 'To‘lov, imtihon, davomat va guruh tarixi talaba kartasida birlashtirildi. Ro‘yxatlarni Excelga yuklab olish qo‘shildi.',
+      uz: 'To‘lov, imtihon, davomat va guruh tarixi o‘quvchi kartasida birlashtirildi. Ro‘yxatlarni Excelga yuklab olish qo‘shildi.',
       ru: 'Оплаты, экзамены, посещаемость и история групп собраны в карточке курсанта. Добавлена выгрузка списков в Excel.',
       en: 'Payments, exams, attendance and group history brought together on the student record. Added Excel downloads for lists.',
     },
@@ -555,7 +555,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
         uz: [
           'To‘lov tarixi, qolgan qarz, imtihon ballari va davomat bir kartada.',
           'B, BC, C toifasi va filial bo‘yicha guruhlarni boshqarish.',
-          'Talabalar va guruhlar ro‘yxatini 1 bosishda Excelga yuklab olish.',
+          'O‘quvchilar va guruhlar ro‘yxatini 1 bosishda Excelga yuklab olish.',
         ],
         ru: [
           'История оплат, остаток долга, результаты экзаменов и посещаемость в одной карточке.',
@@ -570,7 +570,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       },
       improvements: {
         uz: [
-          'Talabalarni ism, familiya yoki telefon orqali tez qidirish qo‘shildi.',
+          'O‘quvchilarni ism, familiya yoki telefon orqali tez qidirish qo‘shildi.',
         ],
         ru: [
           'Внедрён быстрый поиск курсантов по фамилии, имени или номеру телефона.',
@@ -619,8 +619,8 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
     highlights: {
       features: {
         uz: [
-          'To‘lov sanasi, talaba, kurs, to‘langan summa va qolgan qarz bir ro‘yxatda.',
-          'To‘lov muddati o‘tgan talabalarni alohida saralash.',
+          'To‘lov sanasi, o‘quvchi, kurs, to‘langan summa va qolgan qarz bir ro‘yxatda.',
+          'To‘lov muddati o‘tgan o‘quvchilarni alohida saralash.',
           'Har bir filial tushumini alohida ko‘rish va solishtirish.',
         ],
         ru: [
@@ -678,16 +678,16 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       en: 'Branches, staff and change history',
     },
     excerpt: {
-      uz: 'Filiallarni bir tizimda boshqarish qo‘shildi. Xodimlar rollari va talaba, to‘lov, dars yozuvlaridagi o‘zgarishlar tarixi ko‘rinadi.',
+      uz: 'Filiallarni bir tizimda boshqarish qo‘shildi. Xodimlar rollari va o‘quvchi, to‘lov, dars yozuvlaridagi o‘zgarishlar tarixi ko‘rinadi.',
       ru: 'Добавлено управление филиалами в одной системе, роли сотрудников и история изменений в записях курсантов, оплат и занятий.',
       en: 'Added shared branch management, staff roles and change history for student, payment and lesson records.',
     },
     highlights: {
       features: {
         uz: [
-          'Rahbar barcha filiallar tushumi, talabalar soni va xodimlarini bir joyda ko‘radi.',
+          'Rahbar barcha filiallar tushumi, o‘quvchilar soni va xodimlarini bir joyda ko‘radi.',
           'Qabul xodimi, o‘qituvchi va menejerga ishiga mos bo‘limlar.',
-          'Talaba, to‘lov yoki darsni kim va qachon o‘zgartirganini ko‘rish.',
+          'O‘quvchi, to‘lov yoki darsni kim va qachon o‘zgartirganini ko‘rish.',
         ],
         ru: [
           'Руководитель видит результаты всех филиалов на одной панели.',
@@ -878,7 +878,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       features: {
         uz: [
           'Yo‘l belgilari, chorrahalar va xavfsizlik bo‘yicha savollar ro‘yxati.',
-          'Talaba kartasida test bali va to‘g‘ri javoblar foizini ko‘rish.',
+          'O‘quvchi kartasida test bali va to‘g‘ri javoblar foizini ko‘rish.',
         ],
         ru: [
           'Вопросы по дорожным знакам, перекрёсткам и безопасности.',
@@ -928,12 +928,12 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
     pillar: 'schedule',
     routeHint: 'app.automaktab.uz/training-programs',
     title: {
-      uz: 'O‘quv dasturlari va talaba qabuli',
+      uz: 'O‘quv dasturlari va o‘quvchi qabuli',
       ru: 'Учебные программы и приём курсантов',
       en: 'Training programmes and student enrollment',
     },
     excerpt: {
-      uz: 'Nazariya soatlari va haydash daqiqalarini dasturda belgilash, talabani shu dasturga biriktirish imkoniyati qo‘shildi.',
+      uz: 'Nazariya soatlari va haydash daqiqalarini dasturda belgilash, o‘quvchini shu dasturga biriktirish imkoniyati qo‘shildi.',
       ru: 'Добавлена настройка часов теории и минут вождения в учебной программе, а также зачисление курсантов на неё.',
       en: 'Added theory hours and driving minute settings for training programmes, plus student enrollment in each programme.',
     },
@@ -941,7 +941,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       features: {
         uz: [
           'B, BC va C toifalari uchun nazariya soatlari va haydash daqiqalarini sozlash.',
-          'Talabaga o‘quv dasturini biriktirish va boshlanish sanasini belgilash.',
+          'O‘quvchiga o‘quv dasturini biriktirish va boshlanish sanasini belgilash.',
         ],
         ru: [
           'Настраивайте часы теории и минуты вождения для категорий B, BC и C.',
@@ -996,7 +996,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       en: 'Teachers and admissions staff',
     },
     excerpt: {
-      uz: 'O‘qituvchilar, instruktorlar, ularga biriktirilgan mashinalar va qabul xodimlarining talaba ro‘yxatlari alohida bo‘limlarda yuritiladi.',
+      uz: 'O‘qituvchilar, instruktorlar, ularga biriktirilgan mashinalar va qabul xodimlarining o‘quvchi ro‘yxatlari alohida bo‘limlarda yuritiladi.',
       ru: 'Добавлены списки преподавателей, инструкторов и закреплённых машин, а также записи о приёме новых курсантов.',
       en: 'Added teacher and instructor lists, assigned vehicles and admissions records for new students.',
     },
@@ -1004,7 +1004,7 @@ export const CHANGELOG_ITEMS: ChangelogItem[] = [
       features: {
         uz: [
           'O‘qituvchi malakasi, biriktirilgan guruhlar va instruktor mashinalarini ko‘rish.',
-          'Qabul xodimlarining yangi talabalarni ro‘yxatga olish ishlarini kuzatish.',
+          'Qabul xodimlarining yangi o‘quvchilarni ro‘yxatga olish ishlarini kuzatish.',
         ],
         ru: [
           'Смотрите квалификацию преподавателей, закреплённые группы и машины инструкторов.',

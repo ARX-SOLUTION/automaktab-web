@@ -101,7 +101,7 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
         {/* 03b Morning Telegram Report (08:00 Nazorat Hisoboti) */}
         <MorningReportWidget content={content.morningReport} />
 
-        {/* 04 Student Journey (Talaba yo‘li) */}
+        {/* 04 Student Journey (O‘quvchi yo‘li) */}
         <RoadStepper content={content.journey} scenes={content.scenes} />
 
         {/* 05 Live Attendance Demo (Sinab ko‘ring) */}

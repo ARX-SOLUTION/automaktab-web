@@ -40,7 +40,7 @@ export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
     revenue: "Tushum",
     debt: "Qarzdorlik",
     branchRevenue: "Filiallar tushumi",
-    students: "Talaba",
+    students: "O‘quvchi",
     debtors: "Qarzdorlar",
     remaining: "Qolgan to‘lov",
     instruction: "To‘lovni qayd eting. Tushum va qarzdorlik qanday o‘zgarishini ko‘ring.",
@@ -53,7 +53,7 @@ export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
     disclaimer: "To‘qima ma’lumotlar. O‘zgarishlar saqlanmaydi; bu to‘lov qabul qilish xizmati emas.",
     noScript: "Bu statik namuna. Sinab ko‘rish uchun brauzeringizda JavaScript’ni yoqing.",
     workflowTitle: "Jamoangiz ishlaydi. Hisob bir joyda.",
-    workflowDescription: "Talabalar, to‘lovlar va darslarni alohida jadvallardan bitta tartibli jarayonga birlashtiring.",
+    workflowDescription: "O‘quvchilar, to‘lovlar va darslarni alohida jadvallardan bitta tartibli jarayonga birlashtiring.",
   },
   ru: {
     title: "Панель руководителя",

@@ -14,7 +14,7 @@ export const DEMO_FORM_COPY: Record<Locale, DemoFormCopy> = {
     regionPlaceholder: "Masalan: Samarqand",
     centerName: "Avtomaktab nomi · ixtiyoriy",
     centerNamePlaceholder: "Avtomaktab nomi",
-    studentCount: "Talabalar soni · ixtiyoriy",
+    studentCount: "O‘quvchilar soni · ixtiyoriy",
     note: "Qo‘shimcha izoh · ixtiyoriy",
     notePlaceholder: "Masalan: qo‘ng‘iroq qilish uchun qulay vaqt",
     submit: "Tanishuvni so‘rash",

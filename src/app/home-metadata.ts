@@ -23,7 +23,7 @@ const SEO_METADATA: Record<
   uz: {
     title: "Avtomaktab CRM va boshqaruv tizimi | automaktab.uz",
     description:
-      "Talabalar, to‘lovlar, qarzdorlik, dars jadvali va davomatni bir joyda boshqaring. Filiallar holatini ko‘ring va demoni ochib sinang.",
+      "O‘quvchilar, to‘lovlar, qarzdorlik, dars jadvali va davomatni bir joyda boshqaring. Filiallar holatini ko‘ring va demoni ochib sinang.",
   },
   ru: {
     title: "CRM для автошколы и система управления | automaktab.uz",
