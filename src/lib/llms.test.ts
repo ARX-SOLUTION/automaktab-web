@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { contentEn } from "@/content/en";
 import { contentUz } from "@/content/uz";
 import { SEO_PAGE_IDS, SEO_PAGES, getSeoPagePath } from "@/config/seo-pages";
 import { SUPPORTED_LOCALES } from "@/i18n/config";
@@ -8,7 +7,9 @@ import { buildLlmsFullTxt, buildLlmsTxt } from "./llms";
 describe("llms.txt", () => {
   it("starts with the llmstxt.org title and summary", () => {
     const text = buildLlmsTxt();
-    expect(text.startsWith(`# automaktab.uz\n\n> ${contentEn.meta.description}\n`)).toBe(true);
+    expect(text).toMatch(/^# automaktab\.uz\n\n> automaktab\.uz is a CRM and management system for driving schools/);
+    expect(text).toContain("## Features");
+    expect(text).not.toMatch(/price:|UZS|so‘m/i);
   });
 
   it("links every localized homepage and SEO page", () => {
@@ -29,10 +30,16 @@ describe("llms-full.txt", () => {
     for (const locale of SUPPORTED_LOCALES) {
       for (const id of SEO_PAGE_IDS) {
         const page = SEO_PAGES[id][locale];
-        expect(text).toContain(page.intro);
-        for (const section of page.sections) expect(text).toContain(section.body);
+        const wording = (value: string) => locale === "uz" ? value.replace(/talaba/g, "o‘quvchi").replace(/Talaba/g, "O‘quvchi") : value;
+        expect(text).toContain(wording(page.intro));
+        for (const section of page.sections) expect(text).toContain(wording(section.body));
       }
     }
-    for (const item of contentUz.faq.items) expect(text).toContain(item.answerLogin);
+    for (const item of contentUz.faq.items) expect(text).toContain(item.answerLogin.replace(/talaba/g, "o‘quvchi").replace(/Talaba/g, "O‘quvchi"));
+  });
+
+  it("uses o‘quvchi rather than talaba in generated Uzbek text", () => {
+    expect(buildLlmsFullTxt()).not.toMatch(/talaba/i);
+    expect(buildLlmsTxt()).not.toMatch(/talaba/i);
   });
 });
