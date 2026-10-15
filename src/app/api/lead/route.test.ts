@@ -96,7 +96,7 @@ describe("POST /api/lead", () => {
         city: "Toshkent shahri",
         branches: "2–3",
         students: "100–500",
-        flows: ["Talabalar", "To‘lov va qarz"],
+        flows: ["O‘quvchilar", "To‘lov va qarz"],
         consent: true,
       }),
     });

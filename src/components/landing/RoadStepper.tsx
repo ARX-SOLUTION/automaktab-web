@@ -311,7 +311,7 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
   </>;
 
   return (
-    <section ref={root} id="yol" data-screen-label="04 Talaba yo‘li" data-active-stop={activeStop} className="scroll-story journey-story bg-paper border-y border-sand-300" aria-labelledby="journey-heading">
+    <section ref={root} id="yol" data-screen-label="04 O‘quvchi yo‘li" data-active-stop={activeStop} className="scroll-story journey-story bg-paper border-y border-sand-300" aria-labelledby="journey-heading">
       <div className="landing-container">
         <h2 id="journey-heading" className="story-heading">{content.title}</h2>
         <div className="story-layout">

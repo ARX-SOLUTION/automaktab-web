@@ -336,7 +336,7 @@ const METADATA_LANGUAGE_SIGNAL: Record<
 const normalizeUrl = (u: string) => u.replace(/\/$/, "");
 
 const CAPABILITIES_TITLE: Record<Locale, string> = {
-  uz: "Har bir talabaning holati ko‘z oldingizda.",
+  uz: "Har bir o‘quvchining holati ko‘z oldingizda.",
   ru: "Следите за обучением каждого курсанта.",
   en: "Follow every student’s progress.",
 };

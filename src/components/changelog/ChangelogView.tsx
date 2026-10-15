@@ -479,7 +479,7 @@ export default function ChangelogView({ locale }: ChangelogViewProps) {
                         {item.id === 'release-1-7-0' && (
                           <div className="flex items-center justify-between text-[11px] font-mono">
                             <span>{locale === 'ru' ? "Внутренние тесты ПДД: Вопросы" : locale === 'en' ? "Internal road rules tests: Questions" : "Ichki YHQ testlari: Savollar"}</span>
-                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Результаты в карточке" : locale === 'en' ? "Results in student record" : "Natijalar talaba kartasida"}</span>
+                            <span className="text-[#0E6B43] dark:text-[#C6FF3D]">{locale === 'ru' ? "Результаты в карточке" : locale === 'en' ? "Results in student record" : "Natijalar o‘quvchi kartasida"}</span>
                           </div>
                         )}
 

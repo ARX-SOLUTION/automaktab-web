@@ -24,7 +24,7 @@ export const BLOG_COPY: Record<Locale, BlogCopy> = {
     skipLink: "Asosiy qismga o‘tish",
     eyebrow: "Avtomaktab boshqaruvi",
     title: "Avtomaktab boshqaruvi uchun amaliy maslahatlar.",
-    description: "Talabalar, to‘lovlar, qarzdorlik, jadval va davomatni yuritish bo‘yicha sodda qo‘llanmalar.",
+    description: "O‘quvchilar, to‘lovlar, qarzdorlik, jadval va davomatni yuritish bo‘yicha sodda qo‘llanmalar.",
     articleLabel: "Qo‘llanma",
     readArticle: "Maqolani o‘qish",
     emptyTitle: "Hozircha maqolalar yo‘q",

@@ -350,7 +350,7 @@ export const contentUz: LandingContent = {
   meta: {
     title: "Avtomaktab boshqaruv tizimi | automaktab.uz",
     description:
-      "Talabalar, to‘lovlar, qarzdorlik, dars jadvali va davomatni bir joyda boshqaring. Filiallar holatini ko‘ring va demoni ochib sinang.",
+      "O‘quvchilar, to‘lovlar, qarzdorlik, dars jadvali va davomatni bir joyda boshqaring. Filiallar holatini ko‘ring va demoni ochib sinang.",
   },
   header: {
     logoText: "automaktab",
@@ -371,7 +371,7 @@ export const contentUz: LandingContent = {
     title: "Avtomaktabingiz holati. ",
     titleAccent: "Bir qarashda.",
     description:
-      "Tushum, qarzdorlik va filiallar holatini bir joyda ko‘ring. Talabalar, to‘lovlar va darslarni jamoangiz bilan bir tizimda yuriting.",
+      "Tushum, qarzdorlik va filiallar holatini bir joyda ko‘ring. O‘quvchilar, to‘lovlar va darslarni jamoangiz bilan bir tizimda yuriting.",
     lane1: {
       button: "Demoni ochish",
       helperLogin: "Namuna maktabni demo email va parol bilan oching.",
@@ -385,7 +385,7 @@ export const contentUz: LandingContent = {
     signRows: [
       { arrow: "↑", title: "Kimning to‘lovi kechikdi?", sub: "To‘lov va qarzdorlik", stopIndex: 1 },
       { arrow: "←", title: "Kim darsga kelmadi?", sub: "Jadval va davomat", stopIndex: 2 },
-      { arrow: "→", title: "Guruhda kimlar o‘qiyapti?", sub: "Talabalar va guruhlar", stopIndex: 0 },
+      { arrow: "→", title: "Guruhda kimlar o‘qiyapti?", sub: "O‘quvchilar va guruhlar", stopIndex: 0 },
       { arrow: "↱", title: "Kim qancha haydash mashg‘uloti o‘tdi?", sub: "Amaliy haydash", stopIndex: 3 },
     ],
   },
@@ -395,8 +395,8 @@ export const contentUz: LandingContent = {
     callouts: [
       {
         number: 1,
-        title: "Talabalar qarzdorligi",
-        description: "Talabalarning jami qarzini ko‘ring.",
+        title: "O‘quvchilar qarzdorligi",
+        description: "O‘quvchilarning jami qarzini ko‘ring.",
       },
       {
         number: 2,
@@ -417,13 +417,13 @@ export const contentUz: LandingContent = {
       title: "Maktab moliyasi",
       period: "Namuna · 1–30 sentabr",
       revenue: "Tushum",
-      debt: "Talabalar qarzdorligi",
+      debt: "O‘quvchilar qarzdorligi",
       branches: ["Filial A", "Filial B", "Filial C"],
       branchCaption: "Uch filialning bir davrdagi tushumi.",
     },
     registrar: {
-      title: "Talabalar va darslar",
-      students: "Talabalar ro‘yxati",
+      title: "O‘quvchilar va darslar",
+      students: "O‘quvchilar ro‘yxati",
       group: "Guruh",
       schedule: "Dars vaqti",
       lesson: "Nazariya · Yo‘l harakati qoidalari",
@@ -431,7 +431,7 @@ export const contentUz: LandingContent = {
     teacher: {
       title: "Guruh davomati",
       lesson: "Nazariya darsi",
-      marked: "talaba belgilangan",
+      marked: "o‘quvchi belgilangan",
       statuses: ["Keldi", "Keldi", "Kechikdi", "Kelmadi"],
     },
     leads: {
@@ -447,7 +447,7 @@ export const contentUz: LandingContent = {
       sourceValue: "Instagram",
       followupLabel: "Keyingi aloqa",
       followupValue: "Bugun · 15:30",
-      conversionLabel: "Talaba kartasini ochish"
+      conversionLabel: "O‘quvchi kartasini ochish"
     },
     fleet: {
       title: "Mashinalar holati",
@@ -488,7 +488,7 @@ export const contentUz: LandingContent = {
     eyebrow: "Telegram’da kunlik hisobot",
     title: "Kecha qancha tushum bo‘ldi? ",
     titleAccent: "Ertalab Telegram’da ko‘ring.",
-    description: "Hisobotni yoqing. Har kuni 08:00 da kechagi tushum va yangi talabalar soni Telegram’da keladi.",
+    description: "Hisobotni yoqing. Har kuni 08:00 da kechagi tushum va yangi o‘quvchilar soni Telegram’da keladi.",
     botTitle: "automaktab.uz",
     botSub: "Hisobot namunasi · ma’lumotlar to‘qima",
     timeLabel: "08:00",
@@ -496,7 +496,7 @@ export const contentUz: LandingContent = {
     dateLabel: "Namuna",
     revenueLabel: "Kun natijasi",
     revenueCollectedLabel: "Tushum",
-    newStudentsLabel: "Yangi talabalar",
+    newStudentsLabel: "Yangi o‘quvchilar",
     branchLabel: "Filial",
     totalLabel: "Jami · 3 filial",
     currency: "so‘m",
@@ -506,7 +506,7 @@ export const contentUz: LandingContent = {
       { name: "Yunusobod", revenue: 4600000, students: 3 },
       { name: "Sergeli", revenue: 3000000, students: 1 },
     ],
-    sampleCaption: "Filiallar bo‘yicha namuna. Hozir Telegram’da faqat umumiy tushum va yangi talabalar soni yuboriladi.",
+    sampleCaption: "Filiallar bo‘yicha namuna. Hozir Telegram’da faqat umumiy tushum va yangi o‘quvchilar soni yuboriladi.",
     bullets: ["Rahbarga maktab bo‘yicha jami", "Menejerga o‘z filiali bo‘yicha", "Har kuni 08:00, Toshkent vaqti"],
     ctaButton: "Sinov so‘rash",
     trialNote: "Telegram’ni ulang va hisobotni yoqing",
@@ -529,14 +529,14 @@ export const contentUz: LandingContent = {
   },
   journey: {
     eyebrow: "Qabuldan ichki testgacha",
-    title: "Har bir talabaning holati ko‘z oldingizda.",
+    title: "Har bir o‘quvchining holati ko‘z oldingizda.",
     interactiveCta: "Davomatni belgilab ko‘ring ↓",
     navPrevLabel: "Oldingi bosqich",
     navNextLabel: "Keyingi bosqich",
-    trackAriaLabel: "Talaba bosqichlari. Chap va o‘ng strelka tugmalari bilan tanlang.",
+    trackAriaLabel: "O‘quvchi bosqichlari. Chap va o‘ng strelka tugmalari bilan tanlang.",
     previews: {
       student: {
-        title: "Talaba kartasi",
+        title: "O‘quvchi kartasi",
         category: "B toifa",
         group: "T-25 guruhi",
         certificate: "083 tibbiy ma’lumotnoma: bor",
@@ -550,7 +550,7 @@ export const contentUz: LandingContent = {
         period: "Bu oy",
         branches: "Barcha filiallar",
         debtors: "Qarzdorlar",
-        columns: ["Talaba", "Jami", "Qoldiq"],
+        columns: ["O‘quvchi", "Jami", "Qoldiq"],
         paidInFull: "To‘langan",
       },
       driving: {
@@ -582,8 +582,8 @@ export const contentUz: LandingContent = {
       {
         number: 1,
         name: "Qabul",
-        sub: "Talaba kartasi",
-        title: "Talaba ma’lumotlari bir kartada.",
+        sub: "O‘quvchi kartasi",
+        title: "O‘quvchi ma’lumotlari bir kartada.",
         points: [
           "Hujjatlar va shartnoma bir kartada",
           "Qaysi reklamadan kelganini ko‘ring",
@@ -610,7 +610,7 @@ export const contentUz: LandingContent = {
         title: "Darsga kim kelmayotganini biling.",
         points: [
           "Xona va guruh jadvalini ko‘ring",
-          "Har bir talabaning davomatini belgilang",
+          "Har bir o‘quvchining davomatini belgilang",
           "Davomatni guruhlar bo‘yicha kuzating",
         ],
         previewType: "attendanceScreenshot",
@@ -634,7 +634,7 @@ export const contentUz: LandingContent = {
         points: [
           "Mavzular bo‘yicha YHQ savollari",
           "Vaqt chegaralangan ichki sinov",
-          "Har bir talabaning sinov natijalari",
+          "Har bir o‘quvchining sinov natijalari",
         ],
         previewType: "examScreenshot",
       },
@@ -668,7 +668,7 @@ export const contentUz: LandingContent = {
     unmarkedTemplate: "Belgilanmagan: {count}",
     allMarkedMsg: "Hammasi belgilandi.",
     card: {
-      title: "Talaba kartasi",
+      title: "O‘quvchi kartasi",
       attendance: "Davomat",
       today: "Bugun",
       debt: "Qolgan to‘lov",
@@ -692,16 +692,16 @@ export const contentUz: LandingContent = {
         label: "O‘qituvchi",
         question: "Kim keldi? Kim dars qoldirdi?",
         answer:
-          "Guruh ro‘yxati, dars va davomat bir joyda. Har bir talabaning holatini belgilang.",
+          "Guruh ro‘yxati, dars va davomat bir joyda. Har bir o‘quvchining holatini belgilang.",
         modules: ["Dars jadvali", "Davomat jurnali", "Guruh ro‘yxati"],
         scene: "teacher",
       },
       {
         label: "Qabul xodimi",
-        question: "Talabani topib, to‘lovini qanday tekshiraman?",
+        question: "O‘quvchini topib, to‘lovini qanday tekshiraman?",
         answer:
-          "Talabani qidiruvdan toping. Hujjatlari, guruhi va to‘lov holati bir kartada.",
-        modules: ["Talaba kartasi", "083 ma’lumotnoma", "To‘lov jadvali"],
+          "O‘quvchini qidiruvdan toping. Hujjatlari, guruhi va to‘lov holati bir kartada.",
+        modules: ["O‘quvchi kartasi", "083 ma’lumotnoma", "To‘lov jadvali"],
         scene: "registrar",
       },
       {
@@ -724,7 +724,7 @@ export const contentUz: LandingContent = {
         points: [
           "Bosqich, manba va mas’ul",
           "Keyingi aloqa vaqti",
-          "Talaba kartasini yaratish"
+          "O‘quvchi kartasini yaratish"
         ]
       },
       {
@@ -807,7 +807,7 @@ export const contentUz: LandingContent = {
     eyebrow: "Narx va sinov",
     title: "Qaror qilishdan oldin maktabingizda sinang.",
     description:
-      "Filial va talabalar sonini ayting. Narx va 30 kunlik sinov shartlarini yozma taklifda oling.",
+      "Filial va o‘quvchilar sonini ayting. Narx va 30 kunlik sinov shartlarini yozma taklifda oling.",
     demoCard: {
       label: "Namuna maktab",
       badgeLogin: "demo email va parol bilan",
@@ -823,7 +823,7 @@ export const contentUz: LandingContent = {
     comparisonRows: [
       {
         field: "Narx",
-        value: "Filial va talabalar soniga qarab hisoblanadi.",
+        value: "Filial va o‘quvchilar soniga qarab hisoblanadi.",
       },
       {
         field: "Sinov",
@@ -878,13 +878,13 @@ export const contentUz: LandingContent = {
           options: ["1", "2–3", "4+"],
         },
         students: {
-          label: "Talabalar soni",
+          label: "O‘quvchilar soni",
           options: ["100 gacha", "100–500", "500–1500", "1500+"],
         },
         flows: {
           label: "Qaysi ishlarni yaxshilamoqchisiz?",
           options: [
-            "Talabalar",
+            "O‘quvchilar",
             "To‘lov va qarz",
             "Jadval va davomat",
             "Amaliy haydash",
