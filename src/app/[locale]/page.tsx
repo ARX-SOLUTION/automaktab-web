@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildHomePageMetadata } from "../home-metadata";
 import LandingPage from "@/components/landing/LandingPage";
 import type { LandingContent } from "@/content/uz";
 import { contentUz } from "@/content/uz";

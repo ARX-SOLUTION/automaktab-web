@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import DemoLink from "@/components/landing/DemoLink";
@@ -24,6 +25,10 @@ const COPY: Record<Locale, NotFoundCopy> = {
     demo: "Open demo",
   },
 };
+
+// Next adds the noindex robots tag to 404 responses itself; the layout no
+// longer sets canonical/hreflang/robots, so only the title is needed here.
+export const metadata: Metadata = { title: `${COPY[DEFAULT_LOCALE].title} | automaktab.uz` };
 
 // not-found.js doesn't receive params (see Next's file-conventions/not-found
 // docs). Reading the locale via cookies() would work, but it's a dynamic API

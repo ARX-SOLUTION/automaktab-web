@@ -518,6 +518,10 @@ describe.each([
     expect(res.status).toBe(404);
     expect(html).toContain("Sahifa topilmadi");
     expect(html).toContain('name="robots" content="noindex');
+    expect(html).not.toContain('content="index, follow"');
+    expect(html).not.toContain('rel="canonical"');
+    expect(html).not.toContain('hrefLang=');
+    expect(html).toContain("<title>Sahifa topilmadi | automaktab.uz</title>");
     expect(html).toMatch(/href(?:=|\\":\\")\"?\//);
   });
 });

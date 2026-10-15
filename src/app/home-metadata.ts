@@ -37,20 +37,16 @@ const SEO_METADATA: Record<
   },
 };
 
+// Layout-level defaults shared by every page, including not-found. Canonical,
+// hreflang and og:url are page-specific, so they live in each page's own
+// metadata (see buildHomePageMetadata) and never leak onto 404 responses.
 export function buildHomeMetadata(locale: Locale): Metadata {
   const seo = SEO_METADATA[locale];
-  const alternates = buildLocaleAlternates("/", locale);
-  const canonical =
-    typeof alternates?.canonical === "string"
-      ? alternates.canonical
-      : undefined;
 
   return {
     metadataBase: new URL("https://automaktab.uz"),
     title: seo.title,
     description: seo.description,
-    alternates,
-    robots: { index: true, follow: true },
     authors: [{ name: "automaktab.uz" }],
     creator: "automaktab.uz",
     openGraph: {
@@ -62,7 +58,6 @@ export function buildHomeMetadata(locale: Locale): Metadata {
       alternateLocale: SUPPORTED_LOCALES.flatMap((item) =>
         item === locale ? [] : [OG_LOCALE[item]],
       ),
-      url: canonical,
       images: [
         {
           url: buildOpenGraphImageUrl(locale),
@@ -77,6 +72,19 @@ export function buildHomeMetadata(locale: Locale): Metadata {
       title: seo.title,
       description: seo.description,
       images: [buildOpenGraphImageUrl(locale)],
+    },
+  };
+}
+
+export function buildHomePageMetadata(locale: Locale): Metadata {
+  const shared = buildHomeMetadata(locale);
+  const alternates = buildLocaleAlternates("/", locale);
+
+  return {
+    alternates,
+    openGraph: {
+      ...shared.openGraph,
+      url: alternates?.canonical as string,
     },
   };
 }
