@@ -6,7 +6,6 @@ import { contentRu } from "@/content/ru";
 import { contentEn } from "@/content/en";
 import { isLocale, type Locale } from "@/i18n/config";
 import { LANDING_COPY } from "@/config/landing";
-import { SEO_PAGES, SEO_RELATED_PAGE_IDS } from "@/config/seo-pages";
 import { buildOpenGraphImageUrl } from "@/lib/locale-metadata";
 
 interface PageProps {
@@ -18,6 +17,22 @@ const contentByLocale: Record<Locale, LandingContent> = {
   ru: contentRu,
   en: contentEn,
 };
+
+// Only capabilities the site itself describes (feature pages, landing journey,
+// modules and morning report); see the SEO/GEO research report §9.3.
+const FEATURE_LIST = [
+  "Student payments and debt tracking",
+  "Debtors by branch and group",
+  "Lesson schedules and study groups",
+  "Digital attendance journal",
+  "Practical driving minutes and instructor confirmation",
+  "Internal theory tests (YHQ, 11 topics)",
+  "Multi-branch management and branch comparison",
+  "Leads pipeline with source, stage and follow-up",
+  "Fleet: maintenance, insurance and fuel records",
+  "Expenses and revenue reports",
+  "Daily Telegram report at 08:00",
+];
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
@@ -59,9 +74,7 @@ export default async function Home({ params }: PageProps) {
         url: "https://automaktab.uz/",
         inLanguage: ["uz", "ru", "en"],
         description: content.hero.description,
-        featureList: SEO_RELATED_PAGE_IDS.filter((id) => id !== "pricing").map(
-          (id) => SEO_PAGES[id][locale].eyebrow,
-        ),
+        featureList: FEATURE_LIST,
         screenshot: buildOpenGraphImageUrl(locale),
         publisher: { "@id": "https://automaktab.uz/#organization" },
       },

@@ -455,7 +455,8 @@ describe.each(LOCALE_ROUTES)(
       expect(softwareApp.name).toBe("automaktab.uz");
       expect(softwareApp.offers).toBeUndefined();
       expect(softwareApp["@id"]).toBe("https://automaktab.uz/#software");
-      expect(softwareApp.featureList.length).toBeGreaterThanOrEqual(4);
+      expect(softwareApp.featureList).toContain("Digital attendance journal");
+      expect(softwareApp.featureList.join(" ")).not.toMatch(/price|UZS/i);
       expect(softwareApp.screenshot).toMatch(/\/opengraph-image$/);
 
       const faqPage = organizationGraph["@graph"].find(
