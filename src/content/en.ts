@@ -600,9 +600,19 @@ export const contentEn: LandingContent = {
           "We review your lists together. Data migration and staff training are agreed before the trial.",
       },
       {
+        question: "Can we import from Excel?",
+        answerLogin:
+          "Not with a button. We move your student list with you via a CSV file: first name, last name, phone and course type, up to 10,000 rows per file. Group, price and remaining debt are then entered on each student record. Payment history and staff are not imported from the file.",
+      },
+      {
         question: "How are access rights managed?",
         answerLogin:
           "Staff see the sections they need for their work. We review access permissions together before setup.",
+      },
+      {
+        question: "How is it different from E-AVTOMAKTAB?",
+        answerLogin:
+          "E-AVTOMAKTAB is a learning platform: e-textbooks, online road rules tests, and links to e-test.uz and e-license.uz. automaktab.uz is built to run a driving school: branches and access rights, leads, payments and debt, expenses, approved driving lessons, fleet, and a daily 08:00 owner report in Telegram. We do not integrate with government systems or provide training videos.",
       },
     ],
   },
