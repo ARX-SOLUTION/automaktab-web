@@ -277,7 +277,6 @@ export const contentRu: LandingContent = {
         points: [
           "Пройденное и оставшееся время",
           "Подтверждение инструктора",
-          "Пробег автомобиля",
         ],
         previewType: "drivingCard",
       },

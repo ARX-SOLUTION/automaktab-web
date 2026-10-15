@@ -291,3 +291,11 @@ describe("search engine verification", () => {
     }
   });
 });
+
+describe("driving practice claims", () => {
+  it.each([contentUz, contentRu, contentEn])("does not promise per-lesson distance tracking", (content) => {
+    const driving = content.journey.stops.find((stop) => stop.previewType === "drivingCard");
+    expect(driving).toBeTruthy();
+    expect(JSON.stringify(driving)).not.toMatch(/masofa|пробег|odometer|distance/i);
+  });
+});
