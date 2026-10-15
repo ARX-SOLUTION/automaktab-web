@@ -36,6 +36,14 @@ const FEATURE_LIST = [
   "Daily Telegram report at 08:00",
 ];
 
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  return buildHomePageMetadata(locale);
+}
+
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
