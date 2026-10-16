@@ -19,7 +19,7 @@ import { buildHomeMetadata } from "@/app/home-metadata";
 import { generateMetadata as seoMetadata } from "@/app/[locale]/[...seoPath]/page";
 import ChangelogPage from "@/app/[locale]/changelog/page";
 import { GET as indexNowKey } from "@/app/indexnow.txt/route";
-import { SEO_PAGES, SEO_PAGE_IDS, getSeoPagePath } from "@/config/seo-pages";
+import { SEO_DETAIL_PAGE_IDS, SEO_PAGES, SEO_PAGE_IDS, getSeoPagePath } from "@/config/seo-pages";
 
 describe("automaktab.uz marketing page verification", () => {
   it.each([contentUz, contentRu, contentEn])("makes every student chapter available before JavaScript runs", (content) => {
@@ -68,6 +68,7 @@ describe("automaktab.uz marketing page verification", () => {
   it.each(["uz", "ru", "en"] as const)("links every public SEO page and separates demo from trial in %s", (locale) => {
     const html = renderToStaticMarkup(createElement(LandingPage, { locale }));
     for (const id of SEO_PAGE_IDS) {
+      if ((SEO_DETAIL_PAGE_IDS as readonly string[]).includes(id)) continue;
       expect(html.includes(`href="${getSeoPagePath(id, locale)}"`)).toBe(true);
     }
     const copy = JSON.stringify([SEO_PAGES.pricing[locale], SEO_PAGES.terms[locale]]);

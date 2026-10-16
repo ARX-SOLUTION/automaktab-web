@@ -3,6 +3,7 @@ import { contentRu } from "@/content/ru";
 import { contentUz, type LandingContent } from "@/content/uz";
 import {
   getSeoPagePath,
+  SEO_DETAIL_PAGE_IDS,
   SEO_LEGAL_PAGE_IDS,
   SEO_PAGES,
   SEO_RELATED_PAGE_IDS,
@@ -112,7 +113,7 @@ export function buildLlmsTxt(): string {
       `## ${LANGUAGE_NAME[locale]}`,
       "",
       uzWording(`- [${content.meta.title}](${homeUrl(locale)}): ${content.meta.description}`, locale),
-      ...pageLinks(SEO_RELATED_PAGE_IDS, locale),
+      ...pageLinks([...SEO_RELATED_PAGE_IDS, ...SEO_DETAIL_PAGE_IDS], locale),
       "",
     );
   }
@@ -152,7 +153,7 @@ export function buildLlmsFullTxt(): string {
       for (const [question, answer] of FAQ_UZ) lines.push(`**${question}**`, "", answer, "");
     }
 
-    for (const id of [...SEO_RELATED_PAGE_IDS, ...SEO_LEGAL_PAGE_IDS]) {
+    for (const id of [...SEO_RELATED_PAGE_IDS, ...SEO_DETAIL_PAGE_IDS, ...SEO_LEGAL_PAGE_IDS]) {
       const page = SEO_PAGES[id][locale];
       lines.push(
         `### ${page.heading}`,
@@ -160,11 +161,15 @@ export function buildLlmsFullTxt(): string {
         `URL: ${seoUrl(id, locale)}`,
         `Updated: ${page.updatedAt}`,
         "",
+        ...(page.definition ? [page.definition, ""] : []),
         page.intro,
         "",
       );
       for (const section of page.sections) {
         lines.push(`#### ${section.title}`, "", section.body, "");
+      }
+      for (const item of page.faq ?? []) {
+        lines.push(`**${item.question}**`, "", item.answer, "");
       }
     }
     lines.splice(start, lines.length - start, ...lines.slice(start).map((line) => uzWording(line, locale)));

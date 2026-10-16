@@ -9,6 +9,7 @@ export const SEO_PAGE_IDS = [
   "leads",
   "privacy",
   "terms",
+  "driving",
 ] as const;
 
 export type SeoPageId = (typeof SEO_PAGE_IDS)[number];
@@ -21,6 +22,14 @@ export const SEO_RELATED_PAGE_IDS = [
   "branches",
   "pricing",
   "leads",
+] as const satisfies readonly SeoPageId[];
+
+/**
+ * Answer-first detail pages (REPORT §13.3). Not in the header/footer menus;
+ * reached through `related` links on feature pages, the sitemap and llms.txt.
+ */
+export const SEO_DETAIL_PAGE_IDS = [
+  "driving",
 ] as const satisfies readonly SeoPageId[];
 
 export const SEO_LEGAL_PAGE_IDS = [
@@ -36,6 +45,7 @@ type SeoSection = {
 /** Existing motion components a page can reuse (REPORT §13.2); no new animation. */
 export type SeoVisualId =
   | "morning-report"
+  | "driving-card"
   | "scene:director"
   | "scene:registrar"
   | "scene:accountant"
@@ -989,6 +999,173 @@ export const SEO_PAGES: Record<
         label: "Open demo",
       },
       updatedAt: "2026-10-01",
+    },
+  },
+  driving: {
+    uz: {
+      segments: ["features", "practical-driving"],
+      title: "Amaliy haydash va instruktorlar hisobi | automaktab.uz",
+      description:
+        "Har bir haydash mashg‘uloti o‘quvchi, mashina, instruktor va vaqt bilan yoziladi. O‘qish rejasiga faqat tasdiqlangan daqiqalar qo‘shiladi.",
+      keywords: ["amaliy haydash hisobi", "instruktorlar hisobi", "avtomaktab CRM"],
+      eyebrow: "Amaliy haydash",
+      heading: "Amaliy haydash mashg‘ulotlari va instruktorlar hisobi",
+      definition:
+        "automaktab.uz har bir haydash mashg‘ulotini o‘quvchi, mashina, instruktor va vaqt bilan yozadi; faqat tasdiqlangan daqiqalar o‘quvchining o‘qish rejasiga qo‘shiladi.",
+      intro:
+        "Kim qachon, qaysi mashinada va qaysi instruktor bilan haydaganini daftarsiz ko‘ring. O‘tilgan va qolgan daqiqalar o‘quvchining o‘qish rejasida turadi.",
+      visual: "driving-card",
+      sections: [
+        {
+          title: "Mashg‘ulot holatlari",
+          body:
+            "Mashg‘ulot avval rejalashtiriladi. Haydashdan keyin instruktor uni haqiqiy daqiqalar bilan yuboradi. Menejer tasdiqlaydi yoki rad etadi. Kerak bo‘lsa, mashg‘ulot bekor qilinadi yoki menejer daqiqalarni tuzatadi. Har bir o‘zgarish mashg‘ulot tarixida qoladi.",
+        },
+        {
+          title: "O‘tilgan va qolgan daqiqalar",
+          body:
+            "O‘qish rejasida kerakli daqiqalar soni belgilanadi, masalan 1200. Tasdiqlangan mashg‘ulot daqiqalari shu rejaga qo‘shiladi va qolgan daqiqalar hisoblanadi. Rejalashtirilgan, yuborilgan yoki rad etilgan mashg‘ulot hisobga kirmaydi.",
+        },
+        {
+          title: "Instruktor va mashina",
+          body:
+            "Mashg‘ulotga instruktor va avtoparkdagi mashina biriktiriladi. Mashina kartasida shu mashinadagi mashg‘ulotlar ro‘yxati ko‘rinadi, shuning uchun mashina qayerda ishlaganini alohida yozish shart emas.",
+        },
+      ],
+      faq: [
+        {
+          question: "Haydash daqiqalari qanday hisoblanadi?",
+          answer:
+            "O‘quvchining o‘qish rejasiga faqat tasdiqlangan mashg‘ulot daqiqalari qo‘shiladi. Tasdiqlanmagan yoki rad etilgan mashg‘ulot hisobga kirmaydi.",
+        },
+        {
+          question: "Mashg‘ulotni kim tasdiqlaydi?",
+          answer: "Instruktor mashg‘ulotni yuboradi, menejer uni tasdiqlaydi yoki rad etadi.",
+        },
+        {
+          question: "Masofa (km) yoziladimi?",
+          answer:
+            "Yo‘q. Mashg‘ulot bo‘yicha masofa yozilmaydi. Mashinaning odometri avtopark bo‘limida yuritiladi.",
+        },
+      ],
+      related: ["schedule", "attendance"],
+      relatedLabel: "Boshqa imkoniyatlar",
+      cta: {
+        title: "Haydash hisobini demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
+      },
+      updatedAt: "2026-10-16",
+    },
+    ru: {
+      segments: ["features", "practical-driving"],
+      title: "Учёт практического вождения и инструкторов | automaktab.uz",
+      description:
+        "Каждое занятие по вождению записывается с курсантом, машиной, инструктором и временем. В план обучения идут только подтверждённые минуты.",
+      keywords: ["учёт вождения автошкола", "расписание инструкторов", "CRM автошколы"],
+      eyebrow: "Практическое вождение",
+      heading: "Учёт практического вождения и инструкторов",
+      definition:
+        "automaktab.uz записывает каждое занятие по вождению с курсантом, машиной, инструктором и временем; в план обучения курсанта засчитываются только подтверждённые минуты.",
+      intro:
+        "Видно, кто, когда, на какой машине и с каким инструктором ездил, без бумажного журнала. Пройденные и оставшиеся минуты хранятся в плане обучения курсанта.",
+      visual: "driving-card",
+      sections: [
+        {
+          title: "Статусы занятия",
+          body:
+            "Занятие сначала планируется. После вождения инструктор отправляет его с фактическими минутами. Менеджер подтверждает или отклоняет. При необходимости занятие отменяют или менеджер исправляет минуты. Каждое изменение остаётся в истории занятия.",
+        },
+        {
+          title: "Пройденные и оставшиеся минуты",
+          body:
+            "В плане обучения задаётся нужное число минут, например 1200. Минуты подтверждённых занятий добавляются к плану, остаток считается автоматически. Запланированные, отправленные и отклонённые занятия не засчитываются.",
+        },
+        {
+          title: "Инструктор и машина",
+          body:
+            "К занятию привязываются инструктор и машина из автопарка. В карточке машины виден список занятий на ней, поэтому отдельно записывать, где работала машина, не нужно.",
+        },
+      ],
+      faq: [
+        {
+          question: "Как считаются минуты вождения?",
+          answer:
+            "В план обучения курсанта идут только минуты подтверждённых занятий. Неподтверждённые и отклонённые занятия не засчитываются.",
+        },
+        {
+          question: "Кто подтверждает занятие?",
+          answer: "Инструктор отправляет занятие, менеджер подтверждает или отклоняет его.",
+        },
+        {
+          question: "Записывается ли пробег (км)?",
+          answer:
+            "Нет. Пробег по занятию не записывается. Одометр машины ведётся в разделе автопарка.",
+        },
+      ],
+      related: ["schedule", "attendance"],
+      relatedLabel: "Другие возможности",
+      cta: {
+        title: "Посмотрите учёт вождения в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-10-16",
+    },
+    en: {
+      segments: ["features", "practical-driving"],
+      title: "Practical driving lessons and instructor tracking | automaktab.uz",
+      description:
+        "Every driving lesson is recorded with the student, vehicle, instructor and time. Only approved minutes count toward the training plan.",
+      keywords: ["driving lesson tracking", "driving instructor management software", "driving school CRM"],
+      eyebrow: "Practical driving",
+      heading: "Practical driving lessons and instructor tracking",
+      definition:
+        "automaktab.uz records every driving lesson with the student, vehicle, instructor and time; only approved minutes count toward the student's training plan.",
+      intro:
+        "See who drove when, in which vehicle and with which instructor, without a paper log. Completed and remaining minutes sit on the student's training plan.",
+      visual: "driving-card",
+      sections: [
+        {
+          title: "Lesson statuses",
+          body:
+            "A lesson is planned first. After driving, the instructor submits it with the actual minutes. A manager approves or rejects it. If needed, the lesson is cancelled or a manager corrects the minutes. Every change stays in the lesson history.",
+        },
+        {
+          title: "Completed and remaining minutes",
+          body:
+            "The training plan sets the required minutes, for example 1200. Minutes from approved lessons are added to the plan and the remainder is calculated. Planned, submitted and rejected lessons do not count.",
+        },
+        {
+          title: "Instructor and vehicle",
+          body:
+            "Each lesson gets an instructor and a vehicle from the fleet. The vehicle record lists the lessons driven in it, so nobody has to log where the car was used.",
+        },
+      ],
+      faq: [
+        {
+          question: "How are driving minutes counted?",
+          answer:
+            "Only minutes from approved lessons are added to the student's training plan. Unapproved and rejected lessons do not count.",
+        },
+        {
+          question: "Who approves a lesson?",
+          answer: "The instructor submits the lesson; a manager approves or rejects it.",
+        },
+        {
+          question: "Is distance (km) recorded?",
+          answer:
+            "No. Distance is not recorded per lesson. The vehicle odometer is kept in the fleet section.",
+        },
+      ],
+      related: ["schedule", "attendance"],
+      relatedLabel: "Other features",
+      cta: {
+        title: "See driving lesson tracking in the demo.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
+      },
+      updatedAt: "2026-10-16",
     },
   },
 };

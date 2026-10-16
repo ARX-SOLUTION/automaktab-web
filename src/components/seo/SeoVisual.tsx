@@ -1,3 +1,4 @@
+import DrivingCard from "@/components/landing/DrivingCard";
 import MorningReportWidget from "@/components/landing/MorningReportWidget";
 import ProductScene from "@/components/landing/ProductScene";
 import type { SeoVisualId } from "@/config/seo-pages";
@@ -12,6 +13,13 @@ const CONTENT = { uz: contentUz, ru: contentRu, en: contentEn } as const;
 export default function SeoVisual({ id, locale }: { id: SeoVisualId; locale: Locale }) {
   const content = CONTENT[locale];
   if (id === "morning-report") return <MorningReportWidget content={content.morningReport} />;
+  if (id === "driving-card") {
+    return (
+      <div className="seo-visual">
+        <DrivingCard content={content.journey.previews.driving} sampleLabel={content.scenes.sampleLabel} />
+      </div>
+    );
+  }
   const kind = id.slice("scene:".length) as Parameters<typeof ProductScene>[0]["kind"];
   return (
     <div className="seo-visual">
