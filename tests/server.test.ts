@@ -286,11 +286,11 @@ const SEO_ROUTE_GROUPS: SeoRouteGroup[] = [
       en: "/en/features/leads-and-enrollment",
     },
     headings: {
-      uz: "Har bir murojaat guruhga aylanadi.",
-      ru: "Каждая заявка становится группой.",
-      en: "Every inquiry becomes a placement.",
+      uz: "Avtomaktab murojaatlari: birinchi qo‘ng‘iroqdan qabulgacha.",
+      ru: "Заявки автошколы: от первого звонка до зачисления.",
+      en: "Driving-school inquiries: from first call to enrollment.",
     },
-    titleSignals: { uz: "Murojaatlar", ru: "Заявки", en: "Inquiries" },
+    titleSignals: { uz: "murojaatlar", ru: "Заявки", en: "inquiries" },
   },
 ];
 
