@@ -129,7 +129,7 @@ const TOPIC_CRITERIA: Record<TopicId, string> = {
   "reports-owner":
     "Rahbar hisobotlari: tushum, qarz va davomat ko'rsatkichlarini bir joyda ko'rish.",
   "pricing-trial":
-    "Boshqaruv tizimi narxi va sinov shartlari: tariflar va 30 kunlik sinov.",
+    "Boshqaruv tizimi narxi va sinov shartlari: tariflar va 14 kunlik sinov.",
 };
 
 export function buildCriteria(): Record<TopicId, string> {

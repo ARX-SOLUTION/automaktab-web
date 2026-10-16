@@ -10,7 +10,6 @@ export const SEO_PAGE_IDS = [
   "privacy",
   "terms",
   "driving",
-  "compare",
   "telegram",
   "fleet",
   "expenses",
@@ -34,7 +33,6 @@ export const SEO_RELATED_PAGE_IDS = [
  */
 export const SEO_DETAIL_PAGE_IDS = [
   "driving",
-  "compare",
   "telegram",
   "fleet",
   "expenses",
@@ -193,7 +191,7 @@ export const SEO_PAGES: Record<
             "Yo‘q. 08:00 dagi Telegram hisobotida kechagi tushum va yangi o‘quvchilar soni bor. Qarzdorlarni tizimdagi ro‘yxatdan ko‘rasiz.",
         },
       ],
-      related: ["branches", "attendance", "compare"],
+      related: ["branches", "attendance", "telegram"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "To‘lovlar hisobini demoda ko‘ring.",
@@ -279,7 +277,7 @@ export const SEO_PAGES: Record<
             "Нет. В отчёте в Telegram в 08:00 есть вчерашняя выручка и число новых курсантов. Должников смотрите в списке в системе.",
         },
       ],
-      related: ["branches", "attendance", "compare"],
+      related: ["branches", "attendance", "telegram"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите учёт оплат в демо.",
@@ -365,7 +363,7 @@ export const SEO_PAGES: Record<
             "No. The 08:00 Telegram report has yesterday's revenue and the number of new students. You see students with debt in the list inside the system.",
         },
       ],
-      related: ["branches", "attendance", "compare"],
+      related: ["branches", "attendance", "telegram"],
       relatedLabel: "Other features",
       cta: {
         title: "See payment records in the demo.",
@@ -1250,15 +1248,15 @@ export const SEO_PAGES: Record<
       segments: ["pricing"],
       title: "Tariflar | automaktab.uz",
       description:
-        "Namuna demoni oching. Maktabingiz uchun 30 kunlik sinov, narx va cheklovlarni boshlashdan oldin yozma kelishing.",
+        "Namuna demoni oching. Maktabingiz uchun 14 kunlik sinov, narx va cheklovlarni boshlashdan oldin yozma kelishing.",
       keywords: ["avtomaktab CRM narxi", "avtomaktab tariflari", "boshqaruv tizimi narxi"],
       eyebrow: "Tariflar va sinov",
       heading: "Maktabingiz uchun narx va sinov shartlari.",
       intro:
-        "Demo namuna ma’lumotlari bilan ishlaydi. Maktabingiz ma’lumotlari bilan 30 kunlik sinov, narx va cheklovlarni oldindan yozma kelishamiz.",
+        "Demo namuna ma’lumotlari bilan ishlaydi. Maktabingiz ma’lumotlari bilan 14 kunlik sinov, narx va cheklovlarni oldindan yozma kelishamiz.",
       sections: [
         {
-          title: "Maktabingizda 30 kun sinang",
+          title: "Maktabingizda 14 kun sinang",
           body:
             "Sinov muddati, narx, ma’lumot ko‘chirish va cheklovlarni boshlashdan oldin yozma kelishamiz.",
         },
@@ -1285,15 +1283,15 @@ export const SEO_PAGES: Record<
       segments: ["pricing"],
       title: "Тарифы и пробный период | automaktab.uz",
       description:
-        "Откройте демо. Цену и ограничения 30-дневного пробного периода для вашей автошколы согласуем письменно до начала.",
+        "Откройте демо. Цену и ограничения 14-дневного пробного периода для вашей автошколы согласуем письменно до начала.",
       keywords: ["стоимость CRM для автошколы", "тарифы автошколы", "цена системы управления"],
       eyebrow: "Тарифы и пробный период",
       heading: "Цена и пробный период для вашей автошколы.",
       intro:
-        "Демо использует вымышленные данные. 30-дневный пробный период работает на данных вашей школы. Цену и ограничения согласуем письменно до начала.",
+        "Демо использует вымышленные данные. 14-дневный пробный период работает на данных вашей школы. Цену и ограничения согласуем письменно до начала.",
       sections: [
         {
-          title: "30 дней в вашей автошколе",
+          title: "14 дней в вашей автошколе",
           body:
             "Срок, цену, перенос данных и ограничения согласуем письменно до начала пробного периода.",
         },
@@ -1320,15 +1318,15 @@ export const SEO_PAGES: Record<
       segments: ["pricing"],
       title: "Pricing and trial terms | automaktab.uz",
       description:
-        "Explore the demo. Agree on pricing and limits for a 30-day trial with your school’s data in writing before starting.",
-      keywords: ["driving school CRM pricing", "driving school management pricing", "30-day school trial"],
+        "Explore the demo. Agree on pricing and limits for a 14-day trial with your school’s data in writing before starting.",
+      keywords: ["driving school CRM pricing", "driving school management pricing", "14-day school trial"],
       eyebrow: "Pricing and trial",
       heading: "Pricing and trial terms for your school.",
       intro:
-        "The demo uses sample data. The 30-day trial uses your school’s data. We agree on pricing and limits in writing beforehand.",
+        "The demo uses sample data. The 14-day trial uses your school’s data. We agree on pricing and limits in writing beforehand.",
       sections: [
         {
-          title: "30 days at your school",
+          title: "14 days at your school",
           body:
             "Agree on trial duration, price, data migration and limits in writing before you start.",
         },
@@ -1434,7 +1432,7 @@ export const SEO_PAGES: Record<
             "Yo‘q, SMS yuborilmaydi. Har bir murojaatga keyingi aloqa vaqti belgilanadi va muddati o‘tganlari ko‘rsatkichlarda ko‘rinadi.",
         },
       ],
-      related: ["payments", "telegram", "compare"],
+      related: ["payments", "telegram", "branches"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Qabul jarayonini demoda ko‘ring.",
@@ -1520,7 +1518,7 @@ export const SEO_PAGES: Record<
             "Нет, SMS не отправляются. Для каждой заявки задаётся время следующего контакта, а просроченные видны в показателях.",
         },
       ],
-      related: ["payments", "telegram", "compare"],
+      related: ["payments", "telegram", "branches"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите процесс приёма в демо.",
@@ -1606,7 +1604,7 @@ export const SEO_PAGES: Record<
             "No, SMS is not sent. Each inquiry gets a next-contact time, and overdue ones show up in the metrics.",
         },
       ],
-      related: ["payments", "telegram", "compare"],
+      related: ["payments", "telegram", "branches"],
       relatedLabel: "Other features",
       cta: {
         title: "See enrollment in the demo.",
@@ -1762,7 +1760,7 @@ export const SEO_PAGES: Record<
         {
           title: "Demo va sinov",
           body:
-            "“Demoni ochish” namuna ma’lumotlari bilan ishlaydigan demoni ochadi. Haqiqiy mijoz ma’lumotlari talab qilinmaydi. Demo va maktabingiz ma’lumotlari bilan sinov alohida. 30 kunlik sinov muddati, narxi va cheklovlari boshlashdan oldin yozma kelishiladi.",
+            "“Demoni ochish” namuna ma’lumotlari bilan ishlaydigan demoni ochadi. Haqiqiy mijoz ma’lumotlari talab qilinmaydi. Demo va maktabingiz ma’lumotlari bilan sinov alohida. 14 kunlik sinov muddati, narxi va cheklovlari boshlashdan oldin yozma kelishiladi.",
         },
         {
           title: "Maktabning majburiyatlari",
@@ -1802,7 +1800,7 @@ export const SEO_PAGES: Record<
         {
           title: "Демо и пробный период",
           body:
-            "Кнопка «Открыть демо» открывает систему с вымышленными данными и не требует данных реальных клиентов. Демо и пробный период с данными вашей школы различаются. Срок 30-дневного пробного периода, стоимость и ограничения согласуются письменно до начала.",
+            "Кнопка «Открыть демо» открывает систему с вымышленными данными и не требует данных реальных клиентов. Демо и пробный период с данными вашей школы различаются. Срок 14-дневного пробного периода, стоимость и ограничения согласуются письменно до начала.",
         },
         {
           title: "Обязанности школы",
@@ -1842,7 +1840,7 @@ export const SEO_PAGES: Record<
         {
           title: "Demo and trial",
           body:
-            "“Open demo” starts a session with sample data and does not require real customer data. The sample demo and a trial with your school’s data are separate. Agree on the 30-day trial duration, pricing and limits in writing before starting.",
+            "“Open demo” starts a session with sample data and does not require real customer data. The sample demo and a trial with your school’s data are separate. Agree on the 14-day trial duration, pricing and limits in writing before starting.",
         },
         {
           title: "School responsibilities",
@@ -1911,7 +1909,7 @@ export const SEO_PAGES: Record<
             "Yo‘q. Mashg‘ulot bo‘yicha masofa yozilmaydi. Mashinaning odometri avtopark bo‘limida yuritiladi.",
         },
       ],
-      related: ["schedule", "fleet", "compare"],
+      related: ["schedule", "fleet", "attendance"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Haydash hisobini demoda ko‘ring.",
@@ -1966,7 +1964,7 @@ export const SEO_PAGES: Record<
             "Нет. Пробег по занятию не записывается. Одометр машины ведётся в разделе автопарка.",
         },
       ],
-      related: ["schedule", "fleet", "compare"],
+      related: ["schedule", "fleet", "attendance"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите учёт вождения в демо.",
@@ -2021,288 +2019,10 @@ export const SEO_PAGES: Record<
             "No. Distance is not recorded per lesson. The vehicle odometer is kept in the fleet section.",
         },
       ],
-      related: ["schedule", "fleet", "compare"],
+      related: ["schedule", "fleet", "attendance"],
       relatedLabel: "Other features",
       cta: {
         title: "See driving lesson tracking in the demo.",
-        body: "The demo uses sample data, not real customer records.",
-        label: "Open demo",
-      },
-      updatedAt: "2026-10-16",
-    },
-  },
-  compare: {
-    uz: {
-      segments: ["compare"],
-      title: "automaktab.uz va boshqa avtomaktab dasturlari: taqqoslash | automaktab.uz",
-      description:
-        "automaktab.uz'ni E-AVTOMAKTAB, LeaderCRM, Intalim va EducationCRM bilan ularning ochiq sahifalari asosida taqqoslang: nima bor va nima yo‘q.",
-      keywords: ["e-avtomaktab alternativasi", "avtomaktab dasturi", "avtomaktab CRM"],
-      eyebrow: "Taqqoslash",
-      heading: "automaktab.uz va boshqa avtomaktab dasturlari: ochiq taqqoslash",
-      definition:
-        "automaktab.uz avtomaktablar uchun boshqaruv tizimi (CRM). Quyidagi jadval uni O‘zbekistondagi to‘rtta yechim bilan ularning ochiq sahifalari asosida taqqoslaydi; tekshirilgan sana: 2026-10-16.",
-      intro:
-        "Boshqa mahsulotlar ustuni faqat ularning o‘z saytida yozilganiga tayanadi. automaktab.uz ustuni mahsulot kodiga tayanadi. Biz o‘zimizda yo‘q narsalarni ham ochiq yozamiz.",
-      comparison: {
-        caption: "Imkoniyatlar (2026-10-16 holatiga)",
-        columns: ["Imkoniyat", "automaktab.uz", "E-AVTOMAKTAB", "LeaderCRM", "Intalim", "EducationCRM"],
-        rows: [
-          { label: "Amaliy haydash daqiqalari, instruktor tasdig‘i bilan", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Avtopark: hujjatlar, texnik xizmat, yoqilg‘i", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Murojaatlar (lidlar)", cells: ["✓", "?", "✓", "◐", "✓"] },
-          { label: "Xarajatlar hisobi", cells: ["✓", "?", "?", "?", "✓"] },
-          { label: "Telegram bot yoki hisobot", cells: ["✓", "✓", "✓", "?", "✓"] },
-          { label: "Filiallar va filial bo‘yicha ruxsat", cells: ["✓", "◐", "✓", "?", "✓"] },
-          { label: "YHQ testi", cells: ["◐", "✓", "◐", "✓", "◐"] },
-          { label: "O‘quvchi kabineti", cells: ["✓", "✓", "◐", "✓", "✓"] },
-          { label: "O‘quvchi o‘z to‘lovini ko‘radi", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "Onlayn to‘lov (Click, Payme)", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "SMS", cells: ["—", "✓", "✓", "✓", "✓"] },
-          { label: "Davlat tizimlari (e-test, e-license, YHXX)", cells: ["—", "✓", "—", "✓", "?"] },
-          { label: "Video yoki animatsion darslik", cells: ["—", "✓", "?", "✓", "?"] },
-          { label: "Mobil ilova", cells: ["—", "?", "✓", "✓", "✓"] },
-          { label: "Ochiq narx", cells: ["—", "?", "✓", "✓", "✓"] },
-        ],
-        legend:
-          "✓ manbada bor. ◐ qisman yoki cheklangan. — yo‘q: automaktab.uz uchun kodda yo‘q, boshqalar uchun o‘z manbasida yo‘qligi aytilgan. ? manbada topilmadi. Manbada tilga olinmagan narsa “yo‘q” deb belgilanmaydi.",
-      },
-      sections: [
-        {
-          title: "Bizda nima yo‘q",
-          body:
-            "automaktab.uz'da onlayn to‘lov (Click, Payme), SMS yuborish, mobil ilova, davlat tizimlari bilan integratsiya va video darslik yo‘q. O‘quvchi kabinetida jadval va davomat bor, lekin o‘quvchi o‘z to‘lovlarini u yerda ko‘rmaydi. Ichki YHQ testi maktabning o‘z sinovi, davlat imtihoni emas. Narx ham ochiq emas: u filial va o‘quvchilar soniga qarab yozma taklifda beriladi.",
-        },
-        {
-          title: "Bizda nima bor",
-          body:
-            "automaktab.uz avtomaktabning kundalik boshqaruvi uchun qilingan. Amaliy haydash mashg‘ulotlari instruktor va mashina bilan yoziladi, o‘qish rejasiga faqat tasdiqlangan daqiqalar qo‘shiladi. Avtoparkda hujjat muddatlari, texnik xizmat va yoqilg‘i qaydlari yuritiladi. Murojaatlar, xarajatlar va filial bo‘yicha ruxsatlar bir tizimda. Rahbar har kuni 08:00 da Telegram’da kechagi tushum va yangi o‘quvchilar sonini oladi.",
-        },
-        {
-          title: "Qachon boshqa yechim mos keladi",
-          body:
-            "O‘quvchilar e-test.uz va e-license.uz orqali ishlashi yoki guruhni YHXX'ga elektron ro‘yxatga qo‘yish kerak bo‘lsa, E-AVTOMAKTAB yoki Intalim mos keladi. SMS eslatmalar, o‘quvchi to‘lovini ilovada ko‘rishi yoki ochiq tarif kerak bo‘lsa, EducationCRM yoki LeaderCRM'ni ko‘ring; ular umumiy o‘quv markazlari uchun ham ishlaydi. O‘quv platformasi va boshqaruv tizimi bir-birini to‘ldirishi mumkin.",
-        },
-        {
-          title: "Qanday taqqosladik",
-          body:
-            "Har bir belgi pastdagi manbalarga tayanadi. AVTODROM (avtodrom operatori tizimi) va Rossiyadagi drivli jadvalga kiritilmadi, chunki ular boshqa vazifa yoki bozor uchun. Sahifalar o‘zgarishi mumkin, shuning uchun har bir manba yonida tekshirilgan sana turibdi. Xato topsangiz, so‘rov formasi orqali yozing, tuzatamiz.",
-        },
-      ],
-      faq: [
-        {
-          question: "E-AVTOMAKTAB'dan farqi nima?",
-          answer:
-            "E-AVTOMAKTAB o‘quv platformasi: elektron darsliklar, onlayn YHQ testlari, e-test.uz va e-license.uz bilan bog‘lanish. automaktab.uz maktabni boshqarish uchun: filiallar va ruxsatlar, lidlar, to‘lov va qarzdorlik, xarajatlar, amaliy haydashni tasdiqlash, avtopark va har kuni 08:00 da Telegram hisobot. Davlat tizimlari bilan integratsiya va o‘quv videolari bizda yo‘q.",
-        },
-        {
-          question: "automaktab.uz va avtomaktab.com bir xilmi?",
-          answer:
-            "Yo‘q. avtomaktab.com YHQ imtihoniga tayyorlanish uchun alohida test sayti. automaktab.uz avtomaktablar uchun boshqaruv tizimi va u bilan aloqasi yo‘q.",
-        },
-        {
-          question: "Excel'dan o‘tish mumkinmi?",
-          answer:
-            "Ha. O‘quvchilar ro‘yxatini CSV fayl bilan birga ko‘chiramiz: ism, familiya, telefon va kurs turi, bitta faylda 10 000 tagacha. Guruh, narx va qarz qoldig‘i keyin o‘quvchi kartasida kiritiladi.",
-        },
-      ],
-      sources: [
-        { label: "e-avtomaktab.uz", url: "https://e-avtomaktab.uz/", checkedAt: "2026-10-16" },
-        { label: "e-avtomaktab.uz oferta v1.0 (2026-08-20)", url: "https://e-avtomaktab.uz/Vesperr/assets/docs/offerta.pdf", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz/avtomaktab-crm", url: "https://leadercrm.uz/avtomaktab-crm", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz", url: "https://leadercrm.uz/", checkedAt: "2026-10-16" },
-        { label: "intalim.uz", url: "https://intalim.uz/", checkedAt: "2026-10-16" },
-        { label: "educationcrm.uz", url: "https://educationcrm.uz/", checkedAt: "2026-10-16" },
-        { label: "avtomaktab.com", url: "https://avtomaktab.com/", checkedAt: "2026-10-16" },
-      ],
-      related: ["driving", "leads", "pricing"],
-      relatedLabel: "Boshqa imkoniyatlar",
-      cta: {
-        title: "O‘zingiz solishtiring.",
-        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
-        label: "Demoni ochish",
-      },
-      updatedAt: "2026-10-16",
-    },
-    ru: {
-      segments: ["compare"],
-      title: "automaktab.uz и другие программы для автошкол: сравнение | automaktab.uz",
-      description:
-        "Сравнение automaktab.uz с E-AVTOMAKTAB, LeaderCRM, Intalim и EducationCRM по их открытым страницам: что есть и чего нет.",
-      keywords: ["альтернатива e-avtomaktab", "программа для автошколы", "CRM для автошколы"],
-      eyebrow: "Сравнение",
-      heading: "automaktab.uz и другие программы для автошкол: открытое сравнение",
-      definition:
-        "automaktab.uz это система управления (CRM) для автошкол. Таблица ниже сравнивает её с четырьмя решениями в Узбекистане по их открытым страницам; дата проверки: 2026-10-16.",
-      intro:
-        "Столбцы других продуктов опираются только на то, что написано на их собственных сайтах. Столбец automaktab.uz опирается на код продукта. То, чего у нас нет, мы тоже пишем открыто.",
-      comparison: {
-        caption: "Возможности (на 2026-10-16)",
-        columns: ["Возможность", "automaktab.uz", "E-AVTOMAKTAB", "LeaderCRM", "Intalim", "EducationCRM"],
-        rows: [
-          { label: "Минуты практического вождения с подтверждением инструктора", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Автопарк: документы, ТО, топливо", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Заявки (лиды)", cells: ["✓", "?", "✓", "◐", "✓"] },
-          { label: "Учёт расходов", cells: ["✓", "?", "?", "?", "✓"] },
-          { label: "Telegram-бот или отчёт", cells: ["✓", "✓", "✓", "?", "✓"] },
-          { label: "Филиалы и доступ по филиалу", cells: ["✓", "◐", "✓", "?", "✓"] },
-          { label: "Тесты по ПДД", cells: ["◐", "✓", "◐", "✓", "◐"] },
-          { label: "Кабинет курсанта", cells: ["✓", "✓", "◐", "✓", "✓"] },
-          { label: "Курсант видит свои оплаты", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "Онлайн-оплата (Click, Payme)", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "SMS", cells: ["—", "✓", "✓", "✓", "✓"] },
-          { label: "Госсистемы (e-test, e-license, ГУБДД)", cells: ["—", "✓", "—", "✓", "?"] },
-          { label: "Видео или анимированный учебник", cells: ["—", "✓", "?", "✓", "?"] },
-          { label: "Мобильное приложение", cells: ["—", "?", "✓", "✓", "✓"] },
-          { label: "Открытая цена", cells: ["—", "?", "✓", "✓", "✓"] },
-        ],
-        legend:
-          "✓ есть в источнике. ◐ частично или с ограничениями. — нет: для automaktab.uz нет в коде, для других их источник прямо говорит, что нет. ? в источнике не найдено. То, что источник не упоминает, никогда не отмечается как «нет».",
-      },
-      sections: [
-        {
-          title: "Чего у нас нет",
-          body:
-            "В automaktab.uz нет онлайн-оплаты (Click, Payme), отправки SMS, мобильного приложения, интеграции с госсистемами и видеоучебника. В кабинете курсанта есть расписание и посещаемость, но свои оплаты курсант там не видит. Внутренний тест по ПДД это собственная проверка школы, а не госэкзамен.",
-        },
-        {
-          title: "Что у нас есть",
-          body:
-            "automaktab.uz создан для ежедневного управления автошколой. Занятия по вождению записываются с инструктором и машиной, в план обучения идут только подтверждённые минуты. В автопарке ведутся сроки документов, ТО и заправки. Заявки, расходы и доступ по филиалам в одной системе. Руководитель каждый день в 08:00 получает в Telegram вчерашнюю выручку и число новых курсантов.",
-        },
-        {
-          title: "Когда подойдёт другое решение",
-          body:
-            "Если курсантам нужна работа через e-test.uz и e-license.uz или электронная постановка группы на учёт в ГУБДД, подойдут E-AVTOMAKTAB или Intalim. Если нужны SMS-напоминания, оплаты в приложении курсанта или открытый тариф, посмотрите EducationCRM или LeaderCRM; они работают и для обычных учебных центров. Учебная платформа и система управления могут дополнять друг друга.",
-        },
-        {
-          title: "Как мы сравнивали",
-          body:
-            "Каждая отметка опирается на источники ниже. AVTODROM (система оператора автодрома) и российский drivli в таблицу не включены: у них другая задача или рынок. Нашли ошибку? Напишите через форму заявки, мы исправим.",
-        },
-      ],
-      faq: [
-        {
-          question: "Чем вы отличаетесь от E-AVTOMAKTAB?",
-          answer:
-            "E-AVTOMAKTAB это учебная платформа: электронные учебники, онлайн-тесты по ПДД, связь с e-test.uz и e-license.uz. automaktab.uz создан для управления автошколой: филиалы и права доступа, заявки, оплаты и долги, расходы, подтверждение практического вождения, автопарк и ежедневный отчёт в Telegram в 08:00. Интеграции с государственными системами и учебных видео у нас нет.",
-        },
-        {
-          question: "automaktab.uz и avtomaktab.com это одно и то же?",
-          answer:
-            "Нет. avtomaktab.com это отдельный сайт для подготовки к экзамену по ПДД. automaktab.uz это система управления для автошкол, она с ним не связана.",
-        },
-        {
-          question: "Можно ли перейти с Excel?",
-          answer:
-            "Да. Список курсантов переносим вместе с вами через CSV-файл: имя, фамилия, телефон и тип курса, до 10 000 строк в одном файле. Группа, цена и остаток долга вносятся потом в карточке курсанта.",
-        },
-      ],
-      sources: [
-        { label: "e-avtomaktab.uz", url: "https://e-avtomaktab.uz/", checkedAt: "2026-10-16" },
-        { label: "e-avtomaktab.uz oferta v1.0 (2026-08-20)", url: "https://e-avtomaktab.uz/Vesperr/assets/docs/offerta.pdf", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz/avtomaktab-crm", url: "https://leadercrm.uz/avtomaktab-crm", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz", url: "https://leadercrm.uz/", checkedAt: "2026-10-16" },
-        { label: "intalim.uz", url: "https://intalim.uz/", checkedAt: "2026-10-16" },
-        { label: "educationcrm.uz", url: "https://educationcrm.uz/", checkedAt: "2026-10-16" },
-        { label: "avtomaktab.com", url: "https://avtomaktab.com/", checkedAt: "2026-10-16" },
-      ],
-      related: ["driving", "leads", "pricing"],
-      relatedLabel: "Другие возможности",
-      cta: {
-        title: "Сравните сами.",
-        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
-        label: "Открыть демо",
-      },
-      updatedAt: "2026-10-16",
-    },
-    en: {
-      segments: ["compare"],
-      title: "automaktab.uz vs other driving school software: comparison | automaktab.uz",
-      description:
-        "Compare automaktab.uz with E-AVTOMAKTAB, LeaderCRM, Intalim and EducationCRM based on their public pages: what each has and does not have.",
-      keywords: ["e-avtomaktab alternative", "driving school software", "driving school CRM"],
-      eyebrow: "Comparison",
-      heading: "automaktab.uz vs other driving school software: an open comparison",
-      definition:
-        "automaktab.uz is a management system (CRM) for driving schools. The table below compares it with four solutions in Uzbekistan based on their public pages; checked on 2026-10-16.",
-      intro:
-        "The columns for other products rely only on what their own websites say. The automaktab.uz column relies on the product code. We list what we do not have, too.",
-      comparison: {
-        caption: "Capabilities (as of 2026-10-16)",
-        columns: ["Capability", "automaktab.uz", "E-AVTOMAKTAB", "LeaderCRM", "Intalim", "EducationCRM"],
-        rows: [
-          { label: "Practical driving minutes with instructor approval", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Fleet: documents, maintenance, fuel", cells: ["✓", "?", "—", "◐", "?"] },
-          { label: "Leads", cells: ["✓", "?", "✓", "◐", "✓"] },
-          { label: "Expense tracking", cells: ["✓", "?", "?", "?", "✓"] },
-          { label: "Telegram bot or report", cells: ["✓", "✓", "✓", "?", "✓"] },
-          { label: "Branches and per-branch access", cells: ["✓", "◐", "✓", "?", "✓"] },
-          { label: "Road rules (YHQ) tests", cells: ["◐", "✓", "◐", "✓", "◐"] },
-          { label: "Student portal", cells: ["✓", "✓", "◐", "✓", "✓"] },
-          { label: "Student sees own payments", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "Online payment (Click, Payme)", cells: ["—", "✓", "?", "?", "✓"] },
-          { label: "SMS", cells: ["—", "✓", "✓", "✓", "✓"] },
-          { label: "Government systems (e-test, e-license, traffic police)", cells: ["—", "✓", "—", "✓", "?"] },
-          { label: "Video or animated textbook", cells: ["—", "✓", "?", "✓", "?"] },
-          { label: "Mobile app", cells: ["—", "?", "✓", "✓", "✓"] },
-          { label: "Public pricing", cells: ["—", "?", "✓", "✓", "✓"] },
-        ],
-        legend:
-          "✓ stated in the source. ◐ partial or limited. — not available: for automaktab.uz not in the code; for others their own source says so. ? not found in the source. Anything a source does not mention is never marked as not available.",
-      },
-      sections: [
-        {
-          title: "What we do not have",
-          body:
-            "automaktab.uz has no online payments (Click, Payme), no SMS sending, no mobile app, no integration with government systems and no video textbook. The student portal shows the schedule and attendance, but students cannot see their payments there. The internal road rules test is the school's own check, not the state exam.",
-        },
-        {
-          title: "What we have",
-          body:
-            "automaktab.uz is built for running a driving school day to day. Driving lessons are recorded with the instructor and vehicle, and only approved minutes count toward the training plan. The fleet keeps document expiry dates, maintenance and fuel records. Leads, expenses and per-branch access live in one system. Every day at 08:00 the owner gets yesterday's revenue and new student count in Telegram.",
-        },
-        {
-          title: "When another product fits better",
-          body:
-            "If students must work through e-test.uz and e-license.uz, or groups must be registered with the traffic police electronically, E-AVTOMAKTAB or Intalim fit. If you need SMS reminders, payments in a student app or public pricing, look at EducationCRM or LeaderCRM; they also serve general education centers. A learning platform and a management system can complement each other.",
-        },
-        {
-          title: "How we compared",
-          body:
-            "Every mark relies on the sources below. AVTODROM (a driving-ground operator system) and drivli (Russia) are not in the table because they serve a different job or market. Found a mistake? Write to us through the request form and we will fix it.",
-        },
-      ],
-      faq: [
-        {
-          question: "How is it different from E-AVTOMAKTAB?",
-          answer:
-            "E-AVTOMAKTAB is a learning platform: e-textbooks, online road rules tests, and links to e-test.uz and e-license.uz. automaktab.uz is built to run a driving school: branches and access rights, leads, payments and debt, expenses, approved driving lessons, fleet, and a daily 08:00 owner report in Telegram. We do not integrate with government systems or provide training videos.",
-        },
-        {
-          question: "Are automaktab.uz and avtomaktab.com the same?",
-          answer:
-            "No. avtomaktab.com is a separate test-prep site for the road rules exam. automaktab.uz is a management system for driving schools and is not affiliated with it.",
-        },
-        {
-          question: "Can we move from Excel?",
-          answer:
-            "Yes. We move your student list with you from a CSV file: first name, last name, phone and course type, up to 10,000 rows per file. Group, price and debt balance are entered later on the student record.",
-        },
-      ],
-      sources: [
-        { label: "e-avtomaktab.uz", url: "https://e-avtomaktab.uz/", checkedAt: "2026-10-16" },
-        { label: "e-avtomaktab.uz oferta v1.0 (2026-08-20)", url: "https://e-avtomaktab.uz/Vesperr/assets/docs/offerta.pdf", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz/avtomaktab-crm", url: "https://leadercrm.uz/avtomaktab-crm", checkedAt: "2026-10-16" },
-        { label: "leadercrm.uz", url: "https://leadercrm.uz/", checkedAt: "2026-10-16" },
-        { label: "intalim.uz", url: "https://intalim.uz/", checkedAt: "2026-10-16" },
-        { label: "educationcrm.uz", url: "https://educationcrm.uz/", checkedAt: "2026-10-16" },
-        { label: "avtomaktab.com", url: "https://avtomaktab.com/", checkedAt: "2026-10-16" },
-      ],
-      related: ["driving", "leads", "pricing"],
-      relatedLabel: "Other features",
-      cta: {
-        title: "Compare it yourself.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
