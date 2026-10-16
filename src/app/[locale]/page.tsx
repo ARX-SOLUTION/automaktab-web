@@ -44,14 +44,6 @@ export async function generateMetadata({
   return buildHomePageMetadata(locale);
 }
 
-// Brand disambiguation (REPORT §13.3 J): avtomaktab.com is an unrelated
-// exam-prep site. No sameAs until official brand profiles exist.
-const DISAMBIGUATION: Record<Locale, string> = {
-  uz: "Avtomaktablar uchun boshqaruv tizimi (CRM). avtomaktab.com test sayti bilan aloqasi yo‘q.",
-  ru: "Система управления (CRM) для автошкол. Не связана с сайтом подготовки к экзамену avtomaktab.com.",
-  en: "Management system (CRM) for driving schools. Not affiliated with the avtomaktab.com exam-prep site.",
-};
-
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
@@ -66,7 +58,6 @@ export default async function Home({ params }: PageProps) {
         "@id": "https://automaktab.uz/#organization",
         name: "automaktab.uz",
         alternateName: ["Automaktab", "Автомактаб", "automaktab CRM"],
-        disambiguatingDescription: DISAMBIGUATION[locale],
         url: "https://automaktab.uz/",
         logo: {
           "@type": "ImageObject",

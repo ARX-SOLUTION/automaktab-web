@@ -33,7 +33,7 @@ export const contentEn: LandingContent = {
     },
     lane2: {
       button: "Request trial",
-      helper: "We’ll agree on 30-day trial terms for your school.",
+      helper: "We’ll agree on 14-day trial terms for your school.",
     },
     signTitle: "Daily questions for school owners",
     signRows: [
@@ -453,7 +453,7 @@ export const contentEn: LandingContent = {
       {
         number: "03",
         title: "Request trial",
-        description: "Agree on the 30-day trial, data migration, team training and price in writing.",
+        description: "Agree on the 14-day trial, data migration, team training and price in writing.",
       },
     ],
   },
@@ -461,7 +461,7 @@ export const contentEn: LandingContent = {
     eyebrow: "Pricing and trial",
     title: "Try it at your school before deciding.",
     description:
-      "Tell us your branch and student counts. Get a written offer with pricing and 30-day trial terms.",
+      "Tell us your branch and student counts. Get a written offer with pricing and 14-day trial terms.",
     demoCard: {
       label: "Sample school",
       badgeLogin: "demo email and password required",
@@ -472,7 +472,7 @@ export const contentEn: LandingContent = {
     trialCard: {
       label: "Trial for your school",
       badge: "Written offer",
-      description: "30 days with your school’s data. We agree on pricing and terms in writing before you start.",
+      description: "14 days with your school’s data. We agree on pricing and terms in writing before you start.",
     },
     comparisonRows: [
       {
@@ -481,7 +481,7 @@ export const contentEn: LandingContent = {
       },
       {
         field: "Trial",
-        value: "30 days with your own school data.",
+        value: "14 days with your own school data.",
       },
       {
         field: "After the trial",
@@ -582,7 +582,7 @@ export const contentEn: LandingContent = {
       {
         question: "How is the trial different from the demo?",
         answerLogin:
-          "The demo uses sample data. The trial runs for 30 days with your school’s data. We agree on pricing and limits in writing.",
+          "The demo uses sample data. The trial runs for 14 days with your school’s data. We agree on pricing and limits in writing.",
       },
       {
         question: "How many branches can we connect?",
@@ -608,16 +608,6 @@ export const contentEn: LandingContent = {
         question: "How are access rights managed?",
         answerLogin:
           "Staff see the sections they need for their work. We review access permissions together before setup.",
-      },
-      {
-        question: "How is it different from E-AVTOMAKTAB?",
-        answerLogin:
-          "E-AVTOMAKTAB is a learning platform: e-textbooks, online road rules tests, and links to e-test.uz and e-license.uz. automaktab.uz is built to run a driving school: branches and access rights, leads, payments and debt, expenses, approved driving lessons, fleet, and a daily 08:00 owner report in Telegram. We do not integrate with government systems or provide training videos.",
-      },
-      {
-        question: "Are automaktab.uz and avtomaktab.com the same?",
-        answerLogin:
-          "No. avtomaktab.com is a separate test-prep site for the road rules exam. automaktab.uz is a management system for driving schools and is not affiliated with it.",
       },
     ],
   },

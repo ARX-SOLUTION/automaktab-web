@@ -347,7 +347,7 @@ const FAQ_TITLE: Record<Locale, string> = {
   en: "Common questions.",
 };
 
-const FAQ_ITEM_COUNT = 10;
+const FAQ_ITEM_COUNT = 8;
 
 const JSON_LD_SCRIPT_RE =
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;
@@ -371,7 +371,7 @@ describe.each(LOCALE_ROUTES)(
       expect(title.length).toBeLessThanOrEqual(60);
       expect(description.length).toBeLessThanOrEqual(155);
       expect(html).not.toContain('name="keywords"');
-      expect(description).not.toMatch(/бесплатно|free for 30 days/);
+      expect(description).not.toMatch(/бесплатно|free for 14 days/);
       expect(html).toContain(
         `property="og:title" content="${title}"`,
       );
@@ -443,7 +443,7 @@ describe.each(LOCALE_ROUTES)(
       expect(organization).toBeTruthy();
       expect(organization.name).toBe("automaktab.uz");
       expect(organization.alternateName).toEqual(["Automaktab", "Автомактаб", "automaktab CRM"]);
-      expect(organization.disambiguatingDescription).toContain("avtomaktab.com");
+      expect(organization.disambiguatingDescription).toBeUndefined();
       expect(organization.sameAs).toBeUndefined();
       expect(organization.contactPoint).toBeUndefined();
       expect(organization.logo).toEqual({

@@ -33,7 +33,7 @@ const LANGUAGE_NAME: Record<Locale, string> = {
 // Curated from claims the site already makes (landing journey, modules,
 // morning report, pricing and FAQ copy); see the SEO/GEO research report.
 const SUMMARY =
-  "automaktab.uz is a CRM and management system for driving schools (avtomaktab) in Uzbekistan. One system for branches, students, payments and debt, groups and lesson schedules, attendance, practical driving lessons, internal theory tests, fleet, leads and owner reports. Interface in Uzbek, Russian and English. Not affiliated with avtomaktab.com, a separate exam-prep site.";
+  "automaktab.uz is a CRM and management system for driving schools (avtomaktab) in Uzbekistan. One system for branches, students, payments and debt, groups and lesson schedules, attendance, practical driving lessons, internal theory tests, fleet, leads and owner reports. Interface in Uzbek, Russian and English.";
 
 const FEATURE_PAGES: ReadonlyArray<readonly [SeoPageId, string, string]> = [
   ["payments", "Payments and debt", "payment history on the student card; debtors filtered by branch and group."],
@@ -53,7 +53,7 @@ const OTHER_FEATURES = [
 // Uzbek FAQ answers for AI search, written only from facts the site states.
 const FAQ_UZ: ReadonlyArray<readonly [string, string]> = [
   ["automaktab.uz nima?", "O‘zbekistondagi avtomaktablar uchun CRM. Filiallar, o‘quvchilar, to‘lov va qarzdorlik, guruh va jadval, davomat, amaliy haydash va hisobotlar bitta tizimda yuritiladi."],
-  ["Avtomaktab CRM narxi qancha?", "Narx filiallar va o‘quvchilar soniga qarab yozma taklifda beriladi. Maktabingiz ma’lumotlari bilan 30 kunlik sinov bor. Demoni telefon raqamisiz ochish mumkin."],
+  ["Avtomaktab CRM narxi qancha?", "Narx filiallar va o‘quvchilar soniga qarab yozma taklifda beriladi. Maktabingiz ma’lumotlari bilan 14 kunlik sinov bor. Demoni telefon raqamisiz ochish mumkin."],
   ["O‘quvchilarning qarzdorligini qanday ko‘raman?", "Har bir o‘quvchi kartasida to‘lov tarixi va qolgan qarz turadi. Qarzdorlarni filial va guruh bo‘yicha topish mumkin."],
   ["Amaliy haydash soatlari hisoblanadimi?", "Ha. O‘tilgan va qolgan daqiqalar hamda instruktor tasdig‘i qayd etiladi."],
   ["Bir nechta filialni boshqarsa bo‘ladimi?", "Ha. Rahbar barcha filiallar tushumi va qarzdorligini bir panelda solishtiradi."],

@@ -379,7 +379,7 @@ export const contentUz: LandingContent = {
     },
     lane2: {
       button: "Sinov so‘rash",
-      helper: "Maktabingiz uchun 30 kunlik sinov shartlarini kelishamiz.",
+      helper: "Maktabingiz uchun 14 kunlik sinov shartlarini kelishamiz.",
     },
     signTitle: "Rahbarning kundalik savollari",
     signRows: [
@@ -799,7 +799,7 @@ export const contentUz: LandingContent = {
       {
         number: "03",
         title: "Sinov so‘rash",
-        description: "30 kunlik sinov, ma’lumot ko‘chirish, jamoani o‘rgatish va narx shartlarini yozma kelishamiz.",
+        description: "14 kunlik sinov, ma’lumot ko‘chirish, jamoani o‘rgatish va narx shartlarini yozma kelishamiz.",
       },
     ],
   },
@@ -807,7 +807,7 @@ export const contentUz: LandingContent = {
     eyebrow: "Narx va sinov",
     title: "Qaror qilishdan oldin maktabingizda sinang.",
     description:
-      "Filial va o‘quvchilar sonini ayting. Narx va 30 kunlik sinov shartlarini yozma taklifda oling.",
+      "Filial va o‘quvchilar sonini ayting. Narx va 14 kunlik sinov shartlarini yozma taklifda oling.",
     demoCard: {
       label: "Namuna maktab",
       badgeLogin: "demo email va parol bilan",
@@ -818,7 +818,7 @@ export const contentUz: LandingContent = {
     trialCard: {
       label: "Maktabingiz uchun sinov",
       badge: "Yozma taklif",
-      description: "Maktabingiz ma’lumotlari bilan 30 kun sinang. Narx va shartlarni boshlashdan oldin yozma kelishamiz.",
+      description: "Maktabingiz ma’lumotlari bilan 14 kun sinang. Narx va shartlarni boshlashdan oldin yozma kelishamiz.",
     },
     comparisonRows: [
       {
@@ -827,7 +827,7 @@ export const contentUz: LandingContent = {
       },
       {
         field: "Sinov",
-        value: "30 kun, o‘z maktabingiz ma’lumotlari bilan.",
+        value: "14 kun, o‘z maktabingiz ma’lumotlari bilan.",
       },
       {
         field: "Sinovdan keyin",
@@ -928,7 +928,7 @@ export const contentUz: LandingContent = {
       {
         question: "Demo bilan sinovning farqi nima?",
         answerLogin:
-          "Demo namuna ma’lumotlari bilan tanishish uchun. Sinovda maktabingiz ma’lumotlari bilan 30 kun ishlaysiz. Narx va cheklovlarni oldindan yozma kelishamiz.",
+          "Demo namuna ma’lumotlari bilan tanishish uchun. Sinovda maktabingiz ma’lumotlari bilan 14 kun ishlaysiz. Narx va cheklovlarni oldindan yozma kelishamiz.",
       },
       {
         question: "Nechta filial bilan ishlash mumkin?",
@@ -954,16 +954,6 @@ export const contentUz: LandingContent = {
         question: "Kirish huquqlari qanday boshqariladi?",
         answerLogin:
           "Har bir xodim ishiga mos bo‘limlarni ko‘radi. Kimga qaysi kirish huquqi kerakligini ulashdan oldin birga tekshiramiz.",
-      },
-      {
-        question: "E-AVTOMAKTAB’dan farqi nima?",
-        answerLogin:
-          "E-AVTOMAKTAB o‘quv platformasi: elektron darsliklar, onlayn YHQ testlari, e-test.uz va e-license.uz bilan bog‘lanish. automaktab.uz maktabni boshqarish uchun: filiallar va ruxsatlar, lidlar, to‘lov va qarzdorlik, xarajatlar, amaliy haydashni tasdiqlash, avtopark va har kuni 08:00 da Telegram hisobot. Davlat tizimlari bilan integratsiya va o‘quv videolari bizda yo‘q.",
-      },
-      {
-        question: "automaktab.uz va avtomaktab.com bir xilmi?",
-        answerLogin:
-          "Yo‘q. avtomaktab.com YHQ imtihoniga tayyorlanish uchun alohida test sayti. automaktab.uz avtomaktablar uchun boshqaruv tizimi va u bilan aloqasi yo‘q.",
       },
     ],
   },

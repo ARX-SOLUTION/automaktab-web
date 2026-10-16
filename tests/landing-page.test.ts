@@ -78,7 +78,7 @@ describe("automaktab.uz marketing page verification", () => {
     for (const locale of ["uz", "ru", "en"] as const) {
       const home = buildHomeMetadata(locale);
       expect(home.keywords).toBeUndefined();
-      expect(home.description).not.toMatch(/бесплатно|free for 30 days/);
+      expect(home.description).not.toMatch(/бесплатно|free for 14 days/);
       const page = await seoMetadata({
         params: Promise.resolve({ locale, seoPath: ["features", "payments-and-debt"] }),
       });
@@ -175,7 +175,7 @@ describe("automaktab.uz marketing page verification", () => {
     expect(contentUz.resources.roadmapCard.items).toHaveLength(2);
     expect(contentUz.howItWorks.steps).toHaveLength(3);
     expect(contentUz.pricing.comparisonRows).toHaveLength(3);
-    expect(contentUz.faq.items).toHaveLength(10);
+    expect(contentUz.faq.items).toHaveLength(8);
     expect(contentUz.finalCta).toBeDefined();
   });
 
@@ -232,7 +232,7 @@ describe("automaktab.uz marketing page verification", () => {
       expect(content.pricing.comparisonRows).toHaveLength(3);
       expect(content.pricing.form.fields.city.options).toHaveLength(14);
       expect(content.pricing.form.disclaimer).toBeTruthy();
-      expect(content.faq.items).toHaveLength(10);
+      expect(content.faq.items).toHaveLength(8);
       expect(content.finalCta).toBeDefined();
 
       // Antislop rule R-02: Zero em dashes in newly authored content across all languages
