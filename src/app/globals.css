@@ -1108,6 +1108,10 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
   margin: clamp(2rem, 5vw, 3.5rem) auto 0;
 }
 
+.seo-visual > :is(.scene-director, .scene-registrar, .scene-accountant, .scene-teacher, .scene-leads, .scene-fleet, .scene-education) {
+  margin-inline: auto;
+}
+
 .seo-faq details {
   border-bottom: 1px solid var(--c-sand-300);
 }

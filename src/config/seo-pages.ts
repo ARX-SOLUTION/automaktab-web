@@ -108,7 +108,7 @@ export const SEO_PAGES: Record<
   payments: {
     uz: {
       segments: ["features", "payments-and-debt"],
-      title: "Avtomaktab to‘lovlari va qarzdorlik | automaktab.uz",
+      title: "Avtomaktab to‘lovlari va qarzdorlik hisobi | automaktab.uz",
       description:
         "O‘quvchilar to‘lovlari va qolgan qarzni bir joyda ko‘ring. Qarzdorlarni filial va guruh bo‘yicha toping.",
       keywords: [
@@ -120,6 +120,9 @@ export const SEO_PAGES: Record<
       heading: "Avtomaktab to‘lovlari va qarzdorligini boshqaring.",
       intro:
         "Kim qancha to‘laganini va qancha qarzi qolganini ko‘ring. O‘quvchi kartasi va qarzdorlar ro‘yxati bir tizimda.",
+      definition:
+        "automaktab.uz har bir o‘quvchining to‘lovlari va qolgan qarzini kartasida saqlaydi; qarzdorlarni filial bo‘yicha saralaysiz, guruh sahifasida esa har bir o‘quvchining qarz holati ko‘rinadi.",
+      visual: "scene:director",
       sections: [
         {
           title: "To‘lovlar o‘quvchi kartasida",
@@ -136,18 +139,66 @@ export const SEO_PAGES: Record<
           body:
             "Namuna ma’lumotlari bilan to‘lovlar va rahbar panelini tekshiring. Telefon raqamingizni qoldirish shart emas.",
         },
+        {
+          title: "To‘lov usullari va Excel",
+          body:
+            "To‘lovni maktab xodimi kiritadi: naqd, karta yoki bank o‘tkazmasi. Har bir to‘lov alohida yoziladi va o‘quvchining qolgan qarzini kamaytiradi, shuning uchun bo‘lib to‘lash ham aniq ko‘rinadi. To‘lovlar va o‘quvchilar ro‘yxatini Excel faylga yuklab olish mumkin, masalan, buxgalterga yoki rahbarga yuborish uchun.",
+        },
+        {
+          title: "Rahbar paneli va filiallar",
+          body:
+            "O‘quvchilar ro‘yxatida qarzi borlarni alohida filtrlang va qarz miqdori bo‘yicha saralang. Rahbar panelida davr tushumi va o‘quvchilar qarzdorligi jami va har bir filial bo‘yicha ko‘rinadi.",
+        },
+        {
+          title: "Kim nimani ko‘radi",
+          body:
+            "To‘lov ma’lumotlarini faqat ruxsati bor xodimlar ko‘radi va kiritadi. Har bir xodim o‘ziga ruxsat berilgan filiallar to‘lovlarini ko‘radi. To‘lov yoki o‘quvchi kartasidagi o‘zgarishni kim va qachon qilgani audit tarixida qoladi.",
+        },
+        {
+          title: "O‘quvchi kartasida nima bor",
+          body:
+            "Kartada kurs narxi, to‘langan summa, qolgan qarz va to‘lovlar tarixi turadi. Shartnoma raqami, 083 tibbiy ma’lumotnoma va hujjatlar holati ham shu kartada, shuning uchun o‘quvchi haqida savolga bitta joydan javob topasiz.",
+        },
       ],
+      faq: [
+        {
+          question: "Qanday to‘lov usullari bor?",
+          answer:
+            "Naqd, karta va bank o‘tkazmasi. To‘lovni maktab xodimi kiritadi. Click yoki Payme orqali onlayn to‘lov hozir yo‘q.",
+        },
+        {
+          question: "Bo‘lib to‘lash qanday ko‘rinadi?",
+          answer:
+            "Har bir to‘lov alohida yoziladi. Qolgan qarz o‘quvchi kartasida va qarzdorlar ro‘yxatida darhol yangilanadi.",
+        },
+        {
+          question: "To‘lovlarni Excel'ga yuklab olsa bo‘ladimi?",
+          answer:
+            "Ha. To‘lovlar ro‘yxati va o‘quvchilar ro‘yxati xlsx faylga yuklab olinadi.",
+        },
+        {
+          question: "O‘quvchi o‘z to‘lovini ko‘radimi?",
+          answer:
+            "Hozir yo‘q. O‘quvchi kabinetida jadval va davomat bor, to‘lovlar esa faqat maktab xodimlariga ko‘rinadi.",
+        },
+        {
+          question: "Qarzdorlar haqida Telegram'da xabar keladimi?",
+          answer:
+            "Yo‘q. 08:00 dagi Telegram hisobotida kechagi tushum va yangi o‘quvchilar soni bor. Qarzdorlarni tizimdagi ro‘yxatdan ko‘rasiz.",
+        },
+      ],
+      related: ["branches", "attendance", "compare"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "To‘lovlar hisobini demoda ko‘ring.",
         body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
         label: "Demoni ochish",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     ru: {
       segments: ["features", "payments-and-debt"],
-      title: "Оплаты и задолженность автошколы | automaktab.uz",
+      title: "Учёт оплат и задолженности автошколы | automaktab.uz",
       description:
         "Смотрите оплаты и остаток долга в карточке курсанта. Находите должников по филиалу и группе.",
       keywords: ["оплаты автошколы", "задолженность автошколы", "CRM автошколы"],
@@ -155,6 +206,9 @@ export const SEO_PAGES: Record<
       heading: "Управляйте оплатами и задолженностью автошколы.",
       intro:
         "Проверяйте, сколько курсант оплатил и сколько осталось. Карточка курсанта и список задолженности находятся в одной системе.",
+      definition:
+        "automaktab.uz хранит оплаты и остаток долга каждого курсанта в его карточке; должников можно отфильтровать по филиалу, а на странице группы виден долг каждого курсанта.",
+      visual: "scene:director",
       sections: [
         {
           title: "Оплаты в карточке курсанта",
@@ -171,18 +225,66 @@ export const SEO_PAGES: Record<
           body:
             "Проверьте оплаты и панель руководителя на вымышленных данных. Оставлять номер телефона не нужно.",
         },
+        {
+          title: "Способы оплаты и Excel",
+          body:
+            "Оплату вносит сотрудник школы: наличные, карта или банковский перевод. Каждая оплата записывается отдельно и уменьшает остаток долга курсанта, поэтому оплата частями тоже видна точно. Списки оплат и курсантов можно выгрузить в Excel, например, для бухгалтера или руководителя.",
+        },
+        {
+          title: "Панель руководителя и филиалы",
+          body:
+            "В списке курсантов отфильтруйте тех, у кого есть долг, и отсортируйте по сумме долга. На панели руководителя выручка за период и задолженность курсантов видны в целом и по каждому филиалу.",
+        },
+        {
+          title: "Кто что видит",
+          body:
+            "Платёжные данные видят и вносят только сотрудники с нужными правами. Каждый сотрудник видит оплаты только разрешённых ему филиалов. Кто и когда изменил оплату или карточку курсанта, остаётся в журнале аудита.",
+        },
+        {
+          title: "Что в карточке курсанта",
+          body:
+            "В карточке указаны цена курса, оплаченная сумма, остаток долга и история оплат. Номер договора, медсправка 083 и статус документов тоже здесь, поэтому ответ на вопрос о курсанте находится в одном месте.",
+        },
       ],
+      faq: [
+        {
+          question: "Какие способы оплаты есть?",
+          answer:
+            "Наличные, карта и банковский перевод. Оплату вносит сотрудник школы. Онлайн-оплаты через Click или Payme сейчас нет.",
+        },
+        {
+          question: "Как видна оплата частями?",
+          answer:
+            "Каждая оплата записывается отдельно. Остаток долга сразу обновляется в карточке курсанта и в списке должников.",
+        },
+        {
+          question: "Можно ли выгрузить оплаты в Excel?",
+          answer:
+            "Да. Список оплат и список курсантов выгружаются в файл xlsx.",
+        },
+        {
+          question: "Видит ли курсант свои оплаты?",
+          answer:
+            "Сейчас нет. В кабинете курсанта есть расписание и посещаемость, а оплаты видят только сотрудники школы.",
+        },
+        {
+          question: "Приходят ли уведомления о должниках в Telegram?",
+          answer:
+            "Нет. В отчёте в Telegram в 08:00 есть вчерашняя выручка и число новых курсантов. Должников смотрите в списке в системе.",
+        },
+      ],
+      related: ["branches", "attendance", "compare"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите учёт оплат в демо.",
         body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     en: {
       segments: ["features", "payments-and-debt"],
-      title: "Driving-school payments and debt | automaktab.uz",
+      title: "Driving school payment and debt tracking | automaktab.uz",
       description:
         "See payments and outstanding debt on each student record. Find students with debt by branch and group.",
       keywords: ["driving school payments", "driving school debt", "driving school CRM"],
@@ -190,6 +292,9 @@ export const SEO_PAGES: Record<
       heading: "Keep track of payments and student debt.",
       intro:
         "See how much each student has paid and what remains. Student records and the debt list are in one system.",
+      definition:
+        "automaktab.uz keeps every student's payments and outstanding debt on their record; you filter students with debt by branch, and the group page shows each student's debt status.",
+      visual: "scene:director",
       sections: [
         {
           title: "Payments stay with the student record",
@@ -206,14 +311,62 @@ export const SEO_PAGES: Record<
           body:
             "Check payments and the owner dashboard with sample data. You do not need to leave your phone number.",
         },
+        {
+          title: "Payment methods and Excel",
+          body:
+            "School staff record each payment: cash, card or bank transfer. Every payment is stored separately and reduces the student's outstanding debt, so installments stay clear. Payment and student lists can be downloaded to Excel, for example for the accountant or the owner.",
+        },
+        {
+          title: "Owner dashboard and branches",
+          body:
+            "Filter the student list to those with debt and sort by the amount owed. The owner dashboard shows revenue for the period and student debt in total and for each branch.",
+        },
+        {
+          title: "Who sees what",
+          body:
+            "Only staff with the right permissions see and record payment data. Each staff member sees payments only for the branches they are allowed to access. Who changed a payment or a student record, and when, stays in the audit log.",
+        },
+        {
+          title: "What the student record holds",
+          body:
+            "The record shows the course price, amount paid, outstanding debt and payment history. The contract number, the 083 medical certificate and document status sit on the same record, so questions about a student have one place to look.",
+        },
       ],
+      faq: [
+        {
+          question: "Which payment methods are supported?",
+          answer:
+            "Cash, card and bank transfer. School staff record the payment. Online payment through Click or Payme is not available.",
+        },
+        {
+          question: "How do installments show up?",
+          answer:
+            "Each payment is stored separately. The remaining debt updates right away on the student record and in the debtor list.",
+        },
+        {
+          question: "Can I export payments to Excel?",
+          answer:
+            "Yes. The payment list and the student list download as xlsx files.",
+        },
+        {
+          question: "Can students see their own payments?",
+          answer:
+            "Not at the moment. The student portal shows the schedule and attendance; payments are visible to school staff only.",
+        },
+        {
+          question: "Do debtor alerts come to Telegram?",
+          answer:
+            "No. The 08:00 Telegram report has yesterday's revenue and the number of new students. You see students with debt in the list inside the system.",
+        },
+      ],
+      related: ["branches", "attendance", "compare"],
       relatedLabel: "Other features",
       cta: {
         title: "See payment records in the demo.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
   },
   schedule: {

@@ -4,6 +4,7 @@ import SeoPage from "@/app/[locale]/[...seoPath]/page";
 import { SEO_PAGES, type SeoPageCopy } from "@/config/seo-pages";
 
 const original = SEO_PAGES.payments.uz;
+const originalRu = SEO_PAGES.payments.ru;
 
 async function render(locale: "uz" | "ru" | "en", seoPath: string[]) {
   return renderToStaticMarkup(await SeoPage({ params: Promise.resolve({ locale, seoPath }) }));
@@ -21,10 +22,14 @@ function graph(html: string) {
 
 afterEach(() => {
   SEO_PAGES.payments.uz = original;
+  SEO_PAGES.payments.ru = originalRu;
 });
 
 describe("SEO page template", () => {
   it("adds WebPage and BreadcrumbList JSON-LD without FAQPage when a page has no FAQ", async () => {
+    const { definition, visual, comparison, faq, sources, related, ...bare } = originalRu;
+    void [definition, visual, comparison, faq, sources, related];
+    SEO_PAGES.payments.ru = bare;
     const html = await render("ru", ["features", "payments-and-debt"]);
     const nodes = graph(html);
     expect(nodes.map((node) => node["@type"])).toEqual(["WebPage", "BreadcrumbList"]);
