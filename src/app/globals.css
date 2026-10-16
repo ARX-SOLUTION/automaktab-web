@@ -1162,6 +1162,7 @@ body { scrollbar-color: var(--c-sand-400) var(--c-paper); }
 .seo-compare tbody th {
   position: sticky;
   left: 0;
+  min-width: 10rem;
   background: var(--c-paper);
   color: var(--c-ink);
   font-weight: 600;

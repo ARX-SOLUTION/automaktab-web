@@ -100,6 +100,10 @@ describe("seo pages use English path segments in every locale", () => {
     expect(getSeoPagePath("driving", "uz")).toBe("/features/practical-driving");
     expect(getSeoPagePath("driving", "ru")).toBe("/ru/features/practical-driving");
     expect(getSeoPagePath("driving", "en")).toBe("/en/features/practical-driving");
+    expect(getSeoPagePath("compare", "uz")).toBe("/compare");
+    expect(getSeoPagePath("compare", "ru")).toBe("/ru/compare");
+    expect(SEO_PAGES.compare.en.comparison?.rows.every((row) => row.cells.length === 5)).toBe(true);
+    expect(SEO_PAGES.compare.uz.sources?.every((source) => source.checkedAt === "2026-10-16")).toBe(true);
     const params = getSeoPageStaticParams();
     for (const id of SEO_DETAIL_PAGE_IDS) {
       for (const locale of ["uz", "ru", "en"] as const) {
@@ -107,7 +111,9 @@ describe("seo pages use English path segments in every locale", () => {
         expect(params).toContainEqual({ locale, seoPath: [...copy.segments] });
         expect(copy.definition).toBeTruthy();
         expect(copy.faq?.length).toBeGreaterThanOrEqual(2);
-        expect(JSON.stringify(copy)).not.toMatch(/talaba|—/i);
+        const { comparison, ...prose } = copy;
+        expect(JSON.stringify(prose)).not.toMatch(/talaba|—/i);
+        expect(JSON.stringify(comparison ?? {})).not.toMatch(/talaba/i);
       }
     }
   });
