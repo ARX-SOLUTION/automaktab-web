@@ -372,7 +372,7 @@ export const SEO_PAGES: Record<
   schedule: {
     uz: {
       segments: ["features", "schedules-and-groups"],
-      title: "Avtomaktab dars jadvali va guruhlar | automaktab.uz",
+      title: "Avtomaktab CRM: dars jadvali va guruhlar | automaktab.uz",
       description:
         "Nazariya va amaliy darslarni guruh hamda o‘qituvchi bilan haftalik jadvalda rejalashtiring.",
       keywords: ["avtomaktab dars jadvali", "avtomaktab guruhlari", "nazariya va amaliy darslar"],
@@ -380,6 +380,9 @@ export const SEO_PAGES: Record<
       heading: "Dars jadvali va guruhlar bir tizimda.",
       intro:
         "Nazariya va haydash mashg‘ulotlarini bir jadvalda rejalashtiring. Guruh, o‘qituvchi va dars vaqtini belgilang.",
+      definition:
+        "automaktab.uz jadvali har bir guruh uchun haftalik shablondan iborat: hafta kuni, boshlanish va tugash vaqti, nazariya yoki amaliy dars. Shablondan keyingi 1–12 hafta darslari yaratiladi.",
+      visual: "scene:registrar",
       sections: [
         {
           title: "Bir haftalik darslar ko‘z oldingizda",
@@ -389,25 +392,83 @@ export const SEO_PAGES: Record<
         {
           title: "Guruh va o‘qituvchini belgilang",
           body:
-            "Har bir darsga guruh va o‘qituvchini biriktiring. Jadvaldagi o‘zgarishlarni shu yerda kuzating.",
+            "Har bir dars guruhga tegishli. Guruh o‘qituvchisi kalendarda dars yonida ko‘rinadi.",
         },
         {
           title: "Nazariya va haydash bir jadvalda",
           body:
             "Dars turini kalendardan ko‘ring. Nazariya va amaliy haydash mashg‘ulotlarini alohida ajrating.",
         },
+        {
+          title: "Haftalik shablon",
+          body:
+            "Guruh uchun hafta kuni, vaqt va dars turini bir marta kiriting. Tizim 1–12 hafta uchun darslarni yaratadi va avval yaratilgan darslarni takrorlamaydi.",
+        },
+        {
+          title: "Kalendarda nima ko‘rinadi",
+          body:
+            "Har bir dars sanasi, guruhi, o‘qituvchisi va belgilangan davomati bilan ko‘rinadi. Kalendarni kerakli sana oralig‘ida oching.",
+        },
+        {
+          title: "Kim qaysi jadvalni ko‘radi",
+          body:
+            "O‘qituvchi faqat o‘z guruhlari darslarini ko‘radi. Filial xodimlari o‘z filiali jadvalini, rahbar esa barcha filiallarni ko‘radi.",
+        },
+        {
+          title: "Shablonni kim boshqaradi",
+          body:
+            "Shablonni rahbar, menejer yoki qabul xodimi qo‘shadi va tahrirlaydi. O‘chirish faqat rahbar va menejerga ruxsat etilgan. Kerak bo‘lmagan shablonni nofaol qilib qo‘yish mumkin.",
+        },
+        {
+          title: "Davomat shu darsdan boshlanadi",
+          body:
+            "Yaratilgan dars davomat jurnalida ochiladi va o‘qituvchi o‘quvchilarni shu darsda belgilaydi. Kalendarda qaysi darsda davomat belgilanganini ko‘rasiz.",
+        },
+        {
+          title: "Har bir filial o‘z jadvali bilan",
+          body:
+            "Har bir dars va shablon filialga bog‘langan. Filial o‘z jadvalini yuritadi, rahbar esa barcha filiallar darslarini bitta kalendarda ko‘radi.",
+        },
+        {
+          title: "O‘quvchi ham jadvalni biladi",
+          body:
+            "O‘quvchi o‘z kabinetida dars jadvalini va navbatdagi darsini ko‘radi. Dars vaqti o‘zgarsa, kabinetida bildirishnoma chiqadi.",
+        },
       ],
+      faq: [
+        {
+          question: "Darslarni har hafta qo‘lda kiritish kerakmi?",
+          answer:
+            "Yo‘q. Guruhga haftalik shablon qo‘shing va 1–12 hafta uchun darslarni yarating. Bir guruhga bir nechta shablon qo‘shish mumkin, masalan, dushanba nazariya va payshanba amaliy dars. Shablonni rahbar, menejer yoki qabul xodimi kiritadi.",
+        },
+        {
+          question: "Jadvalda xona yoki auditoriya bormi?",
+          answer:
+            "Hozircha yo‘q. Dars guruh, sana, vaqt va dars turi bilan saqlanadi.",
+        },
+        {
+          question: "Amaliy haydash shu jadvalda rejalashtiriladimi?",
+          answer:
+            "Guruhning amaliy darslari jadvalda alohida turda ko‘rinadi. Har bir o‘quvchining haydash mashg‘uloti esa alohida yoziladi va menejer tasdiqlaydi.",
+        },
+        {
+          question: "O‘qituvchi boshqa guruhlar jadvalini ko‘radimi?",
+          answer:
+            "Yo‘q. O‘qituvchi faqat o‘ziga biriktirilgan guruhlar darslarini ko‘radi.",
+        },
+      ],
+      related: ["attendance", "driving", "branches"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Dars jadvalini demoda ko‘ring.",
         body: "Namuna maktabning haftalik jadvali, guruhlari va darslarini tekshiring.",
         label: "Demoni ochish",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     ru: {
       segments: ["features", "schedules-and-groups"],
-      title: "Расписание и группы автошколы | automaktab.uz",
+      title: "Расписание и группы в CRM автошколы | automaktab.uz",
       description:
         "Планируйте теорию и практику в недельном расписании с группой и преподавателем.",
       keywords: ["расписание автошколы", "группы автошколы", "теория и практика"],
@@ -415,6 +476,9 @@ export const SEO_PAGES: Record<
       heading: "Расписание и группы в одной системе.",
       intro:
         "Планируйте теорию и вождение в одном расписании. Для каждого занятия укажите группу, преподавателя и время.",
+      definition:
+        "Расписание automaktab.uz строится из недельных шаблонов группы: день недели, время начала и окончания, теория или практика. Из шаблона создаются занятия на 1–12 недель вперёд.",
+      visual: "scene:registrar",
       sections: [
         {
           title: "Вся неделя перед глазами",
@@ -424,25 +488,83 @@ export const SEO_PAGES: Record<
         {
           title: "Укажите группу и преподавателя",
           body:
-            "Назначьте группу и преподавателя для каждого занятия. Следите за изменениями в том же расписании.",
+            "Каждое занятие относится к группе. Преподаватель группы виден в календаре рядом с занятием.",
         },
         {
           title: "Теория и вождение в одном расписании",
           body:
             "Тип занятия виден в календаре. Теорию и практическое вождение легко различить.",
         },
+        {
+          title: "Недельный шаблон",
+          body:
+            "Один раз укажите день, время и тип занятия для группы. Система создаст занятия на 1–12 недель и не продублирует уже созданные.",
+        },
+        {
+          title: "Что видно в календаре",
+          body:
+            "Каждое занятие показано с датой, группой, преподавателем и отмеченной посещаемостью. Календарь открывается за нужный период.",
+        },
+        {
+          title: "Кто какое расписание видит",
+          body:
+            "Преподаватель видит только занятия своих групп. Сотрудники филиала видят расписание своего филиала, руководитель — всех филиалов.",
+        },
+        {
+          title: "Кто управляет шаблонами",
+          body:
+            "Шаблон добавляет и редактирует руководитель, менеджер или сотрудник приёмной. Удалять его могут только руководитель и менеджер. Ненужный шаблон можно сделать неактивным.",
+        },
+        {
+          title: "Посещаемость начинается с занятия",
+          body:
+            "Созданное занятие открывается в журнале посещаемости, и преподаватель отмечает курсантов прямо в нём. В календаре видно, на каких занятиях посещаемость уже отмечена.",
+        },
+        {
+          title: "У каждого филиала своё расписание",
+          body:
+            "Каждое занятие и шаблон привязаны к филиалу. Филиал ведёт своё расписание, а руководитель видит занятия всех филиалов в одном календаре.",
+        },
+        {
+          title: "Курсант тоже видит расписание",
+          body:
+            "В личном кабинете курсант видит своё расписание и ближайшее занятие. Если время занятия меняется, в кабинете появляется уведомление.",
+        },
       ],
+      faq: [
+        {
+          question: "Нужно ли вносить занятия вручную каждую неделю?",
+          answer:
+            "Нет. Добавьте группе недельный шаблон и создайте занятия на 1–12 недель. У группы может быть несколько шаблонов, например теория в понедельник и практика в четверг. Шаблон вносит руководитель, менеджер или сотрудник приёмной.",
+        },
+        {
+          question: "Есть ли в расписании аудитории?",
+          answer:
+            "Пока нет. Занятие хранится с группой, датой, временем и типом.",
+        },
+        {
+          question: "Планируется ли вождение в этом расписании?",
+          answer:
+            "Практические занятия группы видны в расписании отдельным типом. Каждое занятие вождения курсанта записывается отдельно и подтверждается менеджером.",
+        },
+        {
+          question: "Видит ли преподаватель расписание других групп?",
+          answer:
+            "Нет. Преподаватель видит только занятия своих групп.",
+        },
+      ],
+      related: ["attendance", "driving", "branches"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите расписание в демо.",
         body: "Проверьте недельное расписание, группы и занятия на примере автошколы.",
         label: "Открыть демо",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
     en: {
       segments: ["features", "schedules-and-groups"],
-      title: "Driving-school schedules and groups | automaktab.uz",
+      title: "Driving-school CRM for schedules and groups | automaktab.uz",
       description:
         "Plan theory and driving lessons in a weekly schedule. Assign each lesson to a group and teacher.",
       keywords: ["driving school schedule", "driving school groups", "theory and practical lessons"],
@@ -450,6 +572,9 @@ export const SEO_PAGES: Record<
       heading: "Schedule groups and lessons in one place.",
       intro:
         "Plan theory and driving lessons in one schedule. Set the group, teacher and time for each lesson.",
+      definition:
+        "automaktab.uz builds the schedule from weekly group templates: weekday, start and end time, theory or practical lesson. Lessons for the next 1–12 weeks are generated from the template.",
+      visual: "scene:registrar",
       sections: [
         {
           title: "See the whole week at a glance",
@@ -459,21 +584,79 @@ export const SEO_PAGES: Record<
         {
           title: "Assign the group and teacher",
           body:
-            "Assign a group and teacher to each lesson. Track changes in the same schedule.",
+            "Every lesson belongs to a group. The group’s teacher is shown next to the lesson in the calendar.",
         },
         {
           title: "Theory and driving in one schedule",
           body:
             "Lesson types are visible in the calendar, making theory and driving practice easy to tell apart.",
         },
+        {
+          title: "Weekly templates",
+          body:
+            "Enter the weekday, time and lesson type for a group once. The system generates lessons for 1–12 weeks and skips lessons that already exist.",
+        },
+        {
+          title: "What the calendar shows",
+          body:
+            "Each lesson shows its date, group, teacher and recorded attendance. Open the calendar for any date range.",
+        },
+        {
+          title: "Who sees which schedule",
+          body:
+            "Teachers see only their own groups’ lessons. Branch staff see their branch schedule; the owner sees every branch.",
+        },
+        {
+          title: "Who manages templates",
+          body:
+            "The owner, a manager or admissions staff can add and edit templates. Only the owner and managers can delete them. A template that is no longer needed can be set to inactive.",
+        },
+        {
+          title: "Attendance starts from the lesson",
+          body:
+            "A generated lesson opens in the attendance register, where the teacher marks students. The calendar shows which lessons already have attendance recorded.",
+        },
+        {
+          title: "Each branch keeps its own schedule",
+          body:
+            "Every lesson and template belongs to a branch. Each branch runs its own schedule, while the owner sees lessons from all branches in one calendar.",
+        },
+        {
+          title: "Students see it too",
+          body:
+            "In their student account, each student sees their own schedule and next lesson. If a lesson time changes, a notification appears there.",
+        },
       ],
+      faq: [
+        {
+          question: "Do I have to enter lessons by hand every week?",
+          answer:
+            "No. Add a weekly template to the group and generate lessons for 1–12 weeks. A group can have several templates, for example theory on Monday and practice on Thursday. The owner, a manager or admissions staff can set templates.",
+        },
+        {
+          question: "Does the schedule track rooms?",
+          answer:
+            "Not yet. A lesson is stored with its group, date, time and type.",
+        },
+        {
+          question: "Is practical driving planned in this schedule?",
+          answer:
+            "A group’s practical lessons appear in the schedule as their own type. Each student’s driving session is recorded separately and approved by a manager.",
+        },
+        {
+          question: "Can a teacher see other groups’ schedules?",
+          answer:
+            "No. Teachers see only the lessons of groups assigned to them.",
+        },
+      ],
+      related: ["attendance", "driving", "branches"],
       relatedLabel: "Other features",
       cta: {
         title: "See the schedule in the demo.",
         body: "Explore the weekly schedule, groups and lessons in a sample school.",
         label: "Open demo",
       },
-      updatedAt: "2026-09-19",
+      updatedAt: "2026-10-16",
     },
   },
   attendance: {

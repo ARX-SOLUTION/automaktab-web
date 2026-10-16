@@ -263,7 +263,7 @@ export const contentEn: LandingContent = {
         sub: "Schedule and attendance",
         title: "See who is missing lessons.",
         points: [
-          "Weekly room and group schedule",
+          "Weekly schedule by group",
           "Mark each student’s attendance",
           "Attendance by group",
         ],

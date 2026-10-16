@@ -37,7 +37,7 @@ const SUMMARY =
 
 const FEATURE_PAGES: ReadonlyArray<readonly [SeoPageId, string, string]> = [
   ["payments", "Payments and debt", "payment history on the student card; debtors filtered by branch and group."],
-  ["schedule", "Schedules and groups", "groups, theory and practical lessons by teacher and room."],
+  ["schedule", "Schedules and groups", "weekly group templates, theory and practical lessons in one calendar."],
   ["attendance", "Digital attendance", "present / late / absent / excused per lesson."],
   ["branches", "Branch management", "revenue and debt per branch on the owner dashboard."],
 ];
