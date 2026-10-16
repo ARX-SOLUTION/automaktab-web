@@ -29,8 +29,6 @@ export default function SiteHeader({
   const menuDemoUrl = buildDemoUrl("header_menu");
   const navLinks = [
     { href: `${home}#yol`, label: content.nav.capabilities },
-    { href: `${home}#rollar`, label: content.nav.roles },
-    { href: `${home}#qanday`, label: content.nav.howItWorks },
     { href: `${home}#tariflar`, label: content.nav.pricing },
     { href: `${home}#savollar`, label: content.nav.faq },
   ];

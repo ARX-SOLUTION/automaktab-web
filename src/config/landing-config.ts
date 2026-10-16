@@ -11,6 +11,6 @@ export function getLandingConfig(): LandingConfig {
 
   return {
     demoAccess: envDemo === "oneclick" ? "oneclick" : "login",
-    showRoadmap: envRoadmap !== "false",
+    showRoadmap: envRoadmap === "true",
   };
 }

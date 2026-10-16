@@ -80,6 +80,7 @@ export default async function SeoPage({
 
   const { copy, id } = page;
   const labels = TEMPLATE_LABELS[candidate];
+  const isLegal = (SEO_LEGAL_PAGE_IDS as readonly SeoPageId[]).includes(id);
 
   return (
     <>
@@ -98,8 +99,14 @@ export default async function SeoPage({
             {copy.eyebrow}
           </p>
           <h1>{copy.heading}</h1>
-          {copy.definition && <p className="seo-definition">{copy.definition}</p>}
-          <p>{copy.intro}</p>
+          {/* One lead only; `intro` stays in llms.txt when a definition exists. */}
+          {copy.definition ? <p className="seo-definition">{copy.definition}</p> : <p>{copy.intro}</p>}
+          {!isLegal && copy.visual !== "pricing-cards" && (
+            <DemoLink locale={candidate} className="button button-primary seo-lead-cta">
+              {copy.cta.label}
+              <ArrowUpRight aria-hidden="true" />
+            </DemoLink>
+          )}
         </header>
 
         {copy.visual && <SeoVisual id={copy.visual} locale={candidate} />}

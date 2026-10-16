@@ -10,7 +10,8 @@ import type { LandingContent } from "@/content/uz";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export default function MorningReportWidget({ content }: { content: LandingContent["morningReport"] }) {
+/** `card` shows only the report example, for pages whose H1 already introduces the report. */
+export default function MorningReportWidget({ content, variant = "section" }: { content: LandingContent["morningReport"]; variant?: "section" | "card" }) {
   const root = useRef<HTMLElement>(null);
   const [state, setState] = useState<"static" | "playing" | "paused" | "complete">("static");
   const format = new Intl.NumberFormat(content.numberLocale === "uz-UZ" ? "fr-FR" : content.numberLocale);
@@ -53,15 +54,14 @@ export default function MorningReportWidget({ content }: { content: LandingConte
   }, { scope: root, dependencies: [content, near], revertOnUpdate: true });
 
   return (
-    <section ref={root} id="morning-report" data-report-state={state} className="report-section bg-paper" aria-labelledby="morning-report-heading">
-      <div className="landing-container report-layout">
-        <div className="report-intro">
+    <section ref={root} id="morning-report" data-report-state={state} className="report-section bg-paper" {...(variant === "card" ? { "aria-label": content.headerTitle } : { "aria-labelledby": "morning-report-heading" })}>
+      <div className={`landing-container report-layout${variant === "card" ? " report-layout-card" : ""}`}>
+        {variant === "section" && <div className="report-intro">
           <h2 id="morning-report-heading" className="m-0 font-display font-extrabold text-ink [text-wrap:balance]">{content.title}<span className="text-forest-600">{content.titleAccent}</span></h2>
-          <p>{content.description}</p>
           <ul>{content.bullets.map((bullet) => <li key={bullet}><Check size={20} aria-hidden="true" />{bullet}</li>)}</ul>
           <a href="#tariflar" className="action-secondary">{content.ctaButton}</a>
           <span className="report-trial-note">{content.trialNote}</span>
-        </div>
+        </div>}
         <div className="report-example">
           <div className="report-bot"><span className="report-bot-icon"><Send size={24} aria-hidden="true" /></span><div><strong>{content.botTitle}</strong><span>{content.botSub}</span></div><span className="report-clock"><Clock3 size={15} aria-hidden="true" />{content.timeLabel}</span></div>
           <div className="report-message">

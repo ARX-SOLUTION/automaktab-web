@@ -1,6 +1,8 @@
 import DrivingCard from "@/components/landing/DrivingCard";
 import MorningReportWidget from "@/components/landing/MorningReportWidget";
+import { PricingPlans } from "@/components/landing/PricingCards";
 import ProductScene from "@/components/landing/ProductScene";
+import { getLandingConfig } from "@/config/landing-config";
 import type { SeoVisualId } from "@/config/seo-pages";
 import { contentEn } from "@/content/en";
 import { contentRu } from "@/content/ru";
@@ -12,7 +14,14 @@ const CONTENT = { uz: contentUz, ru: contentRu, en: contentEn } as const;
 /** Maps a page's visual id to an existing landing motion component. */
 export default function SeoVisual({ id, locale }: { id: SeoVisualId; locale: Locale }) {
   const content = CONTENT[locale];
-  if (id === "morning-report") return <MorningReportWidget content={content.morningReport} />;
+  if (id === "morning-report") return <MorningReportWidget content={content.morningReport} variant="card" />;
+  if (id === "pricing-cards") {
+    return (
+      <div className="seo-visual">
+        <PricingPlans content={content.pricing} demoAccess={getLandingConfig().demoAccess} />
+      </div>
+    );
+  }
   if (id === "driving-card") {
     return (
       <div className="seo-visual">

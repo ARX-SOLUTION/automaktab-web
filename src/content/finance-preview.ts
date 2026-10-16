@@ -24,8 +24,6 @@ export interface FinancePreviewContent {
   resetSuccess: string;
   disclaimer: string;
   noScript: string;
-  workflowTitle: string;
-  workflowDescription: string;
 }
 
 export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
@@ -52,8 +50,6 @@ export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
     resetSuccess: "Namuna boshlang‘ich holatga qaytdi.",
     disclaimer: "To‘qima ma’lumotlar. O‘zgarishlar saqlanmaydi; bu to‘lov qabul qilish xizmati emas.",
     noScript: "Bu statik namuna. Sinab ko‘rish uchun brauzeringizda JavaScript’ni yoqing.",
-    workflowTitle: "Jamoangiz ishlaydi. Hisob bir joyda.",
-    workflowDescription: "O‘quvchilar, to‘lovlar va darslarni alohida jadvallardan bitta tartibli jarayonga birlashtiring.",
   },
   ru: {
     title: "Панель руководителя",
@@ -78,8 +74,6 @@ export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
     resetSuccess: "Исходные данные примера восстановлены.",
     disclaimer: "Вымышленные данные. Изменения не сохраняются; это не сервис приёма платежей.",
     noScript: "Это статичный пример. Чтобы попробовать, включите JavaScript в браузере.",
-    workflowTitle: "Команда работает. Учёт в одном месте.",
-    workflowDescription: "Объедините учёт курсантов, оплат и занятий в один понятный рабочий процесс.",
   },
   en: {
     title: "Owner overview",
@@ -104,7 +98,5 @@ export const financePreviewContent: Record<Locale, FinancePreviewContent> = {
     resetSuccess: "The example is back to its starting values.",
     disclaimer: "Fictional data. Changes are not saved; this is not a payment service.",
     noScript: "This is a static example. Enable JavaScript in your browser to try it.",
-    workflowTitle: "Your team works. The records stay together.",
-    workflowDescription: "Bring students, payments and lessons from separate spreadsheets into one clear workflow.",
   },
 };

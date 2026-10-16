@@ -146,10 +146,10 @@ test(`consolidation diagram keeps one readable platform at ${width}px`, async ({
 test("motion resets when reduced motion is enabled", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  await page.locator('#qanday').scrollIntoViewIfNeeded();
+  await page.locator('#tariflar').scrollIntoViewIfNeeded();
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.locator('#how-it-works-heading')).toHaveCSS("opacity", "1");
-  await expect(page.locator('#how-it-works-heading')).toHaveCSS("transform", "none");
+  await expect(page.locator('#pricing-heading')).toHaveCSS("opacity", "1");
+  await expect(page.locator('#pricing-heading')).toHaveCSS("transform", "none");
   await page.goto('/ru');
   await expect(page.locator('h1')).toBeVisible();
   expect(await page.locator('main').count()).toBe(1);
@@ -162,21 +162,19 @@ test("Uzbek report hydrates without errors and initial sticky scenes start norma
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   const journey = page.locator("#yol");
-  const roles = page.locator("#rollar");
   await expect(journey).toHaveAttribute("data-story-ready", "true");
-  await expect(roles).toHaveAttribute("data-story-ready", "true");
   await expect(journey.locator(".story-preview")).toHaveCSS("position", "sticky");
   await expect(page.locator("[data-report-branch]").first().locator("td").first()).toHaveText("7 200 000so‘m");
-  await roles.locator("[data-role-chapter]").first().evaluate((element) => window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - innerHeight * 0.45 + 48, behavior: "instant" }));
-  const scene = roles.getByRole("tabpanel").locator("[data-product-scene]");
-  await expect(roles.getByRole("tab").first()).toHaveAttribute("aria-selected", "true");
-  await expect(scene).toHaveAttribute("data-product-scene", "director");
+  await journey.locator("[data-journey-chapter]").nth(2).evaluate((element) => window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - innerHeight * 0.45 + 48, behavior: "instant" }));
+  const scene = journey.getByRole("tabpanel").locator("[data-product-scene]");
+  await expect(journey.getByRole("tab").nth(2)).toHaveAttribute("aria-selected", "true");
+  await expect(scene).toHaveAttribute("data-product-scene", "teacher");
   await expect(scene).toHaveAttribute("data-scene-state", "complete");
   for (const path of await scene.locator("[data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
   expect(errors).toEqual([]);
 });
 
-test("natural scrolling reaches every student step and team role in both directions", async ({ page }) => {
+test("natural scrolling reaches every student step in both directions", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/en");
@@ -184,61 +182,13 @@ test("natural scrolling reaches every student step and team role in both directi
     await chapter.evaluate((element) => window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - innerHeight * 0.45 + 48, behavior: "instant" }));
   };
   const journey = page.locator("#yol");
-  const roles = page.locator("#rollar");
   await expect(journey).toHaveAttribute("data-story-ready", "true");
-  await expect(roles).toHaveAttribute("data-story-ready", "true");
   const titles = [contentEn.journey.previews.student.title, contentEn.journey.previews.payments.title, contentEn.scenes.teacher.title, contentEn.journey.previews.driving.title, contentEn.journey.previews.exam.title];
   for (const index of [0, 1, 2, 3, 4, 3, 2, 1, 0]) {
     await scrollToChapter(journey.locator("[data-journey-chapter]").nth(index));
     await expect(journey.getByRole("tab").nth(index)).toHaveAttribute("aria-selected", "true");
     await expect(journey.getByRole("tabpanel")).toContainText(titles[index]);
   }
-  for (const index of [0, 1, 2, 3, 2, 1, 0]) {
-    await scrollToChapter(roles.locator("[data-role-chapter]").nth(index));
-    await expect(roles.getByRole("tab").nth(index)).toHaveAttribute("aria-selected", "true");
-    await expect(roles.getByRole("tabpanel").locator("[data-product-scene]")).toHaveAttribute("data-product-scene", contentEn.roles.tabs[index].scene);
-  }
-  await roles.getByRole("tab").nth(0).focus();
-  await roles.getByRole("tab").nth(0).press("End");
-  await scrollToChapter(roles.locator("[data-role-chapter]").nth(1));
-  await expect(roles.getByRole("tab").nth(3)).toBeFocused();
-  await expect(roles.getByRole("tab").nth(3)).toHaveAttribute("aria-selected", "true");
-});
-
-test("role scenes show synthetic workflows, preserve keyboard focus and stop motion on preference changes", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.goto("/en");
-  const roles = page.locator("#rollar");
-  await roles.locator("[data-role-chapter]").first().evaluate((element) => window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - innerHeight * 0.45 + 48, behavior: "instant" }));
-  await expect(roles.getByRole("tab").first()).toHaveAttribute("aria-selected", "true");
-  const tabs = roles.getByRole("tab");
-  const panel = roles.getByRole("tabpanel");
-  const scene = panel.locator("[data-product-scene]");
-  const panelId = (await panel.getAttribute("id"))!;
-  for (const tab of await tabs.all()) await expect(tab).toHaveAttribute("aria-controls", panelId);
-  await expect(roles.getByRole("group", { name: contentEn.scenes.director.title })).toBeVisible();
-  await expect(scene).toHaveAttribute("data-product-scene", "director");
-  await expect(scene).toContainText(contentEn.scenes.sampleLabel);
-  await expect(scene).toHaveAttribute("data-scene-state", "complete");
-  for (const fallback of await roles.locator(".story-inline-preview").all()) await expect(fallback).toBeHidden();
-  for (const [index, kind] of ["teacher", "registrar", "accountant"].entries()) {
-    await tabs.nth(index).press("ArrowRight");
-    await expect(tabs.nth(index + 1)).toBeFocused();
-    await expect(scene).toHaveAttribute("data-product-scene", kind);
-    await expect(scene).toHaveAttribute("data-scene-state", "complete");
-  }
-  await tabs.nth(3).press("Home");
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(tabs.nth(0)).toBeFocused();
-  await expect(scene).toHaveAttribute("data-scene-state", "static");
-  await expect(scene).toContainText(contentEn.scenes.director.revenue);
-  await expect(scene).toContainText(contentEn.scenes.director.debt);
-  await expect(page.locator('img[src*="images%2Fdemo"], img[src*="/images/demo/"]')).toHaveCount(0);
-  await tabs.nth(0).press("ArrowRight");
-  await expect(scene).toBeVisible();
-  await expect(scene).toHaveAttribute("data-scene-state", "static");
-  for (const status of contentEn.scenes.teacher.statuses) await expect(scene).toContainText(status);
 });
 
 for (const viewport of [{ width: 1280, height: 900 }, { width: 1440, height: 1000 }]) {
@@ -246,16 +196,16 @@ test(`live preference and desktop-to-phone changes restore the complete story at
   await page.setViewportSize(viewport);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/en");
-  const roles = page.locator("#rollar");
-  const chapter = roles.locator('[data-role-chapter="2"]');
-  await expect(roles).toHaveAttribute("data-story-ready", "true");
+  const journey = page.locator("#yol");
+  const chapter = journey.locator('[data-journey-chapter="2"]');
+  await expect(journey).toHaveAttribute("data-story-ready", "true");
   await chapter.evaluate((element) => window.scrollTo({ top: window.scrollY + element.getBoundingClientRect().top - innerHeight * 0.35, behavior: "instant" }));
-  await expect(roles).toHaveAttribute("data-active-role", "2");
+  await expect(journey).toHaveAttribute("data-active-stop", "2");
   const before = await chapter.boundingBox();
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(1000);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(roles).not.toHaveAttribute("data-story-ready", "true");
-  await expect(roles).toHaveAttribute("data-active-role", "2");
+  await expect(journey).not.toHaveAttribute("data-story-ready", "true");
+  await expect(journey).toHaveAttribute("data-active-stop", "2");
   await expect(page.locator("main")).not.toHaveAttribute("data-motion-changing", "true");
   await expect.poll(() => chapter.evaluate(async (element, top) => {
     let drift = 0;
@@ -268,8 +218,8 @@ test(`live preference and desktop-to-phone changes restore the complete story at
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(1000);
   await expect(chapter.locator(".story-inline-preview")).toBeVisible();
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect(roles).toHaveAttribute("data-story-ready", "true");
-  await expect(roles).toHaveAttribute("data-active-role", "2");
+  await expect(journey).toHaveAttribute("data-story-ready", "true");
+  await expect(journey).toHaveAttribute("data-active-stop", "2");
   await expect(page.locator("main")).not.toHaveAttribute("data-motion-changing", "true");
   await expect.poll(() => chapter.evaluate(async (element, top) => {
     let drift = 0;
@@ -281,16 +231,15 @@ test(`live preference and desktop-to-phone changes restore the complete story at
   }, before!.y)).toBeLessThanOrEqual(3);
   expect(await page.evaluate(() => scrollY)).toBeGreaterThan(1000);
   await page.setViewportSize({ width: 844, height: 390 });
-  await expect(roles.locator(".story-preview")).toBeHidden();
-  // Stacked stories keep only the current chapter open; the role chosen on desktop stays current.
-  await expect(roles.locator("details[open]")).toHaveCount(1);
+  await expect(journey.locator(".story-preview")).toBeHidden();
+  // Stacked stories keep only the current chapter open; the step chosen on desktop stays current.
+  await expect(journey.locator("details[open]")).toHaveCount(1);
   await expect(chapter.locator(".story-inline-preview")).toBeVisible();
-  await expect(page.locator("#yol details[open] .story-inline-preview")).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(roles).not.toHaveAttribute("data-story-ready", "true");
-  for (const path of await page.locator("[data-report-path], #rollar details[open] [data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
-  for (const example of await page.locator("#yol details[open] .story-inline-preview, #rollar details[open] .story-inline-preview").all()) {
+  await expect(journey).not.toHaveAttribute("data-story-ready", "true");
+  for (const path of await page.locator("[data-report-path], #yol details[open] [data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
+  for (const example of await page.locator("#yol details[open] .story-inline-preview").all()) {
     await expect(example).toBeVisible();
     await expect(example).toHaveCSS("transform", "none");
   }
@@ -298,100 +247,7 @@ test(`live preference and desktop-to-phone changes restore the complete story at
 });
 }
 
-const SAMPLE_LABELS = ["Present", "Present", "Late", "Present", "Absent", "Excused"];
-
-async function attendanceMarks(page: Page) {
-  return page.locator("#sinab .attendance-row").evaluateAll((rows) => rows.map((row) => row.querySelector('[aria-checked="true"] .attendance-status-label')?.textContent ?? null));
-}
-
-async function scrollToRowLine(page: Page, rowIndex: number) {
-  // Rows are marked when their top crosses 70% of the viewport.
-  await page.locator("#sinab .attendance-row").nth(rowIndex).evaluate((row) => {
-    window.scrollTo({ top: scrollY + row.getBoundingClientRect().top - innerHeight * 0.7 + 4, behavior: "instant" });
-  });
-}
-
 for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
-  test(`attendance demo marks rows while scrolling, then hands control to the visitor at ${viewport.width}px`, async ({ page }) => {
-    const pageErrors: string[] = [];
-    page.on("pageerror", (error) => pageErrors.push(error.message));
-    await page.setViewportSize(viewport);
-    await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.goto("/en");
-    const attendance = page.locator("#sinab");
-    const progress = attendance.getByRole("progressbar");
-    const count = (key: string) => attendance.locator(`[data-attendance-count="${key}"] dd`);
-    const today = attendance.locator("[data-attendance-history]").last();
-    const feedback = attendance.getByRole("status");
-    await attendance.evaluate((element) => window.scrollTo({ top: scrollY + element.getBoundingClientRect().top - innerHeight * 1.5, behavior: "instant" }));
-    await expect.poll(() => attendanceMarks(page)).toEqual(Array(6).fill(null));
-    await expect(progress).toHaveAttribute("aria-valuenow", "0");
-    await expect(today).toHaveAttribute("data-attendance-history", "unmarked");
-
-    await scrollToRowLine(page, 2);
-    await expect.poll(() => attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 3), null, null, null]);
-    await scrollToRowLine(page, 5);
-    await expect.poll(() => attendanceMarks(page)).toEqual(SAMPLE_LABELS);
-    await expect(progress).toHaveAttribute("aria-valuenow", "6");
-    for (const [key, value] of [["keldi", "3"], ["kechikdi", "1"], ["kelmadi", "1"], ["uzrli", "1"]]) await expect(count(key)).toHaveText(value);
-    await expect(today).toHaveAttribute("data-attendance-history", "kelmadi");
-    await expect(attendance.getByRole("article")).toContainText(contentEn.attendanceDemo.card.debt);
-    // Scroll-driven marks are not announced; only the visitor's own changes are.
-    await expect(feedback).toHaveText("");
-
-    await scrollToRowLine(page, 3);
-    await expect.poll(() => attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 4), null, null]);
-    const linkedRow = attendance.getByRole("radiogroup").nth(4).getByRole("radio");
-    await linkedRow.nth(0).click();
-    await expect(today).toHaveAttribute("data-attendance-history", "keldi");
-    await expect(feedback).toHaveText(contentEn.attendanceDemo.unmarkedTemplate.replace("{count}", "1"));
-    await scrollToRowLine(page, 0);
-    await page.waitForTimeout(300);
-    expect(await attendanceMarks(page)).toEqual([...SAMPLE_LABELS.slice(0, 4), "Present", null]);
-    await expect(attendance.getByRole("link", { name: contentEn.attendanceDemo.ctaButton })).toHaveAttribute("href", /app\.automaktab\.uz\/login\?demo=1.*utm_content=attendance_demo/);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    expect(pageErrors).toEqual([]);
-  });
-
-  test(`reduced motion shows the finished attendance state without movement at ${viewport.width}px`, async ({ page }) => {
-    await page.setViewportSize(viewport);
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/en#sinab");
-    const attendance = page.locator("#sinab");
-    const radios = attendance.getByRole("radiogroup").first().getByRole("radio");
-    const count = (key: string) => attendance.locator(`[data-attendance-count="${key}"] dd`);
-    const feedback = attendance.getByRole("status");
-    await page.waitForTimeout(500);
-    expect(await attendanceMarks(page)).toEqual(SAMPLE_LABELS);
-    await expect(attendance.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "6");
-    await expect(attendance.locator("[data-attendance-history]").last()).toHaveAttribute("data-attendance-history", "kelmadi");
-    for (const block of await attendance.locator("[data-attendance-reveal]").all()) {
-      await expect(block).toBeVisible();
-      await expect(block).toHaveCSS("opacity", "1");
-      await expect(block).toHaveCSS("transform", "none");
-    }
-    await expect(feedback).toHaveText("");
-
-    for (const [index, status] of contentEn.attendanceDemo.statuses.entries()) {
-      await expect(radios.nth(index).locator(".attendance-status-label")).toHaveText(status.label);
-    }
-    await radios.nth(0).click();
-    await expect(radios.nth(0)).toHaveAttribute("aria-checked", "false");
-    await expect(count("keldi")).toHaveText("2");
-    await expect(attendance.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "5");
-    await expect(feedback).toHaveText(contentEn.attendanceDemo.unmarkedTemplate.replace("{count}", "1"));
-    await radios.nth(0).focus();
-    await radios.nth(0).press("ArrowRight");
-    await expect(radios.nth(1)).toBeFocused();
-    await expect(count("kechikdi")).toHaveText("2");
-    await radios.nth(1).press("End");
-    await expect(radios.nth(3)).toHaveAttribute("aria-checked", "true");
-    await radios.nth(3).press("Home");
-    await expect(radios.nth(0)).toHaveAttribute("aria-checked", "true");
-    await expect(feedback).toHaveText(contentEn.attendanceDemo.allMarkedMsg);
-    await expect(attendance).toContainText(contentEn.attendanceDemo.banner);
-  });
-
   test(`sticky header keeps login and language once scrolled without shifting the page at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.addInitScript(() => {
@@ -432,23 +288,21 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
   });
 }
 
-test("role motion pauses outside the viewport or on hidden documents and cleans up for reduced motion", async ({ page }) => {
+test("scene motion pauses outside the viewport or on hidden documents and cleans up for reduced motion", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/en");
-  const roles = page.locator("#rollar");
-  await roles.scrollIntoViewIfNeeded();
-  const tabs = roles.getByRole("tab");
-  const scene = roles.getByRole("tabpanel").locator("[data-product-scene]");
-  await tabs.nth(2).click();
+  const proof = page.locator('[data-module-proof="leads"]');
+  const scene = proof.locator("[data-product-scene]");
+  await scene.scrollIntoViewIfNeeded();
   await expect(scene).toHaveAttribute("data-scene-state", "playing");
   await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" }));
   await expect(scene).toHaveAttribute("data-scene-state", "paused");
-  const visualFrame = () => scene.locator("[data-scene-path]").evaluateAll((paths) => paths.map((path) => getComputedStyle(path).strokeDashoffset));
+  const visualFrame = () => scene.locator("[data-scene-path], [data-scene-node]").evaluateAll((nodes) => nodes.map((node) => `${getComputedStyle(node).strokeDashoffset}|${getComputedStyle(node).transform}`));
   const offscreenFrame = await visualFrame();
   await page.waitForTimeout(250);
   expect(await visualFrame()).toEqual(offscreenFrame);
-  await roles.scrollIntoViewIfNeeded();
+  await scene.scrollIntoViewIfNeeded();
   await expect(scene).toHaveAttribute("data-scene-state", "playing");
   await page.evaluate(() => {
     Object.defineProperty(document, "hidden", { configurable: true, value: true });
@@ -465,10 +319,6 @@ test("role motion pauses outside the viewport or on hidden documents and cleans 
   });
   await expect(scene).toHaveAttribute("data-scene-state", "static");
   for (const path of await scene.locator("[data-scene-path]").all()) await expect(path).toHaveCSS("stroke-dashoffset", "0px");
-  await tabs.nth(3).click();
-  await tabs.nth(1).click();
-  await expect(scene).toHaveAttribute("data-scene-state", "static");
-  await expect(tabs.nth(1)).toBeFocused();
 });
 
 test.describe("without JavaScript", () => {
@@ -487,26 +337,16 @@ test.describe("without JavaScript", () => {
     await expect(flow.getByRole("button")).toHaveCount(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
-  test("all role examples remain accessible through native disclosures", async ({ page }) => {
+  test("all story examples remain accessible through native disclosures", async ({ page }) => {
     await page.goto("/en");
-    const roles = page.locator("#rollar");
-    await expect(roles.getByRole("tab")).toHaveCount(0);
-    const disclosures = roles.locator("details");
-    await expect(disclosures).toHaveCount(4);
+    await expect(page.locator("#rollar")).toHaveCount(0);
+    await expect(page.locator("#yol").getByRole("tab")).toHaveCount(0);
     await expect(page.locator("#yol [data-journey-chapter]")).toHaveCount(5);
     for (const chapter of await page.locator("#yol [data-journey-chapter]").all()) await expect(chapter.locator(".story-inline-preview")).toBeVisible();
     await expect(page.locator("[data-report-branch]")).toHaveCount(3);
     await expect(page.locator("[data-report-total]")).toHaveAttribute("data-report-total-students", "8");
     await expect(page.locator("#morning-report")).toContainText(contentEn.morningReport.sampleCaption);
     await expect(page.locator("[data-module-proof]")).toHaveCount(3);
-    for (const [index, role] of contentEn.roles.tabs.entries()) {
-      await expect(disclosures.nth(index)).toHaveAttribute("open", "");
-      await expect(disclosures.nth(index)).toContainText(role.answer);
-      const example = disclosures.nth(index).getByRole("group", { name: contentEn.scenes[role.scene].title });
-      await expect(example).toBeVisible();
-      await expect(example).toContainText(contentEn.scenes.sampleLabel);
-      await expect(example).toHaveAttribute("data-scene-state", "static");
-    }
   });
 });
 
@@ -676,7 +516,7 @@ for (const viewport of [
   { width: 1280, height: 800, path: "/ru" },
   { width: 1440, height: 1000, path: "/en" },
 ]) {
-  test(`sequential stories, report, modules and attendance stay usable at ${viewport.width}×${viewport.height}`, async ({ page }) => {
+  test(`sequential stories, report and modules stay usable at ${viewport.width}×${viewport.height}`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(viewport.path);
@@ -696,21 +536,6 @@ for (const viewport of [
       await expect(example).toContainText(content.scenes.sampleLabel);
       expect(await example.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
     }
-    const roles = page.locator("#rollar");
-    for (const [index, role] of content.roles.tabs.entries()) {
-      const chapter = roles.locator("[data-role-chapter]").nth(index);
-      if (index > 0) await chapter.locator("summary").click();
-      await expect(chapter).toContainText(role.answer);
-      await expect(chapter.locator("[data-product-scene]")).toBeVisible();
-      await expect(roles.locator("details[open]")).toHaveCount(1);
-    }
-    await roles.locator("summary").first().click();
-    const disclosure = roles.locator("summary").first();
-    await disclosure.focus();
-    await disclosure.press("Enter");
-    await expect(roles.locator("details").first()).not.toHaveAttribute("open", "");
-    await disclosure.press("Enter");
-    await expect(roles.locator("details").first()).toHaveAttribute("open", "");
     await expect(page.locator("[data-report-branch]")).toHaveCount(3);
     await expect(page.locator("[data-report-total]")).toHaveAttribute("data-report-total-revenue", "14800000");
     await expect(page.locator("#morning-report")).toContainText(content.morningReport.sampleCaption);
@@ -727,27 +552,6 @@ for (const viewport of [
       await expect(proof.locator("[data-product-scene]")).toBeVisible();
       expect(await proof.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
     }
-    const attendance = page.locator("#sinab");
-    const radios = attendance.getByRole("radiogroup").first().getByRole("radio");
-    await radios.nth(0).focus();
-    await radios.nth(0).press("ArrowRight");
-    await expect(radios.nth(1)).toBeFocused();
-    await expect(radios.nth(1)).toHaveAttribute("aria-checked", "true");
-    await radios.nth(1).press("End");
-    await expect(radios.nth(3)).toHaveAttribute("aria-checked", "true");
-    await radios.nth(3).press("End");
-    await expect(radios.nth(3)).toHaveAttribute("aria-checked", "true");
-    await radios.nth(3).click();
-    await expect(radios.nth(3)).toHaveAttribute("aria-checked", "false");
-    for (const [index, radio] of (await radios.all()).entries()) {
-      const bounds = await radio.boundingBox();
-      expect(bounds?.width).toBeGreaterThanOrEqual(44);
-      expect(bounds?.height).toBeGreaterThanOrEqual(44);
-      const label = radio.getByText(content.attendanceDemo.statuses[index].label, { exact: true });
-      expect((await label.boundingBox())!.width).toBeGreaterThan(16);
-    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    await page.reload();
-    await expect(attendance.locator('[role="radio"][aria-checked="true"]')).toHaveCount(6);
   });
 }
