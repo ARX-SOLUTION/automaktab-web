@@ -34,7 +34,8 @@ export default function MorningReportWidget({ content }: { content: LandingConte
       const sequence = gsap.timeline({ paused: true, onStart: safe(() => { if (active) setState("playing"); }), onComplete: safe(() => { if (active) setState("complete"); }) });
       sequence
         // Rows fade in rather than clip, so a paused sequence never cuts off branch names.
-        .from(element.querySelectorAll("[data-report-branch]"), { opacity: 0.35, x: 6, duration: 0.35, stagger: 0.12, ease: "power3.out", clearProps: "opacity,transform" })
+        // immediateRender: false keeps rows at full contrast until playback starts (detail pages show the widget near the fold).
+        .from(element.querySelectorAll("[data-report-branch]"), { opacity: 0.35, x: 6, duration: 0.35, stagger: 0.12, ease: "power3.out", clearProps: "opacity,transform", immediateRender: false })
         .to(paths, { strokeDashoffset: 0, duration: 0.55, ease: "power2.inOut" }, 0.35)
         .from(element.querySelector("[data-report-total]"), { clipPath: "inset(0 0 12% 0 round 14px)", y: 4, duration: 0.4, ease: "power3.out", clearProps: "clipPath,transform" }, 0.75);
       const sync = safe(() => {
