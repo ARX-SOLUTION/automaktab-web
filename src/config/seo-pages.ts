@@ -33,6 +33,36 @@ type SeoSection = {
   body: string;
 };
 
+/** Existing motion components a page can reuse (REPORT §13.2); no new animation. */
+export type SeoVisualId =
+  | "morning-report"
+  | "scene:director"
+  | "scene:registrar"
+  | "scene:accountant"
+  | "scene:teacher"
+  | "scene:leads"
+  | "scene:fleet"
+  | "scene:education";
+
+export type SeoFaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type SeoSource = {
+  label: string;
+  url: string;
+  checkedAt: string;
+};
+
+export type SeoComparison = {
+  caption: string;
+  /** First column header, then one header per compared product. */
+  columns: readonly string[];
+  rows: readonly { label: string; cells: readonly string[] }[];
+  legend: string;
+};
+
 export type SeoPageCopy = {
   segments: readonly string[];
   title: string;
@@ -42,6 +72,14 @@ export type SeoPageCopy = {
   heading: string;
   intro: string;
   sections: readonly SeoSection[];
+  /** Answer-first sentence shown right under the H1. */
+  definition?: string;
+  visual?: SeoVisualId;
+  comparison?: SeoComparison;
+  faq?: readonly SeoFaqItem[];
+  sources?: readonly SeoSource[];
+  /** Explicit internal links; falls back to SEO_RELATED_PAGE_IDS. */
+  related?: readonly SeoPageId[];
   relatedLabel: string;
   cta: {
     title: string;
