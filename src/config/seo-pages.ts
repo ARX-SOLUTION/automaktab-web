@@ -13,6 +13,7 @@ export const SEO_PAGE_IDS = [
   "compare",
   "telegram",
   "fleet",
+  "expenses",
 ] as const;
 
 export type SeoPageId = (typeof SEO_PAGE_IDS)[number];
@@ -36,6 +37,7 @@ export const SEO_DETAIL_PAGE_IDS = [
   "compare",
   "telegram",
   "fleet",
+  "expenses",
 ] as const satisfies readonly SeoPageId[];
 
 export const SEO_LEGAL_PAGE_IDS = [
@@ -1051,7 +1053,7 @@ export const SEO_PAGES: Record<
             "Ha. Xodimni bir nechta filialga biriktirib, har bir filial uchun alohida ruxsat berish mumkin.",
         },
       ],
-      related: ["telegram", "payments", "attendance"],
+      related: ["telegram", "expenses", "payments"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Filiallar natijasini demoda ko‘ring.",
@@ -1142,7 +1144,7 @@ export const SEO_PAGES: Record<
             "Да. Сотрудника можно закрепить за несколькими филиалами и выдать права отдельно для каждого.",
         },
       ],
-      related: ["telegram", "payments", "attendance"],
+      related: ["telegram", "expenses", "payments"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Сравните филиалы в демо.",
@@ -1233,7 +1235,7 @@ export const SEO_PAGES: Record<
             "Yes. Assign the employee to several branches and grant permissions separately for each one.",
         },
       ],
-      related: ["telegram", "payments", "attendance"],
+      related: ["telegram", "expenses", "payments"],
       relatedLabel: "Other features",
       cta: {
         title: "Compare branches in the demo.",
@@ -2375,7 +2377,7 @@ export const SEO_PAGES: Record<
             "Profil sahifasida Telegram’ni ulang va kunlik hisobotni yoqing. Bu sozlama rahbar va menejerga ochiq.",
         },
       ],
-      related: ["branches", "leads", "payments"],
+      related: ["branches", "expenses", "leads"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Telegram hisobotini demoda ko‘ring.",
@@ -2451,7 +2453,7 @@ export const SEO_PAGES: Record<
             "Подключите Telegram в профиле и включите ежедневный отчёт. Настройка доступна руководителю и менеджеру.",
         },
       ],
-      related: ["branches", "leads", "payments"],
+      related: ["branches", "expenses", "leads"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите отчёт в Telegram в демо.",
@@ -2527,7 +2529,7 @@ export const SEO_PAGES: Record<
             "Link Telegram on your profile and turn on the daily report. The setting is available to owners and managers.",
         },
       ],
-      related: ["branches", "leads", "payments"],
+      related: ["branches", "expenses", "leads"],
       relatedLabel: "Other features",
       cta: {
         title: "See the Telegram report in the demo.",
@@ -2600,7 +2602,7 @@ export const SEO_PAGES: Record<
             "Ha, rahbar o‘tkazadi. Sabab yoziladi, tarixda kim va qachon o‘tkazgani saqlanadi.",
         },
       ],
-      related: ["driving", "branches", "compare"],
+      related: ["driving", "expenses", "branches"],
       relatedLabel: "Boshqa imkoniyatlar",
       cta: {
         title: "Avtoparkni demoda ko‘ring.",
@@ -2671,7 +2673,7 @@ export const SEO_PAGES: Record<
             "Да, это делает руководитель. Указывается причина, в истории сохраняется, кто и когда перевёл.",
         },
       ],
-      related: ["driving", "branches", "compare"],
+      related: ["driving", "expenses", "branches"],
       relatedLabel: "Другие возможности",
       cta: {
         title: "Посмотрите автопарк в демо.",
@@ -2742,10 +2744,255 @@ export const SEO_PAGES: Record<
             "Yes, by the owner. A reason is recorded, and the history keeps who moved it and when.",
         },
       ],
-      related: ["driving", "branches", "compare"],
+      related: ["driving", "expenses", "branches"],
       relatedLabel: "Other features",
       cta: {
         title: "See the fleet in the demo.",
+        body: "The demo uses sample data, not real customer records.",
+        label: "Open demo",
+      },
+      updatedAt: "2026-10-16",
+    },
+  },
+  expenses: {
+    uz: {
+      segments: ["features", "expenses"],
+      title: "Avtomaktab xarajatlari hisobi CRM’da | automaktab.uz",
+      description:
+        "Xarajatlarni toifa bo‘yicha yozing: har birida to‘langan va to‘lanmagan qism, muddat va o‘zgarishlar tarixi alohida ko‘rinadi.",
+      keywords: ["avtomaktab xarajatlari", "xarajatlar hisobi", "avtomaktab CRM"],
+      eyebrow: "Xarajatlar",
+      heading: "Avtomaktab xarajatlari hisobi",
+      definition:
+        "automaktab.uz xarajatlarni toifa bo‘yicha yozadi va har birida to‘langan hamda to‘lanmagan qismni alohida ko‘rsatadi.",
+      intro:
+        "Ijara, kommunal to‘lov, mashina yoki o‘qituvchi bilan hisob-kitob: har bir xarajat summa, sana, muddat va oluvchi bilan yoziladi.",
+      visual: "scene:accountant",
+      sections: [
+        {
+          title: "Toifalar",
+          body:
+            "Ijara, kommunal, mashina, marketing, sarf materiallari, ma’muriy, o‘qituvchi bilan hisob-kitob va boshqa. Xarajat filialga yoki avtoparkdagi mashinaga bog‘lanishi mumkin.",
+        },
+        {
+          title: "To‘langan va to‘lanmagan qism",
+          body:
+            "Xarajat bir necha to‘lov bilan yopilishi mumkin. Holati rejalashtirilgan, qisman to‘langan, to‘langan yoki bekor qilingan bo‘ladi. To‘lovni rahbar yoki buxgalter kiritadi, xato to‘lov bekor qilinadi.",
+        },
+        {
+          title: "O‘zgarishlar tarixi",
+          body:
+            "Yaratish, tahrirlash, to‘lov, to‘lovni bekor qilish, bekor qilish va o‘chirish tarixda qoladi. Bekor qilish va o‘chirishda sabab yoziladi. Rahbar xarajatlarni ko‘rib chiqilgan deb belgilaydi.",
+        },
+        {
+          title: "Oy yakuni va o‘qituvchilar",
+          body:
+            "Rahbar va buxgalter oy bo‘yicha xarajatlarni CSV faylga yuklab oladi. O‘qituvchi bilan hisob-kitobni o‘qituvchining o‘zi ham ko‘radi.",
+        },
+        {
+          title: "Muddat nazorati",
+          body:
+            "Har bir xarajatga to‘lov muddati qo‘yiladi. Xarajatlar sahifasida bugun va keyingi 3 kunda muddati keladigan hamda 1–7, 8–30 va 31 kundan ortiq kechikkan xarajatlar soni ko‘rinadi.",
+        },
+        {
+          title: "Yoqilg‘i avtomatik xarajat bo‘ladi",
+          body:
+            "Avtoparkda tasdiqlangan yoqilg‘i qaydi shu mashinaga bog‘langan xarajat sifatida yoziladi, shuning uchun yoqilg‘ini qayta kiritish shart emas.",
+        },
+        {
+          title: "Kim nima qiladi",
+          body:
+            "Xarajatni rahbar, buxgalter yoki menejer qo‘shadi va ko‘radi. To‘lovni faqat rahbar yoki buxgalter kiritadi.",
+        },
+        {
+          title: "Telegram xabarlari",
+          body:
+            "Xarajat qo‘shilganda va birinchi marta qisman to‘langanda xabar keladi. Ish kunlari 09:00 da kunlik, dushanba 10:00 da haftalik xulosa keladi.",
+        },
+      ],
+      faq: [
+        {
+          question: "Qanday toifalar bor?",
+          answer:
+            "Ijara, kommunal, mashina, marketing, sarf materiallari, ma’muriy, o‘qituvchi bilan hisob-kitob va boshqa.",
+        },
+        {
+          question: "Qisman to‘langan xarajat qanday ko‘rinadi?",
+          answer:
+            "Holati qisman to‘langan bo‘ladi, to‘langan summa va qolgan qism alohida ko‘rinadi.",
+        },
+        {
+          question: "Xarajat haqida xabar keladimi?",
+          answer:
+            "Ha, Telegram’ni ulagan va xarajatlarni ko‘rish ruxsati bor xodimlarga. Kunlik xulosa rahbar, buxgalter va filial menejeriga keladi.",
+        },
+      ],
+      related: ["telegram", "branches", "fleet"],
+      relatedLabel: "Boshqa imkoniyatlar",
+      cta: {
+        title: "Xarajatlar hisobini demoda ko‘ring.",
+        body: "Demo namuna ma’lumotlari bilan ishlaydi. Haqiqiy mijoz ma’lumotlari ishlatilmaydi.",
+        label: "Demoni ochish",
+      },
+      updatedAt: "2026-10-16",
+    },
+    ru: {
+      segments: ["features", "expenses"],
+      title: "Учёт расходов автошколы в CRM | automaktab.uz",
+      description:
+        "Записывайте расходы по категориям: оплаченная и неоплаченная часть, срок и история изменений видны отдельно по каждому расходу.",
+      keywords: ["учет расходов автошколы", "расходы автошколы", "CRM автошколы"],
+      eyebrow: "Расходы",
+      heading: "Учёт расходов автошколы",
+      definition:
+        "automaktab.uz записывает расходы по категориям и по каждому отдельно показывает оплаченную и неоплаченную часть.",
+      intro:
+        "Аренда, коммунальные платежи, машина или расчёт с преподавателем: каждый расход записывается с суммой, датой, сроком и получателем.",
+      visual: "scene:accountant",
+      sections: [
+        {
+          title: "Категории",
+          body:
+            "Аренда, коммунальные, машина, маркетинг, расходные материалы, административные, расчёт с преподавателем и другое. Расход можно привязать к филиалу или к машине из автопарка.",
+        },
+        {
+          title: "Оплаченная и неоплаченная часть",
+          body:
+            "Расход можно закрыть несколькими платежами. Статус: запланирован, частично оплачен, оплачен или отменён. Платёж вносит руководитель или бухгалтер, ошибочный платёж аннулируется.",
+        },
+        {
+          title: "История изменений",
+          body:
+            "Создание, правка, платёж, аннулирование платежа, отмена и удаление сохраняются в истории. При отмене и удалении указывается причина. Руководитель отмечает расходы как проверенные.",
+        },
+        {
+          title: "Закрытие месяца и преподаватели",
+          body:
+            "Руководитель и бухгалтер выгружают расходы за месяц в CSV. Расчёт с преподавателем видит и сам преподаватель.",
+        },
+        {
+          title: "Контроль сроков",
+          body:
+            "Для каждого расхода задаётся срок оплаты. На странице расходов видно, у скольких срок сегодня и в ближайшие 3 дня, а сколько просрочено на 1–7, 8–30 и более 31 дня.",
+        },
+        {
+          title: "Топливо сразу становится расходом",
+          body:
+            "Подтверждённая заправка в автопарке записывается как расход, привязанный к этой машине, поэтому вносить топливо повторно не нужно.",
+        },
+        {
+          title: "Кто что делает",
+          body:
+            "Расходы добавляют и видят руководитель, бухгалтер и менеджер. Платежи вносят только руководитель или бухгалтер.",
+        },
+        {
+          title: "Уведомления в Telegram",
+          body:
+            "Уведомление приходит при создании расхода и при первой частичной оплате. По будням в 09:00 приходит ежедневная сводка, по понедельникам в 10:00 недельная.",
+        },
+      ],
+      faq: [
+        {
+          question: "Какие есть категории?",
+          answer:
+            "Аренда, коммунальные, машина, маркетинг, расходные материалы, административные, расчёт с преподавателем и другое.",
+        },
+        {
+          question: "Как выглядит частично оплаченный расход?",
+          answer:
+            "Статус частично оплачен, оплаченная сумма и остаток видны отдельно.",
+        },
+        {
+          question: "Приходят ли уведомления о расходах?",
+          answer:
+            "Да, сотрудникам с подключённым Telegram и правом видеть расходы. Ежедневная сводка приходит руководителю, бухгалтеру и менеджеру филиала.",
+        },
+      ],
+      related: ["telegram", "branches", "fleet"],
+      relatedLabel: "Другие возможности",
+      cta: {
+        title: "Посмотрите учёт расходов в демо.",
+        body: "Демо использует вымышленные данные. Данные реальных клиентов не используются.",
+        label: "Открыть демо",
+      },
+      updatedAt: "2026-10-16",
+    },
+    en: {
+      segments: ["features", "expenses"],
+      title: "Driving-school expense tracking CRM | automaktab.uz",
+      description:
+        "Record expenses by category: the paid and unpaid parts, due date and change history of each expense are shown separately.",
+      keywords: ["driving school expenses", "expense tracking", "driving school CRM"],
+      eyebrow: "Expenses",
+      heading: "Driving-school expense tracking",
+      definition:
+        "automaktab.uz records expenses by category and shows the paid and unpaid parts of each one separately.",
+      intro:
+        "Rent, utilities, a car or a teacher settlement: every expense is recorded with its amount, date, due date and payee.",
+      visual: "scene:accountant",
+      sections: [
+        {
+          title: "Categories",
+          body:
+            "Rent, utilities, vehicle, marketing, supplies, administrative, teacher settlement and other. An expense can be linked to a branch or to a car in the fleet.",
+        },
+        {
+          title: "Paid and unpaid parts",
+          body:
+            "An expense can be settled in several payments. Its status is planned, partially paid, paid or cancelled. The owner or an accountant records payments, and a mistaken payment can be voided.",
+        },
+        {
+          title: "Change history",
+          body:
+            "Creation, edits, payments, voided payments, cancellation and deletion stay in the history. Cancelling or deleting requires a reason. The owner marks expenses as reviewed.",
+        },
+        {
+          title: "Month close and teachers",
+          body:
+            "The owner and accountants download a month’s expenses as CSV. Teachers can see their own settlements.",
+        },
+        {
+          title: "Due-date control",
+          body:
+            "Each expense gets a due date. The expenses page shows how many are due today or in the next 3 days, and how many are overdue by 1–7, 8–30 or more than 31 days.",
+        },
+        {
+          title: "Fuel becomes an expense automatically",
+          body:
+            "An approved fuel entry in the fleet is recorded as an expense linked to that car, so fuel never has to be entered twice.",
+        },
+        {
+          title: "Who does what",
+          body:
+            "The owner, accountants and managers add and view expenses. Only the owner or an accountant records payments.",
+        },
+        {
+          title: "Telegram alerts",
+          body:
+            "An alert arrives when an expense is created and when it is first partly paid. A daily digest arrives on weekdays at 09:00 and a weekly one on Mondays at 10:00.",
+        },
+      ],
+      faq: [
+        {
+          question: "Which categories are there?",
+          answer:
+            "Rent, utilities, vehicle, marketing, supplies, administrative, teacher settlement and other.",
+        },
+        {
+          question: "How does a partly paid expense look?",
+          answer:
+            "Its status is partially paid, and the paid amount and remaining balance are shown separately.",
+        },
+        {
+          question: "Do I get expense notifications?",
+          answer:
+            "Yes, if you have linked Telegram and can view expenses. The daily digest goes to the owner, accountants and branch managers.",
+        },
+      ],
+      related: ["telegram", "branches", "fleet"],
+      relatedLabel: "Other features",
+      cta: {
+        title: "See expense tracking in the demo.",
         body: "The demo uses sample data, not real customer records.",
         label: "Open demo",
       },
