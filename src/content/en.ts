@@ -11,8 +11,6 @@ export const contentEn: LandingContent = {
     logoDomain: ".uz",
     nav: {
       capabilities: "Features",
-      roles: "Roles",
-      howItWorks: "How it works",
       pricing: "Pricing & trial",
       faq: "FAQ",
     },
@@ -25,23 +23,16 @@ export const contentEn: LandingContent = {
     title: "Your driving school. ",
     titleAccent: "At a glance.",
     description:
-      "See revenue, outstanding debt and branch results together. Manage students, payments and lessons with your team in one place.",
+      "Revenue, debt and branches in one place.",
     lane1: {
       button: "Open demo",
-      helperLogin: "Explore a sample school with a demo email and password.",
-      helperOneClick: "Explore a sample school without a password.",
+      helperLogin: "Demo: a sample school.",
+      helperOneClick: "Demo: a sample school, no password.",
     },
     lane2: {
       button: "Request trial",
-      helper: "We’ll agree on 14-day trial terms for your school.",
+      helper: "Trial: 14 days.",
     },
-    signTitle: "Daily questions for school owners",
-    signRows: [
-      { arrow: "↑", title: "Who has overdue payments?", sub: "Payments and debt", stopIndex: 1 },
-      { arrow: "←", title: "Who missed a lesson?", sub: "Schedule and attendance", stopIndex: 2 },
-      { arrow: "→", title: "Who is in each group?", sub: "Students and groups", stopIndex: 0 },
-      { arrow: "↱", title: "How much driving practice is completed?", sub: "Driving practice", stopIndex: 3 },
-    ],
   },
   proof: {
     title: "Revenue, debt and branches in one view.",
@@ -142,7 +133,6 @@ export const contentEn: LandingContent = {
     eyebrow: "Daily report in Telegram",
     title: "Yesterday’s results. ",
     titleAccent: "In Telegram each morning.",
-    description: "Enable daily reports. Yesterday’s revenue and new student count arrive in Telegram at 08:00 Tashkent time.",
     botTitle: "automaktab.uz",
     botSub: "Sample report · fictional data",
     timeLabel: "08:00",
@@ -160,7 +150,7 @@ export const contentEn: LandingContent = {
       { name: "Yunusabad", revenue: 4600000, students: 3 },
       { name: "Sergeli", revenue: 3000000, students: 1 },
     ],
-    sampleCaption: "Sample branch breakdown. Current Telegram reports contain only total revenue and the number of new students.",
+    sampleCaption: "Sample. Reports currently contain only total revenue and new student count.",
     bullets: ["School totals for the owner", "Branch totals for each manager", "Daily at 08:00, Tashkent time"],
     ctaButton: "Request trial",
     trialNote: "Connect Telegram and enable daily reports",
@@ -184,7 +174,6 @@ export const contentEn: LandingContent = {
   journey: {
     eyebrow: "Enrollment to internal tests",
     title: "Follow every student’s progress.",
-    interactiveCta: "Try taking attendance ↓",
     navPrevLabel: "Previous step",
     navNextLabel: "Next step",
     trackAriaLabel: "Student stages. Select with the left and right arrow keys.",
@@ -294,87 +283,13 @@ export const contentEn: LandingContent = {
       },
     ],
   },
-  attendanceDemo: {
-    eyebrow: "TRY IT",
-    title: "Who missed the lesson?",
-    description: "Mark it yourself.",
-    banner: "Sample · not saved",
-    lessonTitle: "Theory · 14:00",
-    lessonSubject: "T-25 · Road rules",
-    ctaButton: "Open demo",
-    unmarkedLabel: "Unmarked",
-    markedLabel: "Marked",
-    attendanceStatusTemplate: "{name} attendance status",
-    statuses: [
-      { key: "keldi", label: "Present", icon: "✓", color: "#1F7A4A", bg: "#E3F1E8", text: "#1B5E3A" },
-      { key: "kechikdi", label: "Late", icon: "◷", color: "#9A6400", bg: "#FBEFD5", text: "#7A4E00" },
-      { key: "kelmadi", label: "Absent", icon: "✕", color: "#C23B22", bg: "#FFF6F3", text: "#B3301A" },
-      { key: "uzrli", label: "Excused", icon: "U", color: "#3B5998", bg: "#E8EEF8", text: "#2B4070" },
-    ],
-    students: [
-      "Saidova Feruza",
-      "Ismoilov Rustam",
-      "Sobirov Rustam",
-      "Istomov Aziz",
-      "Ergashev Javohir",
-      "Abdullayeva Sevara",
-    ],
-    unmarkedTemplate: "Unmarked: {count}",
-    allMarkedMsg: "Everyone is marked.",
-    card: {
-      title: "Student card",
-      attendance: "Attendance",
-      today: "Today",
-      debt: "Balance due",
-      currency: "UZS",
-    },
-  },
-  roles: {
-    eyebrow: "For your school team",
-    title: "Your team works. You see the full picture.",
-    questionEyebrow: "Daily question",
-    tabs: [
-      {
-        label: "Owner or director",
-        question: "How much came in? Who still owes?",
-        answer:
-          "Compare revenue, expenses and student debt. See which branch needs attention.",
-        modules: ["Owner dashboard", "Financial overview", "Branch comparison"],
-        scene: "director",
-      },
-      {
-        label: "Teacher",
-        question: "Who attended? Who missed the lesson?",
-        answer:
-          "The group, lesson and attendance in one place. Mark each student’s status.",
-        modules: ["Lesson schedule", "Attendance register", "Group list"],
-        scene: "teacher",
-      },
-      {
-        label: "Admissions staff",
-        question: "How do I find a student and check payments?",
-        answer:
-          "Find a student through search. Their documents, group and payments are in one record.",
-        modules: ["Student record", "Medical certificate 083", "Payment plan"],
-        scene: "registrar",
-      },
-      {
-        label: "Accountant",
-        question: "How much was spent? What still needs paying?",
-        answer:
-          "Review revenue and expenses by branch. See paid and unpaid amounts separately.",
-        modules: ["Branch filter", "Expense records", "Change history"],
-        scene: "accountant",
-      },
-    ],
-  },
   resources: {
     title: "Manage admissions, vehicles and teaching together.",
     modules: [
       {
         kind: "leads",
         title: "Inquiries and enrollment",
-        description: "See where each inquiry came from and its current stage. Assign a team member and plan the next follow-up.",
+        description: "Source, stage, owner and next follow-up.",
         points: [
           "Stage, source and team member",
           "Follow-up deadlines",
@@ -384,7 +299,7 @@ export const contentEn: LandingContent = {
       {
         kind: "fleet",
         title: "Fleet",
-        description: "Track vehicle status, instructors and maintenance together. Keep fuel records and insurance documents in one place.",
+        description: "Vehicles, instructors, maintenance and insurance.",
         points: [
           "Vehicle status and assignment",
           "Maintenance and insurance",
@@ -394,7 +309,7 @@ export const contentEn: LandingContent = {
       {
         kind: "education",
         title: "Teaching",
-        description: "Plan lessons with groups and teachers. Track attendance, internal test settings and results in one place.",
+        description: "Lessons, attendance and internal tests.",
         points: [
           "Group, lesson and teacher",
           "Schedule and attendance",
@@ -406,13 +321,13 @@ export const contentEn: LandingContent = {
       badge: "Expenses",
       title: "See where your money goes.",
       description:
-        "Track fuel, repairs and other expenses. See what has been paid and what still needs paying.",
+        "Fuel, repairs and unpaid expenses.",
     },
     teamCard: {
       badge: "Branches and team",
       title: "Keep every branch in view.",
       description:
-        "Give staff access for their work. Manage branches and instructors in one system.",
+        "Access for each staff member by role.",
       stats: [
         { count: "3", label: "branches" },
         { count: "8", label: "instructors" },
@@ -436,32 +351,11 @@ export const contentEn: LandingContent = {
       ],
     },
   },
-  howItWorks: {
-    eyebrow: "How it works",
-    title: "Explore the demo. Try it at your school.",
-    steps: [
-      {
-        number: "01",
-        title: "Open demo",
-        description: "Check payments, debt and attendance in a sample school.",
-      },
-      {
-        number: "02",
-        title: "Check the fit",
-        description: "Review your branches, team and current way of working with us.",
-      },
-      {
-        number: "03",
-        title: "Request trial",
-        description: "Agree on the 14-day trial, data migration, team training and price in writing.",
-      },
-    ],
-  },
   pricing: {
     eyebrow: "Pricing and trial",
     title: "Try it at your school before deciding.",
     description:
-      "Tell us your branch and student counts. Get a written offer with pricing and 14-day trial terms.",
+      "Pricing is based on your branch and student counts.",
     demoCard: {
       label: "Sample school",
       badgeLogin: "demo email and password required",
@@ -472,22 +366,8 @@ export const contentEn: LandingContent = {
     trialCard: {
       label: "Trial for your school",
       badge: "Written offer",
-      description: "14 days with your school’s data. We agree on pricing and terms in writing before you start.",
+      description: "14 days with your own data. Terms in writing; you decide whether to continue.",
     },
-    comparisonRows: [
-      {
-        field: "Price",
-        value: "Based on your branch and student counts.",
-      },
-      {
-        field: "Trial",
-        value: "14 days with your own school data.",
-      },
-      {
-        field: "After the trial",
-        value: "You decide whether to continue.",
-      },
-    ],
     form: {
       title: "Request a trial for your school",
       requiredNote: "Required",
@@ -607,7 +487,7 @@ export const contentEn: LandingContent = {
       {
         question: "How are access rights managed?",
         answerLogin:
-          "Staff see the sections they need for their work. We review access permissions together before setup.",
+          "Staff see the sections they need for their work. Who changed what, and when, stays in the audit log. We review access permissions together before setup.",
       },
     ],
   },

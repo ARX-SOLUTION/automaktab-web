@@ -127,19 +127,6 @@ for (const { locale, path, width } of [
   });
 }
 
-test("owner shortcuts reach the requested chapter on a phone", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/en");
-  const chapter = page.locator('[data-journey-chapter="1"]');
-  // Phones keep only the current chapter open, so the payments chapter starts closed.
-  await expect(chapter).not.toHaveAttribute("open");
-  await page.getByRole("button", { name: "Who has overdue payments? Payments and debt" }).press("Enter");
-  await expect(chapter).toHaveAttribute("open");
-  await expect(chapter).toBeInViewport();
-  await expect(chapter.locator("summary")).toBeFocused();
-});
-
 test.describe("static finance preview", () => {
   test.use({ javaScriptEnabled: false });
   test("shows all sample records with honest inactive controls without JavaScript", async ({ page }) => {

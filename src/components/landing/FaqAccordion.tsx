@@ -11,7 +11,7 @@ interface FaqAccordionProps {
 
 export default function FaqAccordion({ content, demoAccess }: FaqAccordionProps) {
   // First item open by default per design.md §6.12
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (idx: number) => {
     const next = openIndex === idx ? null : idx;

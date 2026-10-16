@@ -8,8 +8,6 @@ export interface LandingContent {
     logoDomain: string;
     nav: {
       capabilities: string;
-      roles: string;
-      howItWorks: string;
       pricing: string;
       faq: string;
     };
@@ -32,13 +30,6 @@ export interface LandingContent {
       button: string;
       helper: string;
     };
-    signTitle: string;
-    signRows: Array<{
-      arrow: string;
-      title: string;
-      sub: string;
-      stopIndex: number;
-    }>;
   };
   proof: {
     title: string;
@@ -116,7 +107,6 @@ export interface LandingContent {
     eyebrow: string;
     title: string;
     titleAccent: string;
-    description: string;
     botTitle: string;
     botSub: string;
     timeLabel: string;
@@ -146,7 +136,6 @@ export interface LandingContent {
   journey: {
     eyebrow: string;
     title: string;
-    interactiveCta: string;
     navPrevLabel: string;
     navNextLabel: string;
     trackAriaLabel: string;
@@ -203,48 +192,6 @@ export interface LandingContent {
       previewType: "studentCard" | "paymentsTable" | "attendanceScreenshot" | "drivingCard" | "examScreenshot";
     }>;
   };
-  attendanceDemo: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    banner: string;
-    lessonTitle: string;
-    lessonSubject: string;
-    ctaButton: string;
-    unmarkedLabel: string;
-    markedLabel: string;
-    attendanceStatusTemplate: string;
-    statuses: Array<{
-      key: "keldi" | "kechikdi" | "kelmadi" | "uzrli";
-      label: string;
-      icon: string;
-      color: string;
-      bg: string;
-      text: string;
-    }>;
-    students: string[];
-    unmarkedTemplate: string;
-    allMarkedMsg: string;
-    card: {
-      title: string;
-      attendance: string;
-      today: string;
-      debt: string;
-      currency: string;
-    };
-  };
-  roles: {
-    eyebrow: string;
-    title: string;
-    questionEyebrow: string;
-    tabs: Array<{
-      label: string;
-      question: string;
-      answer: string;
-      modules: string[];
-      scene: "director" | "registrar" | "teacher" | "accountant";
-    }>;
-  };
   resources: {
     title: string;
     modules: Array<{ kind: "leads" | "fleet" | "education"; title: string; description: string; points: string[] }>;
@@ -270,15 +217,6 @@ export interface LandingContent {
       }>;
     };
   };
-  howItWorks: {
-    eyebrow: string;
-    title: string;
-    steps: Array<{
-      number: string;
-      title: string;
-      description: string;
-    }>;
-  };
   pricing: {
     eyebrow: string;
     title: string;
@@ -295,10 +233,6 @@ export interface LandingContent {
       badge: string;
       description: string;
     };
-    comparisonRows: Array<{
-      field: string;
-      value: string;
-    }>;
     form: {
       title: string;
       requiredNote: string;
@@ -357,8 +291,6 @@ export const contentUz: LandingContent = {
     logoDomain: ".uz",
     nav: {
       capabilities: "Imkoniyatlar",
-      roles: "Kimlar uchun",
-      howItWorks: "Qanday ishlaydi",
       pricing: "Narx va sinov",
       faq: "Savollar",
     },
@@ -371,23 +303,16 @@ export const contentUz: LandingContent = {
     title: "Avtomaktabingiz holati. ",
     titleAccent: "Bir qarashda.",
     description:
-      "Tushum, qarzdorlik va filiallar holatini bir joyda ko‘ring. O‘quvchilar, to‘lovlar va darslarni jamoangiz bilan bir tizimda yuriting.",
+      "Tushum, qarzdorlik va filiallar bir joyda.",
     lane1: {
       button: "Demoni ochish",
-      helperLogin: "Namuna maktabni demo email va parol bilan oching.",
-      helperOneClick: "Namuna maktabni parolsiz oching.",
+      helperLogin: "Demo: namuna maktab.",
+      helperOneClick: "Demo: namuna maktab, parolsiz.",
     },
     lane2: {
       button: "Sinov so‘rash",
-      helper: "Maktabingiz uchun 14 kunlik sinov shartlarini kelishamiz.",
+      helper: "Sinov: 14 kun.",
     },
-    signTitle: "Rahbarning kundalik savollari",
-    signRows: [
-      { arrow: "↑", title: "Kimning to‘lovi kechikdi?", sub: "To‘lov va qarzdorlik", stopIndex: 1 },
-      { arrow: "←", title: "Kim darsga kelmadi?", sub: "Jadval va davomat", stopIndex: 2 },
-      { arrow: "→", title: "Guruhda kimlar o‘qiyapti?", sub: "O‘quvchilar va guruhlar", stopIndex: 0 },
-      { arrow: "↱", title: "Kim qancha haydash mashg‘uloti o‘tdi?", sub: "Amaliy haydash", stopIndex: 3 },
-    ],
   },
   proof: {
     title: "Tushum, qarzdorlik va filiallar bir ko‘rinishda.",
@@ -488,7 +413,6 @@ export const contentUz: LandingContent = {
     eyebrow: "Telegram’da kunlik hisobot",
     title: "Kecha qancha tushum bo‘ldi? ",
     titleAccent: "Ertalab Telegram’da ko‘ring.",
-    description: "Hisobotni yoqing. Har kuni 08:00 da kechagi tushum va yangi o‘quvchilar soni Telegram’da keladi.",
     botTitle: "automaktab.uz",
     botSub: "Hisobot namunasi · ma’lumotlar to‘qima",
     timeLabel: "08:00",
@@ -506,7 +430,7 @@ export const contentUz: LandingContent = {
       { name: "Yunusobod", revenue: 4600000, students: 3 },
       { name: "Sergeli", revenue: 3000000, students: 1 },
     ],
-    sampleCaption: "Filiallar bo‘yicha namuna. Hozir Telegram’da faqat umumiy tushum va yangi o‘quvchilar soni yuboriladi.",
+    sampleCaption: "Namuna. Hozir faqat jami tushum va yangi o‘quvchilar soni yuboriladi.",
     bullets: ["Rahbarga maktab bo‘yicha jami", "Menejerga o‘z filiali bo‘yicha", "Har kuni 08:00, Toshkent vaqti"],
     ctaButton: "Sinov so‘rash",
     trialNote: "Telegram’ni ulang va hisobotni yoqing",
@@ -530,7 +454,6 @@ export const contentUz: LandingContent = {
   journey: {
     eyebrow: "Qabuldan ichki testgacha",
     title: "Har bir o‘quvchining holati ko‘z oldingizda.",
-    interactiveCta: "Davomatni belgilab ko‘ring ↓",
     navPrevLabel: "Oldingi bosqich",
     navNextLabel: "Keyingi bosqich",
     trackAriaLabel: "O‘quvchi bosqichlari. Chap va o‘ng strelka tugmalari bilan tanlang.",
@@ -640,87 +563,13 @@ export const contentUz: LandingContent = {
       },
     ],
   },
-  attendanceDemo: {
-    eyebrow: "SINAB KO‘RING",
-    title: "Kim darsga kelmadi?",
-    description: "Belgilab ko‘ring.",
-    banner: "Namuna · saqlanmaydi",
-    lessonTitle: "Nazariya · 14:00",
-    lessonSubject: "T-25 · Yo‘l qoidalari",
-    ctaButton: "Demoni ochish",
-    unmarkedLabel: "Belgilanmagan",
-    markedLabel: "Belgilandi",
-    attendanceStatusTemplate: "{name}: davomat holati",
-    statuses: [
-      { key: "keldi", label: "Keldi", icon: "✓", color: "#1F7A4A", bg: "#E3F1E8", text: "#1B5E3A" },
-      { key: "kechikdi", label: "Kechikdi", icon: "◷", color: "#9A6400", bg: "#FBEFD5", text: "#7A4E00" },
-      { key: "kelmadi", label: "Kelmadi", icon: "✕", color: "#C23B22", bg: "#FFF6F3", text: "#B3301A" },
-      { key: "uzrli", label: "Uzrli", icon: "U", color: "#3B5998", bg: "#E8EEF8", text: "#2B4070" },
-    ],
-    students: [
-      "Saidova Feruza",
-      "Ismoilov Rustam",
-      "Sobirov Rustam",
-      "Istomov Aziz",
-      "Ergashev Javohir",
-      "Abdullayeva Sevara",
-    ],
-    unmarkedTemplate: "Belgilanmagan: {count}",
-    allMarkedMsg: "Hammasi belgilandi.",
-    card: {
-      title: "O‘quvchi kartasi",
-      attendance: "Davomat",
-      today: "Bugun",
-      debt: "Qolgan to‘lov",
-      currency: "so‘m",
-    },
-  },
-  roles: {
-    eyebrow: "KIMLAR UCHUN",
-    title: "Jamoa ishlaydi. Siz umumiy holatni ko‘rasiz.",
-    questionEyebrow: "Kundalik savol",
-    tabs: [
-      {
-        label: "Avtomaktab rahbari",
-        question: "Qancha tushum bor? Kim qarzdor?",
-        answer:
-          "Tushum, xarajat va qarzdorlikni solishtiring. Qaysi filialga e’tibor kerakligini raqamlardan ko‘ring.",
-        modules: ["Rahbar paneli", "Moliya tahlili", "Filiallar natijasi"],
-        scene: "director",
-      },
-      {
-        label: "O‘qituvchi",
-        question: "Kim keldi? Kim dars qoldirdi?",
-        answer:
-          "Guruh ro‘yxati, dars va davomat bir joyda. Har bir o‘quvchining holatini belgilang.",
-        modules: ["Dars jadvali", "Davomat jurnali", "Guruh ro‘yxati"],
-        scene: "teacher",
-      },
-      {
-        label: "Qabul xodimi",
-        question: "O‘quvchini topib, to‘lovini qanday tekshiraman?",
-        answer:
-          "O‘quvchini qidiruvdan toping. Hujjatlari, guruhi va to‘lov holati bir kartada.",
-        modules: ["O‘quvchi kartasi", "083 ma’lumotnoma", "To‘lov jadvali"],
-        scene: "registrar",
-      },
-      {
-        label: "Buxgalter",
-        question: "Qancha xarajat qilindi? Qancha to‘lanmagan?",
-        answer:
-          "Filiallar tushumi va xarajatlarini tekshiring. To‘langan va hali to‘lanmagan summalarni alohida ko‘ring.",
-        modules: ["Filial bo‘yicha saralash", "Xarajatlar hisobi", "O‘zgarishlar tarixi"],
-        scene: "accountant",
-      },
-    ],
-  },
   resources: {
     title: "Qabul, avtopark va ta’lim bir tizimda.",
     modules: [
       {
         kind: "leads",
         title: "Murojaatlar va qabul",
-        description: "Murojaat qayerdan kelganini va qaysi bosqichdaligini ko‘ring. Mas’ul xodimni tayinlang va keyingi aloqa vaqtini belgilang.",
+        description: "Manba, bosqich, mas’ul va keyingi aloqa.",
         points: [
           "Bosqich, manba va mas’ul",
           "Keyingi aloqa vaqti",
@@ -730,7 +579,7 @@ export const contentUz: LandingContent = {
       {
         kind: "fleet",
         title: "Avtopark",
-        description: "Mashina holati, instruktor va texnik xizmatni bir joyda kuzating. Yoqilg‘i qaydlari va sug‘urta hujjatlarini saqlang.",
+        description: "Mashina, instruktor, texnik xizmat va sug‘urta.",
         points: [
           "Mashina holati va instruktori",
           "Texnik xizmat va sug‘urta",
@@ -740,7 +589,7 @@ export const contentUz: LandingContent = {
       {
         kind: "education",
         title: "Ta’lim",
-        description: "Darslarni guruh va o‘qituvchi bilan rejalashtiring. Davomat, ichki test shartlari va natijalarini bir joyda kuzating.",
+        description: "Darslar, davomat va ichki testlar.",
         points: [
           "Guruh, dars va o‘qituvchi",
           "Jadval va davomat",
@@ -752,13 +601,13 @@ export const contentUz: LandingContent = {
       badge: "Xarajatlar",
       title: "Pul nimaga ketayotganini ko‘ring.",
       description:
-        "Yoqilg‘i, ta’mir va boshqa xarajatlarni kuzating. Qancha to‘langanini va qancha to‘lash qolganini ko‘ring.",
+        "Yoqilg‘i, ta’mir va to‘lanmagan xarajatlar.",
     },
     teamCard: {
       badge: "Filiallar va jamoa",
       title: "Filial ko‘paysa ham nazorat sizda.",
       description:
-        "Har bir xodimga ishiga mos kirish huquqini bering. Filiallar va instruktorlar hisobini bir tizimda yuriting.",
+        "Har bir xodimga ishiga mos kirish huquqi.",
       stats: [
         { count: "3 ta", label: "filial" },
         { count: "8 ta", label: "instruktor" },
@@ -782,32 +631,11 @@ export const contentUz: LandingContent = {
       ],
     },
   },
-  howItWorks: {
-    eyebrow: "Qanday ishlaydi",
-    title: "Avval ko‘ring. Keyin maktabingizda sinang.",
-    steps: [
-      {
-        number: "01",
-        title: "Demoni ochish",
-        description: "Namuna maktabda qarzdorlar, tushum va davomatni o‘zingiz tekshirib ko‘ring.",
-      },
-      {
-        number: "02",
-        title: "Mosligini tekshiring",
-        description: "Filiallaringiz, jamoangiz va ish tartibingizni birga ko‘rib chiqamiz.",
-      },
-      {
-        number: "03",
-        title: "Sinov so‘rash",
-        description: "14 kunlik sinov, ma’lumot ko‘chirish, jamoani o‘rgatish va narx shartlarini yozma kelishamiz.",
-      },
-    ],
-  },
   pricing: {
     eyebrow: "Narx va sinov",
     title: "Qaror qilishdan oldin maktabingizda sinang.",
     description:
-      "Filial va o‘quvchilar sonini ayting. Narx va 14 kunlik sinov shartlarini yozma taklifda oling.",
+      "Narx filial va o‘quvchilar soniga qarab hisoblanadi.",
     demoCard: {
       label: "Namuna maktab",
       badgeLogin: "demo email va parol bilan",
@@ -818,22 +646,8 @@ export const contentUz: LandingContent = {
     trialCard: {
       label: "Maktabingiz uchun sinov",
       badge: "Yozma taklif",
-      description: "Maktabingiz ma’lumotlari bilan 14 kun sinang. Narx va shartlarni boshlashdan oldin yozma kelishamiz.",
+      description: "14 kun, o‘z ma’lumotlaringiz bilan. Shartlar yozma; davom etishni o‘zingiz hal qilasiz.",
     },
-    comparisonRows: [
-      {
-        field: "Narx",
-        value: "Filial va o‘quvchilar soniga qarab hisoblanadi.",
-      },
-      {
-        field: "Sinov",
-        value: "14 kun, o‘z maktabingiz ma’lumotlari bilan.",
-      },
-      {
-        field: "Sinovdan keyin",
-        value: "Davom etish yoki to‘xtatish sizning qaroringiz.",
-      },
-    ],
     form: {
       title: "Maktabingiz uchun sinov so‘rash",
       requiredNote: "Majburiy",
@@ -953,7 +767,7 @@ export const contentUz: LandingContent = {
       {
         question: "Kirish huquqlari qanday boshqariladi?",
         answerLogin:
-          "Har bir xodim ishiga mos bo‘limlarni ko‘radi. Kimga qaysi kirish huquqi kerakligini ulashdan oldin birga tekshiramiz.",
+          "Har bir xodim ishiga mos bo‘limlarni ko‘radi. O‘zgarishni kim va qachon qilgani audit tarixida qoladi. Kirish huquqlarini ulashdan oldin birga tekshiramiz.",
       },
     ],
   },

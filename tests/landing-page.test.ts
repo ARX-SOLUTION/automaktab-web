@@ -10,7 +10,6 @@ import LandingPage from "@/components/landing/LandingPage";
 import FinalCTA from "@/components/landing/FinalCTA";
 import ProofFrame from "@/components/landing/ProofFrame";
 import ProductScene from "@/components/landing/ProductScene";
-import RoleTabs from "@/components/landing/RoleTabs";
 import RoadStepper from "@/components/landing/RoadStepper";
 import MorningReportWidget from "@/components/landing/MorningReportWidget";
 import ResourceCards from "@/components/landing/ResourceCards";
@@ -132,17 +131,6 @@ describe("automaktab.uz marketing page verification", () => {
     }
   });
 
-  it.each([contentUz, contentRu, contentEn])("keeps every role available in native server-rendered disclosures", (content) => {
-    const html = renderToStaticMarkup(createElement(RoleTabs, { content: content.roles, scenes: content.scenes }));
-    expect(html.match(/<details\b/g)).toHaveLength(4);
-    for (const role of content.roles.tabs) {
-      expect(html).toContain(`<summary>${role.label.replaceAll('&', '&amp;')}</summary>`);
-      expect(html).toContain(role.answer.replaceAll('&', '&amp;'));
-    }
-    expect(html.match(/aria-controls="role-panel"/g)).toHaveLength(4);
-    expect(html.match(/id="role-panel"/g)).toHaveLength(1);
-  });
-
   it.each([contentUz, contentRu, contentEn])("sends the final demo action to the tracked CRM login", (content) => {
     const html = renderToStaticMarkup(createElement(FinalCTA, { content: content.finalCta }));
 
@@ -164,17 +152,12 @@ describe("automaktab.uz marketing page verification", () => {
     }
   });
 
-  it("includes all 11 sections required by design.md §7", () => {
+  it("includes every landing section", () => {
     expect(contentUz.hero).toBeDefined();
     expect(contentUz.proof).toBeDefined();
     expect(contentUz.problem).toBeDefined();
     expect(contentUz.journey.stops).toHaveLength(5);
-    expect(contentUz.attendanceDemo.students).toHaveLength(6);
-    expect(contentUz.attendanceDemo.statuses).toHaveLength(4);
-    expect(contentUz.roles.tabs).toHaveLength(4);
     expect(contentUz.resources.roadmapCard.items).toHaveLength(2);
-    expect(contentUz.howItWorks.steps).toHaveLength(3);
-    expect(contentUz.pricing.comparisonRows).toHaveLength(3);
     expect(contentUz.faq.items).toHaveLength(8);
     expect(contentUz.finalCta).toBeDefined();
   });
@@ -223,13 +206,8 @@ describe("automaktab.uz marketing page verification", () => {
       expect(content.morningReport.bullets).toHaveLength(3);
       expect(content.problem).toBeDefined();
       expect(content.journey.stops).toHaveLength(5);
-      expect(content.attendanceDemo.students).toHaveLength(6);
-      expect(content.attendanceDemo.statuses).toHaveLength(4);
-      expect(content.roles.tabs).toHaveLength(4);
       expect(content.resources.roadmapCard.items).toHaveLength(2);
       expect(content.resources.teamCard.stats).toHaveLength(2);
-      expect(content.howItWorks.steps).toHaveLength(3);
-      expect(content.pricing.comparisonRows).toHaveLength(3);
       expect(content.pricing.form.fields.city.options).toHaveLength(14);
       expect(content.pricing.form.disclaimer).toBeTruthy();
       expect(content.faq.items).toHaveLength(8);
@@ -254,8 +232,6 @@ describe("automaktab.uz marketing page verification", () => {
 
       const descriptions = [
         content.hero.description,
-        content.morningReport.description,
-        content.attendanceDemo.description,
         content.pricing.description,
         content.resources.expenseCard.description,
         content.resources.teamCard.description,

@@ -52,6 +52,7 @@ type SeoSection = {
 export type SeoVisualId =
   | "morning-report"
   | "driving-card"
+  | "pricing-cards"
   | "scene:director"
   | "scene:registrar"
   | "scene:accountant"
@@ -125,43 +126,23 @@ export const SEO_PAGES: Record<
       intro:
         "Kim qancha to‘laganini va qancha qarzi qolganini ko‘ring. O‘quvchi kartasi va qarzdorlar ro‘yxati bir tizimda.",
       definition:
-        "automaktab.uz har bir o‘quvchining to‘lovlari va qolgan qarzini kartasida saqlaydi; qarzdorlarni filial bo‘yicha saralaysiz, guruh sahifasida esa har bir o‘quvchining qarz holati ko‘rinadi.",
+        "automaktab.uz har bir o‘quvchining to‘lovlari va qolgan qarzini kartasida saqlaydi; qarzdorlarni filial bo‘yicha saralaysiz.",
       visual: "scene:director",
       sections: [
         {
           title: "To‘lovlar o‘quvchi kartasida",
           body:
-            "O‘quvchining to‘lov tarixi va qolgan qarzini kartasidan tekshiring. Kerakli ma’lumot boshqa faylda qolib ketmaydi.",
+            "Kartada kurs narxi, to‘langan summa, qolgan qarz va to‘lovlar tarixi turadi. Shartnoma, 083 ma’lumotnoma va hujjatlar holati ham shu yerda.",
         },
         {
           title: "Qarzdorlarni tez toping",
           body:
-            "Qarzdorlar ro‘yxatidan kim bilan bog‘lanish yoki qaysi to‘lovni tekshirish kerakligini ko‘ring.",
-        },
-        {
-          title: "Demoda sinab ko‘ring",
-          body:
-            "Namuna ma’lumotlari bilan to‘lovlar va rahbar panelini tekshiring. Telefon raqamingizni qoldirish shart emas.",
-        },
-        {
-          title: "To‘lov usullari va Excel",
-          body:
-            "To‘lovni maktab xodimi kiritadi: naqd, karta yoki bank o‘tkazmasi. Har bir to‘lov alohida yoziladi va o‘quvchining qolgan qarzini kamaytiradi, shuning uchun bo‘lib to‘lash ham aniq ko‘rinadi. To‘lovlar va o‘quvchilar ro‘yxatini Excel faylga yuklab olish mumkin, masalan, buxgalterga yoki rahbarga yuborish uchun.",
-        },
-        {
-          title: "Rahbar paneli va filiallar",
-          body:
-            "O‘quvchilar ro‘yxatida qarzi borlarni alohida filtrlang va qarz miqdori bo‘yicha saralang. Rahbar panelida davr tushumi va o‘quvchilar qarzdorligi jami va har bir filial bo‘yicha ko‘rinadi.",
+            "Qarzdorlar ro‘yxatidan kim bilan bog‘lanish kerakligini ko‘ring. Guruh sahifasida har bir o‘quvchining qarzi ko‘rinadi.",
         },
         {
           title: "Kim nimani ko‘radi",
           body:
-            "To‘lov ma’lumotlarini faqat ruxsati bor xodimlar ko‘radi va kiritadi. Har bir xodim o‘ziga ruxsat berilgan filiallar to‘lovlarini ko‘radi. To‘lov yoki o‘quvchi kartasidagi o‘zgarishni kim va qachon qilgani audit tarixida qoladi.",
-        },
-        {
-          title: "O‘quvchi kartasida nima bor",
-          body:
-            "Kartada kurs narxi, to‘langan summa, qolgan qarz va to‘lovlar tarixi turadi. Shartnoma raqami, 083 tibbiy ma’lumotnoma va hujjatlar holati ham shu kartada, shuning uchun o‘quvchi haqida savolga bitta joydan javob topasiz.",
+            "To‘lovni faqat ruxsati bor xodim o‘z filiallari bo‘yicha ko‘radi va kiritadi. Kim va qachon o‘zgartirgani audit tarixida qoladi.",
         },
       ],
       faq: [
@@ -190,6 +171,11 @@ export const SEO_PAGES: Record<
           answer:
             "Yo‘q. 08:00 dagi Telegram hisobotida kechagi tushum va yangi o‘quvchilar soni bor. Qarzdorlarni tizimdagi ro‘yxatdan ko‘rasiz.",
         },
+        {
+          question: "Qarzdorlarni qanday saralayman?",
+          answer:
+            "O‘quvchilar ro‘yxatida qarzi borlarni alohida filtrlang va qarz miqdori bo‘yicha saralang. Rahbar panelida davr tushumi va o‘quvchilar qarzdorligi jami va har bir filial bo‘yicha ko‘rinadi.",
+        },
       ],
       related: ["branches", "attendance", "telegram"],
       relatedLabel: "Boshqa imkoniyatlar",
@@ -211,43 +197,23 @@ export const SEO_PAGES: Record<
       intro:
         "Проверяйте, сколько курсант оплатил и сколько осталось. Карточка курсанта и список задолженности находятся в одной системе.",
       definition:
-        "automaktab.uz хранит оплаты и остаток долга каждого курсанта в его карточке; должников можно отфильтровать по филиалу, а на странице группы виден долг каждого курсанта.",
+        "automaktab.uz хранит оплаты и остаток долга каждого курсанта в его карточке; должников можно отфильтровать по филиалу.",
       visual: "scene:director",
       sections: [
         {
           title: "Оплаты в карточке курсанта",
           body:
-            "Проверяйте историю оплат и остаток долга в карточке. Не нужно искать эти записи в другом файле.",
+            "В карточке цена курса, оплаченная сумма, остаток долга и история оплат. Договор, медсправка 083 и статус документов тоже здесь.",
         },
         {
           title: "Быстро находите должников",
           body:
-            "Список задолженности помогает понять, с кем связаться и какие оплаты проверить.",
-        },
-        {
-          title: "Попробуйте в демо",
-          body:
-            "Проверьте оплаты и панель руководителя на вымышленных данных. Оставлять номер телефона не нужно.",
-        },
-        {
-          title: "Способы оплаты и Excel",
-          body:
-            "Оплату вносит сотрудник школы: наличные, карта или банковский перевод. Каждая оплата записывается отдельно и уменьшает остаток долга курсанта, поэтому оплата частями тоже видна точно. Списки оплат и курсантов можно выгрузить в Excel, например, для бухгалтера или руководителя.",
-        },
-        {
-          title: "Панель руководителя и филиалы",
-          body:
-            "В списке курсантов отфильтруйте тех, у кого есть долг, и отсортируйте по сумме долга. На панели руководителя выручка за период и задолженность курсантов видны в целом и по каждому филиалу.",
+            "Список задолженности показывает, с кем связаться. На странице группы виден долг каждого курсанта.",
         },
         {
           title: "Кто что видит",
           body:
-            "Платёжные данные видят и вносят только сотрудники с нужными правами. Каждый сотрудник видит оплаты только разрешённых ему филиалов. Кто и когда изменил оплату или карточку курсанта, остаётся в журнале аудита.",
-        },
-        {
-          title: "Что в карточке курсанта",
-          body:
-            "В карточке указаны цена курса, оплаченная сумма, остаток долга и история оплат. Номер договора, медсправка 083 и статус документов тоже здесь, поэтому ответ на вопрос о курсанте находится в одном месте.",
+            "Оплаты видят и вносят только сотрудники с правами, по своим филиалам. Кто и когда что изменил, остаётся в журнале аудита.",
         },
       ],
       faq: [
@@ -276,6 +242,11 @@ export const SEO_PAGES: Record<
           answer:
             "Нет. В отчёте в Telegram в 08:00 есть вчерашняя выручка и число новых курсантов. Должников смотрите в списке в системе.",
         },
+        {
+          question: "Как отсортировать должников?",
+          answer:
+            "В списке курсантов отфильтруйте тех, у кого есть долг, и отсортируйте по сумме долга. На панели руководителя выручка за период и задолженность курсантов видны в целом и по каждому филиалу.",
+        },
       ],
       related: ["branches", "attendance", "telegram"],
       relatedLabel: "Другие возможности",
@@ -297,43 +268,23 @@ export const SEO_PAGES: Record<
       intro:
         "See how much each student has paid and what remains. Student records and the debt list are in one system.",
       definition:
-        "automaktab.uz keeps every student's payments and outstanding debt on their record; you filter students with debt by branch, and the group page shows each student's debt status.",
+        "automaktab.uz keeps every student's payments and outstanding debt on their record; you filter students with debt by branch.",
       visual: "scene:director",
       sections: [
         {
           title: "Payments stay with the student record",
           body:
-            "Check payment history and outstanding debt on the student record. No need to find them in another file.",
+            "The record holds the course price, amount paid, outstanding debt and payment history, plus the contract, 083 medical certificate and document status.",
         },
         {
           title: "Find students with outstanding payments",
           body:
-            "Use the debt list to see who needs a follow-up and which payments need checking.",
-        },
-        {
-          title: "Try it in the demo",
-          body:
-            "Check payments and the owner dashboard with sample data. You do not need to leave your phone number.",
-        },
-        {
-          title: "Payment methods and Excel",
-          body:
-            "School staff record each payment: cash, card or bank transfer. Every payment is stored separately and reduces the student's outstanding debt, so installments stay clear. Payment and student lists can be downloaded to Excel, for example for the accountant or the owner.",
-        },
-        {
-          title: "Owner dashboard and branches",
-          body:
-            "Filter the student list to those with debt and sort by the amount owed. The owner dashboard shows revenue for the period and student debt in total and for each branch.",
+            "The debt list shows who needs a follow-up. The group page shows each student's debt.",
         },
         {
           title: "Who sees what",
           body:
-            "Only staff with the right permissions see and record payment data. Each staff member sees payments only for the branches they are allowed to access. Who changed a payment or a student record, and when, stays in the audit log.",
-        },
-        {
-          title: "What the student record holds",
-          body:
-            "The record shows the course price, amount paid, outstanding debt and payment history. The contract number, the 083 medical certificate and document status sit on the same record, so questions about a student have one place to look.",
+            "Only staff with permission see and record payments, for their own branches. Who changed what, and when, stays in the audit log.",
         },
       ],
       faq: [
@@ -362,6 +313,11 @@ export const SEO_PAGES: Record<
           answer:
             "No. The 08:00 Telegram report has yesterday's revenue and the number of new students. You see students with debt in the list inside the system.",
         },
+        {
+          question: "How do I sort students with debt?",
+          answer:
+            "Filter the student list to those with debt and sort by the amount owed. The owner dashboard shows revenue for the period and student debt in total and for each branch.",
+        },
       ],
       related: ["branches", "attendance", "telegram"],
       relatedLabel: "Other features",
@@ -385,65 +341,30 @@ export const SEO_PAGES: Record<
       intro:
         "Nazariya va haydash mashg‘ulotlarini bir jadvalda rejalashtiring. Guruh, o‘qituvchi va dars vaqtini belgilang.",
       definition:
-        "automaktab.uz jadvali har bir guruh uchun haftalik shablondan iborat: hafta kuni, boshlanish va tugash vaqti, nazariya yoki amaliy dars. Shablondan keyingi 1–12 hafta darslari yaratiladi.",
+        "automaktab.uz jadvali guruhning haftalik shablonidan tuziladi: hafta kuni, vaqt va dars turi. Shablondan 1–12 hafta darslari yaratiladi.",
       visual: "scene:registrar",
       sections: [
         {
           title: "Bir haftalik darslar ko‘z oldingizda",
           body:
-            "Haftalik jadvaldan qaysi kuni qanday dars borligini ko‘ring. Turli daftar va xabarlardan yig‘ish shart emas.",
-        },
-        {
-          title: "Guruh va o‘qituvchini belgilang",
-          body:
-            "Har bir dars guruhga tegishli. Guruh o‘qituvchisi kalendarda dars yonida ko‘rinadi.",
-        },
-        {
-          title: "Nazariya va haydash bir jadvalda",
-          body:
-            "Dars turini kalendardan ko‘ring. Nazariya va amaliy haydash mashg‘ulotlarini alohida ajrating.",
-        },
-        {
-          title: "Haftalik shablon",
-          body:
-            "Guruh uchun hafta kuni, vaqt va dars turini bir marta kiriting. Tizim 1–12 hafta uchun darslarni yaratadi va avval yaratilgan darslarni takrorlamaydi.",
-        },
-        {
-          title: "Kalendarda nima ko‘rinadi",
-          body:
-            "Har bir dars sanasi, guruhi, o‘qituvchisi va belgilangan davomati bilan ko‘rinadi. Kalendarni kerakli sana oralig‘ida oching.",
+            "Haftalik jadvaldan qaysi kuni qanday dars borligini ko‘ring. Dars vaqti o‘zgarsa, o‘quvchi kabinetida bildirishnoma chiqadi.",
         },
         {
           title: "Kim qaysi jadvalni ko‘radi",
           body:
-            "O‘qituvchi faqat o‘z guruhlari darslarini ko‘radi. Filial xodimlari o‘z filiali jadvalini, rahbar esa barcha filiallarni ko‘radi.",
-        },
-        {
-          title: "Shablonni kim boshqaradi",
-          body:
-            "Shablonni rahbar, menejer yoki qabul xodimi qo‘shadi va tahrirlaydi. O‘chirish faqat rahbar va menejerga ruxsat etilgan. Kerak bo‘lmagan shablonni nofaol qilib qo‘yish mumkin.",
+            "O‘qituvchi faqat o‘z guruhlarini, filial xodimlari o‘z filialini ko‘radi. Rahbar barcha filiallar darslarini bitta kalendarda ko‘radi.",
         },
         {
           title: "Davomat shu darsdan boshlanadi",
           body:
-            "Yaratilgan dars davomat jurnalida ochiladi va o‘qituvchi o‘quvchilarni shu darsda belgilaydi. Kalendarda qaysi darsda davomat belgilanganini ko‘rasiz.",
-        },
-        {
-          title: "Har bir filial o‘z jadvali bilan",
-          body:
-            "Har bir dars va shablon filialga bog‘langan. Filial o‘z jadvalini yuritadi, rahbar esa barcha filiallar darslarini bitta kalendarda ko‘radi.",
-        },
-        {
-          title: "O‘quvchi ham jadvalni biladi",
-          body:
-            "O‘quvchi o‘z kabinetida dars jadvalini va navbatdagi darsini ko‘radi. Dars vaqti o‘zgarsa, kabinetida bildirishnoma chiqadi.",
+            "Yaratilgan dars davomat jurnalida ochiladi. Kalendarda qaysi darsda davomat belgilanganini ko‘rasiz.",
         },
       ],
       faq: [
         {
           question: "Darslarni har hafta qo‘lda kiritish kerakmi?",
           answer:
-            "Yo‘q. Guruhga haftalik shablon qo‘shing va 1–12 hafta uchun darslarni yarating. Bir guruhga bir nechta shablon qo‘shish mumkin, masalan, dushanba nazariya va payshanba amaliy dars. Shablonni rahbar, menejer yoki qabul xodimi kiritadi.",
+            "Yo‘q. Guruhga haftalik shablon qo‘shing va 1–12 hafta uchun darslarni yarating. Bir guruhga bir nechta shablon qo‘shish mumkin, masalan, dushanba nazariya va payshanba amaliy dars. Shablonni rahbar, menejer yoki qabul xodimi kiritadi. Avval yaratilgan darslar takrorlanmaydi.",
         },
         {
           question: "Jadvalda xona yoki auditoriya bormi?",
@@ -459,6 +380,16 @@ export const SEO_PAGES: Record<
           question: "O‘qituvchi boshqa guruhlar jadvalini ko‘radimi?",
           answer:
             "Yo‘q. O‘qituvchi faqat o‘ziga biriktirilgan guruhlar darslarini ko‘radi.",
+        },
+        {
+          question: "Kalendarda nima ko‘rinadi?",
+          answer:
+            "Har bir dars sanasi, guruhi, o‘qituvchisi va belgilangan davomati bilan ko‘rinadi. Kalendarni kerakli sana oralig‘ida oching.",
+        },
+        {
+          question: "Shablonni kim boshqaradi?",
+          answer:
+            "Shablonni rahbar, menejer yoki qabul xodimi qo‘shadi va tahrirlaydi. O‘chirish faqat rahbar va menejerga ruxsat etilgan. Kerak bo‘lmagan shablonni nofaol qilib qo‘yish mumkin.",
         },
       ],
       related: ["attendance", "driving", "branches"],
@@ -481,65 +412,30 @@ export const SEO_PAGES: Record<
       intro:
         "Планируйте теорию и вождение в одном расписании. Для каждого занятия укажите группу, преподавателя и время.",
       definition:
-        "Расписание automaktab.uz строится из недельных шаблонов группы: день недели, время начала и окончания, теория или практика. Из шаблона создаются занятия на 1–12 недель вперёд.",
+        "Расписание automaktab.uz строится из недельного шаблона группы: день, время и тип занятия. Из шаблона создаются занятия на 1–12 недель.",
       visual: "scene:registrar",
       sections: [
         {
           title: "Вся неделя перед глазами",
           body:
-            "Смотрите, какие занятия запланированы на каждый день. Не нужно собирать расписание из журналов и сообщений.",
-        },
-        {
-          title: "Укажите группу и преподавателя",
-          body:
-            "Каждое занятие относится к группе. Преподаватель группы виден в календаре рядом с занятием.",
-        },
-        {
-          title: "Теория и вождение в одном расписании",
-          body:
-            "Тип занятия виден в календаре. Теорию и практическое вождение легко различить.",
-        },
-        {
-          title: "Недельный шаблон",
-          body:
-            "Один раз укажите день, время и тип занятия для группы. Система создаст занятия на 1–12 недель и не продублирует уже созданные.",
-        },
-        {
-          title: "Что видно в календаре",
-          body:
-            "Каждое занятие показано с датой, группой, преподавателем и отмеченной посещаемостью. Календарь открывается за нужный период.",
+            "Смотрите, какие занятия запланированы на каждый день. Если время занятия меняется, курсант видит уведомление в кабинете.",
         },
         {
           title: "Кто какое расписание видит",
           body:
-            "Преподаватель видит только занятия своих групп. Сотрудники филиала видят расписание своего филиала, руководитель — всех филиалов.",
-        },
-        {
-          title: "Кто управляет шаблонами",
-          body:
-            "Шаблон добавляет и редактирует руководитель, менеджер или сотрудник приёмной. Удалять его могут только руководитель и менеджер. Ненужный шаблон можно сделать неактивным.",
+            "Преподаватель видит только свои группы, сотрудники филиала видят свой филиал. Руководитель видит занятия всех филиалов в одном календаре.",
         },
         {
           title: "Посещаемость начинается с занятия",
           body:
-            "Созданное занятие открывается в журнале посещаемости, и преподаватель отмечает курсантов прямо в нём. В календаре видно, на каких занятиях посещаемость уже отмечена.",
-        },
-        {
-          title: "У каждого филиала своё расписание",
-          body:
-            "Каждое занятие и шаблон привязаны к филиалу. Филиал ведёт своё расписание, а руководитель видит занятия всех филиалов в одном календаре.",
-        },
-        {
-          title: "Курсант тоже видит расписание",
-          body:
-            "В личном кабинете курсант видит своё расписание и ближайшее занятие. Если время занятия меняется, в кабинете появляется уведомление.",
+            "Созданное занятие открывается в журнале посещаемости. В календаре видно, где посещаемость уже отмечена.",
         },
       ],
       faq: [
         {
           question: "Нужно ли вносить занятия вручную каждую неделю?",
           answer:
-            "Нет. Добавьте группе недельный шаблон и создайте занятия на 1–12 недель. У группы может быть несколько шаблонов, например теория в понедельник и практика в четверг. Шаблон вносит руководитель, менеджер или сотрудник приёмной.",
+            "Нет. Добавьте группе недельный шаблон и создайте занятия на 1–12 недель. У группы может быть несколько шаблонов, например теория в понедельник и практика в четверг. Шаблон вносит руководитель, менеджер или сотрудник приёмной. Уже созданные занятия не дублируются.",
         },
         {
           question: "Есть ли в расписании аудитории?",
@@ -555,6 +451,16 @@ export const SEO_PAGES: Record<
           question: "Видит ли преподаватель расписание других групп?",
           answer:
             "Нет. Преподаватель видит только занятия своих групп.",
+        },
+        {
+          question: "Что видно в календаре?",
+          answer:
+            "Каждое занятие показано с датой, группой, преподавателем и отмеченной посещаемостью. Календарь открывается за нужный период.",
+        },
+        {
+          question: "Кто управляет шаблонами?",
+          answer:
+            "Шаблон добавляет и редактирует руководитель, менеджер или сотрудник приёмной. Удалять его могут только руководитель и менеджер. Ненужный шаблон можно сделать неактивным.",
         },
       ],
       related: ["attendance", "driving", "branches"],
@@ -577,65 +483,30 @@ export const SEO_PAGES: Record<
       intro:
         "Plan theory and driving lessons in one schedule. Set the group, teacher and time for each lesson.",
       definition:
-        "automaktab.uz builds the schedule from weekly group templates: weekday, start and end time, theory or practical lesson. Lessons for the next 1–12 weeks are generated from the template.",
+        "automaktab.uz builds the schedule from a group's weekly template: weekday, time and lesson type, generating lessons for 1–12 weeks.",
       visual: "scene:registrar",
       sections: [
         {
           title: "See the whole week at a glance",
           body:
-            "See which lessons are planned each day. No need to piece together a schedule from notebooks and messages.",
-        },
-        {
-          title: "Assign the group and teacher",
-          body:
-            "Every lesson belongs to a group. The group’s teacher is shown next to the lesson in the calendar.",
-        },
-        {
-          title: "Theory and driving in one schedule",
-          body:
-            "Lesson types are visible in the calendar, making theory and driving practice easy to tell apart.",
-        },
-        {
-          title: "Weekly templates",
-          body:
-            "Enter the weekday, time and lesson type for a group once. The system generates lessons for 1–12 weeks and skips lessons that already exist.",
-        },
-        {
-          title: "What the calendar shows",
-          body:
-            "Each lesson shows its date, group, teacher and recorded attendance. Open the calendar for any date range.",
+            "See which lessons are planned each day. If a lesson time changes, the student sees a notification in their account.",
         },
         {
           title: "Who sees which schedule",
           body:
-            "Teachers see only their own groups’ lessons. Branch staff see their branch schedule; the owner sees every branch.",
-        },
-        {
-          title: "Who manages templates",
-          body:
-            "The owner, a manager or admissions staff can add and edit templates. Only the owner and managers can delete them. A template that is no longer needed can be set to inactive.",
+            "Teachers see only their own groups; branch staff see their branch. The owner sees every branch's lessons in one calendar.",
         },
         {
           title: "Attendance starts from the lesson",
           body:
-            "A generated lesson opens in the attendance register, where the teacher marks students. The calendar shows which lessons already have attendance recorded.",
-        },
-        {
-          title: "Each branch keeps its own schedule",
-          body:
-            "Every lesson and template belongs to a branch. Each branch runs its own schedule, while the owner sees lessons from all branches in one calendar.",
-        },
-        {
-          title: "Students see it too",
-          body:
-            "In their student account, each student sees their own schedule and next lesson. If a lesson time changes, a notification appears there.",
+            "A generated lesson opens in the attendance register. The calendar shows which lessons already have attendance.",
         },
       ],
       faq: [
         {
           question: "Do I have to enter lessons by hand every week?",
           answer:
-            "No. Add a weekly template to the group and generate lessons for 1–12 weeks. A group can have several templates, for example theory on Monday and practice on Thursday. The owner, a manager or admissions staff can set templates.",
+            "No. Add a weekly template to the group and generate lessons for 1–12 weeks. A group can have several templates, for example theory on Monday and practice on Thursday. The owner, a manager or admissions staff can set templates. Lessons that already exist are not duplicated.",
         },
         {
           question: "Does the schedule track rooms?",
@@ -651,6 +522,16 @@ export const SEO_PAGES: Record<
           question: "Can a teacher see other groups’ schedules?",
           answer:
             "No. Teachers see only the lessons of groups assigned to them.",
+        },
+        {
+          question: "What does the calendar show?",
+          answer:
+            "Each lesson shows its date, group, teacher and recorded attendance. Open the calendar for any date range.",
+        },
+        {
+          question: "Who manages templates?",
+          answer:
+            "The owner, a manager or admissions staff can add and edit templates. Only the owner and managers can delete them. A template that is no longer needed can be set to inactive.",
         },
       ],
       related: ["attendance", "driving", "branches"],
@@ -679,54 +560,24 @@ export const SEO_PAGES: Record<
       visual: "scene:teacher",
       sections: [
         {
-          title: "To‘rtta tushunarli holat",
-          body:
-            "Keldi, kechikdi, kelmadi yoki uzrli. Har bir o‘quvchining holatini dars ro‘yxatida belgilang.",
-        },
-        {
-          title: "Jadval va davomat yonma-yon",
-          body:
-            "Dars, guruh va davomat bitta tizimda. Alohida qog‘oz jurnalni qidirishga hojat yo‘q.",
-        },
-        {
-          title: "Dars holatini tekshiring",
-          body:
-            "Menejer va o‘qituvchi dars ro‘yxatidan kim kelganini va kim dars qoldirganini ko‘radi.",
-        },
-        {
           title: "Butun guruh bir martada",
           body:
-            "Dars ro‘yxatida guruhdagi barcha o‘quvchilar holatini belgilab, bir martada saqlang. Har bir yozuvga izoh qo‘shish mumkin, kim belgilagani ham saqlanadi.",
+            "Guruh holatini bir martada saqlang. Har bir yozuvga izoh qo‘shiladi, kim belgilagani saqlanadi.",
         },
         {
           title: "O‘quvchi kartasida tarix",
           body:
-            "O‘quvchi kartasidagi davomat bo‘limida u qatnashgan, kechikkan va qoldirgan darslar tarixi turadi. Menejer bu tarixni to‘lov va guruh ma’lumotlari yonida ko‘radi.",
-        },
-        {
-          title: "Kim nimani ko‘radi",
-          body:
-            "O‘qituvchi faqat o‘z guruhlari davomatini ko‘radi va belgilaydi. Filial xodimlari o‘z filiali, rahbar esa barcha filiallar davomatini ko‘radi.",
+            "Qatnashgan, kechikkan va qoldirgan darslar tarixi to‘lov va guruh ma’lumotlari yonida turadi.",
         },
         {
           title: "Uzrli sabab va izoh",
           body:
-            "Kasallik yoki boshqa sabab bilan kelmagan o‘quvchini uzrli deb belgilang va izohga sababini yozing. Shunda uzrsiz va uzrli qoldirilgan darslar alohida ko‘rinadi.",
+            "Uzrli deb belgilang va sababini izohga yozing. Uzrsiz va uzrli qoldirilgan darslar alohida ko‘rinadi.",
         },
         {
           title: "Kalendarda davomat holati",
           body:
-            "Jadval kalendarida har bir dars yonida belgilangan davomat ko‘rinadi. Davomati hali belgilanmagan darsni shu yerdan topasiz.",
-        },
-        {
-          title: "Telegram’da davomat tarixi",
-          body:
-            "O‘qituvchi Telegram botida o‘z o‘quvchisining davomat tarixini ochadi. Boshqa o‘qituvchi o‘quvchilarining tarixi unga ko‘rinmaydi.",
-        },
-        {
-          title: "O‘quvchi o‘z davomatini ko‘radi",
-          body:
-            "O‘quvchi kabinetida o‘z davomatini ko‘radi: qaysi darsga kelgani va qaysi birini qoldirgani.",
+            "Har bir dars yonida belgilangan davomat ko‘rinadi; belgilanmagan darsni shu yerdan topasiz.",
         },
       ],
       faq: [
@@ -743,7 +594,7 @@ export const SEO_PAGES: Record<
         {
           question: "Davomatni kim belgilaydi?",
           answer:
-            "Rahbar, menejer, qabul xodimi yoki guruh o‘qituvchisi. O‘qituvchi faqat o‘ziga biriktirilgan guruhlar darslarini belgilaydi.",
+            "Rahbar, menejer, qabul xodimi yoki guruh o‘qituvchisi. O‘qituvchi faqat o‘ziga biriktirilgan guruhlar darslarini belgilaydi. Filial xodimlari o‘z filiali, rahbar esa barcha filiallar davomatini ko‘radi.",
         },
         {
           question: "Davomatni keyin tuzatish mumkinmi?",
@@ -754,6 +605,11 @@ export const SEO_PAGES: Record<
           question: "Kelmagan o‘quvchi haqida SMS boradimi?",
           answer:
             "Yo‘q. automaktab.uz SMS yubormaydi.",
+        },
+        {
+          question: "Davomat tarixini Telegram’da ko‘rsa bo‘ladimi?",
+          answer:
+            "Ha. O‘qituvchi Telegram botida o‘z o‘quvchisining davomat tarixini ochadi. Boshqa o‘qituvchi o‘quvchilarining tarixi unga ko‘rinmaydi.",
         },
       ],
       related: ["schedule", "payments", "branches"],
@@ -776,58 +632,28 @@ export const SEO_PAGES: Record<
       intro:
         "Отмечайте посещаемость в списке группы. Здесь же проверяйте, какие занятия пропустил курсант.",
       definition:
-        "automaktab.uz отмечает курсанта на каждом занятии: пришёл, опоздал, не пришёл или уважительная причина. Посещаемость связана с занятием, группой и карточкой курсанта.",
+        "automaktab.uz отмечает курсанта на каждом занятии: пришёл, опоздал, не пришёл или уважительная причина, с привязкой к группе и карточке.",
       visual: "scene:teacher",
       sections: [
         {
-          title: "Четыре понятных статуса",
-          body:
-            "Пришёл, опоздал, не пришёл или пропустил по уважительной причине. Отметьте каждого курсанта в списке занятия.",
-        },
-        {
-          title: "Расписание и посещаемость рядом",
-          body:
-            "Занятие, группа и посещаемость находятся в одной системе. Не нужно искать отдельный бумажный журнал.",
-        },
-        {
-          title: "Проверяйте посещаемость занятия",
-          body:
-            "Менеджер и преподаватель видят, кто пришёл и кто пропустил занятие.",
-        },
-        {
           title: "Вся группа за один раз",
           body:
-            "Отметьте статусы всех курсантов группы в списке занятия и сохраните одним действием. К каждой записи можно добавить комментарий, а кто отметил — сохраняется.",
+            "Сохраните статусы всей группы одним действием. К записи можно добавить комментарий, и сохраняется, кто отметил.",
         },
         {
           title: "История в карточке курсанта",
           body:
-            "Во вкладке посещаемости в карточке курсанта видна история посещённых, пропущенных занятий и опозданий. Менеджер видит её рядом с оплатами и группой.",
-        },
-        {
-          title: "Кто что видит",
-          body:
-            "Преподаватель видит и отмечает только свои группы. Сотрудники филиала видят посещаемость своего филиала, руководитель — всех филиалов.",
+            "История посещённых, пропущенных занятий и опозданий видна рядом с оплатами и группой.",
         },
         {
           title: "Уважительная причина и комментарий",
           body:
-            "Если курсант пропустил занятие по болезни или другой причине, отметьте «уважительная» и укажите причину в комментарии. Так пропуски без причины и по уважительной причине видны отдельно.",
+            "Отметьте «уважительная» и укажите причину в комментарии. Пропуски без причины и по уважительной причине видны отдельно.",
         },
         {
           title: "Посещаемость в календаре",
           body:
-            "В календаре расписания рядом с каждым занятием видна отмеченная посещаемость. Занятие, где посещаемость ещё не отмечена, легко найти.",
-        },
-        {
-          title: "История посещаемости в Telegram",
-          body:
-            "Преподаватель открывает в Telegram-боте историю посещаемости своего курсанта. Курсанты других преподавателей ему недоступны.",
-        },
-        {
-          title: "Курсант видит свою посещаемость",
-          body:
-            "В личном кабинете курсант видит свою посещаемость: на какие занятия пришёл и какие пропустил.",
+            "Рядом с каждым занятием видна отмеченная посещаемость; неотмеченное занятие легко найти.",
         },
       ],
       faq: [
@@ -844,7 +670,7 @@ export const SEO_PAGES: Record<
         {
           question: "Кто отмечает посещаемость?",
           answer:
-            "Руководитель, менеджер, сотрудник приёмной или преподаватель группы. Преподаватель отмечает только свои группы.",
+            "Руководитель, менеджер, сотрудник приёмной или преподаватель группы. Преподаватель отмечает только свои группы. Сотрудники филиала видят посещаемость своего филиала, а руководитель всех филиалов.",
         },
         {
           question: "Можно ли исправить посещаемость позже?",
@@ -855,6 +681,11 @@ export const SEO_PAGES: Record<
           question: "Уходит ли SMS о пропуске?",
           answer:
             "Нет. automaktab.uz не отправляет SMS.",
+        },
+        {
+          question: "Можно ли посмотреть посещаемость в Telegram?",
+          answer:
+            "Да. Преподаватель открывает в Telegram-боте историю посещаемости своего курсанта. Курсанты других преподавателей ему недоступны.",
         },
       ],
       related: ["schedule", "payments", "branches"],
@@ -877,58 +708,28 @@ export const SEO_PAGES: Record<
       intro:
         "Mark attendance on the group list. Check which lessons each student has missed in the same system.",
       definition:
-        "automaktab.uz marks each student present, late, absent or excused for every lesson. Attendance is linked to the lesson, the group and the student’s record.",
+        "automaktab.uz marks each student present, late, absent or excused per lesson, linked to the group and the student’s record.",
       visual: "scene:teacher",
       sections: [
         {
-          title: "Four clear attendance choices",
-          body:
-            "Present, late, absent or excused. Mark each student on the lesson roster.",
-        },
-        {
-          title: "Schedules and attendance stay together",
-          body:
-            "Lessons, groups and attendance are in one system. No need to find a separate paper register.",
-        },
-        {
-          title: "Check who attended the lesson",
-          body:
-            "Managers and teachers can see who attended and who missed the lesson.",
-        },
-        {
           title: "The whole group at once",
           body:
-            "Set the status of every student in the group on the lesson roster and save in one step. Each record can carry a note, and the system keeps who marked it.",
+            "Save the whole group in one step. Each record can carry a note, and who marked it is kept.",
         },
         {
           title: "History on the student record",
           body:
-            "The attendance tab on a student’s record lists the lessons they attended, missed or were late for. Managers see it next to payments and group details.",
-        },
-        {
-          title: "Who sees what",
-          body:
-            "Teachers see and mark only their own groups. Branch staff see attendance for their branch; the owner sees every branch.",
+            "Attended, late and missed lessons are listed next to payments and group details.",
         },
         {
           title: "Excused absences and notes",
           body:
-            "If a student misses a lesson because of illness or another reason, mark them excused and add the reason as a note. Excused and unexcused absences then show separately.",
+            "Mark the student excused and add the reason as a note. Excused and unexcused absences show separately.",
         },
         {
           title: "Attendance in the calendar",
           body:
-            "The schedule calendar shows recorded attendance next to each lesson, so lessons without attendance are easy to find.",
-        },
-        {
-          title: "Attendance history in Telegram",
-          body:
-            "Teachers can open their own student’s attendance history in the Telegram bot. Other teachers’ students are not available to them.",
-        },
-        {
-          title: "Students see their own attendance",
-          body:
-            "In their student account, each student sees their attendance: which lessons they attended and which they missed.",
+            "Recorded attendance shows next to each lesson, so lessons without it are easy to find.",
         },
       ],
       faq: [
@@ -945,7 +746,7 @@ export const SEO_PAGES: Record<
         {
           question: "Who marks attendance?",
           answer:
-            "The owner, a manager, admissions staff or the group’s teacher. Teachers can mark only their own groups.",
+            "The owner, a manager, admissions staff or the group’s teacher. Teachers can mark only their own groups. Branch staff see attendance for their branch; the owner sees every branch.",
         },
         {
           question: "Can attendance be corrected later?",
@@ -956,6 +757,11 @@ export const SEO_PAGES: Record<
           question: "Is an SMS sent when a student misses a lesson?",
           answer:
             "No. automaktab.uz does not send SMS.",
+        },
+        {
+          question: "Can attendance history be opened in Telegram?",
+          answer:
+            "Yes. Teachers can open their own student’s attendance history in the Telegram bot. Other teachers’ students are not available to them.",
         },
       ],
       related: ["schedule", "payments", "branches"],
@@ -984,49 +790,19 @@ export const SEO_PAGES: Record<
       visual: "scene:director",
       sections: [
         {
-          title: "Filiallarni alohida va birga ko‘ring",
-          body:
-            "Har bir filial natijasini va maktabning umumiy holatini bir paneldan tekshiring.",
-        },
-        {
-          title: "Natijalarni bir xil davrda solishtiring",
-          body:
-            "Filiallar bir tizimda ishlaydi. Rahbar natijalarni solishtirib, qaysi ishni tekshirish kerakligini aniqlaydi.",
-        },
-        {
-          title: "Har bir xodimga kerakli kirish huquqi",
-          body:
-            "Rahbar, menejer, qabul xodimi, buxgalter va o‘qituvchi ishiga mos bo‘limlarni ko‘radi.",
-        },
-        {
           title: "Rahbar panelida filiallar",
           body:
-            "Bir nechta filial bo‘lsa, rahbar panelida filiallarni taqqoslash grafigi va tushum bo‘yicha eng yaxshi filiallar ro‘yxati chiqadi. Maktab bo‘yicha jami tushum va qarz ham shu yerda.",
+            "Bir nechta filial bo‘lsa, panelda taqqoslash grafigi va tushum bo‘yicha eng yaxshi filiallar chiqadi. Jami tushum va qarz ham shu yerda.",
         },
         {
           title: "Kirish huquqlari",
           body:
-            "Har bir ruxsat alohida beriladi va uchta doiradan biriga ega: butun maktab, bitta filial yoki faqat o‘z ma’lumotlari. Xodim bir nechta filialga biriktirilishi mumkin. Masalan, buxgalterga ikki filial bo‘yicha faqat xarajatlarni ko‘rish ruxsatini bering.",
-        },
-        {
-          title: "Rollar va ruxsat shablonlari",
-          body:
-            "Rollar: rahbar, menejer, buxgalter, qabul xodimi va o‘qituvchi. Takrorlanadigan ruxsatlar to‘plamini nomli shablon sifatida saqlab, yangi xodimga qo‘llang.",
-        },
-        {
-          title: "Menejerga nima ochiq",
-          body:
-            "Menejer sukut bo‘yicha deyarli barcha bo‘limlarni ko‘radi. Xodim ruxsatlarini boshqarish, audit jurnali va sozlamalar unga yopiq.",
+            "Har bir ruxsat uchta doiradan biriga ega: butun maktab, bitta filial yoki faqat o‘z ma’lumotlari.",
         },
         {
           title: "Kim nimani o‘zgartirgani",
           body:
             "Muhim o‘zgarishlar audit jurnaliga yoziladi: kim, qachon va qaysi yozuvni o‘zgartirgani. Jurnal rahbarga ochiq.",
-        },
-        {
-          title: "Har kuni 08:00 da hisobot",
-          body:
-            "Hisobotni yoqqan rahbar har kuni 08:00 da Telegram’da maktab bo‘yicha, menejer esa o‘z filiali bo‘yicha kechagi tushum va yangi o‘quvchilar sonini oladi.",
         },
       ],
       faq: [
@@ -1038,7 +814,7 @@ export const SEO_PAGES: Record<
         {
           question: "Xodimlarga ruxsatni kim beradi?",
           answer:
-            "Rahbar. Ruxsatlarni boshqarish menejerga sukut bo‘yicha berilmaydi.",
+            "Rahbar. Ruxsatlarni boshqarish menejerga sukut bo‘yicha berilmaydi. Menejer sukut bo‘yicha deyarli barcha bo‘limlarni ko‘radi; audit jurnali va sozlamalar unga yopiq.",
         },
         {
           question: "Filiallar tushumini qanday solishtiraman?",
@@ -1049,6 +825,16 @@ export const SEO_PAGES: Record<
           question: "Bitta xodim ikki filialda ishlay oladimi?",
           answer:
             "Ha. Xodimni bir nechta filialga biriktirib, har bir filial uchun alohida ruxsat berish mumkin.",
+        },
+        {
+          question: "Qanday rollar bor?",
+          answer:
+            "Rollar: rahbar, menejer, buxgalter, qabul xodimi va o‘qituvchi. Takrorlanadigan ruxsatlar to‘plamini nomli shablon sifatida saqlab, yangi xodimga qo‘llang.",
+        },
+        {
+          question: "Filial bo‘yicha kunlik hisobot keladimi?",
+          answer:
+            "Ha. Hisobotni yoqqan rahbar har kuni 08:00 da Telegram’da maktab bo‘yicha, menejer esa o‘z filiali bo‘yicha kechagi tushum va yangi o‘quvchilar sonini oladi.",
         },
       ],
       related: ["telegram", "expenses", "payments"],
@@ -1071,53 +857,23 @@ export const SEO_PAGES: Record<
       intro:
         "Сравнивайте поступления и задолженность филиалов на панели руководителя. Видно, какому филиалу нужно внимание.",
       definition:
-        "automaktab.uz ведёт несколько филиалов в одной системе: руководитель видит все филиалы, а менеджер и другие сотрудники — только закреплённые за ними.",
+        "automaktab.uz ведёт несколько филиалов в одной системе: руководитель видит все, а остальные сотрудники только свои филиалы.",
       visual: "scene:director",
       sections: [
         {
-          title: "Смотрите филиалы отдельно и вместе",
-          body:
-            "Проверяйте результаты каждого филиала и общую картину автошколы на одной панели.",
-        },
-        {
-          title: "Сравнивайте результаты за один период",
-          body:
-            "Филиалы работают в одной системе. Руководитель сравнивает результаты и решает, какие процессы проверить.",
-        },
-        {
-          title: "Каждому сотруднику нужный доступ",
-          body:
-            "Руководитель, менеджер, сотрудник приёмной, бухгалтер и преподаватель видят разделы для своей работы.",
-        },
-        {
           title: "Филиалы на панели руководителя",
           body:
-            "Если филиалов несколько, на панели руководителя есть график сравнения филиалов и список лучших филиалов по поступлениям. Здесь же итоги по всей автошколе.",
+            "Если филиалов несколько, на панели есть график сравнения и лучшие филиалы по поступлениям. Итоги по автошколе тоже здесь.",
         },
         {
           title: "Права доступа",
           body:
-            "Каждое право выдаётся отдельно и имеет одну из трёх областей: вся автошкола, один филиал или только свои данные. Сотрудника можно закрепить за несколькими филиалами. Например, бухгалтеру можно дать право видеть только расходы двух филиалов.",
-        },
-        {
-          title: "Роли и шаблоны прав",
-          body:
-            "Роли: руководитель, менеджер, бухгалтер, сотрудник приёмной и преподаватель. Повторяющийся набор прав можно сохранить как именованный шаблон и применить к новому сотруднику.",
-        },
-        {
-          title: "Что доступно менеджеру",
-          body:
-            "По умолчанию менеджер видит почти все разделы. Управление правами сотрудников, журнал аудита и настройки ему закрыты.",
+            "Каждое право имеет одну из трёх областей: вся автошкола, один филиал или только свои данные.",
         },
         {
           title: "Кто что изменил",
           body:
             "Важные изменения пишутся в журнал аудита: кто, когда и какую запись изменил. Журнал доступен руководителю.",
-        },
-        {
-          title: "Отчёт каждый день в 08:00",
-          body:
-            "Руководитель, включивший отчёт, каждый день в 08:00 получает в Telegram вчерашние поступления и число новых курсантов по всей автошколе, менеджер — по своему филиалу.",
         },
       ],
       faq: [
@@ -1129,7 +885,7 @@ export const SEO_PAGES: Record<
         {
           question: "Кто выдаёт права сотрудникам?",
           answer:
-            "Руководитель. Управление правами по умолчанию менеджеру не выдаётся.",
+            "Руководитель. Управление правами по умолчанию менеджеру не выдаётся. По умолчанию менеджер видит почти все разделы; журнал аудита и настройки ему закрыты.",
         },
         {
           question: "Как сравнить поступления филиалов?",
@@ -1140,6 +896,16 @@ export const SEO_PAGES: Record<
           question: "Может ли сотрудник работать в двух филиалах?",
           answer:
             "Да. Сотрудника можно закрепить за несколькими филиалами и выдать права отдельно для каждого.",
+        },
+        {
+          question: "Какие есть роли?",
+          answer:
+            "Роли: руководитель, менеджер, бухгалтер, сотрудник приёмной и преподаватель. Повторяющийся набор прав можно сохранить как именованный шаблон и применить к новому сотруднику.",
+        },
+        {
+          question: "Приходит ли ежедневный отчёт по филиалу?",
+          answer:
+            "Да. Руководитель, включивший отчёт, каждый день в 08:00 получает в Telegram вчерашние поступления и число новых курсантов по всей автошколе, а менеджер по своему филиалу.",
         },
       ],
       related: ["telegram", "expenses", "payments"],
@@ -1162,53 +928,23 @@ export const SEO_PAGES: Record<
       intro:
         "Compare branch revenue and student debt on the owner dashboard. See which branch needs attention.",
       definition:
-        "automaktab.uz runs several branches in one system: the owner sees every branch, while managers and other staff see only the branches assigned to them.",
+        "automaktab.uz runs several branches in one system: the owner sees every branch; other staff see only their assigned branches.",
       visual: "scene:director",
       sections: [
         {
-          title: "View branches separately and together",
-          body:
-            "Check each branch’s results and the whole school’s performance from one dashboard.",
-        },
-        {
-          title: "Compare results for the same period",
-          body:
-            "Branches work in one system. Owners compare results and decide which tasks need attention.",
-        },
-        {
-          title: "Give each employee the access they need",
-          body:
-            "Owners, managers, admissions staff, accountants and teachers see the sections they need for their work.",
-        },
-        {
           title: "Branches on the owner dashboard",
           body:
-            "With more than one branch, the owner dashboard shows a branch comparison chart and the top branches by revenue, along with totals for the whole school.",
+            "With more than one branch, the dashboard shows a comparison chart and top branches by revenue, plus school-wide totals.",
         },
         {
           title: "Access rights",
           body:
-            "Each permission is granted separately with one of three scopes: the whole school, one branch, or the employee’s own records. An employee can be assigned to several branches. For example, give an accountant view-only access to expenses for two branches.",
-        },
-        {
-          title: "Roles and permission templates",
-          body:
-            "Roles: owner, manager, accountant, admissions staff and teacher. Save a recurring set of permissions as a named template and apply it to new staff.",
-        },
-        {
-          title: "What managers can open",
-          body:
-            "By default a manager sees almost every section. Managing staff permissions, the audit log and settings stay closed to them.",
+            "Each permission has one of three scopes: the whole school, one branch, or the employee's own records.",
         },
         {
           title: "Who changed what",
           body:
             "Important changes go to the audit log: who changed which record and when. The log is available to the owner.",
-        },
-        {
-          title: "A report every day at 08:00",
-          body:
-            "An owner who turns the report on gets yesterday’s revenue and new-student count for the whole school in Telegram at 08:00 every day; a manager gets the same for their branch.",
         },
       ],
       faq: [
@@ -1220,7 +956,7 @@ export const SEO_PAGES: Record<
         {
           question: "Who grants permissions to staff?",
           answer:
-            "The owner. Permission management is not part of a manager’s default access.",
+            "The owner. Permission management is not part of a manager’s default access. By default a manager sees almost every section; the audit log and settings stay closed.",
         },
         {
           question: "How do I compare branch revenue?",
@@ -1231,6 +967,16 @@ export const SEO_PAGES: Record<
           question: "Can one employee work in two branches?",
           answer:
             "Yes. Assign the employee to several branches and grant permissions separately for each one.",
+        },
+        {
+          question: "Which roles are there?",
+          answer:
+            "Roles: owner, manager, accountant, admissions staff and teacher. Save a recurring set of permissions as a named template and apply it to new staff.",
+        },
+        {
+          question: "Is there a daily report per branch?",
+          answer:
+            "Yes. An owner who turns the report on gets yesterday’s revenue and new-student count for the whole school in Telegram at 08:00 every day; a manager gets the same for their branch.",
         },
       ],
       related: ["telegram", "expenses", "payments"],
@@ -1254,21 +1000,23 @@ export const SEO_PAGES: Record<
       heading: "Maktabingiz uchun narx va sinov shartlari.",
       intro:
         "Demo namuna ma’lumotlari bilan ishlaydi. Maktabingiz ma’lumotlari bilan 14 kunlik sinov, narx va cheklovlarni oldindan yozma kelishamiz.",
-      sections: [
+      visual: "pricing-cards",
+      sections: [],
+      faq: [
         {
-          title: "Maktabingizda 14 kun sinang",
-          body:
-            "Sinov muddati, narx, ma’lumot ko‘chirish va cheklovlarni boshlashdan oldin yozma kelishamiz.",
+          question: "Narx qanday hisoblanadi?",
+          answer:
+            "Filiallar, o‘quvchilar soni va kerakli bo‘limlarga qarab. Narx, sinov muddati, ma’lumot ko‘chirish va cheklovlarni boshlashdan oldin yozma kelishamiz.",
         },
         {
-          title: "Narx maktabingizga qarab hisoblanadi",
-          body:
-            "Filiallar, o‘quvchilar soni va kerakli bo‘limlarni ayting. Sizga mos shartlarni yozma taklifda oling.",
+          question: "Demo bilan sinovning farqi nima?",
+          answer:
+            "Demo namuna ma’lumotlari bilan ishlaydi va telefon raqamisiz ochiladi. Sinovda maktabingiz ma’lumotlari bilan 14 kun ishlaysiz.",
         },
         {
-          title: "Avval tizimni o‘zingiz ko‘ring",
-          body:
-            "Telefon raqamingizni qoldirmasdan demoni oching. Rahbar paneli, jadval, davomat va to‘lovlarni namuna ma’lumotlari bilan tekshiring.",
+          question: "Sinovdan keyin nima bo‘ladi?",
+          answer:
+            "Davom etish yoki to‘xtatish sizning qaroringiz.",
         },
       ],
       relatedLabel: "Boshqa imkoniyatlar",
@@ -1289,21 +1037,23 @@ export const SEO_PAGES: Record<
       heading: "Цена и пробный период для вашей автошколы.",
       intro:
         "Демо использует вымышленные данные. 14-дневный пробный период работает на данных вашей школы. Цену и ограничения согласуем письменно до начала.",
-      sections: [
+      visual: "pricing-cards",
+      sections: [],
+      faq: [
         {
-          title: "14 дней в вашей автошколе",
-          body:
-            "Срок, цену, перенос данных и ограничения согласуем письменно до начала пробного периода.",
+          question: "Как считается цена?",
+          answer:
+            "По числу филиалов, курсантов и нужным разделам. Цену, срок пробного периода, перенос данных и ограничения согласуем письменно до начала.",
         },
         {
-          title: "Цена зависит от вашей школы",
-          body:
-            "Расскажите о филиалах, числе курсантов и нужных разделах. Получите подходящие условия в письменном предложении.",
+          question: "Чем демо отличается от пробного периода?",
+          answer:
+            "Демо работает на вымышленных данных и открывается без номера телефона. В пробный период вы 14 дней работаете на данных своей школы.",
         },
         {
-          title: "Сначала посмотрите саму систему",
-          body:
-            "Откройте демо без номера телефона. Проверьте панель руководителя, расписание, посещаемость и оплаты на вымышленных данных.",
+          question: "Что после пробного периода?",
+          answer:
+            "Продолжить или остановиться решаете вы.",
         },
       ],
       relatedLabel: "Другие возможности",
@@ -1324,21 +1074,23 @@ export const SEO_PAGES: Record<
       heading: "Pricing and trial terms for your school.",
       intro:
         "The demo uses sample data. The 14-day trial uses your school’s data. We agree on pricing and limits in writing beforehand.",
-      sections: [
+      visual: "pricing-cards",
+      sections: [],
+      faq: [
         {
-          title: "14 days at your school",
-          body:
-            "Agree on trial duration, price, data migration and limits in writing before you start.",
+          question: "How is pricing calculated?",
+          answer:
+            "By your branch and student counts and the sections you need. We agree on price, trial length, data migration and limits in writing before you start.",
         },
         {
-          title: "Pricing depends on your school",
-          body:
-            "Tell us your branch and student counts and the sections you need. Get suitable terms in a written offer.",
+          question: "How is the demo different from the trial?",
+          answer:
+            "The demo uses sample data and opens without your phone number. The trial runs for 14 days with your school’s data.",
         },
         {
-          title: "See the system before you decide",
-          body:
-            "Open the demo without leaving your phone number. Check the owner dashboard, schedules, attendance and payments with sample data.",
+          question: "What happens after the trial?",
+          answer:
+            "You decide whether to continue.",
         },
       ],
       relatedLabel: "Other features",
@@ -1380,39 +1132,9 @@ export const SEO_PAGES: Record<
             "Qabul qilingan o‘quvchini guruhga biriktiring. To‘lov va davomat shu kartadan davom etadi.",
         },
         {
-          title: "Demoda sinab ko‘ring",
-          body:
-            "Namuna murojaatlar bilan qabul jarayonini tekshiring. Telefon raqamingizni qoldirish shart emas.",
-        },
-        {
-          title: "Manbalar",
-          body:
-            "Har bir murojaat manbasi bilan yoziladi: tavsiya, Instagram, xarita katalogi, Telegram, o‘zi kelgan, OLX yoki boshqa. Maktab o‘z manbalarini ham qo‘sha oladi.",
-        },
-        {
-          title: "Bosqichlarni maktab nomlaydi",
-          body:
-            "Rahbar yoki menejer bosqichlar nomi, rangi va tartibini sozlaydi. Har bir bosqich «ishda», «qabul qilindi» yoki «yo‘qotildi» turida bo‘ladi. Yo‘qotilganda sababi yoziladi: qimmat, boshqa maktab, vaqt to‘g‘ri kelmadi, fikridan qaytdi, javob bermadi yoki boshqa.",
-        },
-        {
           title: "Mas’ul xodim va keyingi qadam",
           body:
             "Har bir murojaatga mas’ul xodim biriktiriladi va keyingi aloqa vaqti belgilanadi. Murojaatlarni ro‘yxat yoki bosqichlar doskasi ko‘rinishida kuzating.",
-        },
-        {
-          title: "Faoliyat tarixi va dublikatlar",
-          body:
-            "Har bir murojaatda qo‘ng‘iroq, xabar, uchrashuv, vazifa va izohlar tarixi saqlanadi. Yangi murojaat qo‘shilganda telefon raqami bo‘yicha dublikat tekshiriladi.",
-        },
-        {
-          title: "Ko‘rsatkichlar va Excel",
-          body:
-            "Ko‘rsatkichlar bo‘limida har bir bosqichdagi murojaatlar, muddati o‘tgan keyingi qadamlar, 3 kundan beri tegilmaganlar, qabulga aylanish va yo‘qotish sabablari ko‘rinadi. Ro‘yxatni Excel’ga eksport qilish mumkin.",
-        },
-        {
-          title: "Yangi murojaat haqida Telegram xabari",
-          body:
-            "Telegram’ni ulagan rahbar barcha yangi murojaatlar, menejer esa o‘z filiali murojaatlari haqida xabar oladi.",
         },
       ],
       faq: [
@@ -1429,7 +1151,22 @@ export const SEO_PAGES: Record<
         {
           question: "SMS yuboriladimi?",
           answer:
-            "Yo‘q, SMS yuborilmaydi. Har bir murojaatga keyingi aloqa vaqti belgilanadi va muddati o‘tganlari ko‘rsatkichlarda ko‘rinadi.",
+            "Yo‘q, SMS yuborilmaydi. Har bir murojaatga keyingi aloqa vaqti belgilanadi va muddati o‘tganlari ko‘rsatkichlarda ko‘rinadi. Telegram’ni ulagan rahbar barcha yangi murojaatlar, menejer esa o‘z filiali murojaatlari haqida xabar oladi.",
+        },
+        {
+          question: "Bosqichlarni o‘zgartirsa bo‘ladimi?",
+          answer:
+            "Ha. Rahbar yoki menejer bosqichlar nomi, rangi va tartibini sozlaydi. Har bir bosqich «ishda», «qabul qilindi» yoki «yo‘qotildi» turida bo‘ladi. Yo‘qotilganda sababi yoziladi: qimmat, boshqa maktab, vaqt to‘g‘ri kelmadi, fikridan qaytdi, javob bermadi yoki boshqa.",
+        },
+        {
+          question: "Takroriy murojaat aniqlanadimi?",
+          answer:
+            "Har bir murojaatda qo‘ng‘iroq, xabar, uchrashuv, vazifa va izohlar tarixi saqlanadi. Yangi murojaat qo‘shilganda telefon raqami bo‘yicha dublikat tekshiriladi.",
+        },
+        {
+          question: "Qanday ko‘rsatkichlar bor?",
+          answer:
+            "Ko‘rsatkichlar bo‘limida har bir bosqichdagi murojaatlar, muddati o‘tgan keyingi qadamlar, 3 kundan beri tegilmaganlar, qabulga aylanish va yo‘qotish sabablari ko‘rinadi. Ro‘yxatni Excel’ga eksport qilish mumkin.",
         },
       ],
       related: ["payments", "telegram", "branches"],
@@ -1458,7 +1195,7 @@ export const SEO_PAGES: Record<
         {
           title: "Заявки в одном списке",
           body:
-            "Неважно, откуда пришла заявка, — каждая попадает в общий список. Видно, на какие заявки ещё не ответили.",
+            "Неважно, откуда пришла заявка: каждая попадает в общий список. Видно, на какие заявки ещё не ответили.",
         },
         {
           title: "От кандидата к группе",
@@ -1466,39 +1203,9 @@ export const SEO_PAGES: Record<
             "Зачислите принятого курсанта в группу. Оплаты и посещаемость продолжаются с его карточки.",
         },
         {
-          title: "Попробуйте в демо",
-          body:
-            "Проверьте процесс приёма на вымышленных заявках. Оставлять номер телефона не нужно.",
-        },
-        {
-          title: "Источники",
-          body:
-            "Каждая заявка сохраняется с источником: рекомендация, Instagram, каталог на карте, Telegram, пришёл сам, OLX или другое. Автошкола может добавить свои источники.",
-        },
-        {
-          title: "Этапы называет автошкола",
-          body:
-            "Руководитель или менеджер настраивает названия, цвета и порядок этапов. Каждый этап относится к типу «в работе», «зачислен» или «потерян». При потере указывается причина: дорого, выбрал другую школу, неудобное время, передумал, не отвечает или другое.",
-        },
-        {
           title: "Ответственный и следующий шаг",
           body:
             "За каждой заявкой закрепляется ответственный сотрудник и время следующего контакта. Заявки можно вести списком или на доске этапов.",
-        },
-        {
-          title: "История действий и дубликаты",
-          body:
-            "В каждой заявке хранится история звонков, сообщений, встреч, задач и заметок. При добавлении новой заявки дубликат проверяется по номеру телефона.",
-        },
-        {
-          title: "Показатели и Excel",
-          body:
-            "В разделе показателей видно число заявок на каждом этапе, просроченные следующие шаги, заявки без касания более 3 дней, конверсию в зачисление и причины потерь. Список можно выгрузить в Excel.",
-        },
-        {
-          title: "Уведомление о новой заявке в Telegram",
-          body:
-            "Руководитель, подключивший Telegram, получает уведомления обо всех новых заявках, менеджер — о заявках своего филиала.",
         },
       ],
       faq: [
@@ -1515,7 +1222,22 @@ export const SEO_PAGES: Record<
         {
           question: "Отправляются ли SMS?",
           answer:
-            "Нет, SMS не отправляются. Для каждой заявки задаётся время следующего контакта, а просроченные видны в показателях.",
+            "Нет, SMS не отправляются. Для каждой заявки задаётся время следующего контакта, а просроченные видны в показателях. Руководитель, подключивший Telegram, получает уведомления обо всех новых заявках, а менеджер о заявках своего филиала.",
+        },
+        {
+          question: "Можно ли настроить этапы?",
+          answer:
+            "Да. Руководитель или менеджер настраивает названия, цвета и порядок этапов. Каждый этап относится к типу «в работе», «зачислен» или «потерян». При потере указывается причина: дорого, выбрал другую школу, неудобное время, передумал, не отвечает или другое.",
+        },
+        {
+          question: "Находятся ли дубликаты заявок?",
+          answer:
+            "В каждой заявке хранится история звонков, сообщений, встреч, задач и заметок. При добавлении новой заявки дубликат проверяется по номеру телефона.",
+        },
+        {
+          question: "Какие есть показатели?",
+          answer:
+            "В разделе показателей видно число заявок на каждом этапе, просроченные следующие шаги, заявки без касания более 3 дней, конверсию в зачисление и причины потерь. Список можно выгрузить в Excel.",
         },
       ],
       related: ["payments", "telegram", "branches"],
@@ -1552,39 +1274,9 @@ export const SEO_PAGES: Record<
             "Place an admitted student into a group. Payments and attendance continue from their record.",
         },
         {
-          title: "Try it in the demo",
-          body:
-            "Check the enrollment flow with sample inquiries. You do not need to leave your phone number.",
-        },
-        {
-          title: "Sources",
-          body:
-            "Every inquiry is saved with its source: referral, Instagram, map directory, Telegram, walk-in, OLX or other. Schools can add their own sources too.",
-        },
-        {
-          title: "Your school names the stages",
-          body:
-            "The owner or a manager sets stage names, colours and order. Each stage is of type in progress, enrolled or lost. When an inquiry is lost, a reason is recorded: too expensive, chose another school, inconvenient time, changed their mind, no answer or other.",
-        },
-        {
           title: "Owner and next step",
           body:
             "Each inquiry gets a responsible employee and a next-contact time. Work with inquiries as a list or on a stage board.",
-        },
-        {
-          title: "Activity history and duplicates",
-          body:
-            "Each inquiry keeps a history of calls, messages, meetings, tasks and notes. When a new inquiry is added, duplicates are checked by phone number.",
-        },
-        {
-          title: "Metrics and Excel",
-          body:
-            "The metrics view shows inquiries per stage, overdue next steps, inquiries untouched for 3 days, conversion to enrollment and lost reasons. The list can be exported to Excel.",
-        },
-        {
-          title: "Telegram alerts for new inquiries",
-          body:
-            "An owner who has linked Telegram is notified of every new inquiry; a manager is notified of inquiries for their branch.",
         },
       ],
       faq: [
@@ -1601,7 +1293,22 @@ export const SEO_PAGES: Record<
         {
           question: "Are SMS messages sent?",
           answer:
-            "No, SMS is not sent. Each inquiry gets a next-contact time, and overdue ones show up in the metrics.",
+            "No, SMS is not sent. Each inquiry gets a next-contact time, and overdue ones show up in the metrics. An owner who has linked Telegram is notified of every new inquiry; a manager is notified of inquiries for their branch.",
+        },
+        {
+          question: "Can we name our own stages?",
+          answer:
+            "Yes. The owner or a manager sets stage names, colours and order. Each stage is of type in progress, enrolled or lost. When an inquiry is lost, a reason is recorded: too expensive, chose another school, inconvenient time, changed their mind, no answer or other.",
+        },
+        {
+          question: "Are duplicate inquiries caught?",
+          answer:
+            "Each inquiry keeps a history of calls, messages, meetings, tasks and notes. When a new inquiry is added, duplicates are checked by phone number.",
+        },
+        {
+          question: "Which metrics are there?",
+          answer:
+            "The metrics view shows inquiries per stage, overdue next steps, inquiries untouched for 3 days, conversion to enrollment and lost reasons. The list can be exported to Excel.",
         },
       ],
       related: ["payments", "telegram", "branches"],
@@ -1880,17 +1587,17 @@ export const SEO_PAGES: Record<
         {
           title: "Mashg‘ulot holatlari",
           body:
-            "Mashg‘ulot avval rejalashtiriladi. Haydashdan keyin instruktor uni haqiqiy daqiqalar bilan yuboradi. Menejer tasdiqlaydi yoki rad etadi. Kerak bo‘lsa, mashg‘ulot bekor qilinadi yoki menejer daqiqalarni tuzatadi. Har bir o‘zgarish mashg‘ulot tarixida qoladi.",
+            "Mashg‘ulot rejalashtiriladi, instruktor uni haqiqiy daqiqalar bilan yuboradi, menejer tasdiqlaydi yoki rad etadi.",
         },
         {
           title: "O‘tilgan va qolgan daqiqalar",
           body:
-            "O‘qish rejasida kerakli daqiqalar soni belgilanadi, masalan 1200. Tasdiqlangan mashg‘ulot daqiqalari shu rejaga qo‘shiladi va qolgan daqiqalar hisoblanadi. Rejalashtirilgan, yuborilgan yoki rad etilgan mashg‘ulot hisobga kirmaydi.",
+            "O‘qish rejasida kerakli daqiqalar belgilanadi, masalan 1200. Tasdiqlangan daqiqalar qo‘shiladi, qolgani hisoblanadi.",
         },
         {
           title: "Instruktor va mashina",
           body:
-            "Mashg‘ulotga instruktor va avtoparkdagi mashina biriktiriladi. Mashina kartasida shu mashinadagi mashg‘ulotlar ro‘yxati ko‘rinadi, shuning uchun mashina qayerda ishlaganini alohida yozish shart emas.",
+            "Mashg‘ulotga instruktor va mashina biriktiriladi. Mashina kartasida undagi mashg‘ulotlar ro‘yxati ko‘rinadi.",
         },
       ],
       faq: [
@@ -1901,12 +1608,18 @@ export const SEO_PAGES: Record<
         },
         {
           question: "Mashg‘ulotni kim tasdiqlaydi?",
-          answer: "Instruktor mashg‘ulotni yuboradi, menejer uni tasdiqlaydi yoki rad etadi.",
+          answer:
+            "Instruktor mashg‘ulotni yuboradi, menejer uni tasdiqlaydi yoki rad etadi.",
         },
         {
           question: "Masofa (km) yoziladimi?",
           answer:
             "Yo‘q. Mashg‘ulot bo‘yicha masofa yozilmaydi. Mashinaning odometri avtopark bo‘limida yuritiladi.",
+        },
+        {
+          question: "Mashg‘ulotni bekor qilsa yoki tuzatsa bo‘ladimi?",
+          answer:
+            "Ha. Kerak bo‘lsa, mashg‘ulot bekor qilinadi yoki menejer daqiqalarni tuzatadi. Har bir o‘zgarish mashg‘ulot tarixida qoladi.",
         },
       ],
       related: ["schedule", "fleet", "attendance"],
@@ -1935,17 +1648,17 @@ export const SEO_PAGES: Record<
         {
           title: "Статусы занятия",
           body:
-            "Занятие сначала планируется. После вождения инструктор отправляет его с фактическими минутами. Менеджер подтверждает или отклоняет. При необходимости занятие отменяют или менеджер исправляет минуты. Каждое изменение остаётся в истории занятия.",
+            "Занятие планируется, инструктор отправляет его с фактическими минутами, менеджер подтверждает или отклоняет.",
         },
         {
           title: "Пройденные и оставшиеся минуты",
           body:
-            "В плане обучения задаётся нужное число минут, например 1200. Минуты подтверждённых занятий добавляются к плану, остаток считается автоматически. Запланированные, отправленные и отклонённые занятия не засчитываются.",
+            "В плане обучения задаётся нужное число минут, например 1200. Подтверждённые минуты добавляются, остаток считается.",
         },
         {
           title: "Инструктор и машина",
           body:
-            "К занятию привязываются инструктор и машина из автопарка. В карточке машины виден список занятий на ней, поэтому отдельно записывать, где работала машина, не нужно.",
+            "К занятию привязываются инструктор и машина. В карточке машины виден список занятий на ней.",
         },
       ],
       faq: [
@@ -1956,12 +1669,18 @@ export const SEO_PAGES: Record<
         },
         {
           question: "Кто подтверждает занятие?",
-          answer: "Инструктор отправляет занятие, менеджер подтверждает или отклоняет его.",
+          answer:
+            "Инструктор отправляет занятие, менеджер подтверждает или отклоняет его.",
         },
         {
           question: "Записывается ли пробег (км)?",
           answer:
             "Нет. Пробег по занятию не записывается. Одометр машины ведётся в разделе автопарка.",
+        },
+        {
+          question: "Можно ли отменить или исправить занятие?",
+          answer:
+            "Да. При необходимости занятие отменяют или менеджер исправляет минуты. Каждое изменение остаётся в истории занятия.",
         },
       ],
       related: ["schedule", "fleet", "attendance"],
@@ -1982,7 +1701,7 @@ export const SEO_PAGES: Record<
       eyebrow: "Practical driving",
       heading: "Practical driving lessons and instructor tracking",
       definition:
-        "automaktab.uz records every driving lesson with the student, vehicle, instructor and time; only approved minutes count toward the student's training plan.",
+        "automaktab.uz records each driving lesson with student, vehicle, instructor and time; only approved minutes count toward the training plan.",
       intro:
         "See who drove when, in which vehicle and with which instructor, without a paper log. Completed and remaining minutes sit on the student's training plan.",
       visual: "driving-card",
@@ -1990,17 +1709,17 @@ export const SEO_PAGES: Record<
         {
           title: "Lesson statuses",
           body:
-            "A lesson is planned first. After driving, the instructor submits it with the actual minutes. A manager approves or rejects it. If needed, the lesson is cancelled or a manager corrects the minutes. Every change stays in the lesson history.",
+            "A lesson is planned, the instructor submits it with the actual minutes, and a manager approves or rejects it.",
         },
         {
           title: "Completed and remaining minutes",
           body:
-            "The training plan sets the required minutes, for example 1200. Minutes from approved lessons are added to the plan and the remainder is calculated. Planned, submitted and rejected lessons do not count.",
+            "The training plan sets the required minutes, for example 1200. Approved minutes are added and the remainder is calculated.",
         },
         {
           title: "Instructor and vehicle",
           body:
-            "Each lesson gets an instructor and a vehicle from the fleet. The vehicle record lists the lessons driven in it, so nobody has to log where the car was used.",
+            "Each lesson gets an instructor and a vehicle. The vehicle record lists the lessons driven in it.",
         },
       ],
       faq: [
@@ -2011,12 +1730,18 @@ export const SEO_PAGES: Record<
         },
         {
           question: "Who approves a lesson?",
-          answer: "The instructor submits the lesson; a manager approves or rejects it.",
+          answer:
+            "The instructor submits the lesson; a manager approves or rejects it.",
         },
         {
           question: "Is distance (km) recorded?",
           answer:
             "No. Distance is not recorded per lesson. The vehicle odometer is kept in the fleet section.",
+        },
+        {
+          question: "Can a lesson be cancelled or corrected?",
+          answer:
+            "Yes. If needed, the lesson is cancelled or a manager corrects the minutes. Every change stays in the lesson history.",
         },
       ],
       related: ["schedule", "fleet", "attendance"],
@@ -2039,45 +1764,25 @@ export const SEO_PAGES: Record<
       eyebrow: "Telegram hisoboti",
       heading: "Har kuni 08:00 da Telegram’da avtomaktab hisoboti",
       definition:
-        "Hisobot yoqilgan bo‘lsa, automaktab.uz har kuni 08:00 da (Toshkent) kechagi tushum va yangi o‘quvchilar sonini Telegram’ga yuboradi: rahbarga maktab bo‘yicha jami, menejerga o‘z filiali bo‘yicha.",
+        "Hisobot yoqilgan bo‘lsa, automaktab.uz har kuni 08:00 da (Toshkent) kechagi tushum va yangi o‘quvchilar sonini Telegram’ga yuboradi.",
       intro:
         "Kecha qancha tushum bo‘lgani va nechta yangi o‘quvchi qo‘shilganini ertalab Telegram’da ko‘ring. Buning uchun tizimga kirish shart emas.",
       visual: "morning-report",
       sections: [
         {
-          title: "Hisobotda nima bor",
-          body:
-            "Kechagi tushum va kecha qo‘shilgan yangi o‘quvchilar soni. Hisobot har kuni 08:00 da Toshkent vaqti bilan keladi.",
-        },
-        {
           title: "Kim oladi",
           body:
-            "Faqat rahbar va menejer, faqat hisobotni yoqqanlar. Rahbar maktab bo‘yicha jami raqamlarni, menejer o‘z filiali raqamlarini oladi. Qabul xodimi va o‘qituvchiga hisobot yuborilmaydi.",
-        },
-        {
-          title: "Ruxsat qayta tekshiriladi",
-          body:
-            "Yuborishdan oldin xodimning holati va ruxsatlari qayta tekshiriladi. O‘chirilgan yoki faol bo‘lmagan xodimga, faoliyati to‘xtatilgan maktabga hisobot bormaydi.",
+            "Hisobotni yoqqan rahbar maktab bo‘yicha, menejer o‘z filiali bo‘yicha raqamlarni oladi. Qabul xodimi va o‘qituvchiga yuborilmaydi.",
         },
         {
           title: "Qanday yoqiladi",
           body:
-            "Profil sahifasida Telegram’ni ulang: tizim havola beradi, bot ulanishni tasdiqlaydi. Shu sahifada kunlik hisobotni yoqing yoki o‘chiring.",
-        },
-        {
-          title: "Xarajat xabarlari va xulosalari",
-          body:
-            "Yangi xarajat yaratilganda va xarajat birinchi marta qisman to‘langanda xabar keladi. Ish kunlari 09:00 da kutilayotgan, yaqin kunlarda muddati keladigan va kechikkan xarajatlar soni, dushanba 10:00 da esa haftalik kechikkan xarajatlar xulosasi keladi.",
+            "Profil sahifasida Telegram’ni ulang, bot ulanishni tasdiqlaydi. Shu sahifada kunlik hisobotni yoqing yoki o‘chiring.",
         },
         {
           title: "Yangi murojaatlar",
           body:
             "Yangi murojaat qo‘shilganda rahbar va shu filial menejeri Telegram’da xabar oladi.",
-        },
-        {
-          title: "Xodimlar menyusi",
-          body:
-            "Botda har bir xodim o‘z ruxsatiga mos menyuni ko‘radi: hisobot, filiallar, o‘quvchilar, to‘lovlar, guruhlar, jadval va davomat, xodimlar, audit jurnali. O‘qituvchi o‘z hisobotini va o‘quvchilarining davomat tarixini ochadi.",
         },
       ],
       faq: [
@@ -2095,6 +1800,21 @@ export const SEO_PAGES: Record<
           question: "Qanday yoqiladi?",
           answer:
             "Profil sahifasida Telegram’ni ulang va kunlik hisobotni yoqing. Bu sozlama rahbar va menejerga ochiq.",
+        },
+        {
+          question: "Xodim o‘chirilsa ham hisobot boradimi?",
+          answer:
+            "Yo‘q. Yuborishdan oldin xodimning holati va ruxsatlari qayta tekshiriladi. O‘chirilgan yoki faol bo‘lmagan xodimga, faoliyati to‘xtatilgan maktabga hisobot bormaydi.",
+        },
+        {
+          question: "Xarajatlar haqida ham xabar keladimi?",
+          answer:
+            "Ha. Yangi xarajat yaratilganda va xarajat birinchi marta qisman to‘langanda xabar keladi. Ish kunlari 09:00 da kutilayotgan, yaqin kunlarda muddati keladigan va kechikkan xarajatlar soni, dushanba 10:00 da esa haftalik kechikkan xarajatlar xulosasi keladi.",
+        },
+        {
+          question: "Botda yana nima bor?",
+          answer:
+            "Botda har bir xodim o‘z ruxsatiga mos menyuni ko‘radi: hisobot, filiallar, o‘quvchilar, to‘lovlar, guruhlar, jadval va davomat, xodimlar, audit jurnali. O‘qituvchi o‘z hisobotini va o‘quvchilarining davomat tarixini ochadi.",
         },
       ],
       related: ["branches", "expenses", "leads"],
@@ -2115,45 +1835,25 @@ export const SEO_PAGES: Record<
       eyebrow: "Отчёт в Telegram",
       heading: "Отчёт автошколы в Telegram каждый день в 08:00",
       definition:
-        "Если отчёт включён, automaktab.uz каждый день в 08:00 (Ташкент) отправляет в Telegram вчерашние поступления и число новых курсантов: руководителю итог по автошколе, менеджеру по своему филиалу.",
+        "Если отчёт включён, automaktab.uz каждый день в 08:00 (Ташкент) отправляет в Telegram вчерашние поступления и число новых курсантов.",
       intro:
         "Смотрите утром в Telegram, сколько поступило вчера и сколько новых курсантов добавилось. Входить в систему для этого не нужно.",
       visual: "morning-report",
       sections: [
         {
-          title: "Что в отчёте",
-          body:
-            "Вчерашние поступления и число курсантов, добавленных вчера. Отчёт приходит каждый день в 08:00 по Ташкенту.",
-        },
-        {
           title: "Кто получает",
           body:
-            "Только руководитель и менеджер, и только те, кто включил отчёт. Руководитель получает итоги по автошколе, менеджер по своему филиалу. Сотрудникам приёмной и преподавателям отчёт не отправляется.",
-        },
-        {
-          title: "Права проверяются заново",
-          body:
-            "Перед отправкой статус и права сотрудника проверяются заново. Удалённым и неактивным сотрудникам, а также приостановленным автошколам отчёт не уходит.",
+            "Включивший отчёт руководитель получает итоги по автошколе, а менеджер по своему филиалу. Приёмной и преподавателям не отправляется.",
         },
         {
           title: "Как включить",
           body:
-            "В профиле подключите Telegram: система выдаёт ссылку, бот подтверждает подключение. Там же включите или выключите ежедневный отчёт.",
-        },
-        {
-          title: "Уведомления и сводки по расходам",
-          body:
-            "Уведомление приходит при создании расхода и при первой частичной оплате. По будним дням в 09:00 приходит число ожидающих, скоро наступающих и просроченных расходов, а по понедельникам в 10:00 недельная сводка просроченных расходов.",
+            "Подключите Telegram в профиле, бот подтвердит подключение. Там же включите или выключите ежедневный отчёт.",
         },
         {
           title: "Новые заявки",
           body:
             "При новой заявке руководитель и менеджер этого филиала получают уведомление в Telegram.",
-        },
-        {
-          title: "Меню сотрудников",
-          body:
-            "В боте каждый сотрудник видит меню по своим правам: отчёт, филиалы, курсанты, оплаты, группы, расписание и посещаемость, сотрудники, журнал аудита. Преподаватель открывает свой отчёт и историю посещаемости своих курсантов.",
         },
       ],
       faq: [
@@ -2171,6 +1871,21 @@ export const SEO_PAGES: Record<
           question: "Как включить отчёт?",
           answer:
             "Подключите Telegram в профиле и включите ежедневный отчёт. Настройка доступна руководителю и менеджеру.",
+        },
+        {
+          question: "Получит ли отчёт удалённый сотрудник?",
+          answer:
+            "Нет. Перед отправкой статус и права сотрудника проверяются заново. Удалённым и неактивным сотрудникам, а также приостановленным автошколам отчёт не уходит.",
+        },
+        {
+          question: "Приходят ли уведомления о расходах?",
+          answer:
+            "Да. Уведомление приходит при создании расхода и при первой частичной оплате. По будним дням в 09:00 приходит число ожидающих, скоро наступающих и просроченных расходов, а по понедельникам в 10:00 недельная сводка просроченных расходов.",
+        },
+        {
+          question: "Что ещё есть в боте?",
+          answer:
+            "В боте каждый сотрудник видит меню по своим правам: отчёт, филиалы, курсанты, оплаты, группы, расписание и посещаемость, сотрудники, журнал аудита. Преподаватель открывает свой отчёт и историю посещаемости своих курсантов.",
         },
       ],
       related: ["branches", "expenses", "leads"],
@@ -2191,45 +1906,25 @@ export const SEO_PAGES: Record<
       eyebrow: "Telegram report",
       heading: "A driving-school report in Telegram every day at 08:00",
       definition:
-        "When the report is on, automaktab.uz sends yesterday’s revenue and new-student count to Telegram every day at 08:00 (Tashkent): school-wide totals to the owner, branch totals to a manager.",
+        "When the report is on, automaktab.uz sends yesterday’s revenue and new-student count to Telegram every day at 08:00 (Tashkent).",
       intro:
         "See yesterday’s revenue and how many new students joined in Telegram each morning, without signing in.",
       visual: "morning-report",
       sections: [
         {
-          title: "What the report contains",
-          body:
-            "Yesterday’s revenue and the number of students added yesterday. It arrives every day at 08:00 Tashkent time.",
-        },
-        {
           title: "Who gets it",
           body:
-            "Only owners and managers who have turned the report on. The owner gets school-wide totals, a manager gets their branch. Admissions staff and teachers do not receive it.",
-        },
-        {
-          title: "Access is checked again",
-          body:
-            "Before sending, the employee’s status and permissions are checked again. Deleted or inactive staff and suspended schools do not receive the report.",
+            "An owner who turns it on gets school-wide totals; a manager gets their branch. Admissions staff and teachers do not receive it.",
         },
         {
           title: "How to turn it on",
           body:
-            "Link Telegram on your profile page: the system gives you a link and the bot confirms the connection. Turn the daily report on or off on the same page.",
-        },
-        {
-          title: "Expense alerts and digests",
-          body:
-            "An alert arrives when an expense is created and when it is first partly paid. On weekdays at 09:00 you get counts of pending, soon-due and overdue expenses; on Mondays at 10:00, a weekly overdue-expense digest.",
+            "Link Telegram on your profile page and the bot confirms it. Turn the daily report on or off on the same page.",
         },
         {
           title: "New inquiries",
           body:
             "When a new inquiry is added, the owner and that branch’s manager are notified in Telegram.",
-        },
-        {
-          title: "Staff menu",
-          body:
-            "In the bot, each employee sees a menu that matches their permissions: report, branches, students, payments, groups, schedule and attendance, staff, audit log. Teachers open their own report and their students’ attendance history.",
         },
       ],
       faq: [
@@ -2247,6 +1942,21 @@ export const SEO_PAGES: Record<
           question: "How do I turn it on?",
           answer:
             "Link Telegram on your profile and turn on the daily report. The setting is available to owners and managers.",
+        },
+        {
+          question: "Does a removed employee still get the report?",
+          answer:
+            "No. Before sending, the employee’s status and permissions are checked again. Deleted or inactive staff and suspended schools do not receive the report.",
+        },
+        {
+          question: "Are there expense alerts too?",
+          answer:
+            "Yes. An alert arrives when an expense is created and when it is first partly paid. On weekdays at 09:00 you get counts of pending, soon-due and overdue expenses; on Mondays at 10:00, a weekly overdue-expense digest.",
+        },
+        {
+          question: "What else is in the bot?",
+          answer:
+            "In the bot, each employee sees a menu that matches their permissions: report, branches, students, payments, groups, schedule and attendance, staff, audit log. Teachers open their own report and their students’ attendance history.",
         },
       ],
       related: ["branches", "expenses", "leads"],
@@ -2282,27 +1992,12 @@ export const SEO_PAGES: Record<
         {
           title: "Qaysi mashina darsga chiqadi",
           body:
-            "Mashg‘ulotga mashina tanlanganda tizim tekshiradi: mashina faolmi, uchala hujjat bormi va muddati o‘tmaganmi, ochiq ta’mir yoki kechikkan texnik xizmat yo‘qmi, toifa mos keladimi. B toifa uchun 10 yildan, boshqa toifalar uchun 20 yildan eski mashina biriktirilmaydi.",
+            "Hujjati muddati o‘tgan, ochiq ta’miri yoki kechikkan texnik xizmati bor mashina mashg‘ulotga biriktirilmaydi.",
         },
         {
           title: "Texnik xizmat va nuqsonlar",
           body:
-            "Har bir ta’mir boshlanish va tugash sanasi bilan yoziladi. Keyingi xizmat sana yoki odometr bo‘yicha belgilanadi. Topilgan nuqson izoh va rasm bilan yoziladi va bartaraf etilguncha ochiq turadi.",
-        },
-        {
-          title: "Qabul qilish va topshirish",
-          body:
-            "Mashina topshirilganda odometr ko‘rsatkichi va beshta rasm bilan dalolatnoma tuziladi: old, orqa, ikki yon va odometr. Qabul qiluvchi xodim tasdiqlaydi, rahbar yoki menejer sababini yozib rad etishi mumkin.",
-        },
-        {
-          title: "Yoqilg‘i va OFD cheki",
-          body:
-            "Yoqilg‘i qaydi chek va odometr rasmi bilan yuboriladi. Chekdagi QR kod orqali fiskal chek ma’lumoti olinadi. Sotuvchi STIR zapravkaga mos kelmasa ogohlantirish chiqadi, summa tasdiqlangan chekdan oshmaydi. QR bo‘lmasa, qayd qo‘lda tekshiriladi.",
-        },
-        {
-          title: "Filiallar va mas’ul xodim",
-          body:
-            "Rahbar mashinani sabab ko‘rsatib boshqa filialga o‘tkazadi, tarixda kim va qachon o‘tkazgani qoladi. Har bir mashinaga mas’ul xodim biriktiriladi.",
+            "Ta’mir sanalari bilan yoziladi, keyingi xizmat sana yoki odometr bo‘yicha belgilanadi. Nuqson rasm bilan yoziladi va bartaraf etilguncha ochiq turadi.",
         },
       ],
       faq: [
@@ -2314,12 +2009,22 @@ export const SEO_PAGES: Record<
         {
           question: "Yoqilg‘i qanday tekshiriladi?",
           answer:
-            "Chek va odometr rasmi majburiy. Chekdagi QR kod orqali fiskal chek ma’lumoti olinadi va zapravka STIR hamda summa bilan solishtiriladi.",
+            "Chek va odometr rasmi majburiy. Chekdagi QR kod orqali fiskal chek ma’lumoti olinadi va zapravka STIR hamda summa bilan solishtiriladi. Summa tasdiqlangan chekdan oshmaydi; QR bo‘lmasa, qayd qo‘lda tekshiriladi.",
         },
         {
           question: "Mashinani boshqa filialga o‘tkazsa bo‘ladimi?",
           answer:
-            "Ha, rahbar o‘tkazadi. Sabab yoziladi, tarixda kim va qachon o‘tkazgani saqlanadi.",
+            "Ha, rahbar o‘tkazadi. Sabab yoziladi, tarixda kim va qachon o‘tkazgani saqlanadi. Har bir mashinaga mas’ul xodim biriktiriladi.",
+        },
+        {
+          question: "Mashina yoshi va toifasi tekshiriladimi?",
+          answer:
+            "Ha. Mashina faol bo‘lishi va toifasi mos kelishi kerak. B toifa uchun 10 yildan, boshqa toifalar uchun 20 yildan eski mashina biriktirilmaydi.",
+        },
+        {
+          question: "Mashina topshirilganda nima yoziladi?",
+          answer:
+            "Mashina topshirilganda odometr ko‘rsatkichi va beshta rasm bilan dalolatnoma tuziladi: old, orqa, ikki yon va odometr. Qabul qiluvchi xodim tasdiqlaydi, rahbar yoki menejer sababini yozib rad etishi mumkin.",
         },
       ],
       related: ["driving", "expenses", "branches"],
@@ -2353,27 +2058,12 @@ export const SEO_PAGES: Record<
         {
           title: "Какая машина может выйти на занятие",
           body:
-            "При выборе машины система проверяет: активна ли машина, есть ли все три документа и не истекли ли они, нет ли открытого ремонта или просроченного техобслуживания, подходит ли категория. Для категории B не назначается машина старше 10 лет, для других категорий старше 20 лет.",
+            "Машину с истёкшим документом, открытым ремонтом или просроченным техобслуживанием нельзя назначить на занятие.",
         },
         {
           title: "Техобслуживание и неисправности",
           body:
-            "Каждый ремонт записывается с датой начала и окончания. Следующее обслуживание назначается по дате или по пробегу. Найденная неисправность записывается с комментарием и фото и остаётся открытой до устранения.",
-        },
-        {
-          title: "Приём и передача",
-          body:
-            "При передаче машины составляется акт с пробегом и пятью фото: спереди, сзади, с двух сторон и одометр. Принимающий сотрудник подтверждает акт, руководитель или менеджер может отклонить его с указанием причины.",
-        },
-        {
-          title: "Топливо и чек ОФД",
-          body:
-            "Заправка отправляется с фото чека и одометра. По QR-коду чека загружаются данные фискального чека. Если ИНН продавца не совпадает с АЗС, появляется предупреждение, а сумма не может превышать подтверждённый чек. Без QR-кода запись проверяется вручную.",
-        },
-        {
-          title: "Филиалы и ответственный",
-          body:
-            "Руководитель переводит машину в другой филиал с указанием причины, в истории остаётся, кто и когда её перевёл. За каждой машиной закрепляется ответственный сотрудник.",
+            "Ремонт записывается с датами, следующее обслуживание назначается по дате или пробегу. Неисправность с фото остаётся открытой до устранения.",
         },
       ],
       faq: [
@@ -2385,12 +2075,22 @@ export const SEO_PAGES: Record<
         {
           question: "Как проверяется топливо?",
           answer:
-            "Фото чека и одометра обязательны. По QR-коду загружаются данные фискального чека и сверяются с ИНН АЗС и суммой.",
+            "Фото чека и одометра обязательны. По QR-коду загружаются данные фискального чека и сверяются с ИНН АЗС и суммой. Сумма не может превышать подтверждённый чек; без QR-кода запись проверяется вручную.",
         },
         {
           question: "Можно ли перевести машину в другой филиал?",
           answer:
-            "Да, это делает руководитель. Указывается причина, в истории сохраняется, кто и когда перевёл.",
+            "Да, это делает руководитель. Указывается причина, в истории сохраняется, кто и когда перевёл. За каждой машиной закрепляется ответственный сотрудник.",
+        },
+        {
+          question: "Проверяются ли возраст и категория машины?",
+          answer:
+            "Да. Машина должна быть активной, а категория подходящей. Для категории B не назначается машина старше 10 лет, для других категорий старше 20 лет.",
+        },
+        {
+          question: "Что фиксируется при передаче машины?",
+          answer:
+            "При передаче машины составляется акт с пробегом и пятью фото: спереди, сзади, с двух сторон и одометр. Принимающий сотрудник подтверждает акт, руководитель или менеджер может отклонить его с указанием причины.",
         },
       ],
       related: ["driving", "expenses", "branches"],
@@ -2424,27 +2124,12 @@ export const SEO_PAGES: Record<
         {
           title: "Which car can go out",
           body:
-            "When a car is chosen for a lesson, the system checks that it is active, that all three documents exist and have not expired, that there is no open repair or overdue service, and that the category matches. Category B cars older than 10 years, and other categories older than 20 years, are not assigned.",
+            "A car with an expired document, an open repair or overdue service cannot be assigned to a lesson.",
         },
         {
           title: "Maintenance and defects",
           body:
-            "Each repair is recorded with start and end dates. The next service is set by date or odometer. A defect is logged with a note and photo and stays open until it is resolved.",
-        },
-        {
-          title: "Handover",
-          body:
-            "When a car changes hands, a handover record is made with the odometer reading and five photos: front, back, both sides and odometer. The receiving employee confirms it; the owner or a manager can reject it with a reason.",
-        },
-        {
-          title: "Fuel and OFD receipts",
-          body:
-            "A fuel entry is submitted with photos of the receipt and the odometer. The receipt’s QR code is used to fetch the fiscal receipt data. If the seller’s TIN does not match the station, a warning is shown, and the amount cannot exceed the verified receipt. Without a QR code, the entry is reviewed manually.",
-        },
-        {
-          title: "Branches and custodian",
-          body:
-            "The owner moves a car to another branch with a reason, and the history keeps who moved it and when. Each car has a responsible employee.",
+            "Repairs are logged with dates; the next service is set by date or odometer. A defect with a photo stays open until resolved.",
         },
       ],
       faq: [
@@ -2456,12 +2141,22 @@ export const SEO_PAGES: Record<
         {
           question: "How is fuel checked?",
           answer:
-            "Receipt and odometer photos are required. The receipt’s QR code is used to fetch the fiscal receipt, which is matched against the station’s TIN and the amount.",
+            "Receipt and odometer photos are required. The receipt’s QR code is used to fetch the fiscal receipt, which is matched against the station’s TIN and the amount. The amount cannot exceed the verified receipt; without a QR code, the entry is reviewed manually.",
         },
         {
           question: "Can a car be moved to another branch?",
           answer:
-            "Yes, by the owner. A reason is recorded, and the history keeps who moved it and when.",
+            "Yes, by the owner. A reason is recorded, and the history keeps who moved it and when. Each car has a responsible employee.",
+        },
+        {
+          question: "Are vehicle age and category checked?",
+          answer:
+            "Yes. The car must be active and match the category. Category B cars older than 10 years, and other categories older than 20 years, are not assigned.",
+        },
+        {
+          question: "What is recorded at handover?",
+          answer:
+            "When a car changes hands, a handover record is made with the odometer reading and five photos: front, back, both sides and odometer. The receiving employee confirms it; the owner or a manager can reject it with a reason.",
         },
       ],
       related: ["driving", "expenses", "branches"],
@@ -2490,51 +2185,26 @@ export const SEO_PAGES: Record<
       visual: "scene:accountant",
       sections: [
         {
-          title: "Toifalar",
-          body:
-            "Ijara, kommunal, mashina, marketing, sarf materiallari, ma’muriy, o‘qituvchi bilan hisob-kitob va boshqa. Xarajat filialga yoki avtoparkdagi mashinaga bog‘lanishi mumkin.",
-        },
-        {
           title: "To‘langan va to‘lanmagan qism",
           body:
-            "Xarajat bir necha to‘lov bilan yopilishi mumkin. Holati rejalashtirilgan, qisman to‘langan, to‘langan yoki bekor qilingan bo‘ladi. To‘lovni rahbar yoki buxgalter kiritadi, xato to‘lov bekor qilinadi.",
-        },
-        {
-          title: "O‘zgarishlar tarixi",
-          body:
-            "Yaratish, tahrirlash, to‘lov, to‘lovni bekor qilish, bekor qilish va o‘chirish tarixda qoladi. Bekor qilish va o‘chirishda sabab yoziladi. Rahbar xarajatlarni ko‘rib chiqilgan deb belgilaydi.",
-        },
-        {
-          title: "Oy yakuni va o‘qituvchilar",
-          body:
-            "Rahbar va buxgalter oy bo‘yicha xarajatlarni CSV faylga yuklab oladi. O‘qituvchi bilan hisob-kitobni o‘qituvchining o‘zi ham ko‘radi.",
+            "Xarajat bir necha to‘lov bilan yopiladi: rejalashtirilgan, qisman to‘langan, to‘langan yoki bekor qilingan. To‘lovni rahbar yoki buxgalter kiritadi.",
         },
         {
           title: "Muddat nazorati",
           body:
-            "Har bir xarajatga to‘lov muddati qo‘yiladi. Xarajatlar sahifasida bugun va keyingi 3 kunda muddati keladigan hamda 1–7, 8–30 va 31 kundan ortiq kechikkan xarajatlar soni ko‘rinadi.",
+            "Har bir xarajatga muddat qo‘yiladi. Sahifada 3 kun ichida muddati keladigan va 1–7, 8–30, 31+ kun kechikkan xarajatlar soni ko‘rinadi.",
         },
         {
           title: "Yoqilg‘i avtomatik xarajat bo‘ladi",
           body:
             "Avtoparkda tasdiqlangan yoqilg‘i qaydi shu mashinaga bog‘langan xarajat sifatida yoziladi, shuning uchun yoqilg‘ini qayta kiritish shart emas.",
         },
-        {
-          title: "Kim nima qiladi",
-          body:
-            "Xarajatni rahbar, buxgalter yoki menejer qo‘shadi va ko‘radi. To‘lovni faqat rahbar yoki buxgalter kiritadi.",
-        },
-        {
-          title: "Telegram xabarlari",
-          body:
-            "Xarajat qo‘shilganda va birinchi marta qisman to‘langanda xabar keladi. Ish kunlari 09:00 da kunlik, dushanba 10:00 da haftalik xulosa keladi.",
-        },
       ],
       faq: [
         {
           question: "Qanday toifalar bor?",
           answer:
-            "Ijara, kommunal, mashina, marketing, sarf materiallari, ma’muriy, o‘qituvchi bilan hisob-kitob va boshqa.",
+            "Ijara, kommunal, mashina, marketing, sarf materiallari, ma’muriy, o‘qituvchi bilan hisob-kitob va boshqa. Xarajat filialga yoki avtoparkdagi mashinaga bog‘lanishi mumkin.",
         },
         {
           question: "Qisman to‘langan xarajat qanday ko‘rinadi?",
@@ -2544,7 +2214,22 @@ export const SEO_PAGES: Record<
         {
           question: "Xarajat haqida xabar keladimi?",
           answer:
-            "Ha, Telegram’ni ulagan va xarajatlarni ko‘rish ruxsati bor xodimlarga. Kunlik xulosa rahbar, buxgalter va filial menejeriga keladi.",
+            "Ha, Telegram’ni ulagan va xarajatlarni ko‘rish ruxsati bor xodimlarga. Kunlik xulosa rahbar, buxgalter va filial menejeriga keladi. Ish kunlari 09:00 da kunlik, dushanba 10:00 da haftalik xulosa keladi.",
+        },
+        {
+          question: "Xarajat o‘zgarishlari saqlanadimi?",
+          answer:
+            "Ha. Yaratish, tahrirlash, to‘lov, to‘lovni bekor qilish, bekor qilish va o‘chirish tarixda qoladi. Bekor qilish va o‘chirishda sabab yoziladi. Rahbar xarajatlarni ko‘rib chiqilgan deb belgilaydi.",
+        },
+        {
+          question: "Oy yakunida xarajatlarni yuklab olsa bo‘ladimi?",
+          answer:
+            "Ha. Rahbar va buxgalter oy bo‘yicha xarajatlarni CSV faylga yuklab oladi. O‘qituvchi bilan hisob-kitobni o‘qituvchining o‘zi ham ko‘radi.",
+        },
+        {
+          question: "Xarajatni kim qo‘shadi?",
+          answer:
+            "Xarajatni rahbar, buxgalter yoki menejer qo‘shadi va ko‘radi. To‘lovni faqat rahbar yoki buxgalter kiritadi.",
         },
       ],
       related: ["telegram", "branches", "fleet"],
@@ -2571,51 +2256,26 @@ export const SEO_PAGES: Record<
       visual: "scene:accountant",
       sections: [
         {
-          title: "Категории",
-          body:
-            "Аренда, коммунальные, машина, маркетинг, расходные материалы, административные, расчёт с преподавателем и другое. Расход можно привязать к филиалу или к машине из автопарка.",
-        },
-        {
           title: "Оплаченная и неоплаченная часть",
           body:
-            "Расход можно закрыть несколькими платежами. Статус: запланирован, частично оплачен, оплачен или отменён. Платёж вносит руководитель или бухгалтер, ошибочный платёж аннулируется.",
-        },
-        {
-          title: "История изменений",
-          body:
-            "Создание, правка, платёж, аннулирование платежа, отмена и удаление сохраняются в истории. При отмене и удалении указывается причина. Руководитель отмечает расходы как проверенные.",
-        },
-        {
-          title: "Закрытие месяца и преподаватели",
-          body:
-            "Руководитель и бухгалтер выгружают расходы за месяц в CSV. Расчёт с преподавателем видит и сам преподаватель.",
+            "Расход закрывается несколькими платежами: запланирован, частично оплачен, оплачен или отменён. Платёж вносит руководитель или бухгалтер.",
         },
         {
           title: "Контроль сроков",
           body:
-            "Для каждого расхода задаётся срок оплаты. На странице расходов видно, у скольких срок сегодня и в ближайшие 3 дня, а сколько просрочено на 1–7, 8–30 и более 31 дня.",
+            "У каждого расхода есть срок. На странице видно, сколько расходов к оплате в ближайшие 3 дня и сколько просрочено на 1–7, 8–30 и 31+ дней.",
         },
         {
           title: "Топливо сразу становится расходом",
           body:
             "Подтверждённая заправка в автопарке записывается как расход, привязанный к этой машине, поэтому вносить топливо повторно не нужно.",
         },
-        {
-          title: "Кто что делает",
-          body:
-            "Расходы добавляют и видят руководитель, бухгалтер и менеджер. Платежи вносят только руководитель или бухгалтер.",
-        },
-        {
-          title: "Уведомления в Telegram",
-          body:
-            "Уведомление приходит при создании расхода и при первой частичной оплате. По будням в 09:00 приходит ежедневная сводка, по понедельникам в 10:00 недельная.",
-        },
       ],
       faq: [
         {
           question: "Какие есть категории?",
           answer:
-            "Аренда, коммунальные, машина, маркетинг, расходные материалы, административные, расчёт с преподавателем и другое.",
+            "Аренда, коммунальные, машина, маркетинг, расходные материалы, административные, расчёт с преподавателем и другое. Расход можно привязать к филиалу или к машине из автопарка.",
         },
         {
           question: "Как выглядит частично оплаченный расход?",
@@ -2625,7 +2285,22 @@ export const SEO_PAGES: Record<
         {
           question: "Приходят ли уведомления о расходах?",
           answer:
-            "Да, сотрудникам с подключённым Telegram и правом видеть расходы. Ежедневная сводка приходит руководителю, бухгалтеру и менеджеру филиала.",
+            "Да, сотрудникам с подключённым Telegram и правом видеть расходы. Ежедневная сводка приходит руководителю, бухгалтеру и менеджеру филиала. По будням в 09:00 приходит ежедневная сводка, по понедельникам в 10:00 недельная.",
+        },
+        {
+          question: "Сохраняется ли история изменений?",
+          answer:
+            "Да. Создание, правка, платёж, аннулирование платежа, отмена и удаление сохраняются в истории. При отмене и удалении указывается причина. Руководитель отмечает расходы как проверенные.",
+        },
+        {
+          question: "Можно ли выгрузить расходы за месяц?",
+          answer:
+            "Да. Руководитель и бухгалтер выгружают расходы за месяц в CSV. Расчёт с преподавателем видит и сам преподаватель.",
+        },
+        {
+          question: "Кто добавляет расходы?",
+          answer:
+            "Расходы добавляют и видят руководитель, бухгалтер и менеджер. Платежи вносят только руководитель или бухгалтер.",
         },
       ],
       related: ["telegram", "branches", "fleet"],
@@ -2652,51 +2327,26 @@ export const SEO_PAGES: Record<
       visual: "scene:accountant",
       sections: [
         {
-          title: "Categories",
-          body:
-            "Rent, utilities, vehicle, marketing, supplies, administrative, teacher settlement and other. An expense can be linked to a branch or to a car in the fleet.",
-        },
-        {
           title: "Paid and unpaid parts",
           body:
-            "An expense can be settled in several payments. Its status is planned, partially paid, paid or cancelled. The owner or an accountant records payments, and a mistaken payment can be voided.",
-        },
-        {
-          title: "Change history",
-          body:
-            "Creation, edits, payments, voided payments, cancellation and deletion stay in the history. Cancelling or deleting requires a reason. The owner marks expenses as reviewed.",
-        },
-        {
-          title: "Month close and teachers",
-          body:
-            "The owner and accountants download a month’s expenses as CSV. Teachers can see their own settlements.",
+            "An expense can be settled in several payments: planned, partially paid, paid or cancelled. The owner or an accountant records payments.",
         },
         {
           title: "Due-date control",
           body:
-            "Each expense gets a due date. The expenses page shows how many are due today or in the next 3 days, and how many are overdue by 1–7, 8–30 or more than 31 days.",
+            "Each expense gets a due date. The page counts those due within 3 days and those overdue by 1–7, 8–30 or 31+ days.",
         },
         {
           title: "Fuel becomes an expense automatically",
           body:
             "An approved fuel entry in the fleet is recorded as an expense linked to that car, so fuel never has to be entered twice.",
         },
-        {
-          title: "Who does what",
-          body:
-            "The owner, accountants and managers add and view expenses. Only the owner or an accountant records payments.",
-        },
-        {
-          title: "Telegram alerts",
-          body:
-            "An alert arrives when an expense is created and when it is first partly paid. A daily digest arrives on weekdays at 09:00 and a weekly one on Mondays at 10:00.",
-        },
       ],
       faq: [
         {
           question: "Which categories are there?",
           answer:
-            "Rent, utilities, vehicle, marketing, supplies, administrative, teacher settlement and other.",
+            "Rent, utilities, vehicle, marketing, supplies, administrative, teacher settlement and other. An expense can be linked to a branch or to a car in the fleet.",
         },
         {
           question: "How does a partly paid expense look?",
@@ -2706,7 +2356,22 @@ export const SEO_PAGES: Record<
         {
           question: "Do I get expense notifications?",
           answer:
-            "Yes, if you have linked Telegram and can view expenses. The daily digest goes to the owner, accountants and branch managers.",
+            "Yes, if you have linked Telegram and can view expenses. The daily digest goes to the owner, accountants and branch managers. A daily digest arrives on weekdays at 09:00 and a weekly one on Mondays at 10:00.",
+        },
+        {
+          question: "Is the change history kept?",
+          answer:
+            "Yes. Creation, edits, payments, voided payments, cancellation and deletion stay in the history. Cancelling or deleting requires a reason. The owner marks expenses as reviewed.",
+        },
+        {
+          question: "Can I export a month’s expenses?",
+          answer:
+            "Yes. The owner and accountants download a month’s expenses as CSV. Teachers can see their own settlements.",
+        },
+        {
+          question: "Who adds expenses?",
+          answer:
+            "The owner, accountants and managers add and view expenses. Only the owner or an accountant records payments.",
         },
       ],
       related: ["telegram", "branches", "fleet"],

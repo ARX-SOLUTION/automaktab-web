@@ -8,18 +8,12 @@ import { getLandingConfig } from "@/config/landing-config";
 import { financePreviewContent } from "@/content/finance-preview";
 import SiteHeader from "./SiteHeader";
 import PageMotion from "./PageMotion";
-import HeroSign from "./HeroSign";
 import LaneCTA from "./LaneCTA";
 import FinancePreview from "./FinancePreview";
-import DebtStory from "./DebtStory";
-import { debtStory } from "@/content/stories/debt";
 import MorningReportWidget from "./MorningReportWidget";
 import ProblemChips from "./ProblemChips";
 import RoadStepper from "./RoadStepper";
-import AttendanceDemo from "./AttendanceDemo";
-import RoleTabs from "./RoleTabs";
 import ResourceCards from "./ResourceCards";
-import TrafficStep from "./TrafficStep";
 import PricingCards from "./PricingCards";
 import FaqAccordion from "./FaqAccordion";
 import FinalCTA from "./FinalCTA";
@@ -81,22 +75,12 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
           </div>
         </section>
 
-        <section className="product-proof workflow-overview bg-sand-100" aria-labelledby="proof-heading">
+        <section className="product-proof workflow-overview bg-sand-100" aria-labelledby="problem-heading">
           <div className="landing-container">
-            <div className="workflow-overview-grid">
-              <div className="workflow-overview-copy">
-                <h2 id="proof-heading" className="font-display font-black text-ink m-0">{preview.workflowTitle}</h2>
-                <p>{preview.workflowDescription}</p>
-                <HeroSign content={content.hero} />
-              </div>
-              <div className="workflow-overview-diagram"><ProblemChips content={content.problem} /></div>
-            </div>
+            <div className="workflow-overview-diagram"><ProblemChips content={content.problem} /></div>
             <p className="workflow-sample-note">{content.proof.caption}</p>
           </div>
         </section>
-
-        {/* 03a Debt story (Kim qancha qarz?) */}
-        <DebtStory content={debtStory[locale] ?? debtStory.uz} />
 
         {/* 03b Morning Telegram Report (08:00 Nazorat Hisoboti) */}
         <MorningReportWidget content={content.morningReport} />
@@ -104,21 +88,12 @@ export default function LandingPage({ locale = "uz" }: LandingPageProps) {
         {/* 04 Student Journey (O‘quvchi yo‘li) */}
         <RoadStepper content={content.journey} scenes={content.scenes} />
 
-        {/* 05 Live Attendance Demo (Sinab ko‘ring) */}
-        <AttendanceDemo content={content.attendanceDemo} />
-
-        {/* 06 Personas (Kimlar uchun) */}
-        <RoleTabs content={content.roles} scenes={content.scenes} />
-
         {/* 07 Resources & Roadmap (Resurslar) */}
         <ResourceCards
           content={content.resources}
           scenes={content.scenes}
           showRoadmap={config.showRoadmap}
         />
-
-        {/* 08 How It Works (Qanday ishlaydi) */}
-        <TrafficStep content={content.howItWorks} />
 
         {/* 09 Pricing & Onboarding Form (Tariflar) */}
         <PricingCards content={content.pricing} demoAccess={config.demoAccess} />

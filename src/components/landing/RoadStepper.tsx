@@ -267,7 +267,6 @@ export default function RoadStepper({ content, scenes }: RoadStepperProps) {
                 <summary><span className="story-marker" aria-hidden="true">{stop.number}</span>{stop.name}</summary>
                 <h3>{stop.title}</h3>
                 <ul className="story-points">{stop.points.map((point) => <li key={point}><Check size={18} aria-hidden="true" />{point}</li>)}</ul>
-                {index === 2 && <a className="story-attendance-link" href="#sinab">{content.interactiveCta}</a>}
                 <div className="story-inline-preview">{renderPreview(index)}</div>
               </details>
             ))}

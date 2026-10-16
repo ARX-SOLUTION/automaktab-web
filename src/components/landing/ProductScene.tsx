@@ -9,7 +9,7 @@ import type { LandingContent } from "@/content/uz";
 
 gsap.registerPlugin(useGSAP);
 
-type SceneKind = LandingContent["roles"]["tabs"][number]["scene"] | "leads" | "fleet" | "education";
+type SceneKind = "director" | "registrar" | "teacher" | "accountant" | "leads" | "fleet" | "education";
 const students = ["F. Saidova", "R. Ismoilov", "S. Abdullayeva", "A. Istomov"];
 const attendanceIcons = [Check, Check, Clock3, UserX];
 
